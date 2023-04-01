@@ -1,0 +1,40 @@
+body{
+    height: 2000px;
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(32,35,200,1) 36%, rgba(244,0,0,1) 100%);
+}
+
+.allViews{
+    font-size: 26px;
+    font-style: italic;
+    text-align: center;
+    font-weight: bold;
+
+    padding: 8px;
+
+}
+
+.vid{
+    background-color: red;
+    height: 150px;
+    width: 150px;
+
+    margin: 20px;
+}
+
+.vid-name{
+    padding: 4px;
+
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.conteiner{
+    width: auto;
+    background: gray; 
+
+    padding: 8px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
