@@ -33,7 +33,7 @@ body{
     width: auto;
     background: gray; 
 
-    padding: 8px;
+    margin: 10px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }

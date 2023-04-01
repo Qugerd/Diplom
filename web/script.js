@@ -10,15 +10,21 @@ async function show(){
 
 function CreateCardVid(){
     let div = document.createElement("div");
+    let divName = document.createElement("div");
     let img = document.createElement("img");
     let name = document.createTextNode("название");
 
     let conteinerDiv = document.querySelector("div.conteiner");
 
-    img.setAttribute('src', 'assets/duc.jpg')
-    img.setAttribute('src', 'assets/duc.jpg')
+    div.classList.add('vid')
+    divName.classList.add('vid-name')
 
+    img.setAttribute('src', 'assets/duc.jpg')
+    img.setAttribute('height', '120')
+    img.setAttribute('width', '150')
+
+    divName.appendChild(name);
     div.appendChild(img);
-    div.appendChild(name);
+    div.appendChild(divName);
     conteinerDiv.appendChild(div);
 }
