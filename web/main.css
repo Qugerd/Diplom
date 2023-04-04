@@ -1,16 +1,13 @@
-body{
-    height: 2000px;
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(32,35,200,1) 36%, rgba(244,0,0,1) 100%);
+.header{
+    display: inline-flex;
+    align-items: center;
 }
 
 .allViews{
-    font-size: 26px;
-    font-style: italic;
-    text-align: center;
+    font-size: 30px;
     font-weight: bold;
-
-    padding: 8px;
-
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 24px;
 }
 
 .vid{
@@ -19,6 +16,7 @@ body{
     width: 150px;
 
     margin: 20px;
+    margin-bottom: 40px;
 }
 
 .vid-name{
@@ -38,3 +36,56 @@ body{
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
+.conteiner2{
+    width: 450px;
+    height: 730px;
+}
+
+.modal{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 11;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .4s, visibility .4s;
+}
+
+.modal-box{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    width: 400px;
+    transform: translate(-50%, -50%);
+}
+
+.modal-box #btnCloseModal{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    border: none;
+    background-color: white;
+    font-size: 30px;
+    margin: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+.modal-conteiner{
+    margin: 40px;
+}
+
+.modal.open{
+    visibility: visible;
+    opacity: 1;
+}

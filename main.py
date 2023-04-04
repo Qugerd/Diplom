@@ -1,17 +1,14 @@
 import eel
 
 
-def text_changer():
-    return "text changed"
-
 @eel.expose
 def my_python_function(a, b):
     return a + b
 
 @eel.expose
-def retrieve():
-    eel.show('about.html')
-    
+def name(name="Название"):
+    print(name)
+
 eel.init("web")
 
-eel.start("main.html")
+eel.start("main.html", size=(1920, 1080), position=(200,200))

@@ -1,65 +1,48 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Приложение</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="main.css" media="all">
-    <script src="eel.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Приложение</title>
+	<link rel="stylesheet" href="main.css">
+	<link rel="stylesheet" href="main.css" media="all">
+	<script src="eel.js"></script>
 </head>
+
 <body>
-  <div class="allViews">
-    <p>Все виды</p>
-  </div>
-     
-  <hr size="1">
-  
-  <div class="conteiner" >
-    <div class="vid" >
-      <img src="assets/duc.jpg" height="120" width="150">
-      <div class="vid-name" id="vid-name">
-        "Название"
-      </div>
-      <button onclick="CreateCardVid()">Click me</button>
-    </div>
-    <div class="vid" >
-      <a href="about.html" target="_self" on>
-        <img src="assets/duc.jpg" height="120" width="150">
-      </a>
-      <div class="vid-name" id="vid-name">
-        "Название"
-      </div>
-      <button onclick="show()">Click me</button>
-    </div>
-    <div class="vid" >
-      <a href="about.html" target="_self" on>
-        <img src="assets/duc.jpg" height="120" width="150">
-      </a>
-      <div class="vid-name" id="vid-name">
-        "Название"
-      </div>
-      <button onclick="show()">Click me</button>
-    </div>
-    <div class="vid" >
-      <a href="about.html" target="_self" on>
-        <img src="assets/duc.jpg" height="120" width="150">
-      </a>
-      <div class="vid-name" id="vid-name">
-        "Название"
-      </div>
-      <button onclick="show()">Click me</button>
-    </div>
-    <div class="vid" >
-      <a href="about.html" target="_self" on>
-        <img src="assets/duc.jpg" height="120" width="150">
-      </a>
-      <div class="vid-name" id="vid-name">
-        "Название"
-      </div>
-      <button onclick="show()">Click me</button>
-    </div>
-  </div>
+	<div class="header">
+		<div class="allViews">
+			<p>Все виды</p>
+		</div>
+		<div class="addbutton" id="btnAddVid" >
+			<button>Добавить категорию</button>
+		</div>
+	</div>
+
+
+	<hr size="1">
+
+
+	<div class="conteiner">
+		<div class="vid">
+			<img src="assets/duc.jpg" height="120" width="150">
+			<div class="vid-name" id="vid-name">
+				"Название"
+			</div>
+			<button onclick="CreateCardVid()">Click me</button>
+		</div>
+	</div>
+
+
+	<div class="modal" id="modal">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio autem obcaecati quos quis harum molestiae iusto maiores neque provident sunt ex impedit mollitia fuga non, quisquam quo saepe deserunt beatae.
+			</div>
+			<button id="btnCloseModal">x</button>
+		</div>
+	</div>
 
 
 
@@ -70,12 +53,8 @@
 
 
 
-
-
-
-
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-  <script src="script.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	<script src="script.js"></script>
 </body>
+
 </html>
