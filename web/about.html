@@ -1,32 +1,61 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Добавление вида</title>
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="main.css" media="all">
-    <script src="eel.js"></script>
+ <title>Добавить фото</title>
+ <style>
+  .container {
+   max-width: 600px;
+   margin: auto;
+   text-align: center;
+  }
+  h1 {
+   font-size: 36px;
+  }
+  form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   margin-top: 50px;
+  }
+  input[type="file"] {
+   margin: 10px 0;
+  }
+  img {
+   max-width: 100%;
+   height: auto;
+   margin: 20px auto;
+   display: block;
+  }
+ </style>
 </head>
-
 <body>
-    <div class="conteiner2">
-        <p>Введите название категории:</p>
-        <input class="input" type="text">
-        <br>
-        <p>Выбор миниатюры</p>
-        <input type="radio" id="r1" name="radio"> Заглушка
-        <br>
+ <div class="container">
+  <h1>Добавить фото</h1>
+  <form action="#" method="post" enctype="multipart/form-data">
+   <input type="file" name="photo" id="photo-input">
+   <button type="submit">Загрузить</button>
+  </form>
+ </div>
 
-        <button class="confirm" onclick="Submit()">Подтвердить !</button>
+ <script>
+  const photoInput = document.querySelector('#photo-input');
+  
+  photoInput.addEventListener('change', function() {
+   const file = this.files[0];
+   showImage(file);
+  });
 
-    </div>
+  function showImage(file) {
+   const reader = new FileReader();
 
+   reader.onload = function() {
+    const img = document.createElement('img');
+    img.src = reader.result;
+    document.querySelector('form').appendChild(img);
+   }
 
-
-
-    <script src="script.js"></script>
+   reader.readAsDataURL(file);
+  }
+ </script>
 </body>
-
 </html>

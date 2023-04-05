@@ -24,21 +24,14 @@
 	<hr size="1">
 
 
-	<div class="conteiner">
-		<div class="vid">
-			<img src="assets/duc.jpg" height="120" width="150">
-			<div class="vid-name" id="vid-name">
-				"Название"
-			</div>
-			<button onclick="CreateCardVid()">Click me</button>
-		</div>
-	</div>
-
-
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio autem obcaecati quos quis harum molestiae iusto maiores neque provident sunt ex impedit mollitia fuga non, quisquam quo saepe deserunt beatae.
+				<p>Добавление вида</p>
+				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
+				<p>Выбор изображения</p>
+				<button class="btn-openDialog"onclick="OpenFileDialog()">выбор изображения</button><br>
+				<button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
 			</div>
 			<button id="btnCloseModal">x</button>
 		</div>
