@@ -69,13 +69,11 @@ function OpenFileDialog(){
 
 
 
-
-
-eel.Parse()(function() {
+eel.parse()(function(return_val) {
     let div = document.createElement("div");
     let divName = document.createElement("div");
     let img = document.createElement("img");
-    let name = document.createTextNode(`Название`);
+    let name = document.createTextNode(`${return_val}`);
 
     let conteinerDiv = document.querySelector("div.conteiner");
 

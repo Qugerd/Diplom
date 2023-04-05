@@ -24,13 +24,16 @@
 	<hr size="1">
 
 
+	<div class="conteiner"></div>
+
+
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
 				<p>Добавление вида</p>
 				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
 				<p>Выбор изображения</p>
-				<button class="btn-openDialog"onclick="OpenFileDialog()">выбор изображения</button><br>
+				<input class="modal-input-file" type="file" onchange="OpenProvodnik(this)" ><br>
 				<button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
 			</div>
 			<button id="btnCloseModal">x</button>

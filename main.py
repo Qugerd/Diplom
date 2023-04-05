@@ -4,16 +4,6 @@ from tkinter import filedialog
 
 
 @eel.expose
-def my_python_function(a, b):
-    return a + b
-
-
-@eel.expose
-def name(name="Название"):
-    print(name)
-
-
-@eel.expose
 def OpenFileDialog():
     root = tk.Tk()
     root.withdraw()
@@ -23,9 +13,8 @@ def OpenFileDialog():
 
 
 @eel.expose
-def Parse():
-    print("hi")
-
+def parse():
+    return 0
 
 
 
