@@ -1,22 +1,35 @@
-async function CreateCardVid(n="Название"){
+const PLACEHOLD_PATH = "http://placehold.it/150x150"
+
+
+
+
+
+async function CreateCardVid(id, title, img_path){
     let div = document.createElement("div");
-    let divName = document.createElement("div");
-    let img = document.createElement("img");
-    let name = document.createTextNode(`${n}`);
+        let divName = document.createElement("div");
+        let img = document.createElement("img");
+        let name = document.createTextNode(`${title}`);
 
-    let conteinerDiv = document.querySelector("div.conteiner");
+        let conteinerDiv = document.querySelector("div.conteiner");
 
-    div.classList.add('vid')
-    divName.classList.add('vid-name')
+        div.classList.add('vid')
+        divName.classList.add('vid-name')
 
-    img.setAttribute('src', 'http://placehold.it/150x150')
-    img.setAttribute('height', '150')
-    img.setAttribute('width', '150')
+        if (img_path != PLACEHOLD_PATH){
+            img.setAttribute('src', `data:image/jpeg;base64,${img_path}`)
+            img.setAttribute('height', '150')
+            img.setAttribute('width', '150')
+        }
+        else{
+            img.setAttribute('src', PLACEHOLD_PATH)
+            img.setAttribute('height', '150')
+            img.setAttribute('width', '150')
+        }
 
-    divName.appendChild(name);
-    div.appendChild(img);
-    div.appendChild(divName);
-    conteinerDiv.appendChild(div);
+        divName.appendChild(name);
+        div.appendChild(img);
+        div.appendChild(divName);
+        conteinerDiv.appendChild(div);
 }
 
 
@@ -68,24 +81,18 @@ function OpenFileDialog(){
 }
 
 
+eel.parse()(function(mas) {
+    console.log(mas[0])
+    console.log(mas.length)
 
-eel.parse()(function(return_val) {
-    let div = document.createElement("div");
-    let divName = document.createElement("div");
-    let img = document.createElement("img");
-    let name = document.createTextNode(`${return_val}`);
 
-    let conteinerDiv = document.querySelector("div.conteiner");
+    for (let i = 0; i < mas.length; i++) {
+        innerMas = mas[i];
 
-    div.classList.add('vid')
-    divName.classList.add('vid-name')
+        let id = innerMas[0];
+        let title = innerMas[1];
+        let img_path = innerMas[2];
 
-    img.setAttribute('src', 'http://placehold.it/150x150')
-    img.setAttribute('height', '150')
-    img.setAttribute('width', '150')
-
-    divName.appendChild(name);
-    div.appendChild(img);
-    div.appendChild(divName);
-    conteinerDiv.appendChild(div);
+        CreateCardVid(id, title, img_path)
+    }
 });

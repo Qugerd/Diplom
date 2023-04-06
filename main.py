@@ -1,6 +1,7 @@
 import eel
 import tkinter as tk
 from tkinter import filedialog
+from database import ParseDB
 
 
 @eel.expose
@@ -14,12 +15,7 @@ def OpenFileDialog():
 
 @eel.expose
 def parse():
-    return 0
-
-
-
-
-
+    return ParseDB()
 
 
 eel.init("web")
