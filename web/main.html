@@ -18,6 +18,9 @@
 		<div class="addbutton" id="btnAddVid" >
 			<button>Добавить категорию</button>
 		</div>
+		<div class="uploadphoto" id="btnAddVid" onclick="OpenModal()">
+			<button>Загрузить фото</button>
+		</div>
 	</div>
 
 
@@ -27,6 +30,7 @@
 	<div class="conteiner"></div>
 
 
+<!-- Модальное окно "Добавить категорию" -->
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
@@ -41,7 +45,39 @@
 	</div>
 
 
-
+	<!-- Модальное окно "Загрузить фото" -->
+	<div class="modal-uploadPhoto" id="modal-uploadPhoto">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+				<p>Загрузить фото</p>
+				<p>Выбор изображения</p>
+				<button class="btnChooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
+				<p>Указание вида:</p>
+				<select id="combobox">
+					<option value="0">Название 0</option>
+					<option value="0">Название 1</option>
+					<option value="0">Название 2</option>
+					<option value="0">Название 2</option>
+					<option value="0">Название 2</option>
+					<option value="0">Название 2</option>
+					<option value="0">Название 2</option>
+					<option value="0">Название 2</option>
+				</select><br>
+				<p>Дата съемки:</p>
+				<input type="date">
+				<p>Место съемки</p>
+				<input type="text" id="">
+				<p>Координаты</p>
+				<input type="text">широта
+				<input type="text">долгота
+				<p>фотоопарат</p>
+				<input type="text">
+				
+				<button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
+			</div>
+			<button id="btnCloseModal-Upload">x</button>
+		</div>
+	</div>
 
 
 

@@ -3,15 +3,19 @@
     align-items: center;
 }
 
-.allViews{
+.header .allViews{
     font-size: 30px;
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 24px;
 }
 
+.header button{
+    margin-left: 10px;
+}
+
 .vid{
-    background-color: red;
+    /* background-color: red; */
     height: 150px;
     width: 150px;
 
@@ -44,7 +48,7 @@
     height: 730px;
 }
 
-.modal{
+.modal, .modal-uploadPhoto{
     position: fixed;
     left: 0;
     top: 0;
@@ -72,7 +76,7 @@
     border-radius: 6px;
 }
 
-.modal-box #btnCloseModal{
+.modal-box #btnCloseModal, #btnCloseModal-Upload{
     position: fixed;
     top: 0px;
     right: 0px;
@@ -139,7 +143,7 @@
 }
 
 
-.modal.open{
+.modal.open, .modal-uploadPhoto.open{
     visibility: visible;
     opacity: 1;
 }

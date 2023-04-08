@@ -44,6 +44,10 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
 // }
 
 
+function OpenModal(){
+    document.getElementById("modal-uploadPhoto").classList.add("open")
+}
+
 document.getElementById("btnAddVid").addEventListener("click", function(){
     document.getElementById("modal").classList.add("open")
 })
@@ -51,7 +55,14 @@ document.getElementById("btnAddVid").addEventListener("click", function(){
 
 document.getElementById("btnCloseModal").addEventListener("click", function(){
     document.getElementById("modal").classList.remove("open")
+
 })
+
+
+document.getElementById("btnCloseModal-Upload").addEventListener("click", function(){
+    document.getElementById("modal-uploadPhoto").classList.remove("open")
+})
+
 
 
 async function Confirm(){
