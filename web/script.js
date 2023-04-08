@@ -13,6 +13,9 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
     let conteinerDiv = document.querySelector("div.conteiner");
 
     div.classList.add('vid')
+    div.onclick = function(){
+        OpenPageAbout()
+    }
     divName.classList.add('vid-name')
 
     if (img_path != PLACEHOLD_PATH){
