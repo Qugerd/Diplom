@@ -17,6 +17,14 @@ def OpenFileDialog():
 
 
 @eel.expose
+def switch_page(page):
+    eel.js_call('window.location.href = "{}";'.format(page))
+
+
+
+
+
+@eel.expose
 def parse():
     return ParseDB()
 

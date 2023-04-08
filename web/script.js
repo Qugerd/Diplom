@@ -109,3 +109,8 @@ eel.parse()(function(mas) {
         CreateCardVid(title, img_path)
     }
 });
+
+
+function OpenPageAbout(){
+    window.location.replace("about.html")
+}
