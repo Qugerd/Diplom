@@ -31,5 +31,27 @@ def get_last_image():
     return GetLastImage()
 
 
+
+@eel.expose
+def save_value(title):
+    global TITLE 
+    TITLE = title
+    print(TITLE)
+
+
+@eel.expose
+def set_value():
+    print(TITLE)
+    return TITLE
+
+
+
+
+
+
+
+
+
+
 eel.init("web")
 eel.start("main.html", size=(1920, 1080), position=(200,200))

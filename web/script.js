@@ -14,7 +14,7 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
 
     div.classList.add('vid')
     div.onclick = function(){
-        OpenPageAbout()
+        OpenPageAbout(title)
     }
     divName.classList.add('vid-name')
 
@@ -114,6 +114,7 @@ eel.parse()(function(mas) {
 });
 
 
-function OpenPageAbout(){
+function OpenPageAbout(title){
+    eel.save_value(title)
     window.location.replace("about.html")
 }
