@@ -92,7 +92,10 @@ body{
     align-items: center;
 }
 
-
+.conteiner-imgbox img{
+    width: 640px;
+    height: 480px;
+}
 
 /* Описательный блок */
 .conteiner-information{

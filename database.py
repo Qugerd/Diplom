@@ -12,7 +12,12 @@ def CreateDataBase():
     conn.execute('''CREATE TABLE IF NOT EXISTS views
                 (id INTEGER PRIMARY KEY,
                 name TEXT NOT NULL,
-                img BLOB);''')
+                img BLOB,
+                name_lat TEXT,
+                name_eng TEXT,
+                description TEXT,
+                spreading TEXT,
+                biology TEXT);''')
     conn.commit()
     conn.close()
 
@@ -34,8 +39,6 @@ def ParseDB():
         image_name, image_blob = row
         kek.append([image_name, Blob_to_base64(image_blob)])
     conn.close()
-
-
     return kek
 
 
@@ -50,6 +53,24 @@ def GetLastImage():
     return Blob_to_base64(img_blob)
 
 
+def GetAboutViewData(title_name="Капибара"):
+    query = "SELECT * FROM views WHERE name = ?"
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute(query, (title_name, ))
+    response = list(cursor.fetchone())
+    conn.close()
+    response[2] = Blob_to_base64(response[2])
+
+    return response
+
+
+
+
+
+
+
+# GetAboutViewData()
 # print(
 # GetLastImage())
 # CreateDataBase()

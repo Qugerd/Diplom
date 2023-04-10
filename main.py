@@ -41,7 +41,7 @@ def save_value(title):
 
 @eel.expose
 def set_value():
-    return TITLE
+    return GetAboutViewData(TITLE)
 
 
 
