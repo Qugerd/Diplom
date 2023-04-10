@@ -53,4 +53,5 @@ def set_value():
 
 
 eel.init("web")
-eel.start("main.html", size=(1920, 1080), position=(200,200))
+
+eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0)
