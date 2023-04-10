@@ -12,8 +12,30 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
 
     let conteinerDiv = document.querySelector("div.conteiner");
 
+
+    // Создание кнопок: удалить, изменить
+    let btnFunctionDelete = document.createElement("button");
+    btnFunctionDelete.classList.add('btn-function-delete')
+    btnFunctionDelete.onclick = function(){
+        Delete()
+    }
+
+
+    let btnFunctionEdit = document.createElement("button");
+    btnFunctionEdit.classList.add('btn-function-edit')
+    btnFunctionEdit.onclick = function(){
+        Edit()
+    }
+
+
+    let divConteinerBtnFunction = document.createElement("div");
+    divConteinerBtnFunction.classList.add('conteiner-btn-function')
+    divConteinerBtnFunction.appendChild(btnFunctionDelete)
+    divConteinerBtnFunction.appendChild(btnFunctionEdit)
+
+
     div.classList.add('vid')
-    div.onclick = function(){
+    img.onclick = function(){
         OpenPageAbout(title)
     }
     divName.classList.add('vid-name')
@@ -32,6 +54,7 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
     divName.appendChild(name);
     div.appendChild(img);
     div.appendChild(divName);
+    div.appendChild(divConteinerBtnFunction);
     conteinerDiv.appendChild(div);
 }
 
@@ -117,4 +140,12 @@ eel.parse()(function(mas) {
 function OpenPageAbout(title){
     eel.save_value(title)
     window.location.replace("about.html")
+}
+
+function Edit(){
+    alert('Вы хотите езменить елемент?')
+}
+
+function Delete(){
+    alert('Вы хотите удалить елемент?')
 }

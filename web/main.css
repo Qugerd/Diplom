@@ -16,6 +16,7 @@
 
 .vid{
     /* background-color: red; */
+    position: relative;
     height: 150px;
     width: 150px;
 
@@ -44,10 +45,65 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.conteiner2{
-    width: 450px;
-    height: 730px;
+
+
+.conteiner-btn-function{
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+
 }
+
+.btn-function-delete{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+
+    background-image: url('assets/icons/x.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 30px;
+
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+
+    transform: translate(50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.btn-function-edit{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+
+    background-image: url('assets/icons/pencil.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 18px;
+
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    margin-top: 5px;
+
+    transform: translate(50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+}
+
+.vid:hover .btn-function-delete, .vid:hover .btn-function-edit{
+    opacity: 1;
+    visibility: visible;
+}
+
 
 .modal, .modal-uploadPhoto{
     position: fixed;

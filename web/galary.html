@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Галерея</title>
+    <script src="eel.js"></script>
+    <script src="script_about.js"></script>
+    <link rel="stylesheet" href="about.css">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
+    </script>
+
+</head>
+<body>
+
+
+
+    <div class="container">
+        <div class="container-header">
+            <div class="label-home">
+                <button>На главную</button>
+            </div>
+
+            <div class="conteiner-btn-navigation">
+                <button>
+                    <a href="about.html">Общая информация</a>
+                </button>
+                <button>
+                    <a href="galary.html">Галерея</a>
+                </button>
+                <button>
+                    <a href="galary.html">Лучшие фотографии</a>
+                </button>
+            </div>
+        </div>
+
+        <div class="conteiner-title">
+            <h1>На русском: название вида</h1>
+            <h2>На латинице: название вида</h2>
+            <h2>На английском: названеи вида</h2>
+        </div>
+
+        <div id="map" style="width: 600px; height: 400px"></div>
+    </div>
+
+    
+
+    <script type="text/javascript">
+        // Функция ymaps.ready() будет вызвана, когда
+        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
+        ymaps.ready(init);
+        function init(){
+            // Создание карты.
+            var myMap = new ymaps.Map("map", {
+                // Координаты центра карты.
+                // Порядок по умолчанию: «широта, долгота».
+                // Чтобы не определять координаты центра карты вручную,
+                // воспользуйтесь инструментом Определение координат.
+                center: [55.76, 37.64],
+                // Уровень масштабирования. Допустимые значения:
+                // от 0 (весь мир) до 19.
+                zoom: 7
+            });
+        }
+    </script>
+</body>
+</html>
