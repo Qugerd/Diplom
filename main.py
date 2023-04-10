@@ -44,12 +44,15 @@ def set_value():
     return GetAboutViewData(TITLE)
 
 
+@eel.expose
+def fill_combobox_values():
+    return GetAllViews()
 
 
 
-
-
-
+@eel.expose
+def put_data_to_db(data):
+    print(data)
 
 
 eel.init("web")

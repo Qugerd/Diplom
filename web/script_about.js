@@ -30,3 +30,5 @@ function GoAbout(){
 function GoGallery(){
     window.location.replace("gallery.html")
 }
+
+

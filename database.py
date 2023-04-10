@@ -64,12 +64,19 @@ def GetAboutViewData(title_name="Капибара"):
 
     return response
 
+def GetAllViews():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute("SELECT name FROM views")
+    list_name = []
+    for row in cursor:
+        value = list(row)[0]
+        list_name.append(value)
+    return list_name
 
 
 
 
-
-
+# GetAllViews()
 # GetAboutViewData()
 # print(
 # GetLastImage())

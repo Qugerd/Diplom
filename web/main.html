@@ -64,26 +64,18 @@
 				<button class="btnChooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
 				<p>Указание вида:</p>
 				<select id="combobox">
-					<option value="0">Название 0</option>
-					<option value="0">Название 1</option>
-					<option value="0">Название 2</option>
-					<option value="0">Название 2</option>
-					<option value="0">Название 2</option>
-					<option value="0">Название 2</option>
-					<option value="0">Название 2</option>
-					<option value="0">Название 2</option>
 				</select><br>
 				<p>Дата съемки:</p>
-				<input type="date">
+				<input type="date" id="datapicker">
 				<p>Место съемки</p>
-				<input type="text" id="">
+				<input type="text" id="place">
 				<p>Координаты</p>
-				<input type="text">широта
-				<input type="text">долгота
+				<input type="text" id="shirota">широта
+				<input type="text" id="dolgota">долгота
 				<p>фотоопарат</p>
-				<input type="text">
+				<input type="text" id="camera">
 				
-				<button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
+				<button class="btnConfirm" id="Confirm" onclick="ConfirmUploadPhoto()">Подтвердить</button>
 			</div>
 			<button id="btnCloseModal-Upload">x</button>
 		</div>

@@ -149,3 +149,40 @@ function Edit(){
 function Delete(){
     alert('Вы хотите удалить елемент?')
 }
+
+eel.fill_combobox_values()(function(list){
+    let combobox = document.getElementById('combobox')
+
+    for(let i = 0; i < list.length; i++){
+        let option = document.createElement("option")
+        option.text = list[i]
+        combobox.appendChild(option)
+    }
+})
+
+function ConfirmUploadPhoto(){
+    let combobox = document.getElementById("combobox").value
+    let datapicker = document.getElementById("datapicker").value
+    let place = document.getElementById("place").value
+    let shirota = document.getElementById("shirota").value
+    let dolgota = document.getElementById("dolgota").value
+    let camera = document.getElementById("camera").value
+
+    console.log(combobox)
+    console.log(datapicker)
+    console.log(place)
+    console.log(shirota)
+    console.log(dolgota)
+    console.log(camera)
+
+    let list = []
+    list.push(combobox)
+    list.push(datapicker)
+    list.push(place)
+    list.push(shirota)
+    list.push(dolgota)
+    list.push(camera)
+    console.log(list)
+
+    eel.put_data_to_db(list)
+}
