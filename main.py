@@ -52,8 +52,19 @@ def fill_combobox_values():
 
 @eel.expose
 def put_data_to_db(data):
-    InsertMetaDate(data)
+    print(data)
+    # InsertMetaDate(data)
 
+
+@eel.expose
+def delete_view_by_id(id):
+    DeleteView(id)
+
+
+@eel.expose
+def edit_title(id, newName):
+    print(id, newName)
+    EditTitle(id, newName)
 
 eel.init("web")
 

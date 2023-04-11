@@ -33,11 +33,11 @@ def AddInDB(name = "Капибара", imgPath = PLACEHOLD_PATH):
 
 def ParseDB():
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute("SELECT name, img FROM views")
+    cursor = conn.execute("SELECT id, name, img FROM views")
     kek = []
     for row in cursor:
-        image_name, image_blob = row
-        kek.append([image_name, Blob_to_base64(image_blob)])
+        image_id, image_name, image_blob = row
+        kek.append([image_id, image_name, Blob_to_base64(image_blob)])
     conn.close()
     return kek
 
@@ -72,6 +72,7 @@ def GetAllViews():
     for row in cursor:
         value = list(row)[0]
         list_name.append(value)
+    conn.close()
     return list_name
 
 
@@ -85,7 +86,23 @@ def InsertMetaDate(data):
     conn.close()
 
 
+def DeleteView(id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("DELETE FROM views WHERE id=?", (id, ))
+    conn.commit()
+    conn.close()
+    
 
+
+def EditTitle(id, newName):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE views SET name = ? WHERE id = ?", (newName, id))
+    conn.commit()
+    conn.close()
+    
+    
+    
+    
 
 # InsertMetaDate()
 # GetAllViews()

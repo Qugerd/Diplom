@@ -4,7 +4,7 @@ let fileDialogValue = PLACEHOLD_PATH
 
 
 
-async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
+async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     let div = document.createElement("div");
     let divName = document.createElement("div");
     let img = document.createElement("img");
@@ -17,14 +17,14 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
     let btnFunctionDelete = document.createElement("button");
     btnFunctionDelete.classList.add('btn-function-delete')
     btnFunctionDelete.onclick = function(){
-        Delete()
+        Delete(id)
     }
 
 
     let btnFunctionEdit = document.createElement("button");
     btnFunctionEdit.classList.add('btn-function-edit')
     btnFunctionEdit.onclick = function(){
-        Edit()
+        Edit(id)
     }
 
 
@@ -35,6 +35,7 @@ async function CreateCardVid(title, img_path = PLACEHOLD_PATH){
 
 
     div.classList.add('vid')
+    div.setAttribute('id', `${id}`)
     img.onclick = function(){
         OpenPageAbout(title)
     }
@@ -104,12 +105,15 @@ async function Confirm(){
         // Очищение занчениеи fileDialogValue
         eel.add_to_db(name, fileDialogValue)
       
-        CreateCardVid(name, await eel.get_last_image()())
+        // CreateCardVid(name, await eel.get_last_image()())
         
         fileDialogValue = PLACEHOLD_PATH
 
         document.getElementById("modal").classList.remove("open")
         document.getElementById("inputName").value = ''
+
+
+        location.reload()
     }
 
 }
@@ -129,10 +133,11 @@ eel.parse()(function(mas) {
     for (let i = 0; i < mas.length; i++) {
         let innerMas = mas[i];
 
-        let title = innerMas[0];
-        let img_path = innerMas[1];
+        let id = innerMas[0]
+        let title = innerMas[1];
+        let img_path = innerMas[2];
 
-        CreateCardVid(title, img_path)
+        CreateCardVid(id, title, img_path)
     }
 });
 
@@ -142,13 +147,29 @@ function OpenPageAbout(title){
     window.location.replace("about.html")
 }
 
-function Edit(){
-    alert('Вы хотите езменить елемент?')
+
+function Edit(id){
+    if(window.confirm('Вы хотите езменить елемент?')){
+        let newName = prompt("Введите название")
+        eel.edit_title(id, newName)
+    }
+
+    location.reload()
 }
 
-function Delete(){
-    alert('Вы хотите удалить елемент?')
+
+function Delete(id){
+
+    if(confirm('Вы хотите удалить елемент?')){
+        eel.delete_view_by_id(id)
+
+        const divVid = document.getElementById(`${id}`)
+        const divConteiner = document.querySelector('.conteiner')
+
+        divConteiner.removeChild(divVid)
+    }
 }
+
 
 eel.fill_combobox_values()(function(list){
     let combobox = document.getElementById('combobox')
@@ -159,6 +180,7 @@ eel.fill_combobox_values()(function(list){
         combobox.appendChild(option)
     }
 })
+
 
 function ConfirmUploadPhoto(){
     let combobox = document.getElementById("combobox").value
