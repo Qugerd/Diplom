@@ -52,7 +52,7 @@ def fill_combobox_values():
 
 @eel.expose
 def put_data_to_db(data):
-    print(data)
+    InsertMetaDate(data)
 
 
 eel.init("web")

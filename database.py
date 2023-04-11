@@ -64,6 +64,7 @@ def GetAboutViewData(title_name="Капибара"):
 
     return response
 
+
 def GetAllViews():
     conn = sqlite3.connect('database.db')
     cursor = conn.execute("SELECT name FROM views")
@@ -74,8 +75,19 @@ def GetAllViews():
     return list_name
 
 
+def InsertMetaDate(data):
+    query = "INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, camera) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    data = tuple(data)
+
+    conn = sqlite3.connect('database.db')
+    conn.execute(query, data)
+    conn.commit()
+    conn.close()
 
 
+
+
+# InsertMetaDate()
 # GetAllViews()
 # GetAboutViewData()
 # print(

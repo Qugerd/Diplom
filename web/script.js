@@ -168,14 +168,15 @@ function ConfirmUploadPhoto(){
     let dolgota = document.getElementById("dolgota").value
     let camera = document.getElementById("camera").value
 
-    console.log(combobox)
-    console.log(datapicker)
-    console.log(place)
-    console.log(shirota)
-    console.log(dolgota)
-    console.log(camera)
+    // console.log(combobox)
+    // console.log(datapicker)
+    // console.log(place)
+    // console.log(shirota)
+    // console.log(dolgota)
+    // console.log(camera)
 
     let list = []
+    list.push(fileDialogValue)
     list.push(combobox)
     list.push(datapicker)
     list.push(place)
