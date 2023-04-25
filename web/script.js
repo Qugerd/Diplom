@@ -190,22 +190,56 @@ function ConfirmUploadPhoto(){
     let dolgota = document.getElementById("dolgota").value
     let camera = document.getElementById("camera").value
 
-    // console.log(combobox)
-    // console.log(datapicker)
-    // console.log(place)
-    // console.log(shirota)
-    // console.log(dolgota)
-    // console.log(camera)
+    // Валидация 
+    if(fileDialogValue == PLACEHOLD_PATH)
+    {
+        alert("Выберите фотографию")
+    }
 
-    let list = []
-    list.push(fileDialogValue)
-    list.push(combobox)
-    list.push(datapicker)
-    list.push(place)
-    list.push(shirota)
-    list.push(dolgota)
-    list.push(camera)
-    console.log(list)
+    else if(datapicker == ''){
+        alert("Выберите дату")
+    }
 
-    eel.put_data_to_db(list)
+    else if(place == ''){
+        alert("Выберите place")
+    }
+
+    else if(shirota == ''){
+        alert("Выберите shirota")
+    }
+
+    else if(dolgota == ''){
+        alert("Выберите dolgota")
+    }
+
+    else if(camera == ''){
+        alert("Выберите camera")
+    }
+    else{
+        let list = []
+        list.push(fileDialogValue)
+        list.push(combobox)
+        list.push(datapicker)
+        list.push(place)
+        list.push(shirota)
+        list.push(dolgota)
+        list.push(camera)
+        // console.log(combobox)
+        // console.log(datapicker)
+        // console.log(place)
+        // console.log(shirota)
+        // console.log(dolgota)
+        // console.log(camera)
+        console.log(list)
+
+        eel.put_data_to_db(list)
+        alert("Фотография добавлена в галлерею")
+    }
+
+
+
+
+
+
+    
 }

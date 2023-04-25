@@ -1,0 +1,19 @@
+.category-conteiner{
+    margin-top: 20px;
+    margin-left: 20px;
+
+    
+}
+
+.label-container{
+    font-size: 20px;
+    font: bold 18px arial;
+
+    margin-bottom: 10px;
+}
+
+.img-container img{
+
+    width: auto;
+    margin: 8px;
+}

@@ -91,7 +91,6 @@ def DeleteView(id):
     conn.execute("DELETE FROM views WHERE id=?", (id, ))
     conn.commit()
     conn.close()
-    
 
 
 def EditTitle(id, newName):
@@ -99,11 +98,24 @@ def EditTitle(id, newName):
     conn.execute("UPDATE views SET name = ? WHERE id = ?", (newName, id))
     conn.commit()
     conn.close()
-    
-    
-    
-    
 
+
+def GetGalleryPhoto(kind='Капибара'):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE kind=?', (kind,))
+    data = []
+    for row in cursor:
+        data_tuple = row
+        data.append(data_tuple)
+    conn.commit()
+    conn.close()
+    print(data)
+
+
+
+
+
+# GetGalleryPhoto()
 # InsertMetaDate()
 # GetAllViews()
 # GetAboutViewData()
