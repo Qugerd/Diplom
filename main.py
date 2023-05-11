@@ -66,6 +66,19 @@ def edit_title(id, newName):
     print(id, newName)
     EditTitle(id, newName)
 
+
+@eel.expose
+def get_gallery_photos():
+    print(TITLE)
+    print(GetGalleryPhotos(TITLE))
+    return GetGalleryPhotos(TITLE)
+
+
+
+
+
+
+
 eel.init("web")
 
 eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0)

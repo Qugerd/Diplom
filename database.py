@@ -100,22 +100,22 @@ def EditTitle(id, newName):
     conn.close()
 
 
-def GetGalleryPhoto(kind='Капибара'):
+def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
     cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE kind=?', (kind,))
     data = []
     for row in cursor:
-        data_tuple = row
+        data_tuple = list(row)
         data.append(data_tuple)
     conn.commit()
     conn.close()
     print(data)
+    return data
 
 
 
 
-
-# GetGalleryPhoto()
+# GetGalleryPhotos()
 # InsertMetaDate()
 # GetAllViews()
 # GetAboutViewData()

@@ -19,16 +19,9 @@ eel.set_value()(function(response){
 })
 
 
-function GoHome(){
-    window.location.replace("main.html")
-}
 
-function GoAbout(){
-    window.location.replace("about.html")
-}
 
-function GoGallery(){
-    window.location.replace("gallery.html")
-}
+
+
 
 

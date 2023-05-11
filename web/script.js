@@ -1,7 +1,7 @@
 const PLACEHOLD_PATH = "http://placehold.it/150x150"
 
 let fileDialogValue = PLACEHOLD_PATH
-
+let TITLE = '';
 
 
 async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
@@ -37,6 +37,7 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     div.classList.add('vid')
     div.setAttribute('id', `${id}`)
     img.onclick = function(){
+        TITLE = title
         OpenPageAbout(title)
     }
     divName.classList.add('vid-name')
@@ -142,10 +143,7 @@ eel.parse()(function(mas) {
 });
 
 
-function OpenPageAbout(title){
-    eel.save_value(title)
-    window.location.replace("about.html")
-}
+
 
 
 function Edit(id){
@@ -235,11 +233,4 @@ function ConfirmUploadPhoto(){
         eel.put_data_to_db(list)
         alert("Фотография добавлена в галлерею")
     }
-
-
-
-
-
-
-    
 }
