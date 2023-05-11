@@ -12,6 +12,5 @@ function GoAbout(){
 }
 
 function GoGallery(){
-    eel.get_gallery_photos()
     window.location.replace("gallery.html")
 }
