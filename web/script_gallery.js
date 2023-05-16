@@ -9,12 +9,12 @@ eel.get_gallery_photos()(function(data){
 
 
     // Присвоение знаечний 
-    let date_prev = null
+    let group_id_prev = null
     for(let i = 0; i < data.length; i++){
 
-        let date_current = data[i][3]
+        let group_id_current = data[i][4]
 
-        if(date_current == date_prev){
+        if(group_id_current == group_id_prev){
 
             let img = document.createElement("img")
             img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
@@ -55,7 +55,7 @@ eel.get_gallery_photos()(function(data){
             categoryConteiner.appendChild(titleDataLocation)
             categoryConteiner.appendChild(imgConteiner)
         }
-        date_prev = date_current
+        group_id_prev = group_id_current
     }
 })
 

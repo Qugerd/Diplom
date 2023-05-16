@@ -181,7 +181,7 @@ eel.fill_combobox_values()(function(list){
 })
 
 
-function ConfirmUploadPhoto(){
+async function ConfirmUploadPhoto(){
     let combobox = document.getElementById("combobox").value
     let datapicker = document.getElementById("datapicker").value
     let place = document.getElementById("place").value
@@ -215,6 +215,7 @@ function ConfirmUploadPhoto(){
         alert("Выберите camera")
     }
     else{
+        let group_id = await eel.generate_group_id()();
         for (let i = 0; i < fileDialogValue.length; i++){
 
             let list = []
@@ -225,6 +226,7 @@ function ConfirmUploadPhoto(){
             list.push(shirota)
             list.push(dolgota)
             list.push(camera)
+            list.push(group_id)
             // console.log(combobox)
             // console.log(datapicker)
             // console.log(place)

@@ -86,7 +86,9 @@ def get_gallery_photos():
     return GetGalleryPhotos(TITLE)
 
 
-
+@eel.expose
+def generate_group_id():
+    return str(uuid.uuid4())
 
 
 

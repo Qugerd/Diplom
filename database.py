@@ -1,4 +1,5 @@
 import sqlite3
+import uuid
 from PIL import Image
 from io import BytesIO
 from support import *
@@ -76,8 +77,8 @@ def GetAllViews():
     return list_name
 
 
-def InsertMetaDate(data):
-    query = "INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, camera) VALUES (?, ?, ?, ?, ?, ?, ?)"
+def InsertMetaDate(data: list):
+    query = "INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, camera, group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
     data = tuple(data)
 
     conn = sqlite3.connect('database.db')
@@ -102,7 +103,7 @@ def EditTitle(id, newName):
 
 def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path, place, data FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
+    cursor = conn.execute('SELECT id, photo_path, place, data, group_id FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
     data = []
     for row in cursor:
         data_tuple = list(row)
