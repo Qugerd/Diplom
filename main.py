@@ -17,6 +17,18 @@ def OpenFileDialog():
 
 
 @eel.expose
+def OpenFilesDialog():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+
+    file_path = filedialog.askopenfilenames(title='Выберите файлы')
+    print(file_path)
+    return file_path
+
+
+@eel.expose
 def parse():
     return ParseDB()
 

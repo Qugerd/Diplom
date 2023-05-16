@@ -1,9 +1,9 @@
 /* Навигация */
 .container{
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.1);
-    width: 100%;
+    position: relative;
+    width: auto;
 
+    background-color: rgba(0, 0, 0, 0.1);
     margin: 0 20px;
 
     display: flex;

@@ -102,7 +102,7 @@ def EditTitle(id, newName):
 
 def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE kind=?', (kind,))
+    cursor = conn.execute('SELECT id, photo_path, place, data FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
     data = []
     for row in cursor:
         data_tuple = list(row)

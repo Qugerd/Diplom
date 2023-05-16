@@ -121,12 +121,13 @@ async function Confirm(){
 
 
 async function OpenFileDialog(){
-    // eel.OpenFileDialog()(function(path){
-    //     fileDialogValue = path
-    //     console.log(fileDialogValue)
-    // })
     fileDialogValue =  await eel.OpenFileDialog()()
     console.log(fileDialogValue)
+}
+
+
+async function OpenFilesDialog(){
+    fileDialogValue =  await eel.OpenFilesDialog()()
 }
 
 
@@ -214,23 +215,26 @@ function ConfirmUploadPhoto(){
         alert("Выберите camera")
     }
     else{
-        let list = []
-        list.push(fileDialogValue)
-        list.push(combobox)
-        list.push(datapicker)
-        list.push(place)
-        list.push(shirota)
-        list.push(dolgota)
-        list.push(camera)
-        // console.log(combobox)
-        // console.log(datapicker)
-        // console.log(place)
-        // console.log(shirota)
-        // console.log(dolgota)
-        // console.log(camera)
-        console.log(list)
+        for (let i = 0; i < fileDialogValue.length; i++){
 
-        eel.put_data_to_db(list)
-        alert("Фотография добавлена в галлерею")
+            let list = []
+            list.push(fileDialogValue[i])
+            list.push(combobox)
+            list.push(datapicker)
+            list.push(place)
+            list.push(shirota)
+            list.push(dolgota)
+            list.push(camera)
+            // console.log(combobox)
+            // console.log(datapicker)
+            // console.log(place)
+            // console.log(shirota)
+            // console.log(dolgota)
+            // console.log(camera)
+            console.log(list)
+
+            eel.put_data_to_db(list)
+        }
+        alert("Фотографии добавлены в галлерею")
     }
 }
