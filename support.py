@@ -3,6 +3,7 @@ import base64
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
+ID = ''
 
 def Image_to_Bytes(image_path):
     print(image_path)

@@ -18,6 +18,11 @@ eel.get_gallery_photos()(function(data){
 
             let img = document.createElement("img")
             img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
+            img.onclick = function(){
+                alert(data[i][0])
+                eel.save_id(data[i][0])
+                GoPhotoPage()
+            }
             imgConteiner.appendChild(img)
         
             let location = data[i][2]
@@ -40,6 +45,12 @@ eel.get_gallery_photos()(function(data){
 
             let img = document.createElement("img")
             img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
+            img.onclick = function(){
+                alert(data[i][0])
+                eel.save_id(data[i][0])
+                GoPhotoPage()
+                
+            }
             imgConteiner.appendChild(img)
     
             let location = data[i][2]
@@ -58,4 +69,18 @@ eel.get_gallery_photos()(function(data){
         group_id_prev = group_id_current
     }
 })
+
+
+eel.set_value()(function(response){
+    console.log(response)
+
+    let name_ru = response[1]
+    let name_en = response[3]
+    let name_lat = response[4]
+
+    document.getElementById("description").innerHTML = name_ru
+    document.getElementById("spreading").innerHTML = name_en
+    document.getElementById("biology").innerHTML = name_lat
+})
+
 

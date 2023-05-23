@@ -54,7 +54,7 @@ def GetLastImage():
     return Blob_to_base64(img_blob)
 
 
-def GetAboutViewData(title_name="Капибара"):
+def GetAboutViewData(title_name):
     query = "SELECT * FROM views WHERE name = ?"
 
     conn = sqlite3.connect('database.db')
@@ -114,8 +114,18 @@ def GetGalleryPhotos(kind):
     return data
 
 
+def GetPhoto(id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT * FROM gallery WHERE id=?', (id,))
+    data = list(cursor.fetchone())
+    return data
 
 
+
+
+
+
+GetPhoto(1)
 # GetGalleryPhotos()
 # InsertMetaDate()
 # GetAllViews()

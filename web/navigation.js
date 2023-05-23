@@ -14,3 +14,7 @@ function GoAbout(){
 function GoGallery(){
     window.location.replace("gallery.html")
 }
+
+function GoPhotoPage(){
+    window.location.replace("photo_page.html")
+}

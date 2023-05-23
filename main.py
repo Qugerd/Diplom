@@ -52,6 +52,12 @@ def save_value(title):
 
 
 @eel.expose
+def save_id(id):
+    global ID
+    ID = id
+    print(ID)
+
+@eel.expose
 def set_value():
     return GetAboutViewData(TITLE)
 
@@ -90,6 +96,11 @@ def get_gallery_photos():
 def generate_group_id():
     return str(uuid.uuid4())
 
+
+@eel.expose
+def get_photo():
+    print(ID)
+    return GetPhoto(ID)
 
 
 
