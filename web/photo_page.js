@@ -38,9 +38,9 @@ eel.get_photo()(async function(data){
     document.getElementById('notes_text').innerHTML = note
 
 
-    document.getElementById('place').innerHTML = place
-    document.getElementById('date').innerHTML = date
-    document.getElementById('camera').innerHTML = camera
+    document.getElementById('place').innerHTML = "Местоположение: " + place
+    document.getElementById('date').innerHTML = "Дата: " + date
+    document.getElementById('camera').innerHTML = "Камера: " + camera
 })
 
 
@@ -83,9 +83,29 @@ function Confirm(){
 
 
 function Remove(){
-    let textarea = document.querySelector('textarea')
-    let btn = document.getElementById('btn')
-
-    textarea.remove()
-    btn.remove()
+    document.querySelector('textarea').remove()
+    document.getElementById('btn').remove()
 }
+
+
+
+// Карта
+function init(){
+    // Создание карты.
+    var myMap = new ymaps.Map("map", {
+        // Координаты центра карты.
+        // Порядок по умолчанию: «широта, долгота».
+        // Чтобы не определять координаты центра карты вручную,
+        // воспользуйтесь инструментом Определение координат.
+        center: [43.01, 131.906],
+        controls: ['zoomControl'],
+        suppressMapOpenBlock: true,
+        // Уровень масштабирования. Допустимые значения:
+        // от 0 (весь мир) до 19.
+        zoom: 11
+    });
+
+    var myPlacemark = new ymaps.Placemark([43.01, 131.906]);
+    myMap.geoObjects.add(myPlacemark);
+}
+

@@ -58,9 +58,9 @@
 
 
         <div class="conteiner-text">
-            <div class="palce text" id="place">Место съемки: </div>
-            <div class="date text" id="date">Дата: </div>
-            <div class="camera text" id="camera">Камера: </div>
+            <div class="palce text" id="place"></div>
+            <div class="date text" id="date"></div>
+            <div class="camera text" id="camera"></div>
         </div>
 
     </div>
@@ -70,22 +70,7 @@
 
 
     <script type="text/javascript">
-        // Функция ymaps.ready() будет вызвана, когда
-        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
         ymaps.ready(init);
-        function init(){
-            // Создание карты.
-            var myMap = new ymaps.Map("map", {
-                // Координаты центра карты.
-                // Порядок по умолчанию: «широта, долгота».
-                // Чтобы не определять координаты центра карты вручную,
-                // воспользуйтесь инструментом Определение координат.
-                center: [55.76, 37.64],
-                // Уровень масштабирования. Допустимые значения:
-                // от 0 (весь мир) до 19.
-                zoom: 7
-            });
-        }
     </script>
 </body>
 </html>
