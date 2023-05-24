@@ -57,6 +57,7 @@ def save_id(id):
     ID = id
     print(ID)
 
+
 @eel.expose
 def set_value():
     return GetAboutViewData(TITLE)
@@ -102,6 +103,11 @@ def get_photo():
     print(ID)
     return GetPhoto(ID)
 
+
+
+@eel.expose
+def edit_notes(id, text):
+    EditNotes(id, text)
 
 
 eel.init("web")

@@ -19,7 +19,6 @@ eel.get_gallery_photos()(function(data){
             let img = document.createElement("img")
             img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
             img.onclick = function(){
-                alert(data[i][0])
                 eel.save_id(data[i][0])
                 GoPhotoPage()
             }
@@ -46,7 +45,6 @@ eel.get_gallery_photos()(function(data){
             let img = document.createElement("img")
             img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
             img.onclick = function(){
-                alert(data[i][0])
                 eel.save_id(data[i][0])
                 GoPhotoPage()
                 

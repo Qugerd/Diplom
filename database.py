@@ -121,11 +121,14 @@ def GetPhoto(id):
     return data
 
 
+def EditNotes(id, text):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE gallery SET notes = ? WHERE id = ?", (text, id))
+    conn.commit()
+    conn.close()
 
 
-
-
-GetPhoto(1)
+# GetPhoto(1)
 # GetGalleryPhotos()
 # InsertMetaDate()
 # GetAllViews()

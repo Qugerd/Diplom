@@ -109,9 +109,36 @@
     margin: 20px;
 }
 
+.conteiner-notes-title{
+    display: flex;
+}
+
+
+.conteiner-notes textarea{
+    width: 97.5%;
+    box-sizing: border-box;
+    min-height: 300px;
+
+    margin-left: 20px;
+
+    font-size: 24px;
+    resize: none;
+}
+
 .notes_title{
     font-size: 26px;
     font-weight: bold;
+}
+
+.edit{
+    margin: 0 20px;
+
+    height: 24px;
+    width: 24px;
+}
+
+.edit:hover{
+    cursor: pointer;
 }
 
 .notes_text{

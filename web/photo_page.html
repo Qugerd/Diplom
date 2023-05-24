@@ -31,9 +31,9 @@
 
 
     <div class="conteiner-title text">
-        <h1 id="name_ru">Чернозобая гагара</h1>
-        <h2 id="name_lat">Чернозобая гагара</h2>
-        <h2 id="name_eng">Чернозобая гагара</h2>
+        <h1 id="name_ru"></h1>
+        <h2 id="name_lat"></h2>
+        <h2 id="name_eng"></h2>
     </div>
 
 
@@ -43,9 +43,12 @@
     </div>
 
     <div class="conteiner-notes">
-        <div class="notes_title text">ЗАМЕТКА</div>
+        <div class="conteiner-notes-title">
+            <div class="notes_title text">ЗАМЕТКА</div>
+            <img class="edit" src="assets/icons/pencil.svg" alt="" onclick="EditNotes()">
+        </div>
+        <div class="notes_text" id="notes_text"></div>
         <div class="notes_text">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Autem, hic minima. Harum, soluta eligendi! At nihil blanditiis omnis laboriosam nemo? Autem assumenda itaque esse, asperiores omnis quae ad, illo, ut perspiciatis suscipit vel delectus quia eveniet fugiat? Minima dolorem ipsum sapiente asperiores pariatur consectetur placeat? Laborum vitae aliquid quasi? Repudiandae rerum delectus ut obcaecati sapiente molestias numquam voluptas nam architecto id, ipsam odit ipsum similique voluptates, itaque quae quia aliquid dicta minima dolorem nulla neque iste animi? Hic dicta, modi nobis aliquam at quam mollitia corporis nam! Facere, vero! Blanditiis et optio ullam, rem tenetur quidem nobis voluptates molestiae totam.
         </div>
     </div>
 
@@ -55,9 +58,9 @@
 
 
         <div class="conteiner-text">
-            <div class="palce text">Место съемки: </div>
-            <div class="date text">Дата: </div>
-            <div class="camera text">Камера: </div>
+            <div class="palce text" id="place">Место съемки: </div>
+            <div class="date text" id="date">Дата: </div>
+            <div class="camera text" id="camera">Камера: </div>
         </div>
 
     </div>
