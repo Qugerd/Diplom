@@ -61,29 +61,17 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
 }
 
 
-// function Submit(){
-//     const value = document.querySelector("input.input").value;
-//     if (document.getElementById('r1').checked) {
-        
-//     }
-//     console.log(value);
-//     eel.name(value);
-//     CreateCardVid(value);
-// }
-
-
 function OpenModal(){
     document.getElementById("modal-uploadPhoto").classList.add("open")
 }
 
-document.getElementById("btnAddVid").addEventListener("click", function(){
+document.getElementById("addCategory").addEventListener("click", function(){
     document.getElementById("modal").classList.add("open")
 })
 
 
 document.getElementById("btnCloseModal").addEventListener("click", function(){
     document.getElementById("modal").classList.remove("open")
-
 })
 
 
@@ -227,16 +215,61 @@ async function ConfirmUploadPhoto(){
             list.push(dolgota)
             list.push(camera)
             list.push(group_id)
-            // console.log(combobox)
-            // console.log(datapicker)
-            // console.log(place)
-            // console.log(shirota)
-            // console.log(dolgota)
-            // console.log(camera)
             console.log(list)
 
             eel.put_data_to_db(list)
         }
         alert("Фотографии добавлены в галлерею")
     }
+}
+
+
+// Перемещение маркера карты при
+// измении поля ввода координат
+var placeMark
+
+
+function editInput(){
+    var shirotaValue = document.getElementById('shirota').value
+    var dolgotaValue = document.getElementById('dolgota').value
+
+    placeMark.geometry.setCoordinates([shirotaValue, dolgotaValue]);
+}
+
+
+// Яндекс карта
+function init(){
+    // Создание карты.
+    var myMap = new ymaps.Map("map", {
+        center: [43., 131.90],
+        controls: ['zoomControl'],
+        suppressMapOpenBlock: true,
+        zoom: 8
+    });
+
+
+    // Создание маркера
+    placeMark = new ymaps.Placemark([43., 131.90],
+    { hintContent: 'Мой маркер'},
+    {draggable: true});
+
+    placeMark.events.add('dragend', function (event) {
+        // Получение новых координат маркера
+        var newCoordinates = event.get('target').geometry.getCoordinates();
+      
+        // Присвоение значений широты и долготы в поля ввода
+        document.getElementById('shirota').value = newCoordinates[0].toPrecision(8);
+        document.getElementById('dolgota').value = newCoordinates[1].toPrecision(8);
+      });
+
+    placeMark.events.add('drag', function (event) {
+        // Получение новых координат маркера
+        var newCoordinates = event.get('target').geometry.getCoordinates();
+      
+        // Присвоение значений широты и долготы в поля ввода
+        document.getElementById('shirota').value = newCoordinates[0].toPrecision(8);
+        document.getElementById('dolgota').value = newCoordinates[1].toPrecision(8);
+    });
+
+    myMap.geoObjects.add(placeMark);
 }

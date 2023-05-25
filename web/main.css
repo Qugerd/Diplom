@@ -105,6 +105,10 @@
 }
 
 
+
+
+
+/* Модальное окно "Загрузить фото" */
 .modal, .modal-uploadPhoto{
     position: fixed;
     left: 0;
@@ -139,7 +143,7 @@
     right: 0px;
     border: none;
     background-color: white;
-    font-size: 30px;
+    font-size: 35px;
     margin: 5px;
     padding: 5px;
     height: 30px;
@@ -147,16 +151,41 @@
 }
 
 .modal-conteiner{
-    margin: 40px;
-    display: inline-block;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+
 }
 
 .modal-conteiner p{
     margin: 0px;
     margin-top: 10px;
-    font-size: 24px;
-    font-family: Arial, Helvetica, sans-serif;
 }
+
+#btnChoseFileUploadPhoto{
+    width: 100%;
+    height: 50px;
+
+    margin-top: 5px;
+    background-color: black;
+    color: white;
+    font: bold 18px arial;
+    cursor: pointer;
+
+}
+
+#btnChoseFileUploadPhoto:hover{
+    width: 100%;
+    height: 50px;
+
+    margin-top: 5px;
+    background-color: white;
+    color: black;
+    font: bold 18px arial;
+    cursor: pointer;
+
+}
+
 
 .modal-conteiner .modal-input{
     margin-top: 10px;
@@ -177,15 +206,17 @@
     outline: none;
 }
 
+.modal-conteiner-center{
+    display: flex; /* Указываем, что контейнер должен использовать flexbox */
+    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
+    align-items: center
+}
 
 .modal-conteiner .btnConfirm, .btn-openDialog{
-    width: 180px;
+    width: 100%;
     height: 50px;
 
-    display: block;
-    float: right;
-
-    margin-top: 50px;
+    margin-top: 30px;
 
     background-color: black;
     color: white;
@@ -203,4 +234,24 @@
 .modal.open, .modal-uploadPhoto.open{
     visibility: visible;
     opacity: 1;
+}
+
+#map{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+}
+
+#combobox{
+    min-width: 200px;
+
+    scrollbar-width: thin; /* устанавливает ширину скроллбара */
+    scrollbar-color: #333 #ddd; /* устанавливает цвет полосы и фона скроллбара */
+    
+}
+
+#combobox option{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
 }

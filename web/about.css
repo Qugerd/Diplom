@@ -104,3 +104,34 @@ body{
     margin: 0 20px;
     margin-bottom: 40px;
 }
+
+.conteiner-information-title{
+    display: flex;
+    text-align: center;
+}
+
+.conteiner-information-title:hover .btnEdit{
+    cursor: pointer;
+    opacity: 1;
+    visibility: visible;
+}
+
+.btnEdit{
+    margin-left: 20px;
+    opacity: 0;
+    visibility: hidden;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+}
+
+.conteiner-information-group textarea{
+    width: 97.5%;
+    margin-left: 20px;
+    resize: none;
+    min-height: 200px;
+}
+
+.conteiner-information-group textarea:focus{
+    outline: none;
+}

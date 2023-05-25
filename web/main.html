@@ -6,9 +6,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Все виды</title>
 	<link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="main.css" media="all">
+	<link rel="stylesheet" href="text_style.css">
 	<script src="eel.js"></script>
-	<script src="navigation.js"></script>
 </head>
 
 <body>
@@ -16,10 +15,10 @@
 		<div class="allViews">
 			<p>Все виды</p>
 		</div>
-		<div class="addbutton" id="btnAddVid" >
+		<div class="addbutton" id="addCategory" >
 			<button>Добавить категорию</button>
 		</div>
-		<div class="uploadphoto" id="btnAddVid" onclick="OpenModal()">
+		<div class="uploadphoto" onclick="OpenModal()">
 			<button>Загрузить фото</button>
 		</div>
 	</div>
@@ -28,30 +27,21 @@
 	<hr size="1">
 
 
-	<div class="conteiner">
-		<!-- <div class="vid" onclick="OpenPageAbout()">
-			<img src="assets/duc.jpg" height="120" width="150">
-			<div class="vid-name" id="vid-name">
-			  "Название"
-			</div>
-			<div class="conteiner-btn-function">
-				<button class="btn-function-delete" onclick="Delete()"></button>
-				<button class="btn-function-edit" onclick="Edit()"></button>
-			</div> -->
-	</div>
+	<div class="conteiner"></div>
 
 
-<!-- Модальное окно "Добавить категорию" -->
+	<!-- Модальное окно "Добавить категорию" -->
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
-				<p>Добавление вида</p>
+				<p class="text-header2">Добавление вида</p>
+				<button id="btnCloseModal">x</button>
 				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
-				<p>Выбор изображения</p>
+				<p class="text-header2">Выбор изображения</p>
 				<button class="btnChooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
-				<button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
+				<div class="modal-conteiner-center"><button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button></div>
+				
 			</div>
-			<button id="btnCloseModal">x</button>
 		</div>
 	</div>
 
@@ -60,36 +50,42 @@
 	<div class="modal-uploadPhoto" id="modal-uploadPhoto">
 		<div class="modal-box">
 			<div class="modal-conteiner">
-				<p>Загрузить фото</p>
-				<p>Выбор изображения</p>
-				<button class="btnChooseFile" onclick="OpenFilesDialog()">Выбрать файл</button><br>
-				<p>Указание вида:</p>
-				<select id="combobox">
+				<p class="text-header">Загрузить фото</p>
+				<button id="btnCloseModal-Upload">x</button>
+				<p class="text-header2">Выбор изображения:</p>
+				<button class="btnChooseFile" id="btnChoseFileUploadPhoto" onclick="OpenFilesDialog()">Выбрать файл</button><br>
+				<p class="text-header2">Указание вида:</p>
+				<select id="combobox" class="text">
 				</select><br>
-				<p>Дата съемки:</p>
+				<p class="text-header2">Дата съемки:</p>
 				<input type="date" id="datapicker">
-				<p>Место съемки</p>
-				<input type="text" id="place">
-				<p>Координаты</p>
-				<input type="text" id="shirota">широта
-				<input type="text" id="dolgota">долгота
-				<p>фотоопарат</p>
-				<input type="text" id="camera">
+				<p class="text-header2">Место съемки:</p>
+				<input type="text" id="place"
+				class="text">
+				<p class="text-header2">Координаты:</p>
+				<div id="map" style="width: 270px; height: 250px"></div>
+				<span class="text">Широта: </span><input class="text" type="number" id="shirota" oninput="editInput()">
+				<span class="text">Долгота: </span><input class="text" type="number" id="dolgota" oninput="editInput()">
+				<p class="text-header2">Камера:</p>
+				<input class="text" type="text" id="camera">
 				
-				<button class="btnConfirm" id="Confirm" onclick="ConfirmUploadPhoto()">Подтвердить</button>
+				<div class="modal-conteiner-center">
+					<button class="btnConfirm" id="Confirm" onclick="ConfirmUploadPhoto()">Подтвердить</button>
+				</div>
 			</div>
-			<button id="btnCloseModal-Upload">x</button>
 		</div>
 	</div>
 
 
 
 
-
-
-
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-	<script src="script.js"></script>
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
+    </script>
+	<script src="script.js" type="text/javascript"></script>
+	<script type="text/javascript">
+        ymaps.ready(init);
+    </script>
+	<script src="navigation.js"></script>
 </body>
 
 </html>

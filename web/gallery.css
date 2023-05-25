@@ -82,3 +82,7 @@
     height: 160px;
     margin: 8px;
 }
+
+.img-container img:hover{
+    cursor: pointer;
+}

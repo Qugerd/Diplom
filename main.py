@@ -104,10 +104,21 @@ def get_photo():
     return GetPhoto(ID)
 
 
-
 @eel.expose
 def edit_notes(id, text):
     EditNotes(id, text)
+
+
+@eel.expose
+def edit_information(id, col_name, text):
+    EditInformation(id, col_name, text)
+
+
+
+
+
+
+
 
 
 eel.init("web")

@@ -128,6 +128,12 @@ def EditNotes(id, text):
     conn.close()
 
 
+def EditInformation(id, col_name, text):
+    conn = sqlite3.connect('database.db')
+    conn.execute(f"UPDATE views SET {col_name} = ? WHERE id = ?", (text, id))
+    conn.commit()
+    conn.close()
+
 # GetPhoto(1)
 # GetGalleryPhotos()
 # InsertMetaDate()
