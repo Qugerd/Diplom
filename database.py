@@ -103,7 +103,7 @@ def EditTitle(id, newName):
 
 def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path, place, data, group_id FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
+    cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
     data = []
     for row in cursor:
         data_tuple = list(row)
@@ -134,6 +134,36 @@ def EditInformation(id, col_name, text):
     conn.commit()
     conn.close()
 
+
+def GetCoordsAllPhotos(kind):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE kind=?', (kind,))
+    data = []
+    for row in cursor:
+        lat, log = convert_str_to_numeric(list(row))
+        data.append([lat, log])
+    conn.commit()
+    conn.close()
+    return data
+
+
+def GetCoordsPhoto(id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE id=?', (id,))
+    lat, log = convert_str_to_numeric(cursor.fetchone())
+    conn.commit()
+    conn.close()
+    return [lat, log]
+
+
+
+
+
+
+
+
+# GetCoordsPhoto(2)
+# GetCoordsAllPhotos("Капибара")
 # GetPhoto(1)
 # GetGalleryPhotos()
 # InsertMetaDate()

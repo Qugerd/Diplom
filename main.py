@@ -114,6 +114,14 @@ def edit_information(id, col_name, text):
     EditInformation(id, col_name, text)
 
 
+@eel.expose
+def get_coords_all_photos():
+    return GetCoordsAllPhotos(TITLE)
+
+
+@eel.expose
+def get_coords_photo():
+    return GetCoordsPhoto(ID)
 
 
 

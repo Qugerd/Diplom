@@ -1,3 +1,5 @@
+ymaps.ready(init);
+
 let ID; 
 
 eel.get_photo()(async function(data){
@@ -90,14 +92,15 @@ function Remove(){
 
 
 // Карта
-function init(){
+async function init(){
     // Создание карты.
+    var coords = await eel.get_coords_photo()()
     var myMap = new ymaps.Map("map", {
         // Координаты центра карты.
         // Порядок по умолчанию: «широта, долгота».
         // Чтобы не определять координаты центра карты вручную,
         // воспользуйтесь инструментом Определение координат.
-        center: [43.01, 131.906],
+        center: coords,
         controls: ['zoomControl'],
         suppressMapOpenBlock: true,
         // Уровень масштабирования. Допустимые значения:
@@ -105,7 +108,7 @@ function init(){
         zoom: 11
     });
 
-    var myPlacemark = new ymaps.Placemark([43.01, 131.906]);
+
+    var myPlacemark = new ymaps.Placemark(coords);
     myMap.geoObjects.add(myPlacemark);
 }
-

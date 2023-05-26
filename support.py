@@ -28,3 +28,8 @@ def Blob_to_base64(image_blob):
         # im.save(buffer, format="JPEG")
         # im_b64 = base64.b64encode(buffer.getvalue()).decode()
         # # im.save(f"{image_name}.png", "PNG")
+        
+def convert_str_to_numeric(str):
+    lat, log = str
+    lat, log = float(lat.replace(',', '.')), float(log.replace(',', '.'))
+    return lat, log

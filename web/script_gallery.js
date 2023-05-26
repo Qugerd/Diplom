@@ -1,3 +1,6 @@
+ymaps.ready(init);
+
+
 eel.get_gallery_photos()(function(data){
     // Контейнер для серии фото с датой и локацией
     const categoryConteiner = document.querySelector('.category-conteiner')
@@ -66,12 +69,11 @@ eel.get_gallery_photos()(function(data){
         }
         group_id_prev = group_id_current
     }
+
 })
 
 
 eel.set_value()(function(response){
-    console.log(response)
-
     let name_ru = response[1]
     let name_en = response[3]
     let name_lat = response[4]
@@ -80,5 +82,39 @@ eel.set_value()(function(response){
     document.getElementById("spreading").innerHTML = name_en
     document.getElementById("biology").innerHTML = name_lat
 })
+
+
+
+
+
+// Яндекс карта
+async function init(){
+
+    var myMap = new ymaps.Map("map", {
+        center: [43., 131.90],
+        controls: ['zoomControl'],
+        suppressMapOpenBlock: true,
+        zoom: 8
+        });
+
+    var myGeoObjects = [];
+
+    var coords = await eel.get_coords_all_photos()()
+
+    console.log(coords)
+
+    for (var i = 0; i < coords.length; i++) {
+        myGeoObjects[i] = new ymaps.GeoObject({
+            geometry: {
+                type: "Point",
+                coordinates: coords[i]
+                }
+            });
+    }
+
+    var myClusterer = new ymaps.Clusterer();
+    myClusterer.add(myGeoObjects);
+    myMap.geoObjects.add(myClusterer);
+}
 
 

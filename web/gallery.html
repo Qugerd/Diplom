@@ -4,11 +4,10 @@
     <title>Галерея</title>
     <script src="eel.js"></script>
     <script src="navigation.js"></script>
-    <script src="script_gallery.js"></script>
     <link rel="stylesheet" href="gallery.css">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
     </script>
-
+    <script src="script_gallery.js"></script>
 </head>
 <body>
 
@@ -45,24 +44,6 @@
     </div>
 
     
-
-    <script type="text/javascript">
-        // Функция ymaps.ready() будет вызвана, когда
-        // загрузятся все компоненты API, а также когда будет готово DOM-дерево.
-        ymaps.ready(init);
-        function init(){
-            // Создание карты.
-            var myMap = new ymaps.Map("map", {
-                // Координаты центра карты.
-                // Порядок по умолчанию: «широта, долгота».
-                // Чтобы не определять координаты центра карты вручную,
-                // воспользуйтесь инструментом Определение координат.
-                center: [55.76, 37.64],
-                // Уровень масштабирования. Допустимые значения:
-                // от 0 (весь мир) до 19.
-                zoom: 7
-            });
-        }
-    </script>
+    <!-- <script src="script_gallery.js"></script> -->
 </body>
 </html>
