@@ -12,7 +12,7 @@ def OpenFileDialog():
     root.attributes("-topmost", True)
 
     file_path = filedialog.askopenfilename()
-    print(file_path)
+    # print(file_path)
     return file_path
 
 

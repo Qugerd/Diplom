@@ -18,3 +18,7 @@ function GoGallery(){
 function GoPhotoPage(){
     window.location.replace("photo_page.html")
 }
+
+function GoFavoritePhotos(){
+    window.location.replace("favorite_photos.html")
+}

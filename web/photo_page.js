@@ -1,12 +1,13 @@
 ymaps.ready(init);
 
 let ID; 
+let photo_path;
 
 eel.get_photo()(async function(data){
     console.log(data)
 
     ID = data[0]
-    const photo_path = data[1]
+    photo_path = data[1]
     const kind = data[2]
     const date = data[3]
     const place = data[4]
@@ -96,19 +97,19 @@ async function init(){
     // Создание карты.
     var coords = await eel.get_coords_photo()()
     var myMap = new ymaps.Map("map", {
-        // Координаты центра карты.
-        // Порядок по умолчанию: «широта, долгота».
-        // Чтобы не определять координаты центра карты вручную,
-        // воспользуйтесь инструментом Определение координат.
         center: coords,
         controls: ['zoomControl'],
         suppressMapOpenBlock: true,
-        // Уровень масштабирования. Допустимые значения:
-        // от 0 (весь мир) до 19.
         zoom: 11
     });
 
 
     var myPlacemark = new ymaps.Placemark(coords);
     myMap.geoObjects.add(myPlacemark);
+}
+
+
+
+function OpenFolder(){
+    eel.open_folder(photo_path)
 }

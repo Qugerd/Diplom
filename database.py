@@ -156,8 +156,9 @@ def GetCoordsPhoto(id):
     return [lat, log]
 
 
-
-
+def GetAllFavoritePhotos():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE id=?', (id,))
 
 
 

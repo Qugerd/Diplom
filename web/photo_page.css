@@ -69,6 +69,20 @@
 
 
 
+/* Кнопки функциаонала */
+.contener-button{
+    width: 100%;
+    display: flex; /* Указываем, что контейнер должен использовать flexbox */
+    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
+    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
+}
+
+.contener-button button{
+    margin: 20px;
+    width: 130px;
+    height: 30px;
+}
+
 
 /* Блок с картинкой */
 .conteiner-imgbox{

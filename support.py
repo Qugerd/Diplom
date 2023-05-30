@@ -1,9 +1,12 @@
 import base64
+import os
+import eel
 
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
 ID = ''
+
 
 def Image_to_Bytes(image_path):
     print(image_path)
@@ -22,14 +25,14 @@ def Blob_to_base64(image_blob):
 
     return image_blob
 
-        # im = Image.open(BytesIO(image_blob))
-        # # print(im)
-        # buffer = BytesIO()
-        # im.save(buffer, format="JPEG")
-        # im_b64 = base64.b64encode(buffer.getvalue()).decode()
-        # # im.save(f"{image_name}.png", "PNG")
-        
+
 def convert_str_to_numeric(str):
     lat, log = str
     lat, log = float(lat.replace(',', '.')), float(log.replace(',', '.'))
     return lat, log
+
+
+@eel.expose
+def open_folder(path):
+    path = path.replace('/', "\\")
+    os.system('explorer /select,"'+path+'"')
