@@ -124,7 +124,9 @@ def get_coords_photo():
     return GetCoordsPhoto(ID)
 
 
-
+@eel.expose
+def get_all_favorite_photos():
+    return GetAllFavoritePhotos()
 
 
 

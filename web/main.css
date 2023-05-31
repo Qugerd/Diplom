@@ -38,7 +38,7 @@
 .conteiner{
     position: relative;
     width: auto;
-    background-color: rgba(0, 0, 0, 0.1) ;
+    
 
     margin: 10px;
     display: grid;
@@ -148,6 +148,14 @@
     padding: 5px;
     height: 30px;
     width: 30px;
+}
+
+#btnCloseModal-Upload:hover{
+    cursor: pointer;
+}
+
+#btnCloseModal:hover{
+    cursor: pointer;
 }
 
 .modal-conteiner{

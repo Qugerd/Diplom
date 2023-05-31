@@ -158,11 +158,26 @@ def GetCoordsPhoto(id):
 
 def GetAllFavoritePhotos():
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE id=?', (id,))
+    cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE like = 1')
+    photos = []
+    for row in cursor:
+        photos.append(list(row))
+    conn.commit()
+    conn.close()
+    return photos
+
+
+def UpdateLikePhoto(like_value, id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE gallery SET like = ? WHERE id = ?", (like_value, id))
+    conn.commit()
+    conn.close()
 
 
 
 
+# GetAllFavoritePhotos()
+# UpdateLikePhoto(0, 5)
 # GetCoordsPhoto(2)
 # GetCoordsAllPhotos("Капибара")
 # GetPhoto(1)
