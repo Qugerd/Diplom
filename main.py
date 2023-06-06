@@ -17,6 +17,19 @@ def OpenFileDialog():
 
 
 @eel.expose
+def OpenFileDialogVideo():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+
+    filetypes = (("MP4 files", "*.mp4"), ("All files", "*.*"))
+    file_path = filedialog.askopenfilename(filetypes=filetypes)
+    return file_path
+
+
+
+@eel.expose
 def OpenFilesDialog():
     root = tk.Tk()
     root.withdraw()
@@ -129,6 +142,14 @@ def get_all_favorite_photos():
     return GetAllFavoritePhotos()
 
 
+@eel.expose
+def add_video(path_video, date):
+    AddVideo(path_video, date, TITLE)
+
+
+@eel.expose
+def get_video_by_view():
+    return GetVideoByView(TITLE)
 
 
 eel.init("web")

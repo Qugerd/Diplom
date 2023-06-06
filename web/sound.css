@@ -1,0 +1,104 @@
+/* Навигация */
+.container-header{
+
+    background-color: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100px;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.label-home{
+    background-color: rgba(0, 0, 0, 0.3);
+
+    width: 150px;
+    height: 100px;
+
+    display: flex; /* Указываем, что контейнер должен использовать flexbox */
+    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
+    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
+   
+}
+
+
+.label-home button{
+    background-color: rgba(255, 255, 255, 1);
+    /* position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); */
+    width: 100%;
+    height: 50px;
+}
+
+.conteiner-btn-navigation{
+    width: 100%;
+
+    display: flex; /* Указываем, что контейнер должен использовать flexbox */
+    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
+    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
+}
+
+.conteiner-btn-navigation button{
+    width: 200px;
+    height: 50px;
+    margin: 0 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+
+/* Кнопка добавить звук */
+.conteiner-btn{
+    margin: 20px;
+}
+
+.addSound{
+    width: 200px;
+    height: 50px;
+
+    font-size: 16px;
+    font-weight: bold;
+
+}
+
+
+
+/* Контейнер звуков */
+
+.conteiner-sounds{
+    background-color: rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+.header-conteiner{
+    display: flex;
+    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
+    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
+}
+
+.header-conteiner div{
+    font-size: 30px;
+    margin: 0 80px;
+}
+
+.fail{
+
+}
+
+.conteiner-content{
+    display: flex;
+}
+
+.conteiner-content div{
+    margin: 0 80px;
+    min-width: 100px;
+}
+
+.audio{
+    max-width: 300px;
+}

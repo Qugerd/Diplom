@@ -23,7 +23,7 @@ def CreateDataBase():
     conn.close()
 
 
-def AddInDB(name = "Капибара", imgPath = PLACEHOLD_PATH):
+def AddInDB(name , imgPath = PLACEHOLD_PATH):
     conn = sqlite3.connect('database.db')
     conn.execute("INSERT INTO views (name, img) VALUES (?, ?)",
              (name, Image_to_Bytes(imgPath)))
@@ -174,8 +174,27 @@ def UpdateLikePhoto(like_value, id):
     conn.close()
 
 
+def AddVideo(path_video, date, view):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO video (path_video, date, view) VALUES (?, ?, ?)",
+            (path_video, date, view))
+    conn.commit()
+    conn.close()
 
 
+def GetVideoByView(view):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT * FROM video WHERE view=?', (view,))
+    data = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return data
+
+
+
+
+
+GetVideoByView("Котик")
 # GetAllFavoritePhotos()
 # UpdateLikePhoto(0, 5)
 # GetCoordsPhoto(2)

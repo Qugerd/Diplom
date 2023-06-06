@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<head>
+    <title>Звуки</title>
+    <link rel="stylesheet" href="sound.css">
+    <link rel="stylesheet" href="text_style.css">
+    <script src="eel.js"></script>
+    <script src="navigation.js"></script>
+    <script src="sound.js"></script>
+</head>
+<body>
+    <div class="container-header">
+        <div class="label-home">
+            <button onclick="GoHome()">На главную</button>
+        </div>
+
+        <div class="conteiner-btn-navigation">
+            <button  onclick="GoAbout()">
+                Общая информация
+            </button>
+
+            <button onclick="GoGallery()">
+                Галерея
+            </button>
+
+            <button onclick="GoFavoritePhotos()">
+                Лучшие фотографии
+            </button>
+
+            <button onclick="GoVideoPage()"> 
+                Видео 
+            </button>
+
+            <button onclick="GoSoundPage()">
+                Звуки
+            </button>
+        </div>
+    </div>
+
+    <div class="conteiner-btn">
+        <button class="addSound">Добавить звук</button>
+    </div>
+
+    <div class="conteiner-sounds">
+        <div class="header-conteiner">
+            <div class="fail text">Файл</div>
+            <div class="name text">Название</div>
+            <div class="duration text">Длительность</div>
+            <div class="data text">Дата</div>
+            <div class="country text">Старана</div>
+            <div class="place text">Место</div>
+            <div class="type text">Тип</div>
+        </div>
+        <div class="conteiner-content">
+            <audio class="audio" preload="none" controls src="assets/sounds/9374c7d5275c04e.mp3"></audio>
+            <div class="nameValue">2edhnlwikhb</div>
+            <div class="durationValue">2:89</div>
+            <div class="dataValue">12:L92301</div>
+            <div class="countryValue">Russia</div>
+            <div class="placeValue">Omsk</div>
+            <div class="typeValue">Type</div>
+        </div>
+    </div>
+</body>
+</html>
