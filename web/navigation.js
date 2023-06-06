@@ -22,3 +22,7 @@ function GoPhotoPage(){
 function GoFavoritePhotos(){
     window.location.replace("favorite_photos.html")
 }
+
+function GoVideoPage(){
+    window.location.replace("video.html")
+}

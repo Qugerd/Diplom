@@ -150,13 +150,10 @@
     width: 30px;
 }
 
-#btnCloseModal-Upload:hover{
+#btnCloseModal-Upload:hover, #btnCloseModal:hover{
     cursor: pointer;
 }
 
-#btnCloseModal:hover{
-    cursor: pointer;
-}
 
 .modal-conteiner{
     margin-left: 40px;

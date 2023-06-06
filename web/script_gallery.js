@@ -1,4 +1,9 @@
-ymaps.ready(init);
+try{
+    ymaps.ready(init);
+}
+catch(error){
+    console.log(error)
+}
 
 
 eel.get_gallery_photos()(function(data){
