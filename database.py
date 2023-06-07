@@ -199,8 +199,21 @@ def AddSound(path_sound, view, date, country, place, type_):
     conn.close()
 
 
+def GetSoundsByView(view):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT * FROM sounds WHERE view=?', (view,))
+    data = cursor.fetchall()
+    conn.commit()
+    conn.close()
+    return data
 
 
+
+
+
+
+
+# GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
 # GetAllFavoritePhotos()
 # UpdateLikePhoto(0, 5)

@@ -159,7 +159,9 @@ def add_sound(path_sound, date, country, place, type_):
     AddSound(path_sound, TITLE, date, country, place, type_)
 
 
-
+@eel.expose
+def get_sounds_by_view():
+    return GetSoundsByView(TITLE)
 
 
 
