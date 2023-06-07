@@ -108,7 +108,7 @@
 
 
 
-/* Модальное окно "Загрузить фото" */
+/* Модальные окна */
 .modal, .modal-uploadPhoto{
     position: fixed;
     left: 0;

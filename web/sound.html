@@ -37,28 +37,67 @@
     </div>
 
     <div class="conteiner-btn">
-        <button class="addSound">Добавить звук</button>
+        <button class="addSound" onclick="OpenModal()">Добавить звук</button>
     </div>
 
     <div class="conteiner-sounds">
-        <div class="header-conteiner">
-            <div class="fail text">Файл</div>
-            <div class="name text">Название</div>
-            <div class="duration text">Длительность</div>
-            <div class="data text">Дата</div>
-            <div class="country text">Старана</div>
-            <div class="place text">Место</div>
-            <div class="type text">Тип</div>
-        </div>
-        <div class="conteiner-content">
-            <audio class="audio" preload="none" controls src="assets/sounds/9374c7d5275c04e.mp3"></audio>
-            <div class="nameValue">2edhnlwikhb</div>
-            <div class="durationValue">2:89</div>
-            <div class="dataValue">12:L92301</div>
-            <div class="countryValue">Russia</div>
-            <div class="placeValue">Omsk</div>
-            <div class="typeValue">Type</div>
-        </div>
+        <table>
+            <thead class="text-header2">
+                <tr>
+                    <th>Файл</th>
+                    <th>Длительность</th>
+                    <th>Дата</th>
+                    <th>Старана</th>
+                    <th>Место</th>
+                    <th>Тип</th>
+                </tr>
+            </thead>
+
+            <tbody class="text">
+                <tr>
+                    <td><audio class="audio" preload="none" controls src="http://localhost:8000/D:\Projects\Диплом\web\assets\sounds\9374c7d5275c04e.mp3"></audio></td>
+                    <td><div class="durationValue">2:89</div></td>
+                    <td><div class="dataValue">12.01.2023</div></td>
+                    <td><div class="countryValue">Russia lorem20</div></td>
+                    <td><div class="placeValue">Omsk</div></td>
+                    <td><div class="typeValue">Type</div></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+
+
+
+
+    <!-- Модальное окно "Добавить звук" -->
+	<div class="modal" id="modal">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+				<p class="text-header">Добавить звук</p>
+				<button id="btnCloseModal" onclick="CloseModal()">x</button>
+
+				<p class="text-header2">Выбор аудиофайла:</p>
+				<button class="btnChooseFile" id="chooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
+
+                <p class="text-header2">Дата:</p>
+                <input type="date" id="input-date">
+
+                <p class="text-header2">Страна:</p>
+                <input type="text" id="input-country">
+
+                <p class="text-header2">Место: </p>
+                <input type="text" id="input-place">
+
+                <p class="text-header2">Тип: </p>
+                <input type="text" id="input-type">
+
+				<div class="modal-conteiner-center">
+                    <button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button>
+                </div>
+				
+			</div>
+		</div>
+	</div>
 </body>
 </html>

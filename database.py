@@ -191,10 +191,17 @@ def GetVideoByView(view):
     return data
 
 
+def AddSound(path_sound, view, date, country, place, type_):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO sounds (path_video, view, date, country, place, type) VALUES (?, ?, ?, ?, ?, ?)",
+            (path_sound, view, date, country, place, type_))
+    conn.commit()
+    conn.close()
 
 
 
-GetVideoByView("Котик")
+
+# GetVideoByView("Котик")
 # GetAllFavoritePhotos()
 # UpdateLikePhoto(0, 5)
 # GetCoordsPhoto(2)

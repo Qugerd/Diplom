@@ -26,3 +26,7 @@ function GoFavoritePhotos(){
 function GoVideoPage(){
     window.location.replace("video.html")
 }
+
+function GoSoundPage(){
+    window.location.replace("sound.html")
+}

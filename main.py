@@ -12,7 +12,6 @@ def OpenFileDialog():
     root.attributes("-topmost", True)
 
     file_path = filedialog.askopenfilename()
-    # print(file_path)
     return file_path
 
 
@@ -28,6 +27,18 @@ def OpenFileDialogVideo():
     return file_path
 
 
+@eel.expose
+def OpenFileDialogSound():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+
+    filetypes = (("MP3 files", "*.mp3"), ("All files", "*.*"))
+    file_path = filedialog.askopenfilename(filetypes=filetypes)
+    print(file_path)
+    return file_path
+
 
 @eel.expose
 def OpenFilesDialog():
@@ -37,7 +48,6 @@ def OpenFilesDialog():
     root.attributes("-topmost", True)
 
     file_path = filedialog.askopenfilenames(title='Выберите файлы')
-    print(file_path)
     return file_path
 
 
@@ -61,14 +71,12 @@ def get_last_image():
 def save_value(title):
     global TITLE 
     TITLE = title
-    print(TITLE)
 
 
 @eel.expose
 def save_id(id):
     global ID
     ID = id
-    print(ID)
 
 
 @eel.expose
@@ -81,10 +89,8 @@ def fill_combobox_values():
     return GetAllViews()
 
 
-
 @eel.expose
 def put_data_to_db(data):
-    print(data)
     InsertMetaDate(data)
 
 
@@ -95,14 +101,11 @@ def delete_view_by_id(id):
 
 @eel.expose
 def edit_title(id, newName):
-    print(id, newName)
     EditTitle(id, newName)
 
 
 @eel.expose
 def get_gallery_photos():
-    print(TITLE)
-    print(GetGalleryPhotos(TITLE))
     return GetGalleryPhotos(TITLE)
 
 
@@ -113,7 +116,6 @@ def generate_group_id():
 
 @eel.expose
 def get_photo():
-    print(ID)
     return GetPhoto(ID)
 
 
@@ -150,6 +152,20 @@ def add_video(path_video, date):
 @eel.expose
 def get_video_by_view():
     return GetVideoByView(TITLE)
+
+
+@eel.expose
+def add_sound(path_sound, date, country, place, type_):
+    AddSound(path_sound, TITLE, date, country, place, type_)
+
+
+
+
+
+
+
+
+
 
 
 eel.init("web")
