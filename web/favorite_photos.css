@@ -70,12 +70,11 @@
 
 }
 
-
-
 .conteiner-image img{
     width: 240px;
     height: 180px;
 }
 
-
-
+.conteiner-image img:hover{
+    cursor: pointer;
+}

@@ -121,5 +121,3 @@ async function init(){
     myClusterer.add(myGeoObjects);
     myMap.geoObjects.add(myClusterer);
 }
-
-

@@ -7,7 +7,12 @@ eel.get_all_favorite_photos()(function(photos){
         const photo_id = photos[i][0]
         const photo_path = photos[i][1]
         image.setAttribute('src', 'http://localhost:8000/' + photo_path)
+        image.addEventListener("click", function(){
+            eel.save_id(photo_id)
+            GoPhotoPage()
+        })
 
         conteiner.appendChild(image)
     }
 })
+

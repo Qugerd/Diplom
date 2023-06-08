@@ -86,3 +86,20 @@
 .img-container img:hover{
     cursor: pointer;
 }
+
+
+
+/* Поиск */
+.conteiner-search{
+    margin-top: 20px;
+    display: flex;
+}
+
+.search{
+    width: 600px;
+    height: 25px;
+}
+
+.sort{
+    display: flex;
+}

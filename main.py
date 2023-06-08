@@ -164,7 +164,9 @@ def get_sounds_by_view():
     return GetSoundsByView(TITLE)
 
 
-
+@eel.expose
+def update_like_photo(like_value, id):
+    UpdateLikePhoto(like_value, id)
 
 
 

@@ -211,8 +211,6 @@ def GetSoundsByView(view):
 
 
 
-
-
 # GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
 # GetAllFavoritePhotos()

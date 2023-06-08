@@ -5,6 +5,7 @@
     <script src="eel.js"></script>
     <script src="navigation.js"></script>
     <link rel="stylesheet" href="gallery.css">
+    <link rel="stylesheet" href="text_style.css">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
     </script>
     <script src="script_gallery.js"></script>
@@ -49,6 +50,15 @@
         </div>
 
         <div id="map" style="width: 600px; height: 400px"></div>
+
+        <div class="conteiner-search">
+            <input class="search text" id="search" type="text" placeholder="Поиск">
+            <div class="sort">
+                <div class="text">Сортировать по: </div>
+                <input type="radio"><div class="text">Дате раньше</div>
+                <input type="radio"><div class="text">Дате позже</div>
+            </div>
+        </div>
 
         <div class="category-conteiner"></div>
     </div>

@@ -2,6 +2,7 @@ ymaps.ready(init);
 
 let ID; 
 let photo_path;
+let likeValue;
 
 eel.get_photo()(async function(data){
     console.log(data)
@@ -16,6 +17,7 @@ eel.get_photo()(async function(data){
     const camera = data[7]
     const group_id = data[8]
     const note = data[9]
+    likeValue = data[10]
 
 
     let data_view = await eel.set_value()()
@@ -44,6 +46,12 @@ eel.get_photo()(async function(data){
     document.getElementById('place').innerHTML = "Местоположение: " + place
     document.getElementById('date').innerHTML = "Дата: " + date
     document.getElementById('camera').innerHTML = "Камера: " + camera
+
+
+    const btnLike = document.getElementById("like")
+    if(likeValue == 1){
+        btnLike.style.color = "yellow"
+    }
 })
 
 
@@ -113,3 +121,14 @@ async function init(){
 function OpenFolder(){
     eel.open_folder(photo_path)
 }
+
+document.getElementById("like").addEventListener("click", function(){
+    if(likeValue == 1){
+        eel.update_like_photo("", ID)
+        this.style.color = "black"
+    }
+    else{
+        eel.update_like_photo(1, ID)
+        this.style.color = "yellow"
+    }
+})
