@@ -273,3 +273,32 @@ function init(){
 
     myMap.geoObjects.add(placeMark);
 }
+
+
+function Search(){
+    let inputValue = document.getElementById("search").value.trim()
+    console.log(inputValue)
+
+    let list = document.querySelectorAll(".conteiner .vid-name")
+    console.log(list.length)
+
+    if(inputValue){
+        list.forEach(elem =>{
+            if (elem.innerHTML.toLocaleLowerCase().search(inputValue) == -1){
+                elem.parentElement.classList.add("hide")
+            }
+        })
+    }
+    else{
+        list.forEach(elem =>{
+            elem.parentElement.classList.remove("hide")
+        })
+    }
+}
+
+function ClearCearch(){
+    document.getElementById("search").value = ""
+    document.querySelectorAll(".conteiner .vid-name").forEach(elem =>{
+        elem.parentElement.classList.remove("hide")
+    })
+}
