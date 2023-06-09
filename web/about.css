@@ -1,6 +1,5 @@
 body{
     margin: 0;
-
 }
 
 
@@ -8,26 +7,22 @@ body{
     position: relative;
     width: auto;
 
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 0 20px;
 
     display: flex;
     flex-direction: column; 
 }
 
 .container-header{
-
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: auto;
     height: 100px;
+
+    margin: 0 20px;
 
     display: flex;
     flex-direction: row;
 }
 
 .label-home{
-    background-color: rgba(0, 0, 0, 0.3);
-
     width: 150px;
     height: 100px;
 
@@ -38,16 +33,38 @@ body{
 }
 
 
-.label-home button{
-    background-color: rgba(255, 255, 255, 1);
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    width: 100%;
-    height: 50px;
+hr{
+    margin: 0 20px;
 }
 
+/* Кнопка "На главную" */
+.label-home button{
+    width: 100%;
+    height: 50px;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(10, 10, 10);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.4s;
+}
+
+.label-home button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Кнопки навигации */
 .conteiner-btn-navigation{
     width: 100%;
 
@@ -60,49 +77,98 @@ body{
     width: 200px;
     height: 50px;
     margin: 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(56, 34, 59);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
+    transition: background-color 0.3s ease-in-out, color 0.4s;
 }
+
+.conteiner-btn-navigation button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+
 
 
 
 
 /* Блок с заголовками*/
 .conteiner-title{
+    position: relative;
+    margin: 0 60px;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(12, 12, 12, 0.3);
 
-    background-color: rgba(0, 0, 0, 0.1);
-
-
-    margin: 0 20px;
 }
 
+.conteiner-title-name{
+    position: relative;
+    display: flex;
+}
+
+#name_lat, #name_eng{
+    font-size:24px;
+}
+
+#editeTitle{
+    position: relative;
+    margin: 10px;
+    right: 0px;
+    top: 0px;
+
+    height: 24px;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.conteiner-title-name:hover #editeTitle{
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+}
 
 
 /* Блок с картинкой */
 .conteiner-imgbox{
-
-    background-color: rgba(0, 0, 0, 0.3);
-
-    height: 500px;
-
-    margin: 0 20px;
+    margin: 0 100px;
+    margin-top: 20px;
 
     display: flex;
     align-items: center;
+
 }
 
 .conteiner-imgbox img{
-    width: 640px;
-    height: 480px;
+    width: 960px;
+    height: 540px;
+    border: 1px solid;
+    box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
 }
+
+
+
+
+
+
 
 /* Описательный блок */
 .conteiner-information{
-    background-color: rgba(0, 0, 0, 0.1);
-
-    margin: 0 20px;
+    margin: 0 60px;
     margin-bottom: 40px;
+    margin-top: 20px;
 }
 
 .conteiner-information-title{
@@ -123,6 +189,8 @@ body{
     height: 30px;
     width: 30px;
     display: inline-block;
+
+    transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
 
 .conteiner-information-group textarea{
@@ -134,4 +202,106 @@ body{
 
 .conteiner-information-group textarea:focus{
     outline: none;
+}
+
+.text-information{
+    margin: 0 20px;
+    margin-bottom: 20px;
+
+    text-indent: 40px;
+}
+
+
+
+
+
+/* Модальные окна */
+.modal{
+    position: fixed;
+    opacity: 0;
+    visibility: hidden; 
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-box{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: rgb(255, 255, 255);
+    width: 500px;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+}
+
+.modal-box #btnCloseModal{
+    position: fixed;
+    top: -5px;
+    right: 0px;
+    border: none;
+    background-color: white;
+    font-size: 35px;
+    margin: 5px;
+    padding: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+#btnCloseModal:hover{
+    cursor: pointer;
+    color: rgb(109, 11, 11);
+}
+
+.modal-conteiner{
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.modal-conteiner .btnConfirm{
+    width: 100%;
+    height: 50px;
+
+    margin-top: 30px;
+
+    background-color: black;
+    color: white;
+    font: bold 18px arial;
+    cursor: pointer;
+}
+
+
+.modal-conteiner .btnConfirm:hover{
+    background-color: white;
+    color: black;
+}
+
+.input{
+    margin-top: 8px;
+    margin-bottom: 15px;
+
+    background: rgba(0, 0, 0, 0.07);
+    border-radius: 2px;
+
+    border: 0.1px solid rgba(10, 10, 10, 0.116);
+    outline: 0px;
+}
+
+.open{
+    visibility: visible;
+    opacity: 1;
 }

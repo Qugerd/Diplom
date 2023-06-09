@@ -41,6 +41,9 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
         OpenPageAbout(title)
     }
     divName.classList.add('vid-name')
+    divName.onclick = function(){
+        OpenPageAbout(title)
+    }
 
     if (img_path != PLACEHOLD_PATH){
         img.setAttribute('src', `data:image/jpeg;base64,${img_path}`)

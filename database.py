@@ -208,7 +208,11 @@ def GetSoundsByView(view):
     return data
 
 
-
+def EditeNamesView(name, name_lat, name_eng, name_old):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE views SET name = ?, name_lat = ?, name_eng = ? WHERE name = ?", (name, name_lat, name_eng, name_old))
+    conn.commit()
+    conn.close()
 
 
 # GetSoundsByView("Капибара")

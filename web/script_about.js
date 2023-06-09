@@ -19,6 +19,9 @@ eel.set_value()(function(response){
     document.getElementById("name_ru").innerHTML = name_ru
     document.getElementById("name_lat").innerHTML = name_lat
     document.getElementById("name_eng").innerHTML = name_eng
+    document.getElementById("input_name_ru").value = name_ru
+    document.getElementById("input_name_lat").value = name_lat
+    document.getElementById("input_name_eng").value = name_eng
     document.getElementById("descriptionText").innerHTML = description
     document.getElementById("spreadingText").innerHTML = spreading
     document.getElementById("biologyText").innerHTML = biology
@@ -64,11 +67,35 @@ function Confirm(elementId, textareaId, btnConfirmId){
     }
 }
 
+
 function Remove(textareaId, btnConfirmId){
     document.getElementById(textareaId).remove()
     document.getElementById(btnConfirmId).remove()
 }
 
 
+function ConfirmNamesEdite(){
+    if(confirm("Подтвердить изменения ?")){
+        let name_ru = document.getElementById("input_name_ru").value
+        let name_lat = document.getElementById("input_name_lat").value
+        let name_eng = document.getElementById("input_name_eng").value
 
+        eel.edite_names_view(name_ru, name_lat, name_eng)
+        eel.save_value(name_ru)
+
+        document.getElementById("name_ru").innerHTML = name_ru
+        document.getElementById("name_lat").innerHTML = name_lat
+        document.getElementById("name_eng").innerHTML = name_eng
+
+        document.getElementById("modal").classList.remove("open")
+    }
+}
+
+function OpenModalEditName(){
+    document.getElementById("modal").classList.add("open")
+}
+
+function CloseModal(){
+    document.getElementById("modal").classList.remove("open")
+}
 

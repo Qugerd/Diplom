@@ -41,16 +41,22 @@
             </div>
         </div>
 
+        <div class="hr">
+            <hr size="1" >
+        </div>
 
-        <div class="conteiner-title">
-            <h1 id="name_ru"></h1>
-            <h2 id="name_lat"></h2>
-            <h2 id="name_eng"></h2>
+        <div class="conteiner-title" >
+            <div class="conteiner-title-name">
+                <div class="text-header" id="name_ru"></div>
+                <img onclick="OpenModalEditName()" id="editeTitle" src="assets/icons/pencil.svg">
+            </div>
+            <div class="text-header" id="name_lat"></div>
+            <div class="text-header" id="name_eng"></div>
         </div>
 
 
         <div class="conteiner-imgbox">
-            <img id="image" src="http://placehold.it/640x480" alt="">
+            <img id="image">
         </div>
 
 
@@ -62,7 +68,8 @@
                     </div>
                     <img class="btnEdit" src="assets/icons/pencil.svg" onclick="Edit('description')">
                 </div>
-                <div class="text-information" id="descriptionText"></div>
+                <div class="text-information" id="descriptionText">
+                </div>
             </div>
 
 
@@ -73,7 +80,8 @@
                     </div>
                     <img class="btnEdit" src="assets/icons/pencil.svg" onclick="Edit('spreading')">
                 </div>
-                <div class="text-information" id="spreadingText"></div>
+                <div class="text-information" id="spreadingText">
+                </div>
             </div>
 
 
@@ -84,12 +92,41 @@
                     </div>
                     <img class="btnEdit" src="assets/icons/pencil.svg" onclick="Edit('biology')">
                 </div>
-                <div class="text-information" id="biologyText"></div>
+                <div class="text-information" id="biologyText">
+                </div>
             </div>
         </div>
     </div>
 
 
+    <div class="modal" id="modal">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+				<div class="text-header">Редактировать называние</div>
+				<button onclick="CloseModal()" id="btnCloseModal">x</button>
+
+                <div class="text-header2">
+                    Название на русском:
+                </div>
+                <input class="input text" id="input_name_ru" type="text">
+
+                <div class="text-header2">
+                    Название на латинском:
+                </div>
+                <input class="input text" id="input_name_lat" type="text">
+
+                <div class="text-header2">
+                    Название на английском:
+                </div>
+                <input class="input text" id="input_name_eng" type="text">
+
+
+
+				<button class="btnConfirm" id="Confirm" onclick="ConfirmNamesEdite()">Подтвердить</button>
+				
+			</div>
+		</div>
+	</div>
 
 
 

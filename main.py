@@ -169,7 +169,9 @@ def update_like_photo(like_value, id):
     UpdateLikePhoto(like_value, id)
 
 
-
+@eel.expose
+def edite_names_view(name, name_lat, name_eng):
+    EditeNamesView(name, name_lat, name_eng, TITLE)
 
 
 eel.init("web")
