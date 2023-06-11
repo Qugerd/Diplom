@@ -36,8 +36,8 @@ eel.get_photo()(async function(data){
 
     const image = document.getElementById("image")
     image.setAttribute('src', 'http://localhost:8000/' + photo_path)
-    image.setAttribute('width', '980')
-    image.setAttribute('height', '640')
+    image.setAttribute('width', '1200')
+    image.setAttribute('height', '705')
 
 
     document.getElementById('notes_text').innerHTML = note
@@ -50,7 +50,8 @@ eel.get_photo()(async function(data){
 
     const btnLike = document.getElementById("like")
     if(likeValue == 1){
-        btnLike.style.color = "yellow"
+        btnLike.style.backgroundColor = "#ffd000"
+        btnLike.style.borderRadius = "50%"
     }
 })
 
@@ -125,10 +126,12 @@ function OpenFolder(){
 document.getElementById("like").addEventListener("click", function(){
     if(likeValue == 1){
         eel.update_like_photo("", ID)
-        this.style.color = "black"
+        this.style.backgroundColor = "#ffd000"
+        this.style.borderRadius = "50%"
     }
     else{
         eel.update_like_photo(1, ID)
-        this.style.color = "yellow"
+        this.style.backgroundColor = "white"
+        this.style.borderRadius = "50%"
     }
 })

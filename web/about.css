@@ -1,8 +1,4 @@
-body{
-    margin: 0;
-}
-
-
+/* Контейнер навигации */
 .container{
     position: relative;
     width: auto;

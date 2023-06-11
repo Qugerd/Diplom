@@ -1,28 +1,24 @@
-/* НАВИГАЦИЯ */
+/* Контейнер навигации */
 .container{
     position: relative;
     width: auto;
 
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 0 20px;
 
     display: flex;
     flex-direction: column; 
 }
 
 .container-header{
-
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: auto;
     height: 100px;
+
+    margin: 0 20px;
 
     display: flex;
     flex-direction: row;
 }
 
 .label-home{
-    background-color: rgba(0, 0, 0, 0.3);
-
     width: 150px;
     height: 100px;
 
@@ -32,16 +28,39 @@
    
 }
 
-.label-home button{
-    background-color: rgba(255, 255, 255, 1);
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    width: 100%;
-    height: 50px;
+
+hr{
+    margin: 0 20px;
 }
 
+/* Кнопка "На главную" */
+.label-home button{
+    width: 100%;
+    height: 50px;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(10, 10, 10);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.4s;
+}
+
+.label-home button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Кнопки навигации */
 .conteiner-btn-navigation{
     width: 100%;
 
@@ -54,18 +73,67 @@
     width: 200px;
     height: 50px;
     margin: 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(56, 34, 59);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
+    transition: background-color 0.3s ease-in-out, color 0.4s;
+}
+
+.conteiner-btn-navigation button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
 }
 
 
 
-/* НАЗВАНИЯ */
+/* Блок с заголовками*/
 .conteiner-title{
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 0 20px;
+    position: relative;
+    margin: 0 60px;
+    margin-top: 20px;
+    text-shadow: 0 0 10px rgba(12, 12, 12, 0.3);
+
 }
+
+.conteiner-title-name{
+    position: relative;
+    display: flex;
+}
+
+#name_lat, #name_eng{
+    font-size:24px;
+}
+
+#editeTitle{
+    position: relative;
+    margin: 10px;
+    right: 0px;
+    top: 0px;
+
+    height: 24px;
+
+    visibility: hidden;
+    opacity: 0;
+
+    transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.conteiner-title-name:hover #editeTitle{
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+}
+
+
 
 
 
@@ -84,16 +152,21 @@
 }
 
 
+
+
+
 /* Блок с картинкой */
 .conteiner-imgbox{
     position: relative;
-    background-color: rgba(0, 0, 0, 0.3);
     height: auto;
-    margin: 0 20px;
+
+    margin: 0 60px;
+
     display: flex; /* Указываем, что контейнер должен использовать flexbox */
     justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
     align-items: center;
 
+    
 }
 
 .conteiner-imgbox:first-child{
@@ -101,26 +174,38 @@
     height: 640px;
 }
 
+#image{
+    border: 1px solid;
+    box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
+    border-radius: 5px;
+}
+
 .favorite{
     position: absolute;
-    width: 64px;
-    height: 64px;
+    width: 32px;
+    height: 32px;
 
-    right: 0;
-    top: 0;
+    right: 660px;
+    top: -53px;
 
-
+    
 }
 
 .favorite:hover{
     cursor: pointer;
-    color: #ffee00;
+
+    background-color: #ffd000;
+    border-radius: 50px;
 }
+
+
+
+
+
 
 /* Заметки */
 .conteiner-notes{
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    margin: 40px 100px 0px;
 }
 
 .conteiner-notes-title{
@@ -165,15 +250,23 @@
 
 
 /* Информация */
+#map{
+    border: 1px solid;
+    box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
+    border-radius: 5px;
+}
+
 .conteiner-information{
-    background-color: rgba(0, 0, 0, 0.1);
-    margin: 20px;
+    background-color: rgba(0, 0, 0, 0.05);
+    margin: 40px 80px 40px;
+
+    border-radius: 50px;
 
     display: flex;
 }
 
 .conteiner-text{
-    margin: 20px;
+    margin: 20px 40px 0px;
 }
 
 .conteiner-text div{
@@ -181,7 +274,3 @@
     font-size: 20px;
 }
 
-.text{
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-weight: bold;
-}

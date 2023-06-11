@@ -64,6 +64,7 @@ eel.get_gallery_photos()(function(data){
             titleDataLocation.innerText = dataTime + ' | ' + location
 
             titleDataLocation.classList.add('label-container')
+            titleDataLocation.classList.add('text-header2')
             imgConteiner.classList.add('img-container')
 
 
