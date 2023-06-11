@@ -151,6 +151,7 @@ hr{
     width: 960px;
     height: 540px;
     border: 1px solid;
+    border-radius: 3px;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
 }
 
@@ -164,7 +165,12 @@ hr{
 .conteiner-information{
     margin: 0 60px;
     margin-bottom: 40px;
-    margin-top: 20px;
+    margin-top: 40px;
+
+    background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 30px;
+
+    padding: 20px;
 }
 
 .conteiner-information-title{

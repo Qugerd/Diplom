@@ -1,18 +1,24 @@
+/* Контейнер навигации */
+.container{
+    position: relative;
+    width: auto;
 
-/* Навигация */
+
+    display: flex;
+    flex-direction: column; 
+}
+
 .container-header{
-
-    background-color: rgba(0, 0, 0, 0.2);
-    width: 100%;
+    width: auto;
     height: 100px;
+
+    margin: 0 20px;
 
     display: flex;
     flex-direction: row;
 }
 
 .label-home{
-    background-color: rgba(0, 0, 0, 0.3);
-
     width: 150px;
     height: 100px;
 
@@ -23,16 +29,38 @@
 }
 
 
-.label-home button{
-    background-color: rgba(255, 255, 255, 1);
-    /* position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%); */
-    width: 100%;
-    height: 50px;
+hr{
+    margin: 0 20px;
 }
 
+/* Кнопка "На главную" */
+.label-home button{
+    width: 100%;
+    height: 50px;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(10, 10, 10);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.4s;
+}
+
+.label-home button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
+}
+
+
+
+
+
+/* Кнопки навигации */
 .conteiner-btn-navigation{
     width: 100%;
 
@@ -45,46 +73,63 @@
     width: 200px;
     height: 50px;
     margin: 0 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+
+    background: rgb(238,174,202);
+    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
+
+    color: rgb(56, 34, 59);
+    border: 0px;
+    border-radius: 3px;
+    font: bold 16px arial;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
+    transition: background-color 0.3s ease-in-out, color 0.4s;
+}
+
+.conteiner-btn-navigation button:hover{
+    background-color: white;
+    color: black;
+    cursor: pointer;
 }
 
 
 /* Кнопка добавит видео */
 .conteiner-btn{
-    background-color: rgba(0, 0, 0, 0.1);
-
-    margin: 20px;
+    margin: 40px;
 }
 
 .add-video{
     width: 200px;
     height: 50px;
 
-    font-size: 16px;
-    font-weight: bold;
+    background-color: black;
+    color: white;
+    font: bold 18px arial;
+    cursor: pointer;
+    border: black;
+
+    transition: background-color 0.4s , color 0.4s ease-in-out;
 }
+
+.add-video:hover{
+    background-color: white;
+    color: black;
+    border: 0.1px solid #d6d6d6;
+}
+
 
 /* Видеокнтейнер */
 
 .conteiner-video{
-    background-color: rgba(0, 0, 0, 0.3);
 
-    margin: 20px;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-
+    margin: 20px 60px 40px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
 }
 
 .conteiner-video video{
     width: 250px;
-
-
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-top: 20px;
-    padding: 0px;
-
-    
+    margin: 10px 0px 10px;
 }

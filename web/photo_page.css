@@ -98,7 +98,7 @@ hr{
 /* Блок с заголовками*/
 .conteiner-title{
     position: relative;
-    margin: 0 60px;
+    margin: 0 80px;
     margin-top: 20px;
     text-shadow: 0 0 10px rgba(12, 12, 12, 0.3);
 
@@ -227,24 +227,38 @@ hr{
 .notes_title{
     font-size: 26px;
     font-weight: bold;
+
+    margin-left: 50px;
+    margin-top: 60px;
 }
 
 .edit{
-    margin: 0 20px;
+    margin: 65px 20px 0px;
 
     height: 24px;
     width: 24px;
+
+    visibility: hidden;
 }
 
-.edit:hover{
+.conteiner-notes-title:hover .edit{
+    visibility: visible;
     cursor: pointer;
 }
 
-.notes_text{
-    margin-top: 15px;
+/* .edit:hover{
+    cursor: pointer;
+    visibility: visible;
+} */
 
+.notes_text{
     font-size: 24px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+
+    border-radius: 50px;
+
+    padding: 20px 40px 0px;
 }
 
 
@@ -258,7 +272,7 @@ hr{
 
 .conteiner-information{
     background-color: rgba(0, 0, 0, 0.05);
-    margin: 40px 80px 40px;
+    margin: 80px 80px 40px;
 
     border-radius: 50px;
 
