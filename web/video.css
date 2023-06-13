@@ -122,7 +122,6 @@ hr{
 /* Видеокнтейнер */
 
 .conteiner-video{
-
     margin: 20px 60px 40px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
@@ -131,5 +130,44 @@ hr{
 
 .conteiner-video video{
     width: 250px;
-    margin: 10px 0px 10px;
+}
+
+
+/* Карточка видео */
+.video-card{
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.video-card:hover{
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
+}
+
+.video-card:hover .button-conteiner{
+    visibility: visible;
+    opacity: 1;
+}
+
+.button-conteiner{
+    display: flex;
+    z-index: 2;
+    margin-bottom: 3px;
+
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+
+    transition: opacity 0.5s , visibility 0.5s;
+}
+
+.video-card button{
+    margin: 5px;
+    padding: 5px;
+
+    font-weight: bold;
+    outline: 0px;
+}
+
+.video-card button:hover{
+    cursor: pointer;
 }

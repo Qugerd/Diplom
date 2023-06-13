@@ -282,9 +282,11 @@ function Search(){
     let inputValue = document.getElementById("search").value.trim()
     console.log(inputValue)
 
+
     let list = document.querySelectorAll(".conteiner .vid-name")
     console.log(list.length)
 
+    
     if(inputValue){
         list.forEach(elem =>{
             if (elem.innerHTML.toLocaleLowerCase().search(inputValue) == -1){

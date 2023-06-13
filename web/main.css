@@ -86,7 +86,7 @@
 .conteiner{
     position: relative;
     width: auto;
-    
+    justify-items: center;
 
     margin: 10px;
     display: grid;

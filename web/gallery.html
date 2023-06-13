@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="text_style.css">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
     </script>
-    <script src="script_gallery.js"></script>
+    <!-- <script src="script_gallery.js"></script> -->
 </head>
 <body>
 
@@ -46,9 +46,9 @@
         <hr size="1">
 
         <div class="conteiner-title" >
-            <div class="text-header" id="name_ru">Черноногий альбатрос</div>
-            <div class="text-header" id="name_lat">Phoebastria nigripes (Audubon,1839)</div>
-            <div class="text-header" id="name_eng">Black-footed Albatross</div>
+            <div class="text-header" id="name_ru"></div>
+            <div class="text-header" id="name_lat"></div>
+            <div class="text-header" id="name_eng"></div>
         </div>
 
 
@@ -56,25 +56,21 @@
 
 
         <div class="conteiner-search">
-            <input class="search text" id="search" type="text" placeholder="Поиск">
-            <button class="btn-clear">Очистить</button>
+            <input class="search text" id="search" type="text" placeholder="Поиск" oninput="Search()">
+            <button class="btn-clear" onclick="ClearSearch()">Очистить</button>
             <div class="sort">
                 <div class="sort-text">Сортировать по: </div>
-                <input class="radio" type="radio" name="date-sort" checked><div class="radio-text">Дате раньше</div>
-                <input class="radio" type="radio" name="date-sort"><div class="radio-text">Дате позже</div>
+
+                <input id="date-early" class="radio" type="radio" name="kek" value="1" checked>
+                    <div class="radio-text" id="date-early">Дате раньше</div>
+
+                <input class="radio" type="radio" name="kek" id="date-later" value="2">
+                    <div class="radio-text">Дате позже</div>
             </div>
         </div>
 
-        <div class="category-conteiner">
-            <!-- <div class="label-container text-header2">2023-05-01 | Приморский край</div>
-            <div class="img-container">
-                <img src="assets/images/_3i77LWDVwk.jpg"> -->
-                <!-- <img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"><img src="assets/images/_3i77LWDVwk.jpg"> -->
-            </div>
-        </div>
+        <div class="category-conteiner"></div>
     </div>
-
-    
-    <!-- <script src="script_gallery.js"></script> -->
+    <script src="script_gallery.js"></script>
 </body>
 </html>

@@ -16,13 +16,41 @@ eel.get_video_by_view()(function(data){
         video.setAttribute('controls', "")
 
 
-        conteinerVideo.appendChild(video)
+        let btnFolder = document.createElement('button')
+        btnFolder.textContent = "Показать в папке"
+        btnFolder.addEventListener("click", function(){
+            ShowInFolder(path_video)
+        })
+        let btnDelete = document.createElement('button')
+        btnDelete.textContent = "Удалить"
+        btnDelete.addEventListener("click", function(){
+            Delete(id)
+        })
+
+        let btnConteiner = document.createElement('div')
+        btnConteiner.classList.add("button-conteiner")
+        btnConteiner.appendChild(btnFolder)
+        btnConteiner.appendChild(btnDelete)
+
+
+        let videoCard = document.createElement('div')
+        videoCard.classList.add("video-card")
+        videoCard.appendChild(video)
+        videoCard.appendChild(btnConteiner)
+
+        conteinerVideo.appendChild(videoCard)
     }
 })
 
 
+function Delete(id){
+    eel.delete_video(id)
+    location.reload()
+}
 
-
+function ShowInFolder(path_video){
+    eel.open_folder(path_video)
+}
 
 
 
@@ -33,7 +61,8 @@ async function AddVideo(){
     var date = "01.02.2023"
     console.log(date)
 
-    eel.add_video(videoPath, date)
-
-    location.reload()
+    if (videoPath != ""){
+        eel.add_video(videoPath, date)
+        location.reload()
+    }
 }

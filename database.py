@@ -103,7 +103,7 @@ def EditTitle(id, newName):
 
 def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
+    cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data DESC', (kind,))
     data = []
     for row in cursor:
         data_tuple = list(row)
@@ -211,6 +211,13 @@ def GetSoundsByView(view):
 def EditeNamesView(name, name_lat, name_eng, name_old):
     conn = sqlite3.connect('database.db')
     conn.execute("UPDATE views SET name = ?, name_lat = ?, name_eng = ? WHERE name = ?", (name, name_lat, name_eng, name_old))
+    conn.commit()
+    conn.close()
+
+
+def DeleteVideo(id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("DELETE FROM video WHERE id=?", (id, ))
     conn.commit()
     conn.close()
 

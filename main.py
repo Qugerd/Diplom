@@ -174,6 +174,10 @@ def edite_names_view(name, name_lat, name_eng):
     EditeNamesView(name, name_lat, name_eng, TITLE)
 
 
+@eel.expose
+def delete_video(id):
+    DeleteVideo(id)
+
 eel.init("web")
 
 eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0)

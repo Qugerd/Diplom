@@ -148,6 +148,7 @@ hr{
     height: 540px;
     border: 1px solid;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
+    border-radius: 3px;
 }
 
 
@@ -164,6 +165,7 @@ hr{
     outline: 0px;
     background-color: rgba(129, 123, 123, 0.1);
     border: 0.1px solid #d6d6d6;
+    border-radius: 5px;
 }
 
 .sort{
@@ -200,6 +202,7 @@ hr{
 
     cursor: pointer;
     margin-left: 10px;
+    border-radius: 5px;
 
     transition: background-color 0.3s ease-in-out, color 0.4s, border 0.2s ease-out;
 }
@@ -242,4 +245,8 @@ img{
 img:hover{
     box-shadow: 0 0 50px rgba(172, 171, 171, 1);
     border: 0.5px solid rgb(129, 129, 129);
+}
+
+.hide{
+    display: none;
 }

@@ -10,6 +10,7 @@ eel.get_gallery_photos()(function(data){
     // Контейнер для серии фото с датой и локацией
     const categoryConteiner = document.querySelector('.category-conteiner')
 
+    let conteinerCollection = document.createElement("div")
 
     // Создание элементов 
     let titleDataLocation = document.createElement("div")
@@ -31,17 +32,25 @@ eel.get_gallery_photos()(function(data){
                 GoPhotoPage()
             }
             imgConteiner.appendChild(img)
-        
+
+
             let location = data[i][2]
             let dataTime = data[i][3]
-            titleDataLocation.innerText = dataTime + ' | ' + location
-    
+
+            const date = new Date(dataTime);
+            const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
+
+            titleDataLocation.innerText = formattedDate + ' | ' + location
             titleDataLocation.classList.add('label-container')
             imgConteiner.classList.add('img-container')
-    
+
+
+            conteinerCollection.classList.add("conteiner-collection")
+            conteinerCollection.appendChild(titleDataLocation)
+            conteinerCollection.appendChild(imgConteiner)
+
             // Добавление в главный контейнер 
-            categoryConteiner.appendChild(titleDataLocation)
-            categoryConteiner.appendChild(imgConteiner)
+            categoryConteiner.appendChild(conteinerCollection)
         }
         else{
 
@@ -61,17 +70,23 @@ eel.get_gallery_photos()(function(data){
     
             let location = data[i][2]
             let dataTime = data[i][3]
-            titleDataLocation.innerText = dataTime + ' | ' + location
+
+            const date = new Date(dataTime);
+            const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
+ 
+            titleDataLocation.innerText = formattedDate + ' | ' + location
 
             titleDataLocation.classList.add('label-container')
             titleDataLocation.classList.add('text-header2')
             imgConteiner.classList.add('img-container')
 
-
+            conteinerCollection = document.createElement("div")
+            conteinerCollection.classList.add("conteiner-collection")
+            conteinerCollection.appendChild(titleDataLocation)
+            conteinerCollection.appendChild(imgConteiner)
 
             // Добавление в главный контейнер 
-            categoryConteiner.appendChild(titleDataLocation)
-            categoryConteiner.appendChild(imgConteiner)
+            categoryConteiner.appendChild(conteinerCollection)
         }
         group_id_prev = group_id_current
     }
@@ -81,12 +96,12 @@ eel.get_gallery_photos()(function(data){
 
 eel.set_value()(function(response){
     let name_ru = response[1]
-    let name_en = response[3]
+    let name_eng = response[3]
     let name_lat = response[4]
 
-    document.getElementById("description").innerHTML = name_ru
-    document.getElementById("spreading").innerHTML = name_en
-    document.getElementById("biology").innerHTML = name_lat
+    document.getElementById("name_ru").innerHTML = name_ru
+    document.getElementById("name_lat").innerHTML = name_eng
+    document.getElementById("name_eng").innerHTML = name_lat
 })
 
 
@@ -122,3 +137,56 @@ async function init(){
     myClusterer.add(myGeoObjects);
     myMap.geoObjects.add(myClusterer);
 }
+
+
+function Search(){
+    let inputValue = document.getElementById("search").value.trim()
+    console.log(inputValue)
+
+
+    let list = document.querySelectorAll(".category-conteiner .label-container")
+    console.log(list.length)
+
+
+    if(inputValue){
+        list.forEach(elem => {
+            if(elem.innerHTML.toLocaleLowerCase().search(inputValue) == -1){
+                elem.parentElement.classList.add("hide")
+            }
+        })
+    }
+    else{
+        list.forEach(elem =>{
+            elem.parentElement.classList.remove("hide")
+        })
+    }
+}
+
+
+function ClearSearch(){
+    document.getElementById("search").value = ""
+    document.querySelectorAll(".category-conteiner .label-container").forEach(elem =>{
+        elem.parentElement.classList.remove("hide")
+    })
+}
+
+
+function SortModeReverse(){
+    const elements = document.querySelectorAll(".category-conteiner .conteiner-collection");
+    const reversedElements = Array.prototype.slice.call(elements).reverse();
+
+    document.querySelector('.category-conteiner').replaceChildren()
+
+    reversedElements.forEach(elem =>{
+        document.querySelector('.category-conteiner').appendChild(elem)
+    })
+}
+
+document.getElementById("date-early").addEventListener("change",SortModeReverse)
+
+document.getElementById("date-later").addEventListener("change",SortModeReverse)
+
+
+
+
+
