@@ -93,5 +93,34 @@
 			</div>
 		</div>
 	</div>
+
+
+
+    <!-- Модальное окно "Редактировать" -->
+	<div class="modalEdite" id="modalEdite">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+				<p class="text-header">Редактировать</p>
+				<button id="btnCloseModal" onclick="CloseModalEdite()">x</button>
+
+                <p class="text-header2">Дата:</p>
+                <input type="text" id="edite-date">
+
+                <p class="text-header2">Страна:</p>
+                <input type="text" id="edite-country">
+
+                <p class="text-header2">Место: </p>
+                <input type="text" id="edite-place">
+
+                <p class="text-header2">Тип: </p>
+                <input type="text" id="edite-type">
+
+				<div class="modal-conteiner-center">
+                    <button class="btnConfirm" id="Confirm" onclick="ConfirmEdite()">Подтвердить</button>
+                </div>
+				
+			</div>
+		</div>
+	</div>
 </body>
 </html>

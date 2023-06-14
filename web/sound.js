@@ -1,5 +1,5 @@
-let fileDialogValue
-
+let fileDialogValue;
+let ID;
 
 eel.get_sounds_by_view()(function(data){
     for(let i = 0; i < data.length; i++){
@@ -30,7 +30,9 @@ eel.get_sounds_by_view()(function(data){
 
 
         let tdDate = document.createElement("td")
-        tdDate.innerHTML = date
+        date = new Date(date);
+        const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
+        tdDate.innerHTML = formattedDate
         tr.appendChild(tdDate)
 
 
@@ -53,18 +55,21 @@ eel.get_sounds_by_view()(function(data){
         let btnEdit = document.createElement("button")
         btnEdit.classList.add("edit")
         btnEdit.addEventListener("click", function(){
-            EditeSound()
+            EditeSound(id, formattedDate, country, place, type)
         })
+
         let btnFolder = document.createElement("button")
         btnFolder.classList.add("sif")
         btnFolder.addEventListener("click", function(){
-            ShowSound()
+            ShowSound(path_sound)
         })
+
         let btnDelete = document.createElement("button")
         btnDelete.classList.add("del")
         btnDelete.addEventListener("click", function(){
-            DeleteSound()
+            DeleteSound(id)
         })
+
         tdButtons.appendChild(btnEdit)
         tdButtons.appendChild(btnFolder)
         tdButtons.appendChild(btnDelete)
@@ -112,6 +117,17 @@ async function Confirm(){
     }
 }
 
+function ConfirmEdite(){
+    let date = document.getElementById("edite-date")
+    let country = document.getElementById("edite-country")
+    let place = document.getElementById("edite-place")
+    let type = document.getElementById("edite-type")
+
+    eel.edite_sound(ID, date.value , country.value , place.value , type.value )
+
+    location.reload()
+}
+
 async function OpenFileDialog(){
     fileDialogValue = await eel.OpenFileDialogSound()()
 }
@@ -128,14 +144,30 @@ function CloseModal(){
     modal.classList.remove("open")
 }
 
-function DeleteSound(){
-    alert("Sound Deleted")
+function DeleteSound(id){
+    eel.delete_sound(id)
+    location.reload()
 }
 
-function ShowSound(){
-    alert("Show")
+function ShowSound(path_sound){
+    eel.open_folder(path_sound)
 }
 
-function EditeSound(){
-    alert("Edited")
+function EditeSound(id, date, country, place, type){
+    ID = id
+
+    document.getElementById("modalEdite").classList.add("open")
+
+    document.getElementById("edite-date").value = date
+
+    document.getElementById("edite-country").value = country
+
+    document.getElementById("edite-place").value = place
+
+    document.getElementById("edite-type").value = type
+    
+}
+
+function CloseModalEdite(){
+    document.getElementById("modalEdite").classList.remove("open")
 }

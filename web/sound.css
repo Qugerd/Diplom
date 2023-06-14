@@ -148,7 +148,7 @@ td{
 
 
 /* Модальное окно "Добавить звук" */
-.modal{
+.modal, .modalEdite{
     position: fixed;
     left: 0;
     top: 0;
@@ -164,7 +164,7 @@ td{
     transition: opacity .4s, visibility .4s;
 }
 
-.modal.open{
+.modal.open, .modalEdite.open{
     visibility: visible;
     opacity: 1;
 }

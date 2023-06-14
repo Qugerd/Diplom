@@ -178,6 +178,19 @@ def edite_names_view(name, name_lat, name_eng):
 @eel.expose
 def delete_video(id):
     DeleteVideo(id)
+    
+
+@eel.expose
+def delete_sound(id):
+    DeleteSound(id)
+
+
+@eel.expose
+def edite_sound(id, date, country, place, type):
+    EditeSound(id, date, country, place, type)
+
+
+
 
 eel.init("web")
 

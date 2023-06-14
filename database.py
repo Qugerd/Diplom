@@ -224,7 +224,26 @@ def DeleteVideo(id):
     conn.execute("DELETE FROM video WHERE id=?", (id, ))
     conn.commit()
     conn.close()
+    
+    
+def DeleteSound(id):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("DELETE FROM sounds WHERE id=?", (id, ))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        print("Ошибка:", e.args[0])
 
+
+def EditeSound(id, date, country, place, type):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("UPDATE sounds SET date = ?, country = ?, place = ?, type = ? WHERE id = ?", (date, country, place, type, id))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        print("Ошибка:", e.args[0])
 
 # GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
