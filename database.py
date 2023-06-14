@@ -191,12 +191,16 @@ def GetVideoByView(view):
     return data
 
 
-def AddSound(path_sound, view, date, country, place, type_):
-    conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO sounds (path_video, view, date, country, place, type) VALUES (?, ?, ?, ?, ?, ?)",
-            (path_sound, view, date, country, place, type_))
-    conn.commit()
-    conn.close()
+def AddSound(path_sound, view, date, country, place, type_, duration):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("INSERT INTO sounds (path_video, view, date, country, place, type, duration) VALUES (?, ?, ?, ?, ?, ?, ?)",
+                (path_sound, view, date, country, place, type_, duration))
+        conn.commit()
+        conn.close()
+        return "Добавлено"
+    except sqlite3.Error as e:
+        print("Ошибка:", e.args[0])
 
 
 def GetSoundsByView(view):

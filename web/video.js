@@ -14,6 +14,8 @@ eel.get_video_by_view()(function(data){
         let video = document.createElement('video')
         video.setAttribute('src', 'http://localhost:8000/' + path_video)
         video.setAttribute('controls', "")
+        video.controlsList = "nodownload noplaybackrate"
+        video.disablePictureInPicture = true
 
 
         let btnFolder = document.createElement('button')

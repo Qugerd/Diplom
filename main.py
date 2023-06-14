@@ -156,7 +156,8 @@ def get_video_by_view():
 
 @eel.expose
 def add_sound(path_sound, date, country, place, type_):
-    AddSound(path_sound, TITLE, date, country, place, type_)
+    duration = get_duration(path_sound)
+    return AddSound(path_sound, TITLE, date, country, place, type_, duration)
 
 
 @eel.expose

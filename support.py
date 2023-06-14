@@ -1,7 +1,7 @@
 import base64
 import os
 import eel
-
+import librosa
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
@@ -36,3 +36,14 @@ def convert_str_to_numeric(str):
 def open_folder(path):
     path = path.replace('/', "\\")
     os.system('explorer /select,"'+path+'"')
+
+
+def get_duration(path_file):
+    y, sr = librosa.load(path_file)
+    duration = librosa.get_duration(y=y, sr=sr)
+    minutes = int(duration / 60)
+    seconds = int(duration % 60)
+    duration_formatted = "{:d}:{:02d}".format(minutes, seconds)
+
+    print("Длительность файла составляет: {}".format(duration_formatted))
+    return duration_formatted

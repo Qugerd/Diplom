@@ -10,6 +10,7 @@ eel.get_sounds_by_view()(function(data){
         let country = data[i][4]
         let place = data[i][5]
         let type = data[i][6]
+        let duration = data[i][7]
 
 
         //Создание новых строк в таблице
@@ -19,11 +20,12 @@ eel.get_sounds_by_view()(function(data){
         let audio = document.createElement("audio")
         audio.setAttribute("src", 'http://localhost:8000/' + path_sound)
         audio.setAttribute("controls", "")
+        audio.controlsList = "nodownload noplaybackrate "
         tdAudio.appendChild(audio)
         tr.appendChild(tdAudio)
 
         let tdDuration = document.createElement("td")
-        tdDuration.innerHTML = "10:00"
+        tdDuration.innerHTML = duration
         tr.appendChild(tdDuration)
 
 
@@ -47,21 +49,67 @@ eel.get_sounds_by_view()(function(data){
         tr.appendChild(tdType)
 
 
+        let tdButtons = document.createElement("td")
+        let btnEdit = document.createElement("button")
+        btnEdit.classList.add("edit")
+        btnEdit.addEventListener("click", function(){
+            EditeSound()
+        })
+        let btnFolder = document.createElement("button")
+        btnFolder.classList.add("sif")
+        btnFolder.addEventListener("click", function(){
+            ShowSound()
+        })
+        let btnDelete = document.createElement("button")
+        btnDelete.classList.add("del")
+        btnDelete.addEventListener("click", function(){
+            DeleteSound()
+        })
+        tdButtons.appendChild(btnEdit)
+        tdButtons.appendChild(btnFolder)
+        tdButtons.appendChild(btnDelete)
+        tr.appendChild(tdButtons)
+
         let tableBody = document.getElementById("table-body")
         tableBody.appendChild(tr)
     }
 })
 
 
-function Confirm(){
-    let date = document.getElementById("input-date").value
-    let country = document.getElementById("input-country").value
-    let place = document.getElementById("input-place").value
-    let type = document.getElementById("input-type").value
+async function Confirm(){
+    let date = document.getElementById("input-date")
+    let country = document.getElementById("input-country")
+    let place = document.getElementById("input-place")
+    let type = document.getElementById("input-type")
 
     filePath = fileDialogValue
 
-    eel.add_sound(filePath, date, country, place, type)
+    if(filePath == null || filePath == ''){
+        alert("Выберите файл")
+    }
+    else if(date.value == ''){
+        alert("Выберите дату")
+    }
+    else if (country.value == ''){
+        alert("Введите страну")
+    }
+    else if (place.value == ''){
+        alert("Введите локацию")
+    }
+    else if (type.value == ''){
+        alert("Введите тип")
+    }
+    else{
+        let response = await eel.add_sound(filePath, date.value, country.value, place.value, type.value)()
+
+        alert(response)
+    
+        date.value = ''
+        country.value = ''
+        place.value = ''
+        type.value = ''
+        filePath, fileDialogValue = ''
+    }
 }
 
 async function OpenFileDialog(){
@@ -78,4 +126,16 @@ function OpenModal(){
 function CloseModal(){
     let modal = document.getElementById("modal")
     modal.classList.remove("open")
+}
+
+function DeleteSound(){
+    alert("Sound Deleted")
+}
+
+function ShowSound(){
+    alert("Show")
+}
+
+function EditeSound(){
+    alert("Edited")
 }
