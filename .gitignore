@@ -6,3 +6,5 @@ start.bat
 database.db
 .vscode
 __pycache__
+.gitignore
+.gitattributes
