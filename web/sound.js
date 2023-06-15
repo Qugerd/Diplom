@@ -1,6 +1,74 @@
 let fileDialogValue;
 let ID;
 
+function CreateTableRow(id, path_sound, date, country, place, type, duration){
+
+    //Создание новых строк в таблице
+    let tr = document.createElement("tr")
+    tr.classList.add(`row-${id}`)
+
+    let tdAudio = document.createElement("td")
+    let audio = document.createElement("audio")
+    audio.setAttribute("src", 'http://localhost:8000/' + path_sound)
+    audio.setAttribute("controls", "")
+    audio.controlsList = "nodownload noplaybackrate "
+    tdAudio.appendChild(audio)
+    tr.appendChild(tdAudio)
+
+    let tdDuration = document.createElement("td")
+    tdDuration.innerHTML = duration
+    tr.appendChild(tdDuration)
+
+
+    let tdDate = document.createElement("td")
+    tdDate.innerHTML = date
+    tr.appendChild(tdDate)
+
+
+    let tdCountry = document.createElement("td")
+    tdCountry.innerHTML = country
+    tr.appendChild(tdCountry)
+
+
+    let tdPlace = document.createElement("td")
+    tdPlace.innerHTML = place
+    tr.appendChild(tdPlace)
+
+
+    let tdType = document.createElement("td")
+    tdType.innerHTML = type
+    tr.appendChild(tdType)
+
+
+    let tdButtons = document.createElement("td")
+    let btnEdit = document.createElement("button")
+    btnEdit.classList.add("edit")
+    btnEdit.addEventListener("click", function(){
+        EditeSound(id, date, country, place, type)
+    })
+
+    let btnFolder = document.createElement("button")
+    btnFolder.classList.add("sif")
+    btnFolder.addEventListener("click", function(){
+        ShowSound(path_sound)
+    })
+
+    let btnDelete = document.createElement("button")
+    btnDelete.classList.add("del")
+    btnDelete.addEventListener("click", function(){
+        DeleteSound(id)
+    })
+
+    tdButtons.appendChild(btnEdit)
+    tdButtons.appendChild(btnFolder)
+    tdButtons.appendChild(btnDelete)
+    tr.appendChild(tdButtons)
+
+    let tableBody = document.getElementById("table-body")
+    tableBody.appendChild(tr)
+}
+
+
 eel.get_sounds_by_view()(function(data){
     for(let i = 0; i < data.length; i++){
         let id = data[i][0]
@@ -13,70 +81,7 @@ eel.get_sounds_by_view()(function(data){
         let duration = data[i][7]
 
 
-        //Создание новых строк в таблице
-        let tr = document.createElement("tr")
-
-        let tdAudio = document.createElement("td")
-        let audio = document.createElement("audio")
-        audio.setAttribute("src", 'http://localhost:8000/' + path_sound)
-        audio.setAttribute("controls", "")
-        audio.controlsList = "nodownload noplaybackrate "
-        tdAudio.appendChild(audio)
-        tr.appendChild(tdAudio)
-
-        let tdDuration = document.createElement("td")
-        tdDuration.innerHTML = duration
-        tr.appendChild(tdDuration)
-
-
-        let tdDate = document.createElement("td")
-        date = new Date(date);
-        const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
-        tdDate.innerHTML = formattedDate
-        tr.appendChild(tdDate)
-
-
-        let tdCountry = document.createElement("td")
-        tdCountry.innerHTML = country
-        tr.appendChild(tdCountry)
-
-
-        let tdPlace = document.createElement("td")
-        tdPlace.innerHTML = place
-        tr.appendChild(tdPlace)
-
-
-        let tdType = document.createElement("td")
-        tdType.innerHTML = type
-        tr.appendChild(tdType)
-
-
-        let tdButtons = document.createElement("td")
-        let btnEdit = document.createElement("button")
-        btnEdit.classList.add("edit")
-        btnEdit.addEventListener("click", function(){
-            EditeSound(id, formattedDate, country, place, type)
-        })
-
-        let btnFolder = document.createElement("button")
-        btnFolder.classList.add("sif")
-        btnFolder.addEventListener("click", function(){
-            ShowSound(path_sound)
-        })
-
-        let btnDelete = document.createElement("button")
-        btnDelete.classList.add("del")
-        btnDelete.addEventListener("click", function(){
-            DeleteSound(id)
-        })
-
-        tdButtons.appendChild(btnEdit)
-        tdButtons.appendChild(btnFolder)
-        tdButtons.appendChild(btnDelete)
-        tr.appendChild(tdButtons)
-
-        let tableBody = document.getElementById("table-body")
-        tableBody.appendChild(tr)
+        CreateTableRow(id, path_sound, date, country, place, type, duration)
     }
 })
 
@@ -114,6 +119,8 @@ async function Confirm(){
         place.value = ''
         type.value = ''
         filePath, fileDialogValue = ''
+
+        location.reload()
     }
 }
 
@@ -125,7 +132,14 @@ function ConfirmEdite(){
 
     eel.edite_sound(ID, date.value , country.value , place.value , type.value )
 
-    location.reload()
+    let classname = ".row-" + ID
+    let row = document.querySelector(classname)
+    row.cells[2].textContent = date.value
+    row.cells[3].textContent = country.value
+    row.cells[4].textContent = place.value
+    row.cells[5].textContent = type.value
+
+    document.getElementById("modalEdite").classList.remove("open")
 }
 
 async function OpenFileDialog(){
@@ -146,7 +160,8 @@ function CloseModal(){
 
 function DeleteSound(id){
     eel.delete_sound(id)
-    location.reload()
+    let classname = ".row-" + id
+    document.querySelector(classname).remove()
 }
 
 function ShowSound(path_sound){

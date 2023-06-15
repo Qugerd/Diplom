@@ -2,6 +2,7 @@ import base64
 import os
 import eel
 import librosa
+from datetime import datetime
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
@@ -47,3 +48,10 @@ def get_duration(path_file):
 
     print("Длительность файла составляет: {}".format(duration_formatted))
     return duration_formatted
+
+def change_date_formate(date_str):
+    # преобразовываем строку с датой в объект datetime
+    date_obj = datetime.strptime(date_str, "%Y-%m-%d")
+    # преобразовываем объект datetime обратно в строку в нужном формате
+    new_date_str = date_obj.strftime("%d-%m-%Y")
+    return new_date_str

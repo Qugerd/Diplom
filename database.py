@@ -34,7 +34,7 @@ def AddInDB(name , imgPath = PLACEHOLD_PATH):
 
 def ParseDB():
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute("SELECT id, name, img FROM views")
+    cursor = conn.execute("SELECT id, name, img FROM views ORDER BY name ASC")
     kek = []
     for row in cursor:
         image_id, image_name, image_blob = row
@@ -78,13 +78,17 @@ def GetAllViews():
 
 
 def InsertMetaDate(data: list):
-    query = "INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, camera, group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
-    data = tuple(data)
+    try:
+        query = "INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, camera, group_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+        data = tuple(data)
 
-    conn = sqlite3.connect('database.db')
-    conn.execute(query, data)
-    conn.commit()
-    conn.close()
+        conn = sqlite3.connect('database.db')
+        conn.execute(query, data)
+        conn.commit()
+        conn.close()
+        return "Фотографии добавлены в галлерею !"
+    except sqlite3.Error as e:
+        print("Ошибка:", e.args[0])
 
 
 def DeleteView(id):
@@ -103,7 +107,7 @@ def EditTitle(id, newName):
 
 def GetGalleryPhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data DESC', (kind,))
+    cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
     data = []
     for row in cursor:
         data_tuple = list(row)
@@ -156,9 +160,9 @@ def GetCoordsPhoto(id):
     return [lat, log]
 
 
-def GetAllFavoritePhotos():
+def GetAllFavoritePhotos(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE like = 1')
+    cursor = conn.execute('SELECT id, photo_path FROM gallery WHERE like = 1 AND kind = ?', (kind, ))
     photos = []
     for row in cursor:
         photos.append(list(row))
@@ -245,6 +249,18 @@ def EditeSound(id, date, country, place, type):
     except sqlite3.Error as e:
         print("Ошибка:", e.args[0])
 
+
+def DeletePhoto(id):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("DELETE FROM gallery WHERE id=?", (id, ))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+            print("Ошибка:", e.args[0])
+            
+            
+            
 # GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
 # GetAllFavoritePhotos()

@@ -37,10 +37,8 @@ eel.get_gallery_photos()(function(data){
             let location = data[i][2]
             let dataTime = data[i][3]
 
-            const date = new Date(dataTime);
-            const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
 
-            titleDataLocation.innerText = formattedDate + ' | ' + location
+            titleDataLocation.innerText = dataTime + ' | ' + location
             titleDataLocation.classList.add('label-container')
             imgConteiner.classList.add('img-container')
 
@@ -71,10 +69,8 @@ eel.get_gallery_photos()(function(data){
             let location = data[i][2]
             let dataTime = data[i][3]
 
-            const date = new Date(dataTime);
-            const formattedDate = `${('0' + date.getDate()).slice(-2)}-${('0' + (date.getMonth() + 1)).slice(-2)}-${date.getFullYear()}`;
  
-            titleDataLocation.innerText = formattedDate + ' | ' + location
+            titleDataLocation.innerText = dataTime + ' | ' + location
 
             titleDataLocation.classList.add('label-container')
             titleDataLocation.classList.add('text-header2')
@@ -185,8 +181,4 @@ function SortModeReverse(){
 document.getElementById("date-early").addEventListener("change",SortModeReverse)
 
 document.getElementById("date-later").addEventListener("change",SortModeReverse)
-
-
-
-
 

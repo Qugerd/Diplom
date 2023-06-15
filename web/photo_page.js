@@ -126,12 +126,20 @@ function OpenFolder(){
 document.getElementById("like").addEventListener("click", function(){
     if(likeValue == 1){
         eel.update_like_photo("", ID)
-        this.style.backgroundColor = "#ffd000"
+        
+        this.style.backgroundColor = "white"
         this.style.borderRadius = "50%"
     }
     else{
         eel.update_like_photo(1, ID)
-        this.style.backgroundColor = "white"
+        this.style.backgroundColor = "#ffd000"
         this.style.borderRadius = "50%"
     }
 })
+
+
+function DeletePhoto(){
+    eel.delete_photo(ID)
+    GoGallery()
+}
+

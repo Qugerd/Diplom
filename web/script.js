@@ -220,7 +220,7 @@ async function ConfirmUploadPhoto(){
             list.push(group_id)
             console.log(list)
 
-            eel.put_data_to_db(list)
+            eel.put_data_to_db(list)()
         }
         alert("Фотографии добавлены в галлерею")
     }

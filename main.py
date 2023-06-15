@@ -141,7 +141,7 @@ def get_coords_photo():
 
 @eel.expose
 def get_all_favorite_photos():
-    return GetAllFavoritePhotos()
+    return GetAllFavoritePhotos(TITLE)
 
 
 @eel.expose
@@ -190,6 +190,9 @@ def edite_sound(id, date, country, place, type):
     EditeSound(id, date, country, place, type)
 
 
+@eel.expose
+def delete_photo(id):
+    DeletePhoto(id)
 
 
 eel.init("web")
