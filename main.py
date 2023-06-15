@@ -197,4 +197,4 @@ def delete_photo(id):
 
 eel.init("web")
 
-eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0)
+eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0, mode='chrome', host="localhost", port="8000")

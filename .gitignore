@@ -1,1 +1,8 @@
 web/assets
+build
+dist
+main.spec
+start.bat
+database.db
+.vscode
+__pycache__
