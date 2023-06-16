@@ -116,6 +116,8 @@ def generate_group_id():
 
 @eel.expose
 def get_photo():
+    path = GetPhoto(ID)[1]
+    print(path)
     return GetPhoto(ID)
 
 

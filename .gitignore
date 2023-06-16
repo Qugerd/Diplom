@@ -8,3 +8,4 @@ database.db
 __pycache__
 .gitignore
 .gitattributes
+temp
