@@ -35,7 +35,7 @@ eel.get_photo()(async function(data){
 
 
     const image = document.getElementById("image")
-    image.setAttribute('src', 'http://localhost:8000/' + photo_path)
+    image.setAttribute('src', photo_path)
     image.setAttribute('width', '1200')
     image.setAttribute('height', '705')
 

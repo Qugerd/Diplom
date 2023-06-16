@@ -61,16 +61,14 @@ def change_date_formate(date_str):
     return new_date_str
 
 
-def absolute_path_to_relative_path():
+def absolute_path_to_relative_path(file_url):
     # Определяем путь к временной директории от корня проекта
-    temp_dir_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'temp')
+    web_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web')
+    temp_dir_path = os.path.join(web_dir, 'temp')
 
     # Если директория для временных файлов не существует, создаем ее
     if not os.path.exists(temp_dir_path):
         os.makedirs(temp_dir_path)
-
-    # Задаем ссылку на файл
-    file_url = "D:/Projects/Диплом/web/assets/images/01770024703.jpg"
 
     # Определяем путь для копии файла
     file_name = os.path.basename(file_url)
@@ -80,15 +78,16 @@ def absolute_path_to_relative_path():
     shutil.copy(file_url, dest_path)
 
     # Получаем относительный путь до скопированного файла
-    rel_path = os.path.relpath(dest_path, os.path.dirname(os.path.abspath(__file__)))
+    rel_path = os.path.relpath(dest_path, web_dir)
 
     # Выводим информацию о временной директории и скопированном файле
     print("Временная директория: ", temp_dir_path)
     print("Скопированный файл: ", dest_path)
     print("Относительный путь до файла: ", rel_path)
-
+    
     # Удалить всю папку
     # shutil.rmtree(temp_dir_path)
+
     # # Удаляем все файлы из временной директории
     # for file_name in os.listdir(temp_dir_path):
     #     file_path = os.path.join(temp_dir_path, file_name)
@@ -98,3 +97,18 @@ def absolute_path_to_relative_path():
     #     except Exception as e:
     #         print(e)
 
+    return rel_path
+
+@eel.expose
+def delete_temp_dir():
+    web_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web')
+    temp_dir_path = os.path.join(web_dir, 'temp')
+    
+    # # Удаляем все файлы из временной директории
+    for file_name in os.listdir(temp_dir_path):
+        file_path = os.path.join(temp_dir_path, file_name)
+        try:
+            if os.path.isfile(file_path):
+                os.remove(file_path)
+        except Exception as e:
+            print(e)

@@ -26,7 +26,7 @@ eel.get_gallery_photos()(function(data){
         if(group_id_current == group_id_prev){
 
             let img = document.createElement("img")
-            img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
+            img.setAttribute('src', data[i][1])
             img.onclick = function(){
                 eel.save_id(data[i][0])
                 GoPhotoPage()
@@ -58,7 +58,7 @@ eel.get_gallery_photos()(function(data){
 
 
             let img = document.createElement("img")
-            img.setAttribute('src', 'http://localhost:8000/' + data[i][1])
+            img.setAttribute('src', data[i][1])
             img.onclick = function(){
                 eel.save_id(data[i][0])
                 GoPhotoPage()

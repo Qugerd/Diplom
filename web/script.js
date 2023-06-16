@@ -17,7 +17,7 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     let btnFunctionDelete = document.createElement("button");
     btnFunctionDelete.classList.add('btn-function-delete')
     btnFunctionDelete.onclick = function(){
-        Delete(id)
+        Delete(id, title)
     }
 
 
@@ -148,7 +148,7 @@ function Edit(id){
 }
 
 
-function Delete(id){
+function Delete(id, title){
 
     if(confirm('Вы хотите удалить елемент?')){
         eel.delete_view_by_id(id)
@@ -157,7 +157,15 @@ function Delete(id){
         const divConteiner = document.querySelector('.conteiner')
 
         divConteiner.removeChild(divVid)
-    }
+
+        let option = document.querySelectorAll("option")
+
+        for(let i = 0; i<combobox.length; i++){
+            if (option[i].innerText.trim() === title) {
+                option[i].remove();
+            }
+        }
+    }   
 }
 
 
