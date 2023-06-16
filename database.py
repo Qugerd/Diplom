@@ -110,11 +110,11 @@ def GetGalleryPhotos(kind):
     cursor = conn.execute('SELECT id, photo_path, place, data, group_id, latitude, longitude FROM gallery WHERE kind=? ORDER BY data ASC', (kind,))
     data = []
     for row in cursor:
-        data_tuple = list(row)
-        data.append(data_tuple)
+        data_list = list(row)
+        data.append(data_list)
     conn.commit()
     conn.close()
-    print(data)
+    # print(data)
     return data
 
 
@@ -189,7 +189,9 @@ def AddVideo(path_video, date, view):
 def GetVideoByView(view):
     conn = sqlite3.connect('database.db')
     cursor = conn.execute('SELECT * FROM video WHERE view=?', (view,))
-    data = cursor.fetchall()
+    data = []
+    for row in cursor:
+        data.append(list(row))
     conn.commit()
     conn.close()
     return data
@@ -210,7 +212,9 @@ def AddSound(path_sound, view, date, country, place, type_, duration):
 def GetSoundsByView(view):
     conn = sqlite3.connect('database.db')
     cursor = conn.execute('SELECT * FROM sounds WHERE view=?', (view,))
-    data = cursor.fetchall()
+    data = []
+    for row in cursor:
+        data.append(list(row))
     conn.commit()
     conn.close()
     return data

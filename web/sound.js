@@ -9,7 +9,7 @@ function CreateTableRow(id, path_sound, date, country, place, type, duration){
 
     let tdAudio = document.createElement("td")
     let audio = document.createElement("audio")
-    audio.setAttribute("src", 'http://localhost:8000/' + path_sound)
+    audio.setAttribute("src", path_sound)
     audio.setAttribute("controls", "")
     audio.controlsList = "nodownload noplaybackrate "
     tdAudio.appendChild(audio)

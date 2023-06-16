@@ -106,7 +106,11 @@ def edit_title(id, newName):
 
 @eel.expose
 def get_gallery_photos():
-    return GetGalleryPhotos(TITLE)
+    data_list = GetGalleryPhotos(TITLE)
+    for data in data_list:
+        data[1] = absolute_path_to_relative_path(data[1])
+    print(data_list)
+    return data_list
 
 
 @eel.expose
@@ -116,9 +120,10 @@ def generate_group_id():
 
 @eel.expose
 def get_photo():
-    path = GetPhoto(ID)[1]
-    print(path)
-    return GetPhoto(ID)
+    data = GetPhoto(ID)
+    data[1] = absolute_path_to_relative_path(data[1])
+    print(data[1])
+    return data
 
 
 @eel.expose
@@ -143,7 +148,12 @@ def get_coords_photo():
 
 @eel.expose
 def get_all_favorite_photos():
-    return GetAllFavoritePhotos(TITLE)
+    data_list = GetAllFavoritePhotos(TITLE)
+    print(data_list)
+    for data in data_list:
+        data[1] = absolute_path_to_relative_path(data[1])
+    print(data_list)
+    return data_list
 
 
 @eel.expose
@@ -153,7 +163,10 @@ def add_video(path_video, date):
 
 @eel.expose
 def get_video_by_view():
-    return GetVideoByView(TITLE)
+    video_list = GetVideoByView(TITLE)
+    for video in video_list:
+        video[1] = absolute_path_to_relative_path(video[1])
+    return video_list
 
 
 @eel.expose
@@ -164,7 +177,10 @@ def add_sound(path_sound, date, country, place, type_):
 
 @eel.expose
 def get_sounds_by_view():
-    return GetSoundsByView(TITLE)
+    sound_list = GetSoundsByView(TITLE)
+    for sound in sound_list:
+        sound[1] = absolute_path_to_relative_path(sound[1])
+    return sound_list
 
 
 @eel.expose

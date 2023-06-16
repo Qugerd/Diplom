@@ -5,6 +5,7 @@ function OpenPageAbout(title){
 
 function GoHome(){
     window.location.replace("main.html")
+    eel.delete_temp_dir()
 }
 
 function GoAbout(){
