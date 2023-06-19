@@ -13,7 +13,7 @@
 <body>
 	<div class="header">
 		<div class="allViews">
-			<p>Все виды</p>
+            Все виды
 		</div>
 		<div class="addbutton" id="addCategory" >
 			<button>Новый вид</button>
@@ -34,10 +34,7 @@
 
 
 	<div class="conteiner">
-		<!-- <div class="vid">
-			<img src="assets/images/177PiH5lB38.jpg" alt="" height="150" width="150">
-			<div class="vid-name">Белоспинный альбатрос</div>
-		</div> -->
+
 	</div>
 
 
@@ -45,11 +42,28 @@
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
-				<p class="text-header2">Добавление вида</p>
+				<p class="text-header">Новый вида</p>
 				<button id="btnCloseModal">x</button>
+
 				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
-				<p class="text-header2">Выбор изображения</p>
+
+				<input class="modal-input" id="inputLat"type="text" placeholder="Название на латинском">
+
+				<input class="modal-input" id="inputEng"type="text" placeholder="Название на английском">
+
+                <div class="text-header2">Описание:</div>
+                <textarea name="" id="ta-description" rows="6"></textarea>
+
+                <div class="text-header2">Распространение:</div>
+                <textarea name="" id="ta-place" rows="6"></textarea>
+
+                <div class="text-header2">Биология:</div>
+                <textarea name="" id="ta-bio" rows="6"></textarea>
+
+				<p class="text-header2">Выбор изображения:</p>
 				<button class="btnChooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
+                <div class="text" id="fileValue">Файл выбран: пусто</div>
+
 				<div class="modal-conteiner-center"><button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button></div>
 				
 			</div>
@@ -59,23 +73,30 @@
 
 	<!-- Модальное окно "Загрузить фото" -->
 	<div class="modal-uploadPhoto" id="modal-uploadPhoto">
-		<div class="modal-box">
+		<div class="modal-box modalUploadPhoto">
 			<div class="modal-conteiner">
 				<p class="text-header">Загрузить фото</p>
 				<button id="btnCloseModal-Upload">x</button>
 				<p class="text-header2">Выбор изображения:</p>
 				<button class="btnChooseFile" id="btnChoseFileUploadPhoto" onclick="OpenFilesDialog()">Выбрать файл</button><br>
+                <div class="text" id="files-value">Файлы: пусто</div>
+
 				<p class="text-header2">Указание вида:</p>
 				<select id="combobox" class="text">
 				</select><br>
+
 				<p class="text-header2">Дата съемки:</p>
 				<input type="date" id="datapicker">
+
 				<p class="text-header2">Место съемки:</p>
 				<input type="text" id="place"
 				class="text">
+
 				<p class="text-header2">Координаты:</p>
-				<div id="map" style="width: 270px; height: 250px"></div>
+				<div id="map" style="width: 250px; height: 250px"></div>
+
 				<span class="text">Широта: </span><input class="text" type="number" id="shirota" oninput="editInput()">
+                <br>
 				<span class="text">Долгота: </span><input class="text" type="number" id="dolgota" oninput="editInput()">
 				<p class="text-header2">Камера:</p>
 				<input class="text" type="text" id="camera">
@@ -88,7 +109,45 @@
 	</div>
 
 
+	<!-- Alert -->
+	<div class="modal-alert" id="modal-alert">
+		<div class="modal-alert-box ">
+			<div class="modal-alert-conteiner">
+                <div class="alert-text text-header" id="msg">
+                </div>
+                <button class="btn-ok" id="btn-ok">Закрыть</button>
+			</div>
+		</div>
+	</div>
 
+
+    <div class="modal-alert" id="modal-alert-confirm">
+		<div class="modal-alert-box ">
+			<div class="modal-alert-conteiner">
+                <div class="alert-text text-header" id="conf-msg">
+                </div>
+                <div class="alert-button" style="display: flex; justify-content: end;">
+                    <button class="btn-ok" id="conf-ok">Ок</button>
+                    <button class="btn-ok" id="conf-canсel">Отмена</button>
+                </div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="modal-alert" id="modal-alert-promt">
+		<div class="modal-alert-box ">
+			<div class="modal-alert-conteiner">
+                <div class="alert-text text-header">
+                    <input class="alert-input text" type="text" id="promt-input">
+                </div>
+                <div class="alert-button" style="display: flex; justify-content: end;">
+                    <button class="btn-ok" id="promt-ok">Ок</button>
+                    <button class="btn-ok" id="promt-canсel">Отмена</button>
+                </div>
+			</div>
+		</div>
+	</div>
 
 	<script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
     </script>

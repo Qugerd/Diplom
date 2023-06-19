@@ -59,12 +59,10 @@ function Edit(elementId){
 
 
 function Confirm(elementId, textareaId, btnConfirmId){
-    if(confirm("Подтвердить изменения ?")){
-        let text = document.getElementById(textareaId).value
-        eel.edit_information(ID, elementId, text)
-        document.getElementById(elementId + 'Text').innerHTML = text
-        Remove(textareaId, btnConfirmId)
-    }
+    let text = document.getElementById(textareaId).value
+    eel.edit_information(ID, elementId, text)
+    document.getElementById(elementId + 'Text').innerHTML = text
+    Remove(textareaId, btnConfirmId)
 }
 
 
@@ -75,20 +73,18 @@ function Remove(textareaId, btnConfirmId){
 
 
 function ConfirmNamesEdite(){
-    if(confirm("Подтвердить изменения ?")){
-        let name_ru = document.getElementById("input_name_ru").value
-        let name_lat = document.getElementById("input_name_lat").value
-        let name_eng = document.getElementById("input_name_eng").value
+    let name_ru = document.getElementById("input_name_ru").value
+    let name_lat = document.getElementById("input_name_lat").value
+    let name_eng = document.getElementById("input_name_eng").value
 
-        eel.edite_names_view(name_ru, name_lat, name_eng)
-        eel.save_value(name_ru)
+    eel.edite_names_view(name_ru, name_lat, name_eng)
+    eel.save_value(name_ru)
 
-        document.getElementById("name_ru").innerHTML = name_ru
-        document.getElementById("name_lat").innerHTML = name_lat
-        document.getElementById("name_eng").innerHTML = name_eng
+    document.getElementById("name_ru").innerHTML = name_ru
+    document.getElementById("name_lat").innerHTML = name_lat
+    document.getElementById("name_eng").innerHTML = name_eng
 
-        document.getElementById("modal").classList.remove("open")
-    }
+    document.getElementById("modal").classList.remove("open")
 }
 
 function OpenModalEditName(){

@@ -2,7 +2,13 @@ import eel
 import tkinter as tk
 from tkinter import filedialog
 from database import *
+import sys
+import io
 
+
+# outfile = open("logfile.txt", "wt")
+# sys.stderr = outfile
+# sys.stdout = outfile
 
 @eel.expose
 def OpenFileDialog():
@@ -36,7 +42,7 @@ def OpenFileDialogSound():
 
     filetypes = (("MP3 files", "*.mp3"), ("All files", "*.*"))
     file_path = filedialog.askopenfilename(filetypes=filetypes)
-    print(file_path)
+    # print(file_path)
     return file_path
 
 
@@ -48,6 +54,7 @@ def OpenFilesDialog():
     root.attributes("-topmost", True)
 
     file_path = filedialog.askopenfilenames(title='Выберите файлы')
+    print(file_path)
     return file_path
 
 
@@ -57,8 +64,8 @@ def parse():
 
 
 @eel.expose
-def add_to_db(name, imgPath):
-    AddInDB(name, imgPath)
+def add_to_db(name, img, name_lat, name_eng, description, spreading, biology):
+    AddInDB(name, img, name_lat, name_eng, description, spreading, biology)
 
 
 @eel.expose
@@ -81,6 +88,7 @@ def save_id(id):
 
 @eel.expose
 def set_value():
+    print(TITLE)
     return GetAboutViewData(TITLE)
 
 
@@ -91,17 +99,17 @@ def fill_combobox_values():
 
 @eel.expose
 def put_data_to_db(data):
-    InsertMetaDate(data)
+    return InsertMetaDate(data)
 
 
 @eel.expose
-def delete_view_by_id(id):
-    DeleteView(id)
+def delete_view_by_id(id, title):
+    DeleteView(id, title)
 
 
 @eel.expose
-def edit_title(id, newName):
-    EditTitle(id, newName)
+def edit_title(id, newName, old_title):
+    EditTitle(id, newName, old_title)
 
 
 @eel.expose
@@ -109,7 +117,7 @@ def get_gallery_photos():
     data_list = GetGalleryPhotos(TITLE)
     for data in data_list:
         data[1] = absolute_path_to_relative_path(data[1])
-    print(data_list)
+    # print(data_list)
     return data_list
 
 
@@ -122,7 +130,7 @@ def generate_group_id():
 def get_photo():
     data = GetPhoto(ID)
     data[1] = absolute_path_to_relative_path(data[1])
-    print(data[1])
+    # print(data[1])
     return data
 
 
@@ -149,10 +157,10 @@ def get_coords_photo():
 @eel.expose
 def get_all_favorite_photos():
     data_list = GetAllFavoritePhotos(TITLE)
-    print(data_list)
+    # print(data_list)
     for data in data_list:
         data[1] = absolute_path_to_relative_path(data[1])
-    print(data_list)
+    # print(data_list)
     return data_list
 
 
@@ -215,4 +223,4 @@ def delete_photo(id):
 
 eel.init("web")
 
-eel.start("main.html", size=(1920, 1080), position=(200,200), shutdown_delay=10.0, mode='chrome', host="localhost", port="8000")
+eel.start("main.html", size=(1366, 780), position=(200,200), shutdown_delay=10.0, mode='chrome', host="localhost", port="8000")

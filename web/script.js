@@ -1,7 +1,7 @@
 const PLACEHOLD_PATH = "http://placehold.it/150x150"
 
 let fileDialogValue = PLACEHOLD_PATH
-let TITLE = '';
+
 
 
 async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
@@ -24,7 +24,7 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     let btnFunctionEdit = document.createElement("button");
     btnFunctionEdit.classList.add('btn-function-edit')
     btnFunctionEdit.onclick = function(){
-        Edit(id)
+        Edit(id, title)
     }
 
 
@@ -37,7 +37,8 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     div.classList.add('vid')
     div.setAttribute('id', `${id}`)
     img.onclick = function(){
-        TITLE = title
+        const divVid = document.getElementById(`${id}`)
+        title = divVid.children[1].innerHTML
         OpenPageAbout(title)
     }
     divName.classList.add('vid-name')
@@ -86,16 +87,24 @@ document.getElementById("btnCloseModal-Upload").addEventListener("click", functi
 
 async function Confirm(){
     let name = document.getElementById("inputName").value
+    let name_lat = document.getElementById("inputLat").value
+    let name_eng = document.getElementById("inputEng").value
+
+    let description = document.getElementById("ta-description").value
+    let spreading = document.getElementById("ta-place").value
+    let biology = document.getElementById("ta-bio").value
+
+
 
     if(name == ''){
-        alert('Поле название пусто')
+        Alert('Поле "Название вида" пустое')
     }
     else{
         // Добавление в базу данных 
         // Созадние карточки
         
         // Очищение занчениеи fileDialogValue
-        eel.add_to_db(name, fileDialogValue)
+        eel.add_to_db(name, fileDialogValue, name_lat, name_eng, description, spreading, biology)
       
         // CreateCardVid(name, await eel.get_last_image()())
         
@@ -113,12 +122,32 @@ async function Confirm(){
 
 async function OpenFileDialog(){
     fileDialogValue =  await eel.OpenFileDialog()()
+    if(fileDialogValue){
+        document.getElementById("fileValue").innerHTML = "Файл выбран: " + fileDialogValue
+        document.getElementById("fileValue").style.color = "black"
+    }else{
+        document.getElementById("fileValue").innerHTML = "Файл не выбран!"
+        document.getElementById("fileValue").style.color = "red"
+    }
     console.log(fileDialogValue)
 }
 
 
 async function OpenFilesDialog(){
     fileDialogValue =  await eel.OpenFilesDialog()()
+    if(fileDialogValue.length == 1){
+        document.getElementById("files-value").innerHTML = "Файл выбран: " + fileDialogValue
+        document.getElementById("files-value").style.color = "black"
+    }
+    else if(fileDialogValue.length == 0){
+        document.getElementById("files-value").innerHTML = "Файл не выбран !"
+        document.getElementById("files-value").style.color = "red"
+    }
+    else{
+        let size = fileDialogValue.length
+        document.getElementById("files-value").innerHTML = "Файлов выбрано: " + size
+        document.getElementById("files-value").style.color = "black"
+    }
 }
 
 
@@ -138,20 +167,30 @@ eel.parse()(function(mas) {
 
 
 
-function Edit(id){
-    if(window.confirm('Вы хотите езменить елемент?')){
-        let newName = prompt("Введите название")
-        eel.edit_title(id, newName)
-    }
+async function Edit(id, title){
 
-    location.reload()
+    let newName = await AlertPromt(title)
+    eel.edit_title(id, newName, title)
+
+    // меняю название на карточке вида
+    const divVid = document.getElementById(`${id}`)
+    divVid.children[1].innerHTML = newName
+
+
+    // меняю название в комбобоксе
+    let option = document.querySelectorAll("option")
+    for(let i = 0; i < combobox.length; i++){
+        if (option[i].innerText.trim() === title) {
+            option[i].innerText = newName;
+        }
+    }
 }
 
 
-function Delete(id, title){
+async function Delete(id, title){
 
-    if(confirm('Вы хотите удалить елемент?')){
-        eel.delete_view_by_id(id)
+    if(await AlertConfirm('Вы хотите удалить елемент?')){
+        eel.delete_view_by_id(id, title)
 
         const divVid = document.getElementById(`${id}`)
         const divConteiner = document.querySelector('.conteiner')
@@ -160,7 +199,7 @@ function Delete(id, title){
 
         let option = document.querySelectorAll("option")
 
-        for(let i = 0; i<combobox.length; i++){
+        for(let i = 0; i < combobox.length; i++){
             if (option[i].innerText.trim() === title) {
                 option[i].remove();
             }
@@ -181,37 +220,24 @@ eel.fill_combobox_values()(function(list){
 
 
 async function ConfirmUploadPhoto(){
-    let combobox = document.getElementById("combobox").value
-    let datapicker = document.getElementById("datapicker").value
-    let place = document.getElementById("place").value
-    let shirota = document.getElementById("shirota").value
-    let dolgota = document.getElementById("dolgota").value
-    let camera = document.getElementById("camera").value
-
+    let combobox = document.getElementById("combobox")
+    let datapicker = document.getElementById("datapicker")
+    let place = document.getElementById("place")
+    let shirota = document.getElementById("shirota")
+    let dolgota = document.getElementById("dolgota")
+    let camera = document.getElementById("camera")
+    console.log(fileDialogValue)
     // Валидация 
-    if(fileDialogValue == PLACEHOLD_PATH)
-    {
-        alert("Выберите фотографию")
+    if(fileDialogValue == PLACEHOLD_PATH || fileDialogValue == ""){
+        Alert("Выберите фотографию")
     }
 
     else if(datapicker == ''){
-        alert("Выберите дату")
+        Alert("Выберите дату")
     }
 
     else if(place == ''){
-        alert("Выберите place")
-    }
-
-    else if(shirota == ''){
-        alert("Выберите shirota")
-    }
-
-    else if(dolgota == ''){
-        alert("Выберите dolgota")
-    }
-
-    else if(camera == ''){
-        alert("Выберите camera")
+        Alert("Выберите место съемки")
     }
     else{
         let group_id = await eel.generate_group_id()();
@@ -219,18 +245,29 @@ async function ConfirmUploadPhoto(){
 
             let list = []
             list.push(fileDialogValue[i])
-            list.push(combobox)
-            list.push(datapicker)
-            list.push(place)
-            list.push(shirota)
-            list.push(dolgota)
-            list.push(camera)
+            list.push(combobox.value)
+            list.push(datapicker.value)
+            list.push(place.value)
+            list.push(shirota.value)
+            list.push(dolgota.value)
+            list.push(camera.value)
             list.push(group_id)
-            console.log(list)
 
-            eel.put_data_to_db(list)()
+            document.getElementById("modal-uploadPhoto").classList.remove("open")
+            document.getElementById("fileValue").innerHTML = "Файл выбран: пусто"
+
+            console.log(list)
+           Alert(await eel.put_data_to_db(list)())
         }
-        alert("Фотографии добавлены в галлерею")
+        dolgota.innerHTML = ""
+        shirota.innerHTML = ""
+        place.innerHTML = ""
+        datapicker.innerHTML = ""
+        combobox.innerHTML = ""
+        camera.innerHTML = ""
+        dolgota.innerHTML = ""
+        shirota.innerHTML = ""
+        fileDialogValue = ""
     }
 }
 
@@ -314,4 +351,51 @@ function ClearCearch(){
     document.querySelectorAll(".conteiner .vid-name").forEach(elem =>{
         elem.parentElement.classList.remove("hide")
     })
+}
+
+function Alert(text){
+    document.getElementById("msg").innerHTML = text
+    document.getElementById("modal-alert").classList.add("open")
+    document.getElementById("btn-ok").addEventListener("click", function(){
+        document.getElementById("modal-alert").classList.remove("open")
+    })
+}
+
+
+
+
+function AlertConfirm(text) {
+    return new Promise(function(resolve, reject) {
+      document.getElementById('conf-msg').innerHTML = text;
+      document.getElementById('modal-alert-confirm').classList.add('open');
+  
+      document.getElementById('conf-ok').addEventListener('click', function(){
+        document.getElementById('modal-alert-confirm').classList.remove('open');
+        resolve(true);
+      });
+  
+      document.getElementById('conf-canсel').addEventListener('click', function(){
+        document.getElementById('modal-alert-confirm').classList.remove('open');
+        resolve(false);
+      });
+    });
+}
+
+
+function AlertPromt(title){
+    return new Promise(function(resolve, reject) {
+        document.getElementById('modal-alert-promt').classList.add("open")
+        document.getElementById('promt-input').value = title
+
+        document.getElementById('promt-ok').addEventListener('click', function(){
+            document.getElementById('modal-alert-promt').classList.remove('open');
+            let newtitle = document.getElementById('promt-input').value
+            resolve(newtitle);
+        });
+
+        document.getElementById('promt-canсel').addEventListener('click', function(){
+            document.getElementById('modal-alert-promt').classList.remove('open');
+            reject("Canceled");
+        });
+    });
 }

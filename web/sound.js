@@ -1,7 +1,7 @@
 let fileDialogValue;
 let ID;
 
-function CreateTableRow(id, path_sound, date, country, place, type, duration){
+function CreateTableRow(id, path_sound, date, country, place, type, duration_){
 
     //Создание новых строк в таблице
     let tr = document.createElement("tr")
@@ -16,7 +16,7 @@ function CreateTableRow(id, path_sound, date, country, place, type, duration){
     tr.appendChild(tdAudio)
 
     let tdDuration = document.createElement("td")
-    tdDuration.innerHTML = duration
+    tdDuration.innerHTML = duration_
     tr.appendChild(tdDuration)
 
 

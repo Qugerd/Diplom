@@ -23,12 +23,11 @@ def CreateDataBase():
     conn.close()
 
 
-def AddInDB(name , imgPath = PLACEHOLD_PATH):
+def AddInDB(name, img, name_lat, name_eng, description, spreading, biology):
     conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO views (name, img) VALUES (?, ?)",
-             (name, Image_to_Bytes(imgPath)))
+    conn.execute("INSERT INTO views (name, img, name_lat, name_eng, description, spreading, biology) VALUES (?, ?, ?, ?, ?, ?, ?)",
+             (name, Image_to_Bytes(img), name_lat, name_eng, description, spreading, biology))
     conn.commit()
-    print("Добавленно")
     conn.close()
 
 
@@ -68,7 +67,7 @@ def GetAboutViewData(title_name):
 
 def GetAllViews():
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute("SELECT name FROM views")
+    cursor = conn.execute("SELECT name FROM views ORDER BY name ASC")
     list_name = []
     for row in cursor:
         value = list(row)[0]
@@ -89,18 +88,25 @@ def InsertMetaDate(data: list):
         return "Фотографии добавлены в галлерею !"
     except sqlite3.Error as e:
         print("Ошибка:", e.args[0])
+        return "Ошибка обавления"
 
 
-def DeleteView(id):
+def DeleteView(id, title):
     conn = sqlite3.connect('database.db')
     conn.execute("DELETE FROM views WHERE id=?", (id, ))
+    conn.execute("DELETE FROM gallery WHERE kind=?", (title,))
+    conn.execute("DELETE FROM video WHERE view=?", (title,))
+    conn.execute("DELETE FROM sounds WHERE view=?", (title,))
     conn.commit()
     conn.close()
 
 
-def EditTitle(id, newName):
+def EditTitle(id, newName, old_title):
     conn = sqlite3.connect('database.db')
     conn.execute("UPDATE views SET name = ? WHERE id = ?", (newName, id))
+    conn.execute("UPDATE gallery SET kind = ? WHERE kind = ?", (newName, old_title))
+    conn.execute("UPDATE video SET view = ? WHERE view = ?", (newName, old_title))
+    conn.execute("UPDATE sounds SET view = ? WHERE view = ?", (newName, old_title))
     conn.commit()
     conn.close()
 
@@ -206,7 +212,8 @@ def AddSound(path_sound, view, date, country, place, type_, duration):
         conn.close()
         return "Добавлено"
     except sqlite3.Error as e:
-        print("Ошибка:", e.args[0])
+        # print("Ошибка:", e.args[0])
+        pass
 
 
 def GetSoundsByView(view):
@@ -241,7 +248,8 @@ def DeleteSound(id):
         conn.commit()
         conn.close()
     except sqlite3.Error as e:
-        print("Ошибка:", e.args[0])
+        # print("Ошибка:", e.args[0])
+        pass
 
 
 def EditeSound(id, date, country, place, type):
@@ -251,7 +259,8 @@ def EditeSound(id, date, country, place, type):
         conn.commit()
         conn.close()
     except sqlite3.Error as e:
-        print("Ошибка:", e.args[0])
+        # print("Ошибка:", e.args[0])
+        pass
 
 
 def DeletePhoto(id):
@@ -261,7 +270,8 @@ def DeletePhoto(id):
         conn.commit()
         conn.close()
     except sqlite3.Error as e:
-            print("Ошибка:", e.args[0])
+            # print("Ошибка:", e.args[0])
+            pass
             
             
             
