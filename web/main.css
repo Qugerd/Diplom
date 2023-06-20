@@ -368,7 +368,13 @@ textarea{
     cursor: pointer;
 }
 
+.alert-input{
+    width: 90%;
+    font: bold 18px arial;
 
+    border: 1px solid rgba(195, 206, 211, 0.733);
+    outline: transparent;
+}
 
 
 

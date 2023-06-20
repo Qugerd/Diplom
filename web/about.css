@@ -1,75 +1,23 @@
 /* Контейнер навигации */
 .container{
-    position: relative;
     width: auto;
-
 
     display: flex;
     flex-direction: column; 
 }
 
 .container-header{
-    width: auto;
-    height: 100px;
-
-    margin: 0 20px;
-
-    display: flex;
-    flex-direction: row;
-}
-
-.label-home{
-    width: 150px;
-    height: 100px;
-
-    display: flex; /* Указываем, что контейнер должен использовать flexbox */
-    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
-    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
-   
-}
-
-
-hr{
-    margin: 0 20px;
-}
-
-/* Кнопка "На главную" */
-.label-home button{
     width: 100%;
-    height: 50px;
+    height: 100px;
+    display: flex;
 
-
-    background: rgb(238,174,202);
-    background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
-
-    color: rgb(10, 10, 10);
-    border: 0px;
-    border-radius: 3px;
-    font: bold 16px arial;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out, color 0.4s;
+    align-items: center;
+    justify-content: space-evenly;
 }
-
-.label-home button:hover{
-    background-color: white;
-    color: black;
-    cursor: pointer;
-}
-
-
-
 
 
 /* Кнопки навигации */
-.conteiner-btn-navigation{
-    width: 100%;
-
-    display: flex; /* Указываем, что контейнер должен использовать flexbox */
-    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
-    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
-}
-
-.conteiner-btn-navigation button{
+.container-header button{
     width: 200px;
     height: 50px;
     margin: 0 50px;
@@ -91,6 +39,10 @@ hr{
     background-color: white;
     color: black;
     cursor: pointer;
+}
+
+hr{
+    margin: 0 20px;
 }
 
 
@@ -118,7 +70,8 @@ hr{
 
 #editeTitle{
     position: relative;
-    margin: 10px;
+    margin-left: 10px;
+    margin-top: 8px;
     right: 0px;
     top: 0px;
 
@@ -306,4 +259,50 @@ hr{
 .open{
     visibility: visible;
     opacity: 1;
+}
+
+
+
+@media(max-width: 1366px){
+    /* Контейнер навигации */
+    .container{
+        min-width: 1200px;
+    }
+
+    .container-header button{
+        width: 150px;
+        height: 40px;
+        margin: 0 35px;
+
+        font: bold 13px arial;
+    }
+
+
+
+    /* Названия */
+    #name_lat, #name_eng{
+        font-size: 16px;
+    }
+
+    #editeTitle{
+        height: 14px;
+    }
+
+
+
+    /* Блок с картинкой */
+    .conteiner-imgbox img{
+        width: 640px;
+        height: 360px;
+    }
+
+
+
+
+
+    /* Описательный блок */
+    .btnEdit{
+        height: 20px;
+        margin-left: 0px;
+    }
 }

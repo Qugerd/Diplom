@@ -111,7 +111,7 @@ async function init(){
         center: [43., 131.90],
         controls: ['zoomControl'],
         suppressMapOpenBlock: true,
-        zoom: 8
+        zoom: 3
         });
 
     var myGeoObjects = [];

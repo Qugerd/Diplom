@@ -1,59 +1,48 @@
 /* Контейнер навигации */
 .container{
-    position: relative;
     width: auto;
-
 
     display: flex;
     flex-direction: column; 
 }
 
 .container-header{
-    width: auto;
-    height: 100px;
-
-    margin: 0 20px;
-
-    display: flex;
-    flex-direction: row;
-}
-
-.label-home{
-    width: 150px;
-    height: 100px;
-
-    display: flex; /* Указываем, что контейнер должен использовать flexbox */
-    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
-    align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
-   
-}
-
-
-hr{
-    margin: 0 20px;
-}
-
-/* Кнопка "На главную" */
-.label-home button{
     width: 100%;
+    height: 100px;
+    display: flex;
+
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+/* Кнопки навигации */
+.container-header button{
+    width: 200px;
     height: 50px;
+    margin: 0 50px;
 
 
     background: rgb(238,174,202);
     background: linear-gradient(54deg, rgba(238,174,202,0.38699229691876746) 0%, rgba(148,187,233,0.4962359943977591) 100%);
 
-    color: rgb(10, 10, 10);
+    color: rgb(56, 34, 59);
     border: 0px;
     border-radius: 3px;
     font: bold 16px arial;
     cursor: pointer;
+    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
     transition: background-color 0.3s ease-in-out, color 0.4s;
 }
 
-.label-home button:hover{
+.conteiner-btn-navigation button:hover{
     background-color: white;
     color: black;
     cursor: pointer;
+}
+
+hr{
+    margin: 0 20px;
 }
 
 
@@ -152,6 +141,19 @@ hr{
 }
 
 
+.favorite{
+    width: 32px;
+    height: 32px;
+    margin-left: 10px;
+}
+
+.favorite:hover{
+    cursor: pointer;
+
+    background-color: #ffd000;
+    border-radius: 50px;
+}
+
 
 
 
@@ -165,37 +167,22 @@ hr{
     display: flex; /* Указываем, что контейнер должен использовать flexbox */
     justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
     align-items: center;
-
-    
 }
 
-.conteiner-imgbox:first-child{
-    width: 980px;
-    height: 640px;
+.conteiner-imgbox{
+    width: 100%;
+    margin: 20px 0px 0px;
+    display: flex;
+    justify-content: center;
 }
 
 #image{
     border: 1px solid;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
     border-radius: 5px;
-}
 
-.favorite{
-    position: absolute;
-    width: 32px;
-    height: 32px;
-
-    right: 660px;
-    top: -53px;
-
-    
-}
-
-.favorite:hover{
-    cursor: pointer;
-
-    background-color: #ffd000;
-    border-radius: 50px;
+    width: 960px;
+    height: 580px;
 }
 
 
@@ -217,7 +204,7 @@ hr{
     width: 97.5%;
     box-sizing: border-box;
     min-height: 300px;
-
+    padding: 20px;
     margin-left: 20px;
 
     font-size: 24px;
@@ -265,6 +252,8 @@ hr{
 
 /* Информация */
 #map{
+    width: 400px;
+    height: 400px;
     border: 1px solid;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
     border-radius: 5px;
@@ -288,3 +277,97 @@ hr{
     font-size: 20px;
 }
 
+
+
+@media(max-width: 1366px){
+    /* Контейнер навигации */
+    .container{
+        min-width: 1200px;
+    }
+
+    .container-header button{
+        width: 150px;
+        height: 40px;
+        margin: 0 35px;
+
+        font: bold 13px arial;
+    }
+
+
+
+    /* Названия */
+    #name_lat, #name_eng{
+        font-size: 16px;
+    }
+
+    #editeTitle{
+        height: 14px;
+    }
+
+
+
+    /* Кнопки функциаонала */
+    .contener-button button{
+        margin: 10px;
+        width: 120px;
+        height: 25px;
+    }
+
+    .favorite{
+        width: 28px;
+        height: 28px;
+    }
+
+
+
+    /* Блок с картинкой */
+    .conteiner-imgbox{
+        margin: 10px 0px 0px;
+
+    }
+    #image{
+        width: 640px;
+        height: 360px;
+    }
+
+
+
+    /* Заметки */
+    .conteiner-notes{
+        margin: 0px 100px 0px;
+    }
+
+    .edit{
+        height: 18px;
+        width: 18px;
+
+        margin: 65px 20px 0px;
+    }
+
+    .notes_text{
+        font-size: 16px;
+    }
+
+    .conteiner-notes textarea{
+        width: 97.5%;
+        box-sizing: border-box;
+        min-height: 300px;
+    
+        margin-left: 20px;
+        padding: 10px;
+    
+        font-size: 14px;
+        resize: none;
+    }
+
+
+    /* Информация */
+    #map{
+        width: 300px;
+        height: 300px;
+    }
+
+    .conteiner-text div{
+        font-size: 14px;
+    }
+}

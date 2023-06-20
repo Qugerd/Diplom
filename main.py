@@ -129,7 +129,9 @@ def generate_group_id():
 @eel.expose
 def get_photo():
     data = GetPhoto(ID)
+    absolute_path = data[1]
     data[1] = absolute_path_to_relative_path(data[1])
+    data.append(absolute_path)
     # print(data[1])
     return data
 
@@ -172,8 +174,11 @@ def add_video(path_video, date):
 @eel.expose
 def get_video_by_view():
     video_list = GetVideoByView(TITLE)
+
     for video in video_list:
+        absolute_path = video[1]
         video[1] = absolute_path_to_relative_path(video[1])
+        video.append(absolute_path)
     return video_list
 
 
@@ -186,8 +191,11 @@ def add_sound(path_sound, date, country, place, type_):
 @eel.expose
 def get_sounds_by_view():
     sound_list = GetSoundsByView(TITLE)
+
     for sound in sound_list:
+        absolute_path = sound[1]
         sound[1] = absolute_path_to_relative_path(sound[1])
+        sound.append(absolute_path)
     return sound_list
 
 

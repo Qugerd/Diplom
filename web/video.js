@@ -6,6 +6,7 @@ eel.get_video_by_view()(function(data){
         let path_video = data[i][1]
         let view = data[i][2]
         let date = data[i][3]
+        let absolute_path = data[i][4]
 
 
         let conteinerVideo = document.getElementById('conteiner-video')
@@ -21,7 +22,7 @@ eel.get_video_by_view()(function(data){
         let btnFolder = document.createElement('button')
         btnFolder.textContent = "Показать в папке"
         btnFolder.addEventListener("click", function(){
-            ShowInFolder(path_video)
+            ShowInFolder(absolute_path)
         })
         let btnDelete = document.createElement('button')
         btnDelete.textContent = "Удалить"

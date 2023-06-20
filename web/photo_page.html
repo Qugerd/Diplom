@@ -7,35 +7,35 @@
     <script src="navigation.js"></script>
     <link rel="stylesheet" href="photo_page.css">
     <link rel="stylesheet" href="text_style.css">
+    <link rel="icon" type="image/png" href="assets/icons/folder-icon.png">
 </head>
 <body>
     <div class="container">
         <div class="container-header">
-            <div class="label-home">
-                <button onclick="GoHome()">На главную</button>
-            </div>
 
-            <div class="conteiner-btn-navigation">
-                <button  onclick="GoAbout()">
-                    Общая информация
-                </button>
+            <button onclick="GoHome()">На главную</button>
 
-                <button onclick="GoGallery()">
-                    Галерея
-                </button>
 
-                <button onclick="GoFavoritePhotos()">
-                    Лучшие фотографии
-                </button>
 
-                <button onclick="GoVideoPage()"> 
-                    Видео 
-                </button>
+            <button  onclick="GoAbout()">
+                Общая информация
+            </button>
 
-                <button onclick="GoSoundPage()">
-                    Звуки
-                </button>
-            </div>
+            <button onclick="GoGallery()">
+                Галерея
+            </button>
+
+            <button onclick="GoFavoritePhotos()">
+                Лучшие фотографии
+            </button>
+
+            <button onclick="GoVideoPage()"> 
+                Видео
+            </button>
+
+            <button onclick="GoSoundPage()">
+                Звуки
+            </button>
         </div>
     </div>
 
@@ -51,13 +51,12 @@
     <div class="contener-button">
         <button class="openFolder" id="openFoderButton" onclick="OpenFolder()">Открыть в папке</button>
         <button class="Like" onclick="DeletePhoto()">Удалить</button>
+        <svg id="like" class="favorite" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/> </svg>
     </div>
 
 
     <div class="conteiner-imgbox">
-        <img id="image" src="web/temp/photos_photoresize (31).jpg" alt="">
-        <svg id="like" class="favorite" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/> </svg>
-        
+        <img id="image" src="assets/images/01770024703.jpg" alt="">
     </div>
 
     <div class="conteiner-notes">
@@ -65,12 +64,12 @@
             <div class="notes_title text-header">ЗАМЕТКА</div>
             <img class="edit" src="assets/icons/pencil.svg" alt="" onclick="EditNotes()">
         </div>
-        <div class="notes_text" id="notes_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ducimus aperiam magni voluptate eius libero amet voluptatem adipisci facere saepe alias, porro unde praesentium iure obcaecati maxime officiis aspernatur at accusamus modi temporibus sunt est? Nisi laudantium debitis illum optio, dignissimos deserunt omnis, ipsam in sapiente libero cumque nihil fugit repellat? Mollitia pariatur facilis distinctio, est deserunt in sed ab dolorem deleniti reiciendis vel. Praesentium sint error placeat officia recusandae, voluptatem dolorem odio earum id ducimus alias odit aut explicabo assumenda a. Saepe ipsum exercitationem alias nulla eaque ab impedit obcaecati veritatis laboriosam dignissimos. Adipisci asperiores debitis modi culpa nihil cum.</div>
+        <div class="notes_text" id="notes_text"></div>
     </div>
 
 
     <div class="conteiner-information">
-        <div id="map" style="width: 400px; height: 400px"></div>
+        <div id="map"></div>
 
 
         <div class="conteiner-text">

@@ -1,7 +1,7 @@
 let fileDialogValue;
 let ID;
 
-function CreateTableRow(id, path_sound, date, country, place, type, duration_){
+function CreateTableRow(id, path_sound, date, country, place, type, duration_, absolute_path){
 
     //Создание новых строк в таблице
     let tr = document.createElement("tr")
@@ -50,7 +50,7 @@ function CreateTableRow(id, path_sound, date, country, place, type, duration_){
     let btnFolder = document.createElement("button")
     btnFolder.classList.add("sif")
     btnFolder.addEventListener("click", function(){
-        ShowSound(path_sound)
+        ShowSound(absolute_path)
     })
 
     let btnDelete = document.createElement("button")
@@ -79,9 +79,10 @@ eel.get_sounds_by_view()(function(data){
         let place = data[i][5]
         let type = data[i][6]
         let duration = data[i][7]
+        let absolute_path = data[i][8]
 
 
-        CreateTableRow(id, path_sound, date, country, place, type, duration)
+        CreateTableRow(id, path_sound, date, country, place, type, duration, absolute_path)
     }
 })
 

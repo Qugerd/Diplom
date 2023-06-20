@@ -1,14 +1,14 @@
 ymaps.ready(init);
 
 let ID; 
-let photo_path;
+let absolute_path;
 let likeValue;
 
 eel.get_photo()(async function(data){
     console.log(data)
 
     ID = data[0]
-    photo_path = data[1]
+    const photo_path = data[1]
     const kind = data[2]
     const date = data[3]
     const place = data[4]
@@ -18,6 +18,7 @@ eel.get_photo()(async function(data){
     const group_id = data[8]
     const note = data[9]
     likeValue = data[10]
+    absolute_path = data[11]
 
 
     let data_view = await eel.set_value()()
@@ -84,13 +85,11 @@ function EditNotes(){
 
 
 function Confirm(){
-    if (confirm("Вы хотите внести изменения ?")){
-        const text = document.querySelector("textarea").value
-        eel.edit_notes(ID, text)
+    const text = document.querySelector("textarea").value
+    eel.edit_notes(ID, text)
 
-        document.getElementById('notes_text').innerHTML = text
-        Remove()
-    }
+    document.getElementById('notes_text').innerHTML = text
+    Remove()
 }
 
 
@@ -120,7 +119,7 @@ async function init(){
 
 
 function OpenFolder(){
-    eel.open_folder(photo_path)
+    eel.open_folder(absolute_path)
 }
 
 document.getElementById("like").addEventListener("click", function(){

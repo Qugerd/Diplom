@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="text_style.css">
     <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript">
     </script>
-    <!-- <script src="script_gallery.js"></script> -->
+    <link rel="icon" type="image/png" href="assets/icons/folder-icon.png">
 </head>
 <body>
 
@@ -16,32 +16,32 @@
 
     <div class="container">
         <div class="container-header">
-            <div class="label-home">
-                <button onclick="GoHome()">На главную</button>
-            </div>
 
-            <div class="conteiner-btn-navigation">
-                <button  onclick="GoAbout()">
-                    Общая информация
-                </button>
+            <button onclick="GoHome()">На главную</button>
 
-                <button onclick="GoGallery()">
-                    Галерея
-                </button>
 
-                <button onclick="GoFavoritePhotos()">
-                    Лучшие фотографии
-                </button>
 
-                <button onclick="GoVideoPage()"> 
-                    Видео 
-                </button>
+            <button  onclick="GoAbout()">
+                Общая информация
+            </button>
 
-                <button onclick="GoSoundPage()">
-                    Звуки
-                </button>
-            </div>
+            <button onclick="GoGallery()">
+                Галерея
+            </button>
+
+            <button onclick="GoFavoritePhotos()">
+                Лучшие фотографии
+            </button>
+
+            <button onclick="GoVideoPage()"> 
+                Видео
+            </button>
+
+            <button onclick="GoSoundPage()">
+                Звуки
+            </button>
         </div>
+    </div>
 
         <hr size="1">
 
@@ -52,7 +52,7 @@
         </div>
 
 
-        <div class="map" id="map" style="width: 960px; height: 540px"></div>
+        <div class="map" id="map"></div>
 
 
         <div class="conteiner-search">
@@ -70,6 +70,7 @@
         </div>
 
         <div class="category-conteiner"></div>
+
     </div>
     <script src="script_gallery.js"></script>
 </body>
