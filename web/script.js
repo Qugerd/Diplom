@@ -83,6 +83,35 @@ document.getElementById("btnCloseModal-Upload").addEventListener("click", functi
     document.getElementById("modal-uploadPhoto").classList.remove("open")
 })
 
+document.getElementById("btnCloseModal-Class").addEventListener("click", function(){
+    document.getElementById("modal-newClass").classList.remove("open")
+})
+
+document.getElementById("addClass").addEventListener("click", function(){
+    document.getElementById("modal-newClass").classList.add("open")
+    CreateViewBox()
+})
+
+async function CreateViewBox(){
+    let views = await eel.get_all_view()()
+
+    let viewBox = document.getElementById("viewBox")
+    for(let i = 0; i < views.length; i++){
+        let option = document.createElement("option")
+        option.text = views[i]
+        viewBox.appendChild(option)
+    }
+
+
+
+    let familys =  await eel.get_all_family()()
+    let familyBox = document.getElementById("familyBox")
+    for(let i = 0; i < familys.length; i++){
+        let option = document.createElement("option")
+        option.text = familys[i][1]
+        familyBox.appendChild(option)
+    }
+}
 
 
 async function Confirm(){
@@ -263,7 +292,6 @@ async function ConfirmUploadPhoto(){
         shirota.innerHTML = ""
         place.innerHTML = ""
         datapicker.innerHTML = ""
-        combobox.innerHTML = ""
         camera.innerHTML = ""
         dolgota.innerHTML = ""
         shirota.innerHTML = ""
@@ -373,7 +401,8 @@ function AlertConfirm(text) {
         document.getElementById('modal-alert-confirm').classList.remove('open');
         resolve(true);
       });
-  
+
+
       document.getElementById('conf-canсel').addEventListener('click', function(){
         document.getElementById('modal-alert-confirm').classList.remove('open');
         resolve(false);
@@ -399,3 +428,79 @@ function AlertPromt(title){
         });
     });
 }
+
+
+async function AddSquad(){
+    let value = document.getElementById("inputSquad").value
+
+    if (value){
+        eel.add_squad(value)
+        document.getElementById("inputSquad").value = ""
+
+
+        let squads = await eel.get_all_squad()()
+        
+        CreateSquadBox(squads)
+        // CreateClassTable()
+    }
+}
+
+
+function AddFamily(){
+    let valueInput = document.getElementById("inputFamily").value
+    let valueId = document.getElementById("squadBox").value
+
+    if (valueInput){
+        eel.add_family(valueInput, valueId)
+    }
+}
+
+
+function CreateSquadBox(squads){
+    let box = document.getElementById("squadBox")
+    $(box).empty();
+
+
+    for(let i = 0; i < squads.length; i++){
+        let option = document.createElement("option")
+        option.value = squads[i][0]
+        option.text = squads[i][1]
+
+
+        box.appendChild(option)
+    }
+}
+
+
+async function CreateClassTable(){
+    let squads = await eel.get_all_squad()()
+
+    let squadConteiner = document.getElementById("squadConteiner")
+
+    for(let i = 0; i < squads.length; i++){
+        let squadTitle = document.createElement("div")
+        squadTitle.classList.add("squad-title")
+        squadTitle.innerHTML = squads[i][1]
+
+        let squad_id = squads[i][0]
+
+        let familys = await eel.get_all_family_by_id(squad_id)()
+        console.log(familys)
+
+        let squadFamily = document.createElement("div")
+        squadFamily.classList.add("squad-family")
+
+        squadConteiner.appendChild(squadTitle)
+
+        for (let j = 0; j < familys.length; j++){
+            let familyTitle = document.createElement("div")
+            familyTitle.classList.add("family-title")
+            familyTitle.innerHTML = familys[j][1]
+
+            squadFamily.appendChild(familyTitle)
+            squadConteiner.appendChild(squadFamily)
+        }
+    }
+}
+
+CreateClassTable()

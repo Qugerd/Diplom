@@ -229,6 +229,46 @@ def delete_photo(id):
     DeletePhoto(id)
 
 
+@eel.expose
+def add_squad(text):
+    AddSquad(text)
+
+
+@eel.expose
+def get_all_squad():
+    return GetAllSquad()
+
+
+@eel.expose
+def add_family(text, squad_id):
+    AddFamily(text, squad_id)
+
+
+@eel.expose
+def get_all_family_by_id(squad_id):
+    return GetAllFamilyById(squad_id)
+
+
+@eel.expose
+def get_all_view():
+    return GetAllView()
+
+
+@eel.expose
+def get_all_family():
+    return GetAllFamily()
+
+
+
+
+
+
+
+
+
+
+
+
 eel.init("web")
 
 eel.start("main.html", size=(1366, 780), position=(200,200), shutdown_delay=10.0, mode='chrome', host="localhost", port="8000")

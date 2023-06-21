@@ -111,7 +111,7 @@ audio{
     top: 0;
     height: 100%;
     width: 100%;
-    z-index: 11;
+    z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
     display: grid;
     align-items: center;
@@ -230,6 +230,68 @@ audio{
 
 
 
+
+/* Сustom Alert */
+.modal-alert{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(15, 15, 15, 0.521);
+    visibility: hidden;
+    opacity: 0;
+    z-index: 3;
+}
+
+.modal-alert-box{
+    position: relative;
+    width: 600px;
+    background-color: azure;
+
+    border-radius: 10px;
+
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.modal-alert-conteiner{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.alert-text{
+    word-wrap: break-word;
+}
+
+.btn-ok{
+    margin-top: 8px;
+    align-self: flex-end;
+    background-color: transparent;
+    font: bold 18px arial;
+
+    border: 0px;
+}
+
+.btn-ok:hover{
+    cursor: pointer;
+}
+
+.alert-input{
+    width: 90%;
+    font: bold 18px arial;
+
+    border: 1px solid rgba(195, 206, 211, 0.733);
+    outline: transparent;
+}
+
+.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+
 @media(max-width: 1366px){
     /* Контейнер навигации */
     .container{
@@ -286,5 +348,65 @@ audio{
         height: 40px;
 
         font: bold 14px arial;
+    }
+
+
+    .modal-alert{
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background-color: rgba(15, 15, 15, 0.521);
+        visibility: hidden;
+        opacity: 0;
+        z-index: 2;
+    }
+
+    .modal-alert-box{
+        position: relative;
+        width: 400px;
+        background-color: azure;
+
+        border-radius: 10px;
+
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .modal-alert-conteiner{
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+    .alert-text{
+        word-wrap: break-word;
+    }
+
+    .btn-ok{
+        margin-top: 8px;
+        align-self: flex-end;
+        background-color: transparent;
+        font: bold 18px arial;
+
+        border: 0px;
+    }
+
+    .btn-ok:hover{
+        cursor: pointer;
+    }
+
+    .alert-input{
+        width: 90%;
+        height: 20px;
+
+        border: 1px solid rgba(195, 206, 211, 0.733);
+        outline: transparent;
+    }
+
+    .open{
+        visibility: visible;
+        opacity: 1;
     }
 }

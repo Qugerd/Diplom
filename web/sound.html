@@ -71,6 +71,7 @@
 
 				<p class="text-header2">Выбор аудиофайла:</p>
 				<button class="btnChooseFile" id="chooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
+                <div class="text" id="file-song">Файл не выбран</div>
 
                 <p class="text-header2">Дата:</p>
                 <input type="date" id="input-date">
@@ -120,6 +121,22 @@
 			</div>
 		</div>
 	</div>
+
+
+    	<!-- Alert -->
+	<div class="modal-alert" id="modal-alert">
+		<div class="modal-alert-box ">
+			<div class="modal-alert-conteiner">
+                <div class="alert-text text-header" id="msg">
+                </div>
+                <button class="btn-ok" id="btn-ok">Закрыть</button>
+			</div>
+		</div>
+	</div>
+
+
+
+
     <script src="sound.js"></script>
 </body>
 </html>

@@ -96,24 +96,10 @@ async function Confirm(){
     filePath = fileDialogValue
 
     if(filePath == null || filePath == ''){
-        alert("Выберите файл")
-    }
-    else if(date.value == ''){
-        alert("Выберите дату")
-    }
-    else if (country.value == ''){
-        alert("Введите страну")
-    }
-    else if (place.value == ''){
-        alert("Введите локацию")
-    }
-    else if (type.value == ''){
-        alert("Введите тип")
+        Alert("Файл не выбран")
     }
     else{
         let response = await eel.add_sound(filePath, date.value, country.value, place.value, type.value)()
-
-        alert(response)
     
         date.value = ''
         country.value = ''
@@ -145,6 +131,15 @@ function ConfirmEdite(){
 
 async function OpenFileDialog(){
     fileDialogValue = await eel.OpenFileDialogSound()()
+    if (fileDialogValue != ""){
+        document.getElementById("file-song").innerHTML = fileDialogValue
+        document.getElementById("file-song").style.color = "black"
+    }
+    else{
+        document.getElementById("file-song").innerHTML = "Файл не выран"
+        document.getElementById("file-song").style.color = "red"
+    }
+    
 }
 
 
@@ -186,4 +181,13 @@ function EditeSound(id, date, country, place, type){
 
 function CloseModalEdite(){
     document.getElementById("modalEdite").classList.remove("open")
+}
+
+
+function Alert(text){
+    document.getElementById("msg").innerHTML = text
+    document.getElementById("modal-alert").classList.add("open")
+    document.getElementById("btn-ok").addEventListener("click", function(){
+        document.getElementById("modal-alert").classList.remove("open")
+    })
 }

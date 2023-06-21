@@ -16,6 +16,9 @@
 		<div class="allViews">
             Все виды
 		</div>
+        <div class="addbutton" id="addClass" >
+			<button>Новая отряд</button>
+		</div>
 		<div class="addbutton" id="addCategory" >
 			<button>Новый вид</button>
 		</div>
@@ -34,12 +37,75 @@
 	<hr size="1">
 
 
-	<div class="conteiner">
+	<div class="main-conteiner">
+        <div class="conteiner-class">
+            <div class="classifire text-header2">
+                Классификация
+            </div>
 
-	</div>
+
+            <div class="squad text" style="font-size: 24px;">
+                <div class="squad-title">
+                    Гагарообразные
+                </div>
 
 
-	<!-- Модальное окно "Добавить категорию" -->
+                <div class="squad-family" style="font-size: 20px;">
+                    <div class="family-title">
+                        Гагаровые
+                    </div>
+
+
+                    <div class="squad-family-vid" style="font-size: 16px;">
+                        <div class="vid-title">
+                            Краснозобая гагара
+                        </div>
+                        <div class="vid-title">
+                            Чернозобая гагара
+                        </div>
+                        <div class="vid-title">
+                            Белошейная гагара
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="squad text" id="squadConteiner" style="font-size: 24px;">
+                <div class="squad-title">
+                    Гагарообразные
+                </div>
+
+
+                <div class="squad-family" style="font-size: 20px;">
+                    <div class="family-title">
+                        Гагаровые
+                    </div>
+
+
+                    <div class="squad-family-vid" style="font-size: 16px;">
+                        <div class="vid-title">
+                            Краснозобая гагара
+                        </div>
+                        <div class="vid-title">
+                            Чернозобая гагара
+                        </div>
+                        <div class="vid-title">
+                            Белошейная гагара
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    <div class="conteiner"></div>
+
+
+
+	<!-- Модальное окно "Новый вид" -->
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
@@ -66,7 +132,7 @@
                 <div class="text" id="fileValue">Файл выбран: пусто</div>
 
 				<div class="modal-conteiner-center"><button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button></div>
-				
+			
 			</div>
 		</div>
 	</div>
@@ -108,6 +174,87 @@
 			</div>
 		</div>
 	</div>
+
+
+
+    <!-- Модальное окно "Новый отряд" -->
+    <div class="modal-newClass open" id="modal-newClass">
+        <div class="modal-box modalNewClass">
+            <div class="modal-conteiner">
+                <button id="btnCloseModal-Class">x</button>
+                <div class="squad-contiener">
+                    <div class="sqaud-layout">
+                        <div class="squad-text">
+                            Добавить отряд:
+                        </div>
+                        <input type="text" placeholder="Введите отряд" id="inputSquad">
+                        <button id="addSquad" onclick="AddSquad()">Добавить</button>
+                    </div>
+    
+                    <div class="family-layuot">
+                        <div class="family-text">
+                            Добавить семейство:
+                        </div>
+                        <input type="text" placeholder="Введите семейство" id="inputFamily">
+
+                        <div class="family-text">
+                            Семейство добавить к отряду
+                        </div>
+                        <select id="squadBox">
+                            <option value="">Гагарообразные</option>
+                        </select>
+
+                        <button onclick="AddFamily()">Добавить</button>
+                    </div>
+
+
+                    <div class="view-layout">
+                        <div class="viev-text">
+                            Добавить вид к семейству
+                        </div>
+
+                        <div class="view-text">
+                            Выбрать вид:
+                        </div>
+                        <select id="viewBox">
+                        </select>
+
+
+                        <div class="view-text">
+                            Выбрать cемейство:
+                        </div>
+                        <select id="familyBox">
+                        </select>
+
+                        <button>Добавить</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 	<!-- Alert -->
@@ -157,6 +304,7 @@
         ymaps.ready(init);
     </script>
 	<script src="navigation.js"></script>
+    <script src="jquery/jquery-3.6.4.min.js"></script>
 </body>
 
 </html>

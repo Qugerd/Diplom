@@ -272,8 +272,100 @@ def DeletePhoto(id):
     except sqlite3.Error as e:
             # print("Ошибка:", e.args[0])
             pass
-            
-            
+
+
+def AddSquad(squad_name):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO squad (squad_name) VALUES (?)",
+            (squad_name,))
+    conn.commit()
+    conn.close()
+
+
+def GetAllSquad():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT * FROM squad ORDER BY squad_name ASC')
+    data = []
+    for row in cursor:
+        id, squad_name = row
+        data.append([id, squad_name])
+    conn.commit()
+    conn.close()
+    return data
+
+
+
+def AddFamily(family_name, squad_id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO family (family_name, squad_id) VALUES (?, ?)",
+            (family_name, squad_id))
+    conn.commit()
+    conn.close()
+
+
+def GetAllFamilyById(squad_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT * FROM family WHERE squad_id=? ORDER BY family_name ASC', (squad_id,))
+    data = []
+    for row in cursor:
+        id, family_name, squad_id = row
+        data.append([id, family_name, squad_id])
+    conn.commit()
+    conn.close()
+    return data
+
+
+def GetAllView():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT name FROM views ORDER BY name ASC')
+    data = []
+    for row in cursor:
+        data.append(row[0])
+    conn.commit()
+    conn.close()
+    return data
+
+
+def GetAllFamily():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT id, family_name FROM family ORDER BY family_name ASC')
+    data = []
+    for row in cursor:
+        id, family_name = row
+        data.append([id, family_name])
+    conn.commit()
+    conn.close()
+    print(data)
+    return data
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             
 # GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
