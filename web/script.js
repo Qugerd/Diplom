@@ -109,6 +109,7 @@ async function CreateViewBox(){
     for(let i = 0; i < familys.length; i++){
         let option = document.createElement("option")
         option.text = familys[i][1]
+        option.value = familys[i][0]
         familyBox.appendChild(option)
     }
 }
@@ -441,7 +442,7 @@ async function AddSquad(){
         let squads = await eel.get_all_squad()()
         
         CreateSquadBox(squads)
-        // CreateClassTable()
+        CreateClassTable()
     }
 }
 
@@ -485,7 +486,7 @@ async function CreateClassTable(){
         let squad_id = squads[i][0]
 
         let familys = await eel.get_all_family_by_id(squad_id)()
-        console.log(familys)
+        // console.log(familys)
 
         let squadFamily = document.createElement("div")
         squadFamily.classList.add("squad-family")
@@ -497,10 +498,43 @@ async function CreateClassTable(){
             familyTitle.classList.add("family-title")
             familyTitle.innerHTML = familys[j][1]
 
+
+
             squadFamily.appendChild(familyTitle)
             squadConteiner.appendChild(squadFamily)
+
+
+            let familyId = familys[j][0]
+
+            let views = await eel.get_view_in_family(familyId)()
+            console.log(views)
+            for (let k = 0; k < views.length; k++){
+                let name = views[k][0]
+
+
+                let familyVid = document.createElement("div")
+                familyVid.classList.add("squad-family-vid")
+
+                let vidTitle = document.createElement('div')
+                vidTitle.classList.add("vid-title")
+                vidTitle.style.fontSize = "16px"
+                vidTitle.innerHTML = views[k][0]
+                vidTitle.onclick = function (){
+                    OpenPageAbout(name)
+                }
+
+                familyVid.appendChild(vidTitle)
+                squadFamily.appendChild(familyVid)
+            }
         }
     }
+}
+
+
+function AddViewToFamily(){
+    let viewName = document.getElementById('viewBox').value
+    let familyId = document.getElementById('familyBox').value
+    eel.add_view_to_family(viewName, familyId)
 }
 
 CreateClassTable()

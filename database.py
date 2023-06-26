@@ -339,10 +339,24 @@ def GetAllFamily():
     return data
 
 
+def GetViewInFamily(family_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('SELECT name, family_id FROM views WHERE family_id=? ORDER BY name ASC', (family_id, ))
+    data = []
+    for row in cursor:
+        name, family_name = row
+        data.append([name, family_name])
+    conn.commit()
+    conn.close()
+    print(data)
+    return data
 
 
-
-
+def AddViewToFamily(name, family_id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE views SET family_id = ? WHERE name = ?", (family_id, name))
+    conn.commit()
+    conn.close()
 
 
 

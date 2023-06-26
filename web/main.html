@@ -73,25 +73,44 @@
 
             <div class="squad text" id="squadConteiner" style="font-size: 24px;">
                 <div class="squad-title">
-                    Гагарообразные
+                    Журавлеобразные
                 </div>
 
 
                 <div class="squad-family" style="font-size: 20px;">
                     <div class="family-title">
-                        Гагаровые
+                        Журавлиные
                     </div>
 
 
                     <div class="squad-family-vid" style="font-size: 16px;">
                         <div class="vid-title">
-                            Краснозобая гагара
+                            Красавка
                         </div>
                         <div class="vid-title">
-                            Чернозобая гагара
+                            Стерх
                         </div>
                         <div class="vid-title">
-                            Белошейная гагара
+                            Канадский журавль
+                        </div>
+                    </div>
+                </div>
+
+                <div class="squad-family" style="font-size: 20px;">
+                    <div class="family-title">
+                        Пастушковые
+                    </div>
+
+
+                    <div class="squad-family-vid" style="font-size: 16px;">
+                        <div class="vid-title">
+                            Белокрылый погоныш
+                        </div>
+                        <div class="vid-title">
+                            Рогатая камышница
+                        </div>
+                        <div class="vid-title">
+                            Камышница
                         </div>
                     </div>
                 </div>
@@ -184,7 +203,7 @@
                 <button id="btnCloseModal-Class">x</button>
                 <div class="squad-contiener">
                     <div class="sqaud-layout">
-                        <div class="squad-text">
+                        <div class="squad-text text-header2">
                             Добавить отряд:
                         </div>
                         <input type="text" placeholder="Введите отряд" id="inputSquad">
@@ -192,41 +211,43 @@
                     </div>
     
                     <div class="family-layuot">
-                        <div class="family-text">
+                        <div class="family-text text-header2">
                             Добавить семейство:
                         </div>
                         <input type="text" placeholder="Введите семейство" id="inputFamily">
 
-                        <div class="family-text">
-                            Семейство добавить к отряду
+                        <div class="family-text text-header2">
+                            Семейство добавить к отряду:
                         </div>
                         <select id="squadBox">
                             <option value="">Гагарообразные</option>
                         </select>
 
-                        <button onclick="AddFamily()">Добавить</button>
+                        <button id="AddFamily" onclick="AddFamily()">Добавить</button>
                     </div>
 
 
                     <div class="view-layout">
-                        <div class="viev-text">
+                        <div class="viev-text text-header2">
                             Добавить вид к семейству
                         </div>
 
-                        <div class="view-text">
+                        <div class="view-text text-header2">
                             Выбрать вид:
                         </div>
                         <select id="viewBox">
+                            <option value="">паприка</option>
                         </select>
 
 
-                        <div class="view-text">
+                        <div class="view-text text-header2">
                             Выбрать cемейство:
                         </div>
                         <select id="familyBox">
+                            <option value="">паприка</option>
                         </select>
 
-                        <button>Добавить</button>
+                        <button id="AddView" onclick="AddViewToFamily()">Добавить</button>
                     </div>
 
                 </div>

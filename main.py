@@ -259,9 +259,14 @@ def get_all_family():
     return GetAllFamily()
 
 
+@eel.expose
+def get_view_in_family(family_id):
+    return GetViewInFamily(family_id)
 
 
-
+@eel.expose
+def add_view_to_family(vidName, familyId):
+    AddViewToFamily(vidName, familyId)
 
 
 
