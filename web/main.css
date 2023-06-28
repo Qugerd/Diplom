@@ -11,7 +11,9 @@
     font-weight: bold;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 24px;
+    cursor: pointer;
 }
+
 
 .header button{
     width: 200px;
@@ -143,6 +145,92 @@
 
 }
 
+.conteiner-2{
+    width: 100%;
+    margin: 10px;
+
+    display: none;
+    flex-direction: column;
+
+}
+
+.squad-conteiner{
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px 20px;
+}
+
+.squadName{
+    background-color: rgba(77, 117, 24, 0.1);
+    width: auto;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    font-size: 24px;
+
+    padding: 10px;
+}
+
+.family-conteiner{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.familyName{
+    background-color: rgba(204, 221, 49, 0.1);
+    width: auto;
+
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+
+    padding: 10px;
+}
+
+
+
+.conteiner-vid{
+    margin-top: 20px;
+    display: flex;
+}
+
+.vidList{
+    width: 35%;
+    padding-left: 20px;
+}
+
+.vidName{
+    color: #325825f6;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.vidName:hover{
+    text-decoration: underline;
+}
+
+.photoList{
+    width: 65%;
+    background-color: #74737315;
+}
+
+
+
+
+
+
+
+
+
+
+
+.family-title:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration: ;
+}
+
 .vid-title{
     color: rgb(43, 78, 29);
 }
@@ -177,7 +265,10 @@
 
 
 
-
+a{
+    color: black;
+    text-decoration: none;
+}
 
 
 
@@ -243,7 +334,7 @@
 
 
 /* Модальные окна */
-.modal, .modal-uploadPhoto, .modal-newClass{
+.modal, .modal-uploadPhoto, .modal-newClass, .modal-edite{
     position: fixed;
     left: 0;
     top: 0;
@@ -462,10 +553,77 @@ textarea{
 }
 
 
+/* Модальное окно "Редактировать" */
+.modalEdite{
+    width: 500px;
+    height: 500px;
+    padding: 30px;
+}
+
+.editeConteiner{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
 
 
 
+.btn{
+    margin-top: 8px;
+    margin-bottom: 40px;
+    background-color: black;
+    color: white;
+    font: bold 16px arial;
+    cursor: pointer;
+    border: 0px;
+    padding: 7px;
+    border-radius: 5px;
+}
 
+.btn:hover{
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    outline: 1px solid black;
+}
+
+#inputEditeTitle{
+    width: 300px;
+    height: 30px;
+    margin-top: 8px;
+
+    border: 1px solid rgba(195, 206, 211, 0.733);
+    border-radius: 5px;
+    outline: transparent;
+
+    font: bold 18px arial;
+    padding-left: 10px;
+}
+
+#btnEditeOpenFile{
+    width: 170px;
+}
+
+#viewBox{
+    width: 300px;
+    border: 1px solid rgba(195, 206, 211, 0.733);
+    border-radius: 5px;
+    outline: transparent;
+
+    font: bold 18px arial;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-right: 400px;
+}
+
+#AddViewToFam{
+    width: 170px;
+}
+#btnEdite{
+    margin-top: 10px;
+    width: 170px;
+}
 /* Модальное окно "Новый отряд" */
 
 .modalNewClass{
@@ -526,7 +684,7 @@ textarea{
     border: 1px solid black;
 }
 
-#squadBox, #viewBox, #familyBox{
+#squadBox, #familyBox{
     outline: 0px;
     font-size: 16px;
     font-weight: bold;

@@ -272,11 +272,11 @@ async function ConfirmUploadPhoto(){
         Alert("Выберите фотографию")
     }
 
-    else if(datapicker == ''){
+    else if(datapicker.value == ''){
         Alert("Выберите дату")
     }
 
-    else if(place == ''){
+    else if(place.value == ''){
         Alert("Выберите место съемки")
     }
     else{
@@ -454,6 +454,7 @@ async function AddSquad(){
         CreateSquadBox(squads)
         ClearClassTable()
         CreateClassTable()
+        CreateConteiner2()
     }
     else{
         Alert("Введите название отряда")
@@ -471,6 +472,7 @@ function AddFamily(){
         CreateFamilyBox()
         ClearClassTable()
         CreateClassTable()
+        CreateConteiner2()
     }
     else{
         Alert("Введите название семейства")
@@ -520,8 +522,15 @@ async function CreateClassTable(){
         squadConteiner.appendChild(squadTitle)
 
         for (let j = 0; j < familys.length; j++){
+            // let a = document.createElement("a")
+            // a.href = `#f${familys[j][0]}`
+            // a.innerHTML = familys[j][1]
             let familyTitle = document.createElement("div")
             familyTitle.classList.add("family-title")
+            // familyTitle.appendChild(a)
+            familyTitle.onclick = function(){
+                CreateConteiner2()
+            }
             familyTitle.innerHTML = familys[j][1]
 
 
@@ -533,7 +542,6 @@ async function CreateClassTable(){
             let familyId = familys[j][0]
 
             let views = await eel.get_view_in_family(familyId)()
-            console.log(views)
             for (let k = 0; k < views.length; k++){
                 let name = views[k][0]
 
@@ -556,6 +564,69 @@ async function CreateClassTable(){
     }
 }
 
+async function CreateConteiner2(){
+    let conteinerDiv = document.querySelector("div.conteiner");
+    conteinerDiv.style.display = "none"
+
+    let conteiner2 = document.getElementById("conteiner-2")
+    conteiner2.style.display = "flex"
+    $(conteiner2).empty()
+
+    let squads = await eel.get_all_squad()()
+    for(let i = 0; i < squads.length; i++){
+        let squadName = document.createElement("div")
+        squadName.classList.add("squadName")
+        squadName.innerHTML = squads[i][1]
+
+
+        let squadCont = document.createElement("div")
+        squadCont.classList.add("squad-conteiner")
+        squadCont.appendChild(squadName)
+
+
+        let squad_id = squads[i][0]
+        let familys = await eel.get_all_family_by_id(squad_id)()
+        for(let j = 0; j < familys.length; j++){
+            let familyName = document.createElement("div")
+            familyName.classList.add("familyName")
+            // familyName.id = "f" + familys[j][0]
+            familyName.innerHTML = familys[j][1]
+
+
+
+            let vidList = document.createElement("div")
+            vidList.classList.add("vidList")
+
+            let family_id = familys[j][0]
+            let views = await eel.get_view_in_family(family_id)()
+            console.log(views)
+            for(let k = 0; k < views.length; k++){
+                let vidName = document.createElement("div")
+                vidName.innerHTML = views[k][0]
+                vidName.onclick = function(){
+                    OpenPageAbout(views[k][0])
+                }
+                vidName.classList.add("vidName")
+                vidName.classList.add("text18")
+
+
+                vidList.append(vidName)
+            }
+            let conteinerVid = document.createElement("div")
+            conteinerVid.classList.add("conteiner-vid")
+            conteinerVid.append(vidList)
+
+
+            let familyCont = document.createElement("div")
+            familyCont.classList.add("family-conteiner")
+            familyCont.appendChild(familyName)
+            familyCont.appendChild(conteinerVid)
+            squadCont.appendChild(familyCont)
+        }
+
+        conteiner2.appendChild(squadCont)
+    }
+}
 
 function AddViewToFamily(){
     let viewName = document.getElementById('viewBox').value
@@ -563,6 +634,7 @@ function AddViewToFamily(){
     eel.add_view_to_family(viewName, familyId)
     ClearClassTable()
     CreateClassTable()
+    CreateConteiner2()
 }
 
 CreateClassTable()

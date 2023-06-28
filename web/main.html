@@ -13,7 +13,7 @@
 
 <body>
 	<div class="header">
-		<div class="allViews">
+		<div class="allViews" onclick="GoHome">
             Все виды
 		</div>
         <div class="addbutton" id="addClass" >
@@ -56,6 +56,7 @@
 
 
     <div class="conteiner"></div>
+    <div class="conteiner-2" id="conteiner-2"></div>
 
 
 
@@ -191,7 +192,46 @@
 
 
 
+<!-- Модальное окно "Редактировать вид" -->
+<div class="modal-edite open" id="modal-edite">
+    <div class="modal-box modalEdite">
+        <div class="modal-conteiner">
+            <button id="btnCloseModal-Class">x</button>
 
+            <div class="text-header">
+                Редактировать
+            </div>
+
+
+
+           <div class="editeConteiner">
+                <div class="title text-header2">
+                    Изменить название:
+                </div>
+                <input id="inputEditeTitle" type="text" placeholder="Название">
+                <button class="btn" id="btnEdite">Переименовать</button>
+
+
+                <div class="title text-header2">
+                    Изменить изображение:
+                </div>
+                <button class="btn" id="btnEditeOpenFile">Выбрать файл</button>
+
+
+                <div class="title text-header2">
+                    Добавить вид к семейству:
+                </div>
+                <select name="" id="viewBox">
+                    <option value="">-Выберите семейство-</option>
+                </select>
+                <button class="btn" id="AddViewToFam">Добавить</button>
+
+
+                
+           </div>
+        </div>
+    </div>
+</div>
 
 
 
