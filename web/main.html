@@ -39,81 +39,16 @@
 
 	<div class="main-conteiner">
         <div class="conteiner-class">
-            <div class="classifire text-header2">
+            <div class="classifire">
                 Классификация
             </div>
 
-
-            <div class="squad text" style="font-size: 24px;">
-                <div class="squad-title">
-                    Гагарообразные
-                </div>
-
-
-                <div class="squad-family" style="font-size: 20px;">
-                    <div class="family-title">
-                        Гагаровые
-                    </div>
-
-
-                    <div class="squad-family-vid" style="font-size: 16px;">
-                        <div class="vid-title">
-                            Краснозобая гагара
-                        </div>
-                        <div class="vid-title">
-                            Чернозобая гагара
-                        </div>
-                        <div class="vid-title">
-                            Белошейная гагара
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
             <div class="squad text" id="squadConteiner" style="font-size: 24px;">
-                <div class="squad-title">
-                    Журавлеобразные
-                </div>
+                
 
 
-                <div class="squad-family" style="font-size: 20px;">
-                    <div class="family-title">
-                        Журавлиные
-                    </div>
 
 
-                    <div class="squad-family-vid" style="font-size: 16px;">
-                        <div class="vid-title">
-                            Красавка
-                        </div>
-                        <div class="vid-title">
-                            Стерх
-                        </div>
-                        <div class="vid-title">
-                            Канадский журавль
-                        </div>
-                    </div>
-                </div>
-
-                <div class="squad-family" style="font-size: 20px;">
-                    <div class="family-title">
-                        Пастушковые
-                    </div>
-
-
-                    <div class="squad-family-vid" style="font-size: 16px;">
-                        <div class="vid-title">
-                            Белокрылый погоныш
-                        </div>
-                        <div class="vid-title">
-                            Рогатая камышница
-                        </div>
-                        <div class="vid-title">
-                            Камышница
-                        </div>
-                    </div>
-                </div>
             </div>
 
 
@@ -197,13 +132,13 @@
 
 
     <!-- Модальное окно "Новый отряд" -->
-    <div class="modal-newClass open" id="modal-newClass">
+    <div class="modal-newClass" id="modal-newClass">
         <div class="modal-box modalNewClass">
             <div class="modal-conteiner">
                 <button id="btnCloseModal-Class">x</button>
                 <div class="squad-contiener">
                     <div class="sqaud-layout">
-                        <div class="squad-text text-header2">
+                        <div class="squad-text">
                             Добавить отряд:
                         </div>
                         <input type="text" placeholder="Введите отряд" id="inputSquad">
@@ -211,16 +146,15 @@
                     </div>
     
                     <div class="family-layuot">
-                        <div class="family-text text-header2">
+                        <div class="family-text">
                             Добавить семейство:
                         </div>
                         <input type="text" placeholder="Введите семейство" id="inputFamily">
 
-                        <div class="family-text text-header2">
+                        <div class="family-text">
                             Семейство добавить к отряду:
                         </div>
                         <select id="squadBox">
-                            <option value="">Гагарообразные</option>
                         </select>
 
                         <button id="AddFamily" onclick="AddFamily()">Добавить</button>
@@ -228,23 +162,23 @@
 
 
                     <div class="view-layout">
-                        <div class="viev-text text-header2">
+                        <div class="view-text">
                             Добавить вид к семейству
                         </div>
 
-                        <div class="view-text text-header2">
+                        <br>
+
+                        <div class="view-text">
                             Выбрать вид:
                         </div>
                         <select id="viewBox">
-                            <option value="">паприка</option>
                         </select>
 
 
-                        <div class="view-text text-header2">
+                        <div class="view-text">
                             Выбрать cемейство:
                         </div>
                         <select id="familyBox">
-                            <option value="">паприка</option>
                         </select>
 
                         <button id="AddView" onclick="AddViewToFamily()">Добавить</button>

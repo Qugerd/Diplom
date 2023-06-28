@@ -87,15 +87,20 @@ document.getElementById("btnCloseModal-Class").addEventListener("click", functio
     document.getElementById("modal-newClass").classList.remove("open")
 })
 
-document.getElementById("addClass").addEventListener("click", function(){
+document.getElementById("addClass").addEventListener("click", async function(){
     document.getElementById("modal-newClass").classList.add("open")
     CreateViewBox()
+    CreateFamilyBox()
+    let squads = await eel.get_all_squad()()
+    CreateSquadBox(squads)
 })
 
 async function CreateViewBox(){
+    let viewBox = document.getElementById("viewBox")
+    $(viewBox).empty();
     let views = await eel.get_all_view()()
 
-    let viewBox = document.getElementById("viewBox")
+
     for(let i = 0; i < views.length; i++){
         let option = document.createElement("option")
         option.text = views[i]
@@ -103,9 +108,14 @@ async function CreateViewBox(){
     }
 
 
+}
+
+
+async function CreateFamilyBox(){
+    let familyBox = document.getElementById("familyBox")
+    $(familyBox).empty();
 
     let familys =  await eel.get_all_family()()
-    let familyBox = document.getElementById("familyBox")
     for(let i = 0; i < familys.length; i++){
         let option = document.createElement("option")
         option.text = familys[i][1]
@@ -440,9 +450,13 @@ async function AddSquad(){
 
 
         let squads = await eel.get_all_squad()()
-        
+
         CreateSquadBox(squads)
+        ClearClassTable()
         CreateClassTable()
+    }
+    else{
+        Alert("Введите название отряда")
     }
 }
 
@@ -453,6 +467,13 @@ function AddFamily(){
 
     if (valueInput){
         eel.add_family(valueInput, valueId)
+        document.getElementById("inputFamily").value = ''
+        CreateFamilyBox()
+        ClearClassTable()
+        CreateClassTable()
+    }
+    else{
+        Alert("Введите название семейства")
     }
 }
 
@@ -472,6 +493,11 @@ function CreateSquadBox(squads){
     }
 }
 
+
+function ClearClassTable(){
+    let squadConteiner = document.getElementById("squadConteiner")
+    $(squadConteiner).empty();
+}
 
 async function CreateClassTable(){
     let squads = await eel.get_all_squad()()
@@ -535,6 +561,8 @@ function AddViewToFamily(){
     let viewName = document.getElementById('viewBox').value
     let familyId = document.getElementById('familyBox').value
     eel.add_view_to_family(viewName, familyId)
+    ClearClassTable()
+    CreateClassTable()
 }
 
 CreateClassTable()
