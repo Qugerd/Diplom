@@ -269,8 +269,10 @@ def add_view_to_family(vidName, familyId):
     AddViewToFamily(vidName, familyId)
 
 
-
-
+@eel.expose
+def change_preview(id, img):
+    print(img)
+    ChangePreview(id, img)
 
 
 

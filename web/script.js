@@ -1,7 +1,7 @@
 const PLACEHOLD_PATH = "http://placehold.it/150x150"
 
 let fileDialogValue = PLACEHOLD_PATH
-
+let Title;
 
 
 async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
@@ -24,7 +24,7 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     let btnFunctionEdit = document.createElement("button");
     btnFunctionEdit.classList.add('btn-function-edit')
     btnFunctionEdit.onclick = function(){
-        Edit(id, title)
+        OpenModalEdite(id, title)
     }
 
 
@@ -87,9 +87,13 @@ document.getElementById("btnCloseModal-Class").addEventListener("click", functio
     document.getElementById("modal-newClass").classList.remove("open")
 })
 
+document.getElementById("btnCloseModal-Edite").addEventListener("click", function(){
+    document.getElementById("modal-edite").classList.remove("open")
+})
+
 document.getElementById("addClass").addEventListener("click", async function(){
     document.getElementById("modal-newClass").classList.add("open")
-    CreateViewBox()
+    // CreateViewBox()
     CreateFamilyBox()
     let squads = await eel.get_all_squad()()
     CreateSquadBox(squads)
@@ -112,7 +116,7 @@ async function CreateViewBox(){
 
 
 async function CreateFamilyBox(){
-    let familyBox = document.getElementById("familyBox")
+    let familyBox = document.getElementById("viewBox")
     $(familyBox).empty();
 
     let familys =  await eel.get_all_family()()
@@ -204,12 +208,21 @@ eel.parse()(function(mas) {
 });
 
 
+async function OpenModalEdite(id, title){
+    document.getElementById("modal-edite").classList.add("open")
+
+    document.getElementById("inputEditeTitle").value = title
+    ID = id
+    Title = title
+
+    CreateFamilyBox()
+}
 
 
-
-async function Edit(id, title){
-
-    let newName = await AlertPromt(title)
+function RenameTitle(){
+    let newName = document.getElementById("inputEditeTitle").value
+    let id = ID
+    let title = Title
     eel.edit_title(id, newName, title)
 
     // меняю название на карточке вида
@@ -223,6 +236,19 @@ async function Edit(id, title){
         if (option[i].innerText.trim() === title) {
             option[i].innerText = newName;
         }
+    }
+
+    ClearClassTable()
+    CreateClassTable()
+}
+
+
+async function ChangePreview(){
+    let image = await eel.OpenFileDialog()()
+
+    if(image){
+        eel.change_preview(ID, image)
+        window.location.reload()
     }
 }
 
@@ -454,7 +480,7 @@ async function AddSquad(){
         CreateSquadBox(squads)
         ClearClassTable()
         CreateClassTable()
-        CreateConteiner2()
+        // CreateConteiner2()
     }
     else{
         Alert("Введите название отряда")
@@ -472,7 +498,7 @@ function AddFamily(){
         CreateFamilyBox()
         ClearClassTable()
         CreateClassTable()
-        CreateConteiner2()
+        // CreateConteiner2()
     }
     else{
         Alert("Введите название семейства")
@@ -564,6 +590,7 @@ async function CreateClassTable(){
     }
 }
 
+
 async function CreateConteiner2(){
     let conteinerDiv = document.querySelector("div.conteiner");
     conteinerDiv.style.display = "none"
@@ -629,12 +656,12 @@ async function CreateConteiner2(){
 }
 
 function AddViewToFamily(){
+    let title = Title
     let viewName = document.getElementById('viewBox').value
-    let familyId = document.getElementById('familyBox').value
-    eel.add_view_to_family(viewName, familyId)
+    eel.add_view_to_family(title, viewName)
     ClearClassTable()
     CreateClassTable()
-    CreateConteiner2()
+    // CreateConteiner2()
 }
 
 CreateClassTable()

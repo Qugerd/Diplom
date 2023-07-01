@@ -359,8 +359,11 @@ def AddViewToFamily(name, family_id):
     conn.close()
 
 
-
-
+def ChangePreview(id, img):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE views SET img = ? WHERE id = ?", (Image_to_Bytes(img), id))
+    conn.commit()
+    conn.close()
 
 
 

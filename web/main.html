@@ -13,7 +13,7 @@
 
 <body>
 	<div class="header">
-		<div class="allViews" onclick="GoHome">
+		<div class="allViews" onclick="GoHome()">
             Все виды
 		</div>
         <div class="addbutton" id="addClass" >
@@ -160,31 +160,6 @@
 
                         <button id="AddFamily" onclick="AddFamily()">Добавить</button>
                     </div>
-
-
-                    <div class="view-layout">
-                        <div class="view-text">
-                            Добавить вид к семейству
-                        </div>
-
-                        <br>
-
-                        <div class="view-text">
-                            Выбрать вид:
-                        </div>
-                        <select id="viewBox">
-                        </select>
-
-
-                        <div class="view-text">
-                            Выбрать cемейство:
-                        </div>
-                        <select id="familyBox">
-                        </select>
-
-                        <button id="AddView" onclick="AddViewToFamily()">Добавить</button>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -193,10 +168,10 @@
 
 
 <!-- Модальное окно "Редактировать вид" -->
-<div class="modal-edite open" id="modal-edite">
+<div class="modal-edite" id="modal-edite">
     <div class="modal-box modalEdite">
         <div class="modal-conteiner">
-            <button id="btnCloseModal-Class">x</button>
+            <button id="btnCloseModal-Edite">x</button>
 
             <div class="text-header">
                 Редактировать
@@ -209,22 +184,21 @@
                     Изменить название:
                 </div>
                 <input id="inputEditeTitle" type="text" placeholder="Название">
-                <button class="btn" id="btnEdite">Переименовать</button>
+                <button class="btn" id="btnEdite" onclick="RenameTitle()">Переименовать</button>
 
 
                 <div class="title text-header2">
                     Изменить изображение:
                 </div>
-                <button class="btn" id="btnEditeOpenFile">Выбрать файл</button>
+                <button class="btn" id="btnEditeOpenFile" onclick="ChangePreview()">Выбрать файл</button>
 
 
                 <div class="title text-header2">
                     Добавить вид к семейству:
                 </div>
                 <select name="" id="viewBox">
-                    <option value="">-Выберите семейство-</option>
                 </select>
-                <button class="btn" id="AddViewToFam">Добавить</button>
+                <button class="btn" id="AddViewToFam" onclick="AddViewToFamily()">Добавить</button>
 
 
                 

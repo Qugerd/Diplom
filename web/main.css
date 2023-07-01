@@ -365,7 +365,7 @@ a{
     border-radius: 6px;
 }
 
-.modal-box #btnCloseModal, #btnCloseModal-Upload, #btnCloseModal-Class{
+.modal-box #btnCloseModal, #btnCloseModal-Upload, #btnCloseModal-Class, #btnCloseModal-Edite{
     position: fixed;
     top: 0px;
     right: 0px;
@@ -376,6 +376,7 @@ a{
     padding: 5px;
     height: 30px;
     width: 30px;
+    cursor: pointer;
 }
 
 #btnCloseModal-Upload:hover, #btnCloseModal:hover, #btnCloseModal-Class{
@@ -627,15 +628,15 @@ textarea{
 /* Модальное окно "Новый отряд" */
 
 .modalNewClass{
-    height: 350px;
-    width: 850px;
+    height: 300px;
+    width: 700px;
 
     padding: 40px;
 }
 
 .squad-contiener{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 
