@@ -142,3 +142,7 @@ function DeletePhoto(){
     GoGallery()
 }
 
+
+function Redact(){
+    alert("KEK")
+}

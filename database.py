@@ -383,7 +383,7 @@ def ChangePreview(id, img):
 
 
 
-            
+
 # GetSoundsByView("Капибара")
 # GetVideoByView("Котик")
 # GetAllFavoritePhotos()
