@@ -4,6 +4,7 @@ from tkinter import filedialog
 from database import *
 import sys
 import io
+from edit_photo import photo_edit_function
 
 
 # outfile = open("logfile.txt", "wt")
@@ -132,7 +133,7 @@ def get_photo():
     absolute_path = data[1]
     data[1] = absolute_path_to_relative_path(data[1])
     data.append(absolute_path)
-    # print(data[1])
+    # print('get photo', data[1])
     return data
 
 
@@ -273,6 +274,16 @@ def add_view_to_family(vidName, familyId):
 def change_preview(id, img):
     print(img)
     ChangePreview(id, img)
+
+
+
+
+
+
+photo_edit_function()
+delete_temp_dir()
+
+
 
 
 

@@ -144,5 +144,5 @@ function DeletePhoto(){
 
 
 function Redact(){
-    alert("KEK")
+    GoPhotoRedactorPage()
 }

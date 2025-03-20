@@ -31,3 +31,8 @@ function GoVideoPage(){
 function GoSoundPage(){
     window.location.replace("sound.html")
 }
+
+function GoPhotoRedactorPage(){
+    window.location.replace("photo_redactor.html")
+}
+
