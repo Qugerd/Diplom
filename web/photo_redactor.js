@@ -1,3 +1,10 @@
+document.getElementById('crop-btn').addEventListener("click", function(){
+    const image = document.getElementById('image')
+    const cropper = new Cropper(image, {
+        aspectRatio:0,
+    });
+})
+
 eel.get_photo()(async function(data){
     console.log(data)
 
@@ -17,6 +24,8 @@ async function Rotate(){
     image.setAttribute('src', rotated_image)
     photo_path = rotated_image
 }
+
+
 
 // async function Get_photo_path(){
 

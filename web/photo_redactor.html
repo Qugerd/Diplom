@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Редактировать фотографию</title>
-    <script src="eel.js"></script>
-    <script src="navigation.js"></script>
-    <link rel="stylesheet" href="photo_redactor.css">
     <link rel="stylesheet" href="text_style.css">
+    <link rel="stylesheet" href="photo_redactor.css">
+    <link rel="stylesheet" href="cropperjs/cropper.css">
 </head>
 <body>
     <div class="container">
 
         <div class="container_image">
-            <img id="image" src="assets/duc.jpg" alt="">
+            <img id="image" src="temp/a9b32d074b65122b014c05fd7afb3fe5.jpg" alt="">
         </div>
 
         <div class="container-btn">
-            <button onclick="Get_photo_path()">обрезать</button>
+            <button id="crop-btn" onclick="CropPhoto()">обрезать</button>
             <button onclick="Rotate()">повернуть</button>
             <button>изменить размер</button>
-            <button>обрезать</button>
-
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+              </div>
             <button>яркость</button>
             <button>контраст</button>
             <button>насыщенность</button>
@@ -32,6 +32,9 @@
 
         </div>
     </div>
+    <script src="cropperjs/cropper.js"></script>
     <script src="photo_redactor.js"></script>
+    <script src="eel.js"></script>
+    <script src="navigation.js"></script>
 </body>
 </html>
