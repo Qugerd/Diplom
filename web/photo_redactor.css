@@ -1,35 +1,144 @@
-body{
-    margin: 0px;
-}
+html, body {
+    height: 100%;
+    margin: 0;
+  }
 
 .container{
     width: auto;
-
+    height: 100%;
     display: flex;
-    flex-direction: column; 
+    flex-direction: row; 
     /* background-color: aqua; */
 
-    justify-content: center;
-    align-items: center;
+
 }
+
+.conteiner_redact{
+    width: 400px;
+
+    display: flex;
+    flex-direction: column;
+
+    background-color:#7e838e;
+
+    padding: 20px 30px 0px 30px;
+}
+
+.header_redact{
+    margin-right: 0px;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: "Gill Sans", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: beige;
+    text-align: center;
+    text-shadow: 
+    0 0 1px black,
+    0 0 1px black;
+    padding: 20px;
+    border-bottom: 2px rgb(189, 187, 187) solid;
+
+}
+
+.slidecontainer{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.slider{
+    width: 100%;
+    margin: 0px 10px 0px 20px;
+}
+
+input[type="range"]{
+    margin-top: 10px;
+    appearance: none;
+    border-radius: 50px;
+    height: 5px;
+}
+
+.reset_btn{
+    margin-top: 3px;
+    background-image: url(assets/icons/reset.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+
+    cursor: pointer;
+}
+
+.reset_btn:hover{
+    background-color: rgba(2, 2, 2, 0.137);
+}
+
+.label{
+    padding: 0px 20px;
+
+    color: rgb(241, 241, 241);
+    font-size: 16px;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 500;
+    text-align: left;
+    text-shadow: 
+    0 0 1px black,
+    0 0 1px black;
+}
+
+button{
+    height: 40px;
+    margin-bottom: 5px;
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    color: rgb(241, 241, 241);
+    font-size: 16px;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 500;
+    text-align: left;
+    text-shadow: 
+    0 0 1px black,
+    0 0 1px black;
+    border: 0;
+
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgba(243, 243, 243, 0.13);
+}
+
+span{
+    margin-right: 15px;
+}
+
+
 
 .container_image{
-    
-    margin: 50px 0px 50px 0px;
+    height: auto;
+    width: 100%;
+    margin: 0px 0px 0px 0px;
+
+    display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: beige;
+
+    border: 1px black solid;
 }
 
-.container_box{
-    
-}
 
-#image{
+
+#canvas{
     /* width: 995px;
     height: 560px; */
-    max-width: 995px;
     max-height: 560px;
     background-color: azure;
 
-    object-fit: contain;
+
 }

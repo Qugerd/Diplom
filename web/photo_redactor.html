@@ -7,34 +7,54 @@
     <link rel="stylesheet" href="text_style.css">
     <link rel="stylesheet" href="photo_redactor.css">
     <link rel="stylesheet" href="cropperjs/cropper.css">
+    <script src="eel.js"></script>
 </head>
 <body>
     <div class="container">
 
-        <div class="container_image">
-            <img id="image" src="temp/a9b32d074b65122b014c05fd7afb3fe5.jpg" alt="">
-        </div>
-
-        <div class="container-btn">
-            <button id="crop-btn" onclick="CropPhoto()">обрезать</button>
-            <button onclick="Rotate()">повернуть</button>
-            <button>изменить размер</button>
+        <div class="conteiner_redact">
+            <span class="header_redact">Инструменты для редактирвоания</span>
+            <button id="crop-btn" onclick="CropPhoto()"><span></span>обрезать</button>
+            <button onclick="Rotate()"><span></span>повернуть</button>
+            <button><span></span>изменить размер</button>
+            <div class="label">яркость</div>
             <div class="slidecontainer">
-                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-              </div>
-            <button>яркость</button>
-            <button>контраст</button>
-            <button>насыщенность</button>
-            <button>четкость</button>
-            <button>цветовая температура</button>
-            <button>оттенок</button>
-
+                <input id="slider_brigthness" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeBrithness()">
+                <div id="reset_brigthness" class="reset_btn" onclick="ResetBrightness()"></div>
+            </div>
+            <div class="label">контраст</div>
+            <div class="slidecontainer">
+                <input id="slider_contrast" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeContrast()">
+                <div id="reset_contrast" class="reset_btn"></div>
+            </div>
+            <div class="label">насыщенность</div>
+            <div class="slidecontainer">
+                <input id="slider_saturate" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeSaturation()">
+                <div id="reset_saturate" class="reset_btn"></div>
+            </div>
+            <div class="label">оттенки</div>
+            <div class="slidecontainer">
+                <input id="slider_hue" type="range" min="-359" max="359" value="0" class="slider" oninput="ChangeHue()">
+                <div id="reset_hue" class="reset_btn"></div>
+            </div>
+            <div class="label">оттенки серого</div>
+            <div class="slidecontainer">
+                <input id="slider_gray" type="range" min="0" max="100" value="0" class="slider" oninput="ChangeGray()">
+                <div id="reset_gray" class="reset_btn"></div>
+            </div>
+            <button onclick="GoPhotoPage()">назад</button>
 
         </div>
+
+
+        <div class="container_image">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        
     </div>
     <script src="cropperjs/cropper.js"></script>
     <script src="photo_redactor.js"></script>
-    <script src="eel.js"></script>
     <script src="navigation.js"></script>
 </body>
 </html>
