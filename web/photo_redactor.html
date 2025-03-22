@@ -13,34 +13,65 @@
     <div class="container">
 
         <div class="conteiner_redact">
-            <span class="header_redact">Инструменты для редактирвоания</span>
-            <button id="crop-btn" onclick="CropPhoto()"><span></span>обрезать</button>
-            <button onclick="Rotate()"><span></span>повернуть</button>
-            <button><span></span>изменить размер</button>
-            <div class="label">яркость</div>
+            <div class="container_header">
+                <span class="header_redact">Инструменты для редактирвоания</span>
+            </div>
+            
+            <button id="crop-btn" onclick="CropPhoto()">
+                <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 480"><path fill="currentColor" d="M341 304V133H171V91h170q18 0 30.5 12.5T384 133v171h-43zm-213 43h341v42h-85v86h-43v-86H128q-18 0-30.5-12.5T85 347V133H0V91h85V5h43v342z"/></svg></div>
+                <div class="btn_name">обрезать</div>
+            </button>
+            <button onclick="Rotate()">
+                <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.25 5.25h3m0 3.5c0 2.5-2.798 5.5-6.25 5.5a6.25 6.25 0 1 1 0-12.5c3.75 0 6.25 3.5 6.25 3.5v-3.5"/></svg></div>
+                <div class="btn_name">повернуть</div>
+            </button>
+            <!-- <button><span></span>изменить размер</button> -->
+            <div class="label" >
+                <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 107q-62 0-105.5 43.5T107 256t43.5 105.5T256 405t105.5-43.5T405 256t-43.5-105.5T256 107zm0 256q-45 0-76-31t-31-76t31-76t76-31t76 31t31 76t-31 76t-76 31zm21-299V21q0-21-21-21t-21 21v43q0 21 21 21t21-21zM85 256q0-21-21-21H21q-21 0-21 21t21 21h43q21 0 21-21zm406-21h-43q-21 0-21 21t21 21h43q21 0 21-21t-21-21zM256 427q-21 0-21 21v43q0 21 21 21t21-21v-43q0-21-21-21zm164-305l22-22q14-14 0-30q-16-14-30 0l-22 22q-14 14 0 30q8 6 15 6q9 0 15-6zm-313 6q7 0 15-6q14-16 0-30l-22-22q-14-14-30 0q-14 16 0 30l22 22q6 6 15 6zm313 262q-14-14-30 0q-14 16 0 30l22 22q6 6 15 6q7 0 15-6q14-16 0-30zm-328 0l-22 22q-14 14 0 30q8 6 15 6q9 0 15-6l22-22q14-14 0-30q-16-14-30 0z"/></svg>
+                яркость</div>
             <div class="slidecontainer">
                 <input id="slider_brigthness" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeBrithness()">
-                <div id="reset_brigthness" class="reset_btn" onclick="ResetBrightness()"></div>
+                <div id="reset_brigthness" class="reset_btn" onclick="ResetBrightness()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
-            <div class="label">контраст</div>
+
+
+
+            <div class="label">
+                <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="currentColor" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 13V2a6 6 0 1 1 0 12z"/></svg>
+                контраст</div>
             <div class="slidecontainer">
                 <input id="slider_contrast" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeContrast()">
-                <div id="reset_contrast" class="reset_btn"></div>
+                <div id="reset_contrast" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
-            <div class="label">насыщенность</div>
+
+
+
+            <div class="label">
+                <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 20 20"><path fill="currentColor" d="M15.993 1.385a1.87 1.87 0 0 1 2.623 2.622l-4.03 5.27a12.749 12.749 0 0 1-4.237 3.562a4.508 4.508 0 0 0-3.188-3.188a12.75 12.75 0 0 1 3.562-4.236l5.27-4.03ZM6 11a3 3 0 0 0-3 3a.5.5 0 0 1-.72.45a.75.75 0 0 0-1.035.931A4.001 4.001 0 0 0 9 14.004V14a3.01 3.01 0 0 0-1.66-2.685A2.99 2.99 0 0 0 6 11Z"/></svg>
+                насыщенность</div>
             <div class="slidecontainer">
                 <input id="slider_saturate" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeSaturation()">
-                <div id="reset_saturate" class="reset_btn"></div>
+                <div id="reset_saturate" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
-            <div class="label">оттенки</div>
+
+
+
+            <div class="label">
+                <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="M24 40.944A11.955 11.955 0 0 0 32 44c6.627 0 12-5.373 12-12c0-5.591-3.824-10.29-9-11.622"/><path d="M13 20.378C7.824 21.71 4 26.408 4 32c0 6.627 5.373 12 12 12s12-5.373 12-12c0-1.55-.294-3.03-.828-4.39"/><path d="M24 28c6.627 0 12-5.373 12-12S30.627 4 24 4S12 9.373 12 16s5.373 12 12 12Z"/></g></svg>
+                оттенки</div>
             <div class="slidecontainer">
                 <input id="slider_hue" type="range" min="-359" max="359" value="0" class="slider" oninput="ChangeHue()">
-                <div id="reset_hue" class="reset_btn"></div>
+                <div id="reset_hue" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
-            <div class="label">оттенки серого</div>
+
+
+
+            <div class="label">
+                <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 48 48"><mask id="ipSColorFilter0"><g fill="none" stroke="#fff" stroke-linejoin="round" stroke-width="4"><path d="M24 40.944A11.955 11.955 0 0 0 32 44c6.627 0 12-5.373 12-12c0-5.591-3.824-10.29-9-11.622"/><path d="M13 20.378C7.824 21.71 4 26.408 4 32c0 6.627 5.373 12 12 12s12-5.373 12-12c0-1.55-.294-3.03-.828-4.39"/><path fill="#fff" d="M24 28c6.627 0 12-5.373 12-12S30.627 4 24 4S12 9.373 12 16s5.373 12 12 12Z"/></g></mask><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSColorFilter0)"/></svg>
+                оттенки серого</div>
             <div class="slidecontainer">
                 <input id="slider_gray" type="range" min="0" max="100" value="0" class="slider" oninput="ChangeGray()">
-                <div id="reset_gray" class="reset_btn"></div>
+                <div id="reset_gray" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
             <button onclick="GoPhotoPage()">назад</button>
 

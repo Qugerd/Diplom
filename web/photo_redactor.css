@@ -19,10 +19,16 @@ html, body {
     display: flex;
     flex-direction: column;
 
-    background-color:#7e838e;
+    background-color:#2B2C2F;
 
     padding: 20px 30px 0px 30px;
 }
+
+.container_header{
+    display: flex;
+    flex-direction: row;
+}
+
 
 .header_redact{
     margin-right: 0px;
@@ -61,9 +67,15 @@ input[type="range"]{
 
 .reset_btn{
     margin-top: 3px;
-    background-image: url(assets/icons/reset.svg);
-    background-repeat: no-repeat;
-    background-position: center;
+    background-color: white; /* Цвет, который вы хотите применить */
+    mask-image: url(assets/icons/reset.svg);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-image: url(assets/icons/reset.svg);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+
+    color: white;
 
     width: 20px;
     height: 20px;
@@ -73,11 +85,18 @@ input[type="range"]{
 }
 
 .reset_btn:hover{
-    background-color: rgba(2, 2, 2, 0.137);
+    background-color: rgba(255, 255, 255, 0.137);
 }
 
 .label{
-    padding: 0px 20px;
+    padding: 0px 5px;
+
+    height: 30px;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
 
     color: rgb(241, 241, 241);
     font-size: 16px;
@@ -89,12 +108,25 @@ input[type="range"]{
     0 0 1px black;
 }
 
+.label_icon{
+    height: 20px;
+    width: 20px;
+
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 button{
     height: 40px;
     margin-bottom: 5px;
     border-radius: 7px;
 
     background-color: transparent;
+
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
 
     color: rgb(241, 241, 241);
     font-size: 16px;
@@ -112,6 +144,14 @@ button:hover{
     background-color: rgba(243, 243, 243, 0.13);
 }
 
+.icn_span{
+    height: 20px;
+    width: 20px;
+
+    margin-left: 8px;
+    margin-right: 10px;
+}
+
 span{
     margin-right: 15px;
 }
@@ -127,18 +167,15 @@ span{
     justify-content: center;
     align-items: center;
 
-    background-color: beige;
+    background-color: rgb(230, 230, 229);
+    
 
-    border: 1px black solid;
+    border: 7px #2B2C2F solid;
 }
 
 
 
 #canvas{
-    /* width: 995px;
-    height: 560px; */
+
     max-height: 560px;
-    background-color: azure;
-
-
 }
