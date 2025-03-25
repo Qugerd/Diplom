@@ -16,7 +16,7 @@
             <div class="container_header">
                 <span class="header_redact">Инструменты для редактирвоания</span>
             </div>
-            
+
             <button id="crop-btn" onclick="CropPhoto()">
                 <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 480"><path fill="currentColor" d="M341 304V133H171V91h170q18 0 30.5 12.5T384 133v171h-43zm-213 43h341v42h-85v86h-43v-86H128q-18 0-30.5-12.5T85 347V133H0V91h85V5h43v342z"/></svg></div>
                 <div class="btn_name">обрезать</div>
@@ -41,7 +41,7 @@
                 контраст</div>
             <div class="slidecontainer">
                 <input id="slider_contrast" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeContrast()">
-                <div id="reset_contrast" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
+                <div id="reset_contrast" class="reset_btn" onclick="ResetContrast()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
 
 
@@ -51,7 +51,7 @@
                 насыщенность</div>
             <div class="slidecontainer">
                 <input id="slider_saturate" type="range" min="0" max="200" value="100" class="slider" oninput="ChangeSaturation()">
-                <div id="reset_saturate" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
+                <div id="reset_saturate" class="reset_btn" onclick="ResetSaturation()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
 
 
@@ -61,7 +61,7 @@
                 оттенки</div>
             <div class="slidecontainer">
                 <input id="slider_hue" type="range" min="-359" max="359" value="0" class="slider" oninput="ChangeHue()">
-                <div id="reset_hue" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
+                <div id="reset_hue" class="reset_btn" onclick="ResetHue()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
 
 
@@ -71,7 +71,7 @@
                 оттенки серого</div>
             <div class="slidecontainer">
                 <input id="slider_gray" type="range" min="0" max="100" value="0" class="slider" oninput="ChangeGray()">
-                <div id="reset_gray" class="reset_btn"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
+                <div id="reset_gray" class="reset_btn" onclick="ResetGray()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
             <button onclick="GoPhotoPage()">назад</button>
 

@@ -97,7 +97,33 @@ function ResetBrightness(){
     DrawImage()
 }
 
+function ResetContrast(){
+    var slider_contrast = document.getElementById('slider_contrast')
+    slider_contrast.value = 100
+    contrast = 100
+    DrawImage()
+}
 
+function ResetSaturation(){
+    var slider_saturation = document.getElementById('slider_saturate')
+    slider_saturation.value = 100
+    saturation = 100
+    DrawImage()
+}
+
+function ResetHue(){
+    var slider_hue = document.getElementById('slider_hue')
+    slider_hue.value = 0
+    hue = 0
+    DrawImage()
+}
+
+function ResetGray(){
+    var slider_gray = document.getElementById('slider_gray')
+    slider_gray.value = 0
+    gray = 0
+    DrawImage()
+}
 
 
 
