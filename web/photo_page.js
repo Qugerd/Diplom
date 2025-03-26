@@ -37,8 +37,8 @@ eel.get_photo()(async function(data){
 
     const image = document.getElementById("image")
     image.setAttribute('src', photo_path)
-    image.setAttribute('width', '1200')
-    image.setAttribute('height', '705')
+    // image.setAttribute('width', '1200')
+    // image.setAttribute('height', '705')
 
 
     document.getElementById('notes_text').innerHTML = note

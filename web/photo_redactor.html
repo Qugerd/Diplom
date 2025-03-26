@@ -14,17 +14,30 @@
 
         <div class="conteiner_redact">
             <div class="container_header">
-                <span class="header_redact">Инструменты для редактирвоания</span>
+                <span class="header_redact">Инструменты для редактирования</span>
+            </div>
+            
+            <div class="btn_conteiner">
+                <button id="crop-btn">
+                    <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 480"><path fill="currentColor" d="M341 304V133H171V91h170q18 0 30.5 12.5T384 133v171h-43zm-213 43h341v42h-85v86h-43v-86H128q-18 0-30.5-12.5T85 347V133H0V91h85V5h43v342z"/></svg></div>
+                    <div class="btn_name">обрезать</div>
+                </button>
+                <div class="reset_btn" onclick="ResetCrop()">
+                </div>
             </div>
 
-            <button id="crop-btn" onclick="CropPhoto()">
-                <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 480"><path fill="currentColor" d="M341 304V133H171V91h170q18 0 30.5 12.5T384 133v171h-43zm-213 43h341v42h-85v86h-43v-86H128q-18 0-30.5-12.5T85 347V133H0V91h85V5h43v342z"/></svg></div>
-                <div class="btn_name">обрезать</div>
-            </button>
-            <button onclick="Rotate()">
-                <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.25 5.25h3m0 3.5c0 2.5-2.798 5.5-6.25 5.5a6.25 6.25 0 1 1 0-12.5c3.75 0 6.25 3.5 6.25 3.5v-3.5"/></svg></div>
-                <div class="btn_name">повернуть</div>
-            </button>
+
+
+            <div class="btn_conteiner">
+                <button onclick="Rotate()">
+                    <div class="icn_span"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.25 5.25h3m0 3.5c0 2.5-2.798 5.5-6.25 5.5a6.25 6.25 0 1 1 0-12.5c3.75 0 6.25 3.5 6.25 3.5v-3.5"/></svg></div>
+                    <div class="btn_name">повернуть</div>
+                </button>
+                <div class="reset_btn" onclick="ResetRotate()"></div>
+            </div>
+
+
+
             <!-- <button><span></span>изменить размер</button> -->
             <div class="label" >
                 <svg class="label_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 107q-62 0-105.5 43.5T107 256t43.5 105.5T256 405t105.5-43.5T405 256t-43.5-105.5T256 107zm0 256q-45 0-76-31t-31-76t31-76t76-31t76 31t31 76t-31 76t-76 31zm21-299V21q0-21-21-21t-21 21v43q0 21 21 21t21-21zM85 256q0-21-21-21H21q-21 0-21 21t21 21h43q21 0 21-21zm406-21h-43q-21 0-21 21t21 21h43q21 0 21-21t-21-21zM256 427q-21 0-21 21v43q0 21 21 21t21-21v-43q0-21-21-21zm164-305l22-22q14-14 0-30q-16-14-30 0l-22 22q-14 14 0 30q8 6 15 6q9 0 15-6zm-313 6q7 0 15-6q14-16 0-30l-22-22q-14-14-30 0q-14 16 0 30l22 22q6 6 15 6zm313 262q-14-14-30 0q-14 16 0 30l22 22q6 6 15 6q7 0 15-6q14-16 0-30zm-328 0l-22 22q-14 14 0 30q8 6 15 6q9 0 15-6l22-22q14-14 0-30q-16-14-30 0z"/></svg>
@@ -73,13 +86,42 @@
                 <input id="slider_gray" type="range" min="0" max="100" value="0" class="slider" oninput="ChangeGray()">
                 <div id="reset_gray" class="reset_btn" onclick="ResetGray()"><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8"/></svg></div>
             </div>
-            <button onclick="GoPhotoPage()">назад</button>
+
+
+            <div class="save_conteiner" onclick="ResetAllChanges()">
+                <svg class="icn_span" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M13 15.75v-1.5h4v1.5zM14.5 21v-1.25H13v-1.5h1.5V17H16v4zm2.5-1.25v-1.5h4v1.5zM18 17v-4h1.5v1.25H21v1.5h-1.5V17zm2.775-7H18.7q-.65-2.2-2.475-3.6T12 5Q9.075 5 7.037 7.038T5 12q0 1.8.813 3.3T8 17.75V15h2v6H4v-2h2.35Q4.8 17.75 3.9 15.938T3 12q0-1.875.713-3.512t1.924-2.85t2.85-1.925T12 3q3.225 0 5.663 1.988T20.775 10"/></svg>
+                <div class="btn_reset_all_changes">
+                    сбросить всё
+                </div>
+            </div>
+
+
+            <div class="save_conteiner" onclick="SaveImage()">
+                <svg class="icn_span" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><g fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></g></svg>
+                <div class="btn_save_image" >
+                    сохранить
+                </div>
+            </div>
+
+
+            <div class="save_conteiner btn_back" onclick="GoPhotoPage()">
+                <svg class="icn_span" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m4 10l-.707.707L2.586 10l.707-.707zm17 8a1 1 0 1 1-2 0zM8.293 15.707l-5-5l1.414-1.414l5 5zm-5-6.414l5-5l1.414 1.414l-5 5zM4 9h10v2H4zm17 7v2h-2v-2zm-7-7a7 7 0 0 1 7 7h-2a5 5 0 0 0-5-5z"/></svg>
+                <div class="btn_save_image">
+                    назад
+                </div>
+            </div>
 
         </div>
 
 
         <div class="container_image">
-            <canvas id="canvas"></canvas>
+            <div id="canvas_container" class="canvas_container">
+                <canvas id="canvas"></canvas>
+                <div id="container_crop_btns" class="crop_btns">
+                    <button id='crop_btn' class="btn_crop" onclick="CropImage()">обрезать</button>
+                    <button class="btn_crop_cancel" onclick="CropCancel()">отменить</button>
+                </div>
+            </div>
         </div>
 
         

@@ -180,8 +180,7 @@ hr{
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
     border-radius: 5px;
 
-    width: 960px;
-    height: 580px;
+    max-height: 640px;
 }
 
 
@@ -325,8 +324,8 @@ hr{
 
     }
     #image{
-        width: 640px;
-        height: 360px;
+        /* width: 640px; */
+        max-height: 580px;
     }
 
 

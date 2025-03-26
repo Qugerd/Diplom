@@ -2,52 +2,196 @@ var photo_path = ''
 var canvas = document.getElementById('canvas')
 var ctx = canvas.getContext('2d')
 var img = new Image()
+let cropper;
 
 
+
+
+// ПАРАМЕТРЫ ИЗОЮРАЖЕНИЯ
+let scaledWidth = 0;
+let scaledHeight = 0;
 let rotation = 0; // Текущий угол поворота
 let brightness = 100; // Текущая яркость
 let contrast = 100; // Текущий контраст
 let saturation = 100; // Текущий контраст
 let sharpness = 0; // Текущий контраст
 let hue = 0; // Текущий hue
-let gray = 0; // Текущий hue
+let gray = 0; // Текущий серый
+
+
+// ПАРАМЕТРЫ ДЛЯ СБРОСА ОБРЕЗКИ ФОТО
+let originalImage = new Image();
+let originalHeight;
+let originalWidth;
 
 
 
-// document.getElementById('crop-btn').addEventListener("click", function(){
-//     const image = document.getElementById('image')
-//     const cropper = new Cropper(image, {
-//         aspectRatio:0,
-//     });
-// })
-
-eel.get_photo()(async function(data){
-    console.log(data)
-
-    photo_path = data[1]
-    img.src = photo_path
+let displayWidth = 0;  // Ширина для отображения
+let displayHeight = 0; // Высота для отображения
 
 
 
+document.getElementById('crop-btn').addEventListener("click", function(){
+    const container_crop_btns = document.getElementById('container_crop_btns')
+    container_crop_btns.style.display = "flex"
 
-    img.onload = function(){
+    const image = document.getElementById('canvas')
 
-        console.log(img.width)
-        console.log(img.height)
+    const canvas_container = document.getElementById('canvas_container')
+    canvas_container.style.height = image.height + "px"
+    canvas_container.style.width = image.width + "px"
 
-        canvas.width = img.width
-        canvas.height = img.height
-
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-    }
-
+    cropper = new Cropper(image, {
+        aspectRatio:0,
+        viewMode: 0
+    });
 })
 
 
+function CropImage() {
+    // Создаем временный canvas с оригинальным изображением (без фильтров)
+    const originalCanvas = document.createElement('canvas');
+    const originalCtx = originalCanvas.getContext('2d');
+    
+    // Устанавливаем размеры с учетом поворота
+    if (rotation % 180 === 90) {
+        originalCanvas.width = canvas.height;
+        originalCanvas.height = canvas.width;
+    } else {
+        originalCanvas.width = canvas.width;
+        originalCanvas.height = canvas.height;
+    }
+    
+    // Рисуем оригинальное изображение без фильтров
+    originalCtx.save();
+    originalCtx.translate(originalCanvas.width / 2, originalCanvas.height / 2);
+    originalCtx.rotate((rotation * Math.PI) / 180);
+    originalCtx.drawImage(
+        img,
+        -img.width / 2,
+        -img.height / 2,
+        img.width,
+        img.height
+    );
+    originalCtx.restore();
+    
+    // Применяем обрезку к оригинальному изображению
+    const croppedImage = cropper.getCroppedCanvas({
+        imageSmoothingEnabled: false
+    }).toDataURL("image/png");
+    
+    // Создаем новое изображение из обрезанного canvas
+    img = new Image();
+    img.src = croppedImage;
+    img.onload = function() {
+        // Обновляем размеры (без сброса параметров)
+        originalWidth = img.width;
+        originalHeight = img.height;
+        
+        const maxHeight = 580;
+        displayWidth = originalWidth;
+        displayHeight = originalHeight;
+        
+        if (displayHeight > maxHeight) {
+            const scale = maxHeight / displayHeight;
+            displayWidth = originalWidth * scale;
+            displayHeight = maxHeight;
+        }
+        
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+        
+        const canvas_container = document.getElementById('canvas_container');
+        canvas_container.style.width = displayWidth + 'px';
+        canvas_container.style.height = displayHeight + 'px';
+        
+        // Рисуем с текущими параметрами фильтров (они не сбрасываются)
+        DrawImage();
+        
+        cropper.destroy();
+        HideCropBtns();
+    };
+}
 
 
+function CropCancel(){
+    cropper.destroy()
+    HideCropBtns()
+}
+
+function HideCropBtns(){
+    const container_crop_btns = document.getElementById('container_crop_btns')
+    container_crop_btns.style.display = "none"
+}
+
+
+
+eel.get_photo()(async function(data){
+    photo_path = data[1];
+    img.src = photo_path;
+    originalImage.src = img.src;
+
+    img.onload = function(){
+        const maxHeight = 580;
+
+        // Сохраняем оригинальные размеры
+        originalWidth = img.width;
+        originalHeight = img.height;
+
+        // Рассчитываем масштабированные размеры
+        displayWidth = originalWidth;
+        displayHeight = originalHeight;
+
+        if (displayHeight > maxHeight) {
+            const scale = maxHeight / displayHeight;
+            displayWidth = originalWidth * scale;
+            displayHeight = maxHeight;
+        }
+
+        // Устанавливаем размеры canvas
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+
+        // Рисуем изображение
+        DrawImage();
+    }
+});
+
+
+
+
+
+
+// ИЗМЕНЕНИЕ ПАРАМЕТРОВ
 function Rotate(){
-    rotation = (rotation + 90) % 360
+    // Сохраняем текущие размеры изображения
+    const imgWidth = displayWidth;
+    const imgHeight = displayHeight;
+    
+    // Обновляем угол поворота
+    rotation = (rotation + 90) % 360;
+    
+    // Определяем, нужно ли менять ориентацию canvas
+    const shouldSwapDimensions = rotation % 180 === 90;
+    
+    if (shouldSwapDimensions) {
+        // Меняем размеры canvas местами
+        [canvas.width, canvas.height] = [imgHeight, imgWidth];
+        
+        // Обновляем размеры контейнера
+        const canvas_container = document.getElementById('canvas_container');
+        canvas_container.style.width = `${imgHeight}px`;
+        canvas_container.style.height = `${imgWidth}px`;
+    } else {
+        // Возвращаем оригинальные размеры
+        canvas.width = imgWidth;
+        canvas.height = imgHeight;
+        
+        const canvas_container = document.getElementById('canvas_container');
+        canvas_container.style.width = `${imgWidth}px`;
+        canvas_container.style.height = `${imgHeight}px`;
+    }
+
     DrawImage()
 }
 
@@ -89,6 +233,63 @@ function ChangeGray(){
 }
 
 
+function SaveImage(){
+    const link = document.createElement('a');
+    link.download = 'edited-image.png';
+    link.href = canvas.toDataURL();
+    link.click();
+}
+
+
+
+
+// СБРОС НАСТРОЕК
+function ResetCrop(){
+    // Создаем новое изображение из оригинального источника
+    const restoredImg = new Image();
+    restoredImg.src = originalImage.src;
+    
+    restoredImg.onload = function() {
+        // Восстанавливаем оригинальные размеры
+        originalWidth = restoredImg.width;
+        originalHeight = restoredImg.height;
+        
+        // Пересчитываем масштабированные размеры для отображения
+        const maxHeight = 580;
+        displayWidth = originalWidth;
+        displayHeight = originalHeight;
+        
+        if (displayHeight > maxHeight) {
+            const scale = maxHeight / displayHeight;
+            displayWidth = originalWidth * scale;
+            displayHeight = maxHeight;
+        }
+        
+        // Обновляем текущее изображение
+        img = restoredImg;
+        canvas.width = displayWidth;
+        canvas.height = displayHeight;
+        
+        // Обновляем контейнер
+        const canvas_container = document.getElementById('canvas_container');
+        canvas_container.style.height = displayHeight + "px";
+        canvas_container.style.width = displayWidth + "px";
+        
+        // Перерисовываем
+        DrawImage();
+    };
+}
+
+
+function ResetRotate(){
+    rotation = 0
+    canvas.width = displayWidth;
+    canvas.height = displayHeight;
+    const canvas_container = document.getElementById('canvas_container');
+    canvas_container.style.height = displayHeight + "px";
+    canvas_container.style.width = displayWidth + "px";
+    DrawImage()
+}
 
 function ResetBrightness(){
     var slider_brigthness = document.getElementById('slider_brigthness')
@@ -125,6 +326,17 @@ function ResetGray(){
     DrawImage()
 }
 
+function ResetAllChanges(){
+    ResetCrop()
+    ResetRotate()
+    ResetBrightness()
+    ResetContrast()
+    ResetSaturation()
+    ResetHue()
+    ResetGray()
+}
+
+
 
 
 
@@ -132,35 +344,25 @@ function ResetGray(){
 
 function DrawImage(){
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    // Сохраняем текущее состояние контекста
     ctx.save();
 
-    // Перемещаем начало координат в центр canvas
+    // Рассчитываем соотношение для масштабирования
+    const scaleX = displayWidth / originalWidth;
+    const scaleY = displayHeight / originalHeight;
+    const scale = Math.min(scaleX, scaleY);
+
     ctx.translate(canvas.width / 2, canvas.height / 2);
-
-    // Поворачиваем canvas
     ctx.rotate((rotation * Math.PI) / 180);
+    ctx.filter = `grayscale(${gray}%) hue-rotate(${hue}deg) brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
 
-    // фильтр
-    ctx.filter = `grayscale(${gray}%) hue-rotate(${hue}deg) brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%`;
+    // Рисуем с учетом масштаба
+    ctx.drawImage(
+        img, 
+        -originalWidth * scale / 2, 
+        -originalHeight * scale / 2, 
+        originalWidth * scale, 
+        originalHeight * scale
+    );
 
-
-    // Рисуем изображение с учетом поворота
-    ctx.drawImage(img, -img.width / 2, -img.height / 2);
-
-    // Восстанавливаем состояние контекста
     ctx.restore();
 }
-
-// async function Get_photo_path(){
-
-//     const photo_path = await eel.get_photo_path()()
-
-//     const image = document.getElementById("image")
-//     image.setAttribute('src', photo_path)
-//     image.setAttribute('width', '1200')
-//     image.setAttribute('height', '705')
-
-//     alert(photo_path)
-// }

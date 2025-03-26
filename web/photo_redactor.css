@@ -47,6 +47,20 @@ html, body {
 
 }
 
+
+.btn_conteiner{
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+}
+
+.btn_conteiner button{
+    width: 90%;
+    margin-right: 10px;
+}
+
+
+
 .slidecontainer{
     margin-bottom: 10px;
     display: flex;
@@ -152,9 +166,6 @@ button:hover{
     margin-right: 10px;
 }
 
-span{
-    margin-right: 15px;
-}
 
 
 
@@ -164,6 +175,7 @@ span{
     margin: 0px 0px 0px 0px;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -173,9 +185,57 @@ span{
     border: 7px #2B2C2F solid;
 }
 
+.canvas_container{
+
+}
 
 
 #canvas{
 
-    max-height: 560px;
+}
+
+.crop_btns{
+    margin-top: 20px;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.crop_btns button{
+    background-color: black;
+    margin: 0px;
+}
+
+.crop_btns button:hover{
+    background-color: rgba(20, 20, 20, 0.795);
+}
+
+
+.save_conteiner{
+    height: 40px;
+    padding-left: 7px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    font-size: 16px;
+    font-family: "Gill Sans", sans-serif;
+    font-weight: 500;
+    color: rgb(241, 241, 241);
+
+    border-radius: 7px;
+
+    cursor: pointer;
+}
+
+.save_conteiner:hover{
+    background-color: rgba(255, 255, 255, 0.137);
+}
+
+.btn_back{
+    margin-top: auto;
+    margin-bottom: 20px;
 }
