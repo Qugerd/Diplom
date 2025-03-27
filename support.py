@@ -4,7 +4,9 @@ import eel
 from datetime import datetime
 import tempfile
 import shutil
-
+import exifread
+from geopy.geocoders import Nominatim
+from datetime import datetime
 
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
@@ -85,18 +87,7 @@ def absolute_path_to_relative_path(file_url):
     print("Временная директория: ", temp_dir_path)
     print("Скопированный файл: ", dest_path)
     print("Относительный путь до файла: ", rel_path)
-    
-    # Удалить всю папку
-    # shutil.rmtree(temp_dir_path)
 
-    # # Удаляем все файлы из временной директории
-    # for file_name in os.listdir(temp_dir_path):
-    #     file_path = os.path.join(temp_dir_path, file_name)
-    #     try:
-    #         if os.path.isfile(file_path):
-    #             os.remove(file_path)
-    #     except Exception as e:
-    #         print(e)
 
     return rel_path
 
@@ -113,3 +104,90 @@ def delete_temp_dir():
                 os.remove(file_path)
         except Exception as e:
             print(e)
+
+
+def get_location(lat, lon):
+    geolocator = Nominatim(user_agent="geo_locator")
+    location = geolocator.reverse(f"{lat}, {lon}", language="ru")
+
+    address = location.raw.get("address", {})
+
+    city = (
+        address.get("city") 
+        or address.get("town") 
+        or address.get("village") 
+        or address.get("municipality")
+    )
+
+    return city
+
+
+def get_photo_exif(photo_path):
+    with open(photo_path, 'rb') as file:
+        tags = exifread.process_file(file)
+
+        data_and_time = tags['EXIF DateTimeOriginal'].values
+        data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
+
+        make = tags["Image Make"].values
+        model = tags["Image Model"].values
+
+        if 'GPS GPSLatitude' in tags:
+            lat = tags['GPS GPSLatitude'].values
+            lon = tags['GPS GPSLongitude'].values
+
+            lat_decimal = float(lat[0]) + float(lat[1])/60 + float(lat[2])/3600
+            lon_decimal = float(lon[0]) + float(lon[1])/60 + float(lon[2])/3600
+
+
+
+
+            # Учитываем направление (N/S, E/W)
+            if tags['GPS GPSLatitudeRef'].values != 'N':
+                lat_decimal = -lat_decimal
+            if tags['GPS GPSLongitudeRef'].values != 'E':
+                lon_decimal = -lon_decimal
+
+                
+
+            city = get_location(lat_decimal, lon_decimal)
+
+            return [data, lat_decimal, lon_decimal, city, model]
+
+        return [data, model]
+
+
+# print(get_photo_exif(r'web\assets\geo.jpg'))
+print(get_photo_exif(r'web\assets\no_geo.jpg'))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
