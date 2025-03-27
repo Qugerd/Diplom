@@ -178,7 +178,49 @@ async function OpenFileDialog(){
 
 
 async function OpenFilesDialog(){
-    fileDialogValue =  await eel.OpenFilesDialog()()
+    let exif = "empty"
+    let data = ""
+    let lat = ""
+    let lon = ""
+    let city = ""
+    let camera = ""
+
+    file_list =  await eel.OpenFilesDialog()()
+    fileDialogValue = file_list[0]
+    exif = file_list[1]
+
+    if(exif.length > 2){
+        data = exif[0]
+        lat = exif[1]
+        lon = exif[2]
+        city = exif[3]
+        camera = exif[4]
+
+        document.getElementById('datapicker').value = data
+        document.getElementById('place').value = city
+        document.getElementById('shirota').value = lat
+        document.getElementById('dolgota').value = lon
+        document.getElementById('camera').value = camera
+    
+        placeMark.geometry.setCoordinates([lat, lon]);
+        myMap.setCenter([lat, lon])
+    }
+    else if(exif.length <= 2){
+        data = exif[0]
+        camera = exif[1]
+
+        document.getElementById('datapicker').value = data
+        document.getElementById('camera').value = camera
+
+        console.log(data)
+        console.log(camera)
+    }
+
+
+
+
+
+
     if(fileDialogValue.length == 1){
         document.getElementById("files-value").innerHTML = "Файл выбран: " + fileDialogValue
         document.getElementById("files-value").style.color = "black"
@@ -340,7 +382,7 @@ async function ConfirmUploadPhoto(){
 // Перемещение маркера карты при
 // измении поля ввода координат
 var placeMark
-
+var myMap
 
 function editInput(){
     var shirotaValue = document.getElementById('shirota').value
@@ -353,7 +395,7 @@ function editInput(){
 // Яндекс карта
 function init(){
     // Создание карты.
-    var myMap = new ymaps.Map("map", {
+    myMap = new ymaps.Map("map", {
         center: [43., 131.90],
         controls: ['zoomControl'],
         suppressMapOpenBlock: true,

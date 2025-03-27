@@ -4,7 +4,7 @@ from tkinter import filedialog
 from database import *
 import sys
 import io
-from edit_photo import photo_edit_function
+
 
 
 # outfile = open("logfile.txt", "wt")
@@ -56,7 +56,10 @@ def OpenFilesDialog():
 
     file_path = filedialog.askopenfilenames(title='Выберите файлы')
     print(file_path)
-    return file_path
+
+    exif = get_photo_exif(file_path[0])
+
+    return file_path, exif
 
 
 @eel.expose
@@ -100,6 +103,7 @@ def fill_combobox_values():
 
 @eel.expose
 def put_data_to_db(data):
+    print(data)
     return InsertMetaDate(data)
 
 
@@ -280,7 +284,6 @@ def change_preview(id, img):
 
 
 
-photo_edit_function()
 delete_temp_dir()
 
 
