@@ -1,3 +1,25 @@
+html, body {
+    /* height: 100vh; */
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(338deg, #f0efef,#eeeeeeda,#ffffff);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+
 /* Контейнер навигации */
 .container{
     width: auto;
@@ -8,16 +30,50 @@
 
 .container-header{
     width: 100%;
-    height: 100px;
-    display: flex;
+    margin: .5vh 0;
+    padding-bottom: .4vh;
 
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
+
+    box-shadow: 0 3px 10px -2px rgba(0, 0, 0, 0.1);
 }
 
+.container_btn{
+    gap: 0.3rem;
+    padding: 0.1rem .8rem .3rem .8rem;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    
+    color: #333;
+
+    border-radius: 3px;
+    
+    cursor: pointer;
+}
+
+.container_btn:hover{
+    background-color: #f0f0f0;
+}
+
+.container_btn svg{
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.btn_navigate{
+    font-size: 1.2em;
+}
 
 /* Кнопки навигации */
-.container-header button{
+/* .container-header button{
     width: 200px;
     height: 50px;
     margin: 0 50px;
@@ -32,7 +88,7 @@
     cursor: pointer;
     box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
     transition: background-color 0.3s ease-in-out, color 0.4s;
-}
+} */
 
 .container-header button:hover{
     background-color: white;
@@ -51,11 +107,19 @@ hr{
 
 /* Блок с заголовками*/
 .conteiner-title{
-    position: relative;
-    margin: 0 60px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 140px;
     margin-top: 20px;
-    text-shadow: 0 0 10px rgba(12, 12, 12, 0.3);
+    /* text-shadow: 0 0 10px rgba(12, 12, 12, 0.3); */
 
+}
+
+.container_name_redact{
+    display: flex;
+    flex-direction: row;
+    /* align-items: center; */
+    gap: .2rem;
 }
 
 .conteiner-title-name{
@@ -63,8 +127,20 @@ hr{
     display: flex;
 }
 
+#name_ru{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    font-size: 2em;
+    font-weight: 500;
+    color: #303030;
+}
+
 #name_lat, #name_eng{
-    font-size:24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    font-size:1.5em;
+    color: #333;
+    font-weight: 400;
 }
 
 #editeTitle{
@@ -89,22 +165,37 @@ hr{
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
 /* Блок с картинкой */
 .conteiner-imgbox{
-    margin: 0 100px;
+
+
     margin-top: 20px;
 
     display: flex;
     align-items: center;
+    justify-content: center;
 
 }
 
 .conteiner-imgbox img{
-    width: 960px;
-    height: 540px;
+    width: auto;
+
+    height: 50vh;
     border: 1px solid;
     border-radius: 3px;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
+
 }
 
 
@@ -115,19 +206,46 @@ hr{
 
 /* Описательный блок */
 .conteiner-information{
-    margin: 0 60px;
+    margin: 0 10em;
     margin-bottom: 40px;
     margin-top: 40px;
 
-    background-color: rgba(0, 0, 0, 0.06);
-    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1em;
+    align-items: center;
+    /* background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 30px; */
 
-    padding: 20px;
+    /* padding: 20px; */
 }
 
 .conteiner-information-title{
     display: flex;
     text-align: center;
+    justify-content: center;
+
+    margin-bottom: 1rem;
+
+    font-size: 1.5em;
+    font-weight: 450;
+}
+
+.conteiner-information-group{
+    padding: 2em;
+    min-width: 800px;
+    max-width: 800px;
+
+    background-color: rgb(234, 234, 234);
+    border-radius: 20px;
+    border: solid 1px rgb(199, 199, 199);
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.text-information{
+    font-size: 1.2rem;
+    font-weight: 350;
 }
 
 .conteiner-information-title:hover .btnEdit{
@@ -261,47 +379,8 @@ hr{
 }
 
 
-
+/* 
 @media(max-width: 1366px){
-    /* Контейнер навигации */
-    .container{
-        min-width: 1200px;
-    }
 
-    .container-header button{
-        width: 150px;
-        height: 40px;
-        margin: 0 35px;
-
-        font: bold 13px arial;
-    }
-
-
-
-    /* Названия */
-    #name_lat, #name_eng{
-        font-size: 16px;
-    }
-
-    #editeTitle{
-        height: 14px;
-    }
-
-
-
-    /* Блок с картинкой */
-    .conteiner-imgbox img{
-        width: 640px;
-        height: 360px;
-    }
-
-
-
-
-
-    /* Описательный блок */
-    .btnEdit{
-        height: 20px;
-        margin-left: 0px;
-    }
-}
+        
+} */

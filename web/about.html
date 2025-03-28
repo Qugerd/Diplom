@@ -7,7 +7,7 @@
     <script src="script_about.js"></script>
     <script rel="stylesheet" src="about.css"></script>
     <link rel="stylesheet" href="about.css" media="all">
-    <link rel="stylesheet" href="text_style.css" media="all">
+    <!-- <link rel="stylesheet" href="text_style.css" media="all"> -->
     <link rel="icon" type="image/png" href="assets/icons/folder-icon.png">
 </head>
 <body>
@@ -15,40 +15,53 @@
     <div class="container">
         <div class="container-header">
 
-                <button onclick="GoHome()">На главную</button>
+                <div class="container_btn" onclick="GoHome()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M11.336 2.253a1 1 0 0 1 1.328 0l9 8a1 1 0 0 1-1.328 1.494L20 11.45V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7.55l-.336.297a1 1 0 0 1-1.328-1.494l9-8zM6 9.67V19h3v-5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h3V9.671l-6-5.333l-6 5.333zM13 19v-4h-2v4h2z"/></svg>
+                    <div class="btn_navigate">главная</div>
+                </div>
 
+                <div class="container_btn" onclick="GoAbout()" style="background-color: #e7e7e7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M8 18h8v-2H8v2Zm0-4h8v-2H8v2Zm-2 8q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v12q0 .825-.588 1.413T18 22H6Zm7-13V4H6v16h12V9h-5ZM6 4v5v-5v16V4Z"/></svg>
+                    <div class="btn_navigate">общая информация</div>
+                </div>
 
+                <div class="container_btn" onclick="GoGallery()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21 5H7V3h16v14h-2zm-4 4H3v10h14zM1 7v14h18V7zm14 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0" clip-rule="evenodd"/><path fill="currentColor" fill-rule="evenodd" d="M7.4 14.828L3.228 19H3v-2.6L7.4 12l7 7h-2.83z" clip-rule="evenodd"/></svg>
+                    <div class="btn_navigate">галерея</div>
+                </div>
 
-                <button  onclick="GoAbout()">
-                    Общая информация
-                </button>
+                <div class="container_btn" onclick="GoFavoritePhotos()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 432 392"><path fill="currentColor" d="M309 0q50 0 84 34t34 83q0 24-10 48.5T395 209t-40.5 49t-48 48.5T244 363l-31 28l-31-27q-42-39-62-57.5T71.5 258T31 209T9.5 165.5T0 117q0-49 34-83t83-34q58 0 96 45q38-45 96-45zm-94 332q49-44 71.5-65.5T336 215t37.5-52.5T384 117q0-32-21.5-53T309 43q-24 0-45.5 14T233 93h-40q-8-22-29.5-36T117 43q-32 0-53 21t-21 53q0 23 10 45.5T90.5 215t50 51.5T211 332l2 2z"/></svg>
+                    <div class="btn_navigate">лучшие фотографии</div>
+                </div>
 
-                <button onclick="GoGallery()">
-                    Галерея
-                </button>
+                <div class="container_btn" onclick="GoVideoPage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25Z"/><path fill="currentColor" d="M6 10.559V5.442a.25.25 0 0 1 .379-.215l4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559Z"/></svg>
+                    <div class="btn_navigate">видео</div>
+                </div>
 
-                <button onclick="GoFavoritePhotos()">
-                    Лучшие фотографии
-                </button>
-
-                <button onclick="GoVideoPage()"> 
-                    Видео
-                </button>
-
-                <button onclick="GoSoundPage()">
-                    Звуки
-                </button>
-
+                <div class="container_btn" onclick="GoSoundPage()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M13 14H8.818a3.249 3.249 0 1 0 .403 6.472l.557-.07A3.678 3.678 0 0 0 13 16.754V7.39c0-1.619 0-2.428.474-2.987c.474-.56 1.272-.693 2.868-.96L18.7 3.05c.136-.022.204-.034.24.006c.037.04.02.106-.013.24l-.895 3.581c-.015.06-.023.09-.044.11c-.02.02-.05.026-.111.038L13 8"/></svg>
+                    <div class="btn_navigate">звуки</div>
+                </div>
         </div>
 
-        <div class="hr">
+
+        
+        <!-- <div class="hr">
             <hr size="1" >
-        </div>
+        </div> -->
+
+
 
         <div class="conteiner-title" >
             <div class="conteiner-title-name">
-                <div class="text-header" id="name_ru"></div>
-                <img onclick="OpenModalEditName()" id="editeTitle" src="assets/icons/pencil.svg">
+                <div class="container_name_redact">
+                    <div class="text-header" id="name_ru"></div>
+                    <svg id="editeTitle" onclick="OpenModalEditName()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
+                </div>
+
+                <!-- <img onclick="OpenModalEditName()" id="editeTitle" src="assets/icons/pencil.svg"> -->
             </div>
             <div class="text-header" id="name_lat"></div>
             <div class="text-header" id="name_eng"></div>
@@ -69,6 +82,7 @@
                     <img class="btnEdit" src="assets/icons/pencil.svg" onclick="Edit('description')">
                 </div>
                 <div class="text-information" id="descriptionText">
+
                 </div>
             </div>
 
@@ -81,6 +95,7 @@
                     <img class="btnEdit" src="assets/icons/pencil.svg" onclick="Edit('spreading')">
                 </div>
                 <div class="text-information" id="spreadingText">
+
                 </div>
             </div>
 

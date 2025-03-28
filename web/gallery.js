@@ -6,6 +6,10 @@ catch(error){
 }
 
 
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 eel.get_gallery_photos()(function(data){
     // Контейнер для серии фото с датой и локацией
     const categoryConteiner = document.querySelector('.category-conteiner')

@@ -4,6 +4,10 @@ let fileDialogValue = PLACEHOLD_PATH
 let Title;
 
 
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     let div = document.createElement("div");
     let divName = document.createElement("div");

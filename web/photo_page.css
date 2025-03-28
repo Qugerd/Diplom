@@ -1,3 +1,25 @@
+html, body {
+    /* height: 100vh; */
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(338deg, #f0efef,#eeeeeeda,#ffffff);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+
 /* Контейнер навигации */
 .container{
     width: auto;
@@ -8,40 +30,46 @@
 
 .container-header{
     width: 100%;
-    height: 100px;
+    margin: .5vh 0;
+    padding-bottom: .4vh;
+
     display: flex;
-
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
+
+    box-shadow: 0 3px 10px -2px rgba(0, 0, 0, 0.1);
 }
 
+.container_btn{
+    gap: 0.3rem;
+    padding: 0.1rem .8rem .3rem .8rem;
 
-/* Кнопки навигации */
-.container-header button{
-    width: 200px;
-    height: 50px;
-    margin: 0 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    
+    color: #333;
 
-   background-color: black;
-
-    color: rgb(255, 255, 255);
-    border: 0px;
     border-radius: 3px;
-    font: bold 16px arial;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
-    transition: background-color 0.3s ease-in-out, color 0.4s;
-}
-
-.container-header button:hover{
-    background-color: white;
-    color: black;
+    
     cursor: pointer;
 }
 
-hr{
-    margin: 0 20px;
+.container_btn:hover{
+    background-color: #f0f0f0;
+}
+
+.container_btn svg{
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.btn_navigate{
+    font-size: 1.2em;
 }
 
 
@@ -88,7 +116,6 @@ hr{
     position: relative;
     margin: 0 80px;
     margin-top: 20px;
-    text-shadow: 0 0 10px rgba(12, 12, 12, 0.3);
 
 }
 
@@ -97,8 +124,20 @@ hr{
     display: flex;
 }
 
+#name_ru{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    font-size: 2em;
+    font-weight: 500;
+    color: #303030;
+}
+
 #name_lat, #name_eng{
-    font-size:24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    font-size:1.5em;
+    color: #333;
+    font-weight: 400;
 }
 
 #editeTitle{
@@ -133,6 +172,17 @@ hr{
     align-items: center; /* Устанавливаем выравнивание по вертикали - по центру */
 }
 
+
+
+.contener-button .container_btn:hover{
+    background-color: #ebebeb;
+}
+
+.container_btn{
+    display: flex;
+    flex-direction: row;
+}
+
 .contener-button button{
     margin: 20px;
     width: 130px;
@@ -158,29 +208,24 @@ hr{
 
 /* Блок с картинкой */
 .conteiner-imgbox{
-    position: relative;
     height: auto;
+    margin: 1rem 0px 0px;
 
-    margin: 0 60px;
 
     display: flex; /* Указываем, что контейнер должен использовать flexbox */
     justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
     align-items: center;
 }
 
-.conteiner-imgbox{
-    width: 100%;
-    margin: 20px 0px 0px;
-    display: flex;
-    justify-content: center;
-}
+
+
 
 #image{
     border: 1px solid;
     box-shadow: 0 0 20px rgba(22, 22, 22, 0.3);
     border-radius: 5px;
 
-    max-height: 640px;
+    max-height: 50vh;
 }
 
 
@@ -190,11 +235,16 @@ hr{
 
 /* Заметки */
 .conteiner-notes{
-    margin: 40px 100px 0px;
+    margin: 1rem 100px 0px;
 }
 
 .conteiner-notes-title{
     display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    color: #333;
+    gap: 10px;
 }
 
 
@@ -205,7 +255,8 @@ hr{
     padding: 20px;
     margin-left: 20px;
 
-    font-size: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.2rem;
     resize: none;
 }
 
@@ -214,12 +265,12 @@ hr{
     font-weight: bold;
 
     margin-left: 50px;
-    margin-top: 60px;
+    margin-top: 20px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .edit{
-    margin: 65px 20px 0px;
-
     height: 24px;
     width: 24px;
 
@@ -231,19 +282,17 @@ hr{
     cursor: pointer;
 }
 
-/* .edit:hover{
-    cursor: pointer;
-    visibility: visible;
-} */
+
 
 .notes_text{
-    font-size: 24px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-
+    font-size: 1.3rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 400;
+    
 
     border-radius: 50px;
 
-    padding: 20px 40px 0px;
+    padding: 0px 40px 0px;
 }
 
 
@@ -262,110 +311,21 @@ hr{
     margin: 80px 80px 40px;
 
     border-radius: 50px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    color: #333;
 
     display: flex;
 }
 
 .conteiner-text{
-    margin: 20px 40px 0px;
+    margin: 1.3rem 1.2rem 0px;
 }
 
 .conteiner-text div{
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 1.3rem;
 }
 
 
 
-@media(max-width: 1366px){
-    /* Контейнер навигации */
-    .container{
-        min-width: 1200px;
-    }
-
-    .container-header button{
-        width: 150px;
-        height: 40px;
-        margin: 0 35px;
-
-        font: bold 13px arial;
-    }
-
-
-
-    /* Названия */
-    #name_lat, #name_eng{
-        font-size: 16px;
-    }
-
-    #editeTitle{
-        height: 14px;
-    }
-
-
-
-    /* Кнопки функциаонала */
-    .contener-button button{
-        margin: 10px;
-        width: 120px;
-        height: 25px;
-    }
-
-    .favorite{
-        width: 28px;
-        height: 28px;
-    }
-
-
-
-    /* Блок с картинкой */
-    .conteiner-imgbox{
-        margin: 10px 0px 0px;
-
-    }
-    #image{
-        /* width: 640px; */
-        max-height: 580px;
-    }
-
-
-
-    /* Заметки */
-    .conteiner-notes{
-        margin: 0px 100px 0px;
-    }
-
-    .edit{
-        height: 18px;
-        width: 18px;
-
-        margin: 65px 20px 0px;
-    }
-
-    .notes_text{
-        font-size: 16px;
-    }
-
-    .conteiner-notes textarea{
-        width: 97.5%;
-        box-sizing: border-box;
-        min-height: 300px;
-    
-        margin-left: 20px;
-        padding: 10px;
-    
-        font-size: 14px;
-        resize: none;
-    }
-
-
-    /* Информация */
-    #map{
-        width: 300px;
-        height: 300px;
-    }
-
-    .conteiner-text div{
-        font-size: 14px;
-    }
-}

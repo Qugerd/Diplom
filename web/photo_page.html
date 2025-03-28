@@ -11,36 +11,44 @@
 </head>
 <body>
     <div class="container">
+
+
+
         <div class="container-header">
+            <div class="container_btn" onclick="GoHome()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M11.336 2.253a1 1 0 0 1 1.328 0l9 8a1 1 0 0 1-1.328 1.494L20 11.45V19a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-7.55l-.336.297a1 1 0 0 1-1.328-1.494l9-8zM6 9.67V19h3v-5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v5h3V9.671l-6-5.333l-6 5.333zM13 19v-4h-2v4h2z"/></svg>
+                <div class="btn_navigate">главная</div>
+            </div>
 
-            <button onclick="GoHome()">На главную</button>
+            <div class="container_btn" onclick="GoAbout()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="M8 18h8v-2H8v2Zm0-4h8v-2H8v2Zm-2 8q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h8l6 6v12q0 .825-.588 1.413T18 22H6Zm7-13V4H6v16h12V9h-5ZM6 4v5v-5v16V4Z"/></svg>
+                <div class="btn_navigate">общая информация</div>
+            </div>
 
+            <div class="container_btn" onclick="GoGallery()" style="background-color: #e7e7e7">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M21 5H7V3h16v14h-2zm-4 4H3v10h14zM1 7v14h18V7zm14 5.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0" clip-rule="evenodd"/><path fill="currentColor" fill-rule="evenodd" d="M7.4 14.828L3.228 19H3v-2.6L7.4 12l7 7h-2.83z" clip-rule="evenodd"/></svg>
+                <div class="btn_navigate">галерея</div>
+            </div>
 
+            <div class="container_btn" onclick="GoFavoritePhotos()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 432 392"><path fill="currentColor" d="M309 0q50 0 84 34t34 83q0 24-10 48.5T395 209t-40.5 49t-48 48.5T244 363l-31 28l-31-27q-42-39-62-57.5T71.5 258T31 209T9.5 165.5T0 117q0-49 34-83t83-34q58 0 96 45q38-45 96-45zm-94 332q49-44 71.5-65.5T336 215t37.5-52.5T384 117q0-32-21.5-53T309 43q-24 0-45.5 14T233 93h-40q-8-22-29.5-36T117 43q-32 0-53 21t-21 53q0 23 10 45.5T90.5 215t50 51.5T211 332l2 2z"/></svg>
+                <div class="btn_navigate">лучшие фотографии</div>
+            </div>
 
-            <button  onclick="GoAbout()">
-                Общая информация
-            </button>
+            <div class="container_btn" onclick="GoVideoPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 16"><path fill="currentColor" d="M0 3.75C0 2.784.784 2 1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25Zm1.75-.25a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25v-8.5a.25.25 0 0 0-.25-.25Z"/><path fill="currentColor" d="M6 10.559V5.442a.25.25 0 0 1 .379-.215l4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559Z"/></svg>
+                <div class="btn_navigate">видео</div>
+            </div>
 
-            <button onclick="GoGallery()">
-                Галерея
-            </button>
-
-            <button onclick="GoFavoritePhotos()">
-                Лучшие фотографии
-            </button>
-
-            <button onclick="GoVideoPage()"> 
-                Видео
-            </button>
-
-            <button onclick="GoSoundPage()">
-                Звуки
-            </button>
-        </div>
+            <div class="container_btn" onclick="GoSoundPage()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M13 14H8.818a3.249 3.249 0 1 0 .403 6.472l.557-.07A3.678 3.678 0 0 0 13 16.754V7.39c0-1.619 0-2.428.474-2.987c.474-.56 1.272-.693 2.868-.96L18.7 3.05c.136-.022.204-.034.24.006c.037.04.02.106-.013.24l-.895 3.581c-.015.06-.023.09-.044.11c-.02.02-.05.026-.111.038L13 8"/></svg>
+                <div class="btn_navigate">звуки</div>
+            </div>
     </div>
 
-    <hr size="1">
 
+
+    
     <div class="conteiner-title" >
         <div class="text-header" id="name_ru"></div>
         <div class="text-header" id="name_lat"></div>
@@ -49,24 +57,67 @@
 
 
     <div class="contener-button">
-        <button class="openFolder" id="openFoderButton" onclick="OpenFolder()">Открыть в папке</button>
-        <button class="Like" onclick="DeletePhoto()">Удалить</button>
-        <button onclick="Redact()">Редактировать</button>
-        <svg id="like" class="favorite" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/> </svg>
+
+        <div class="container_btn" id="openFoderButton" onclick="OpenFolder()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 32 32"><path fill="currentColor" d="M4.08 5A3.08 3.08 0 0 0 1 8.08v17.935c0 .755.17 1.576.504 2.28a1 1 0 0 0 .073.176a4.783 4.783 0 0 0 4.498 2.531h17.927a3.033 3.033 0 0 0 2.887-2.15l3.957-11.82l.005-.016A3.085 3.085 0 0 0 28 13v-1c0-1.701-1.299-3-3-3h-8.167a1.09 1.09 0 0 1-.759-.318L13.626 6.19l-.008-.009A4.06 4.06 0 0 0 10.755 5H4.08ZM26 13H10.886a4.679 4.679 0 0 0-4.404 3.102l-.003.008C4.62 21.439 3.583 24.273 3 25.768V8.08C3 7.484 3.484 7 4.08 7h6.675a2.06 2.06 0 0 1 1.449.596l2.448 2.492l.009.009a3.09 3.09 0 0 0 2.172.903H25c.596 0 1 .404 1 1v1ZM4.445 28.657a2.779 2.779 0 0 1-.425-.292l.042-.061c.047-.073.091-.152.132-.23c.082-.16.182-.38.31-.684c.507-1.21 1.569-4.043 3.862-10.618A2.68 2.68 0 0 1 10.886 15h17.025a1.087 1.087 0 0 1 1.036 1.406l-3.96 11.826a.493.493 0 0 0-.005.017l-.004.015a1.034 1.034 0 0 1-.984.738H6.045c-.021 0-.043 0-.065.002a2.783 2.783 0 0 1-1.535-.347Z"/></svg>
+            <div class="btn_name">Открыть в папке</div>
+        </div>
+
+        <!-- <button class="openFolder" id="openFoderButton" onclick="OpenFolder()">Открыть в папке</button> -->
+
+        <div class="container_btn" onclick="DeletePhoto()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 20 20"><path fill="currentColor" d="m9.129 0l1.974.005c.778.094 1.46.46 2.022 1.078c.459.504.7 1.09.714 1.728h5.475a.69.69 0 0 1 .686.693a.689.689 0 0 1-.686.692l-1.836-.001v11.627c0 2.543-.949 4.178-3.041 4.178H5.419c-2.092 0-3.026-1.626-3.026-4.178V4.195H.686A.689.689 0 0 1 0 3.505c0-.383.307-.692.686-.692h5.47c.014-.514.205-1.035.554-1.55C7.23.495 8.042.074 9.129 0Zm6.977 4.195H3.764v11.627c0 1.888.52 2.794 1.655 2.794h9.018c1.139 0 1.67-.914 1.67-2.794l-.001-11.627ZM6.716 6.34c.378 0 .685.31.685.692v8.05a.689.689 0 0 1-.686.692a.689.689 0 0 1-.685-.692v-8.05c0-.382.307-.692.685-.692Zm2.726 0c.38 0 .686.31.686.692v8.05a.689.689 0 0 1-.686.692a.689.689 0 0 1-.685-.692v-8.05c0-.382.307-.692.685-.692Zm2.728 0c.378 0 .685.31.685.692v8.05a.689.689 0 0 1-.685.692a.689.689 0 0 1-.686-.692v-8.05a.69.69 0 0 1 .686-.692ZM9.176 1.382c-.642.045-1.065.264-1.334.662c-.198.291-.297.543-.313.768l4.938-.001c-.014-.291-.129-.547-.352-.792c-.346-.38-.73-.586-1.093-.635l-1.846-.002Z"/></svg>
+            <div class="btn_name">Удалить</div>
+        </div>
+
+        <!-- <button class="Like" onclick="DeletePhoto()">Удалить</button> -->
+
+
+        <div class="container_btn" id="like">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 432 392"><path fill="currentColor" d="M309 0q50 0 84 34t34 83q0 24-10 48.5T395 209t-40.5 49t-48 48.5T244 363l-31 28l-31-27q-42-39-62-57.5T71.5 258T31 209T9.5 165.5T0 117q0-49 34-83t83-34q58 0 96 45q38-45 96-45zm-94 332q49-44 71.5-65.5T336 215t37.5-52.5T384 117q0-32-21.5-53T309 43q-24 0-45.5 14T233 93h-40q-8-22-29.5-36T117 43q-32 0-53 21t-21 53q0 23 10 45.5T90.5 215t50 51.5T211 332l2 2z"/></svg>
+            <div class="btn_name">Нравится</div>
+        </div>
+<!-- 
+        <svg id="like" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16"> <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/></svg> -->
+
+
+        
+        <div class="container_btn" onclick="Redact()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="currentColor"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10c.842 0 2 .116 2-1c0-.609-.317-1.079-.631-1.546c-.46-.683-.917-1.359-.369-2.454c.667-1.333 1.778-1.333 3.482-1.333c.851 0 1.851 0 3.018-.167c2.101-.3 2.5-1.592 2.5-3.5M7 15.002L7.009 15"/><circle cx="9.5" cy="8.5" r="1.5"/><circle cx="16.5" cy="9.5" r="1.5"/></g></svg>
+            <div class="btn_name">Редактировать</div>
+        </div>
+
+        <!-- <button onclick="Redact()">Редактировать</button> -->
+
     </div>
+
+
+
+
 
 
     <div class="conteiner-imgbox">
         <img id="image">
     </div>
 
+
+
+
+
+
+
     <div class="conteiner-notes">
         <div class="conteiner-notes-title">
-            <div class="notes_title text-header">ЗАМЕТКА</div>
-            <img class="edit" src="assets/icons/pencil.svg" alt="" onclick="EditNotes()">
+            <div class="notes_title">ЗАМЕТКА</div>
+            <svg class="edit" onclick="EditNotes()" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
         </div>
         <div class="notes_text" id="notes_text"></div>
     </div>
+
+
+
+
+
 
 
     <div class="conteiner-information">
@@ -74,9 +125,9 @@
 
 
         <div class="conteiner-text">
-            <div class="palce text" id="place"></div>
-            <div class="date text" id="date"></div>
-            <div class="camera text" id="camera"></div>
+            <div class="palce" id="place"></div>
+            <div class="date" id="date"></div>
+            <div class="camera" id="camera"></div>
         </div>
     </div>
 

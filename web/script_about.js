@@ -3,6 +3,10 @@ let description;
 let spreading;
 let biology;
 
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 eel.set_value()(function(response){
     ID = response[0]
     description = response[5]

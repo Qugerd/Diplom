@@ -4,6 +4,11 @@ let ID;
 let absolute_path;
 let likeValue;
 
+
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 eel.get_photo()(async function(data){
     console.log(data)
 
@@ -50,9 +55,10 @@ eel.get_photo()(async function(data){
 
 
     const btnLike = document.getElementById("like")
+    const svgPath = btnLike.querySelector('svg path');
+
     if(likeValue == 1){
-        btnLike.style.backgroundColor = "#ffd000"
-        btnLike.style.borderRadius = "50%"
+        svgPath.setAttribute('fill', '#ffd000')
     }
 })
 
@@ -123,16 +129,17 @@ function OpenFolder(){
 }
 
 document.getElementById("like").addEventListener("click", function(){
+
+    const svgPath = this.querySelector('svg path');
+
+
     if(likeValue == 1){
         eel.update_like_photo("", ID)
-        
-        this.style.backgroundColor = "white"
-        this.style.borderRadius = "50%"
+        svgPath.setAttribute('fill', '#333')
     }
     else{
         eel.update_like_photo(1, ID)
-        this.style.backgroundColor = "#ffd000"
-        this.style.borderRadius = "50%"
+        svgPath.setAttribute('fill', '#ffd000')
     }
 })
 
