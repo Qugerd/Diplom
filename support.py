@@ -126,11 +126,15 @@ def get_photo_exif(photo_path):
     with open(photo_path, 'rb') as file:
         tags = exifread.process_file(file)
 
-        data_and_time = tags['EXIF DateTimeOriginal'].values
-        data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
+        if 'EXIF DateTimeOriginal' and "Image Make" in tags:
+            data_and_time = tags['EXIF DateTimeOriginal'].values
+            data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
 
-        make = tags["Image Make"].values
-        model = tags["Image Model"].values
+            make = tags["Image Make"].values
+            model = tags["Image Model"].values
+
+            return [data, model]
+
 
         if 'GPS GPSLatitude' in tags:
             lat = tags['GPS GPSLatitude'].values
@@ -154,11 +158,11 @@ def get_photo_exif(photo_path):
 
             return [data, lat_decimal, lon_decimal, city, model]
 
-        return [data, model]
+        return ["", ""]
 
 
 # print(get_photo_exif(r'web\assets\geo.jpg'))
-print(get_photo_exif(r'web\assets\no_geo.jpg'))
+# print(get_photo_exif(r'web\assets\no_geo.jpg'))
 
 
 

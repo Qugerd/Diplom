@@ -1,6 +1,10 @@
 let fileDialogValue;
 let ID;
 
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 function CreateTableRow(id, path_sound, date, country, place, type, duration_, absolute_path){
 
     //Создание новых строк в таблице

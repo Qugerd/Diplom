@@ -1,3 +1,25 @@
+html, body {
+    /* height: 100vh; */
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(338deg, #f0efef,#eeeeeeda,#ffffff);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow-x: hidden;
+}
+
+
+body {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+
 /* Контейнер навигации */
 .container{
     width: auto;
@@ -8,82 +30,108 @@
 
 .container-header{
     width: 100%;
-    height: 100px;
+    margin: .5vh 0;
+    padding-bottom: .4vh;
+
     display: flex;
-
+    flex-direction: row;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
+
+    box-shadow: 0 3px 10px -2px rgba(0, 0, 0, 0.1);
 }
 
+.container_btn{
+    gap: 0.3rem;
+    padding: 0.1rem .8rem .3rem .8rem;
 
-/* Кнопки навигации */
-.container-header button{
-    width: 200px;
-    height: 50px;
-    margin: 0 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    
+    color: #333;
 
-   background-color: black;
-
-    color: rgb(255, 255, 255);
-    border: 0px;
     border-radius: 3px;
-    font: bold 16px arial;
-    cursor: pointer;
-    box-shadow: 0 0 5px rgba(128, 60, 218, 0.3);
-    transition: background-color 0.3s ease-in-out, color 0.4s;
-}
-
-.container-header button:hover{
-    background-color: white;
-    color: black;
+    
     cursor: pointer;
 }
 
-hr{
-    margin: 0 20px;
+.container_btn:hover{
+    background-color: #f0f0f0;
 }
+
+.container_btn svg{
+    width: 1.4em;
+    height: 1.4em;
+}
+
+.btn_navigate{
+    font-size: 1.2em;
+}
+
 
 
 
 
 /* Кнопка добавит видео */
 .conteiner-btn{
-    margin: 40px 100px 60px;
+    margin: 40px 60px;
 }
 
 .add-video{
     width: 200px;
     height: 50px;
 
-    background-color: black;
-    color: white;
+    background-color: transparent;
+    color: #333;
     font: bold 18px arial;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     cursor: pointer;
-    border: black;
+    border: solid 1px #bdbdbd;
+    border-radius: 3px;
 
     transition: background-color 0.4s , color 0.4s ease-in-out;
 }
 
 .add-video:hover{
-    background-color: white;
+    background-color: ;
     color: black;
-    border: 0.1px solid #d6d6d6;
+    border: 1px solid #888888;
 }
+
+
+
+
 
 
 /* Видеокнтейнер */
-
 .conteiner-video{
     margin: 20px 60px 40px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     justify-items: center;
+    gap: 20px;
 }
 
 .conteiner-video video{
-    width: 250px;
+    width: 350px;
 }
+
+
+
+#myVideo.playing {
+    position: fixed;
+
+    width: 600px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
 
 
 /* Карточка видео */
@@ -96,7 +144,7 @@ hr{
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.65);
 }
 
-.video-card:hover .button-conteiner{
+.video-card:not(.playing):hover .button-conteiner {
     visibility: visible;
     opacity: 1;
 }
@@ -113,6 +161,13 @@ hr{
     transition: opacity 0.5s , visibility 0.5s;
 }
 
+.video-card.playing {
+    background: transparent !important; /* Убираем фон */
+    border: none !important; /* Убираем границы */
+    padding: 0 !important; /* Убираем отступы */
+    box-shadow: none !important; /* Убираем тени, если есть */
+}
+
 .video-card button{
     margin: 5px;
     padding: 5px;
@@ -123,42 +178,4 @@ hr{
 
 .video-card button:hover{
     cursor: pointer;
-}
-
-
-
-
-@media(max-width: 1366px){
-        /* Контейнер навигации */
-        .container{
-            min-width: 1200px;
-        }
-    
-        .container-header button{
-            width: 150px;
-            height: 40px;
-            margin: 0 35px;
-    
-            font: bold 13px arial;
-        }
-
-
-
-
-        /* Кнопка добавит видео */
-    .conteiner-btn{
-        margin: 20px 100px 30px;
-    }
-
-    .add-video{
-        width: 150px;
-        height: 40px;
-
-        font: bold 14px arial;
-    }
-
-    /* Видео контейнеры */
-    .video-card{
-        margin-left: 10px;
-    }
 }

@@ -1,3 +1,7 @@
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
 eel.get_all_favorite_photos()(function(photos){
     const conteiner = document.querySelector('.conteiner-image')
 

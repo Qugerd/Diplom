@@ -1,5 +1,5 @@
 html, body {
-    /* height: 100vh; */
+    height: 100vh;
     width: 100vw;
     margin: 0;
     padding: 0;
@@ -24,22 +24,25 @@ body.loaded {
 .header{
     display: flex;
     align-items: center;
+
 }
 
 .logo{
-    height: 150px;
-    width: 150px;
-    margin-right: 200px;
+    /* height: 12vh; */
+    width: 8vw;
+    margin-right: 10vw;
+    max-width: 100px;
+    max-height: 100px;
 }
 
 .header .btn_conteiner{
-    height: 40px;
+    /* height: 40px; */
     width: auto;
 
-    gap: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+
     border-radius: 7px;
+
+    padding: .2vw 1vw .2vw .1vw;
 
     display: flex;
     flex-direction: row;
@@ -51,11 +54,17 @@ body.loaded {
 .btn_conteiner .btn_name{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     font-weight: 600;
+    font-size: 1vw;
     color: #333;
 }
 
 .header .btn_conteiner:hover{
     background-color: #f0f0f0;
+}
+
+.btn_conteiner svg{
+    /* height: 3vh; */
+    width: 3vw
 }
 
 .conteiner-search{
@@ -89,6 +98,12 @@ body.loaded {
     background-color: #e2e2e2;
     border-radius: 15px;
 }
+
+
+
+
+
+
 
 
 
@@ -128,22 +143,38 @@ body.loaded {
 }
 
 
+
+
+
+
+
+
+
+
 .main-conteiner{
+    
     flex-grow: 1;        /* Занимает всё свободное пространство body */
     display: flex;
     flex-direction: row; /* Дочерние элементы в строку */
     align-items: start;
 }
 
+
+
+
+
+
+/* КЛАССИФИКАТОР */
 .conteiner-class{
-    min-height: 850px;
-    width: 300px;
+    /* min-height: 850px; */
+    /* width: 300px; */
     /* background-color: rgba(0, 0, 0, 0.027); */
-    
     display: flex;
     flex-direction: column;
 
     margin: 0px 0px 10px 10px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
 
     border-right: 1px solid #5555553d;
@@ -154,13 +185,27 @@ body.loaded {
     width: auto;
     text-align: center;
 
+    margin: 0px 1vw;
 
-    font-size: 20px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+
+    font-size: clamp(18px, 1.8vw, 28px);
+
+
     color: #333;
+    font-weight: 500;
 
     padding-bottom: 5px;
     border-bottom: 2px solid #744e4e38;
+}
+
+.classifire svg:hover{
+    color: black;
+    cursor: pointer;
 }
 
 .squad{
@@ -168,23 +213,55 @@ body.loaded {
 }
 
 .squad-title{
+    font-size: clamp(16px, 1.3vw, 24px);
     color: #333;
+    background: linear-gradient(90deg, #dedede,#e0e0e0,#ececec, transparent);
+
+    padding-left: 5px;
+    padding-right: 20px;
+
+    width: clamp(200px, 12vw, 350px);
+    border-radius: 2px;
+
+    font-weight: 500;
+    text-transform: uppercase;
+    word-wrap: break-word;
+
+    margin-top: .8vw;
 }
 
 .squad-family{
-    margin-left: 15px;
+    
 }
 
 .squad-family-vid{
-    margin-left: 10px;
+    margin-left: 1vw;
     padding-left: 10px;
-    border-left: 2px solid #AAAAAA;
+    
+    /* border-left: 2px solid #AAAAAA; */
 }
 
 .family-title{
-    font-size: 20px;
+    font-size: clamp(14px, 1.2vw, 20px);
+    font-weight: 500;
     color: #333;
+    cursor: pointer;
+    text-decoration: none !important;
+
+    padding: .1vw 1vw;
+    border-radius: 3px;
 }
+
+.family-title:hover{
+    background-color: #f0f0f0;
+}
+
+.vid-title{
+    font-size: clamp(12px, 14px, 15px);
+
+}
+
+
 
 
 
@@ -406,84 +483,127 @@ a{
     justify-content: center;
     opacity: 0;
     visibility: hidden; 
-    transition: opacity .4s, visibility .4s;
-
 }
 
 .modal-box{
     position: fixed;
 
-    width: 450px;
-    
+    width: 35vw;
+    max-height: clamp(600px, 88vh, 1200px);
     left: 50%;
     top: 50%;
 
     z-index: 1;
-    background: rgb(255, 255, 255);
+    background: #ececec;
 
     transform: translate(-50%, -50%);
     border-radius: 6px;
+
+    overflow-y: auto;
 }
 
-.modal-box #btnCloseModal, #btnCloseModal-Upload, #btnCloseModal-Class, #btnCloseModal-Edite{
-    position: fixed;
-    top: 0px;
-    right: 0px;
-    border: none;
-    background-color: white;
-    font-size: 35px;
-    margin: 5px;
-    padding: 5px;
-    height: 30px;
-    width: 30px;
+
+
+.container_top_model{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.container_top_model svg{
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    color: #333;
     cursor: pointer;
 }
 
-#btnCloseModal-Upload:hover, #btnCloseModal:hover, #btnCloseModal-Class{
-    cursor: pointer;
+.container_top_model svg:hover{
+    color: black;
 }
 
+.text-header{
+    font-size: 28px;
+    color: #333;
+}
 
 .modal-conteiner{
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 20px;
+    padding: 2.5vw 2.5vw;
+
+
+    display: flex;
+    flex-direction: column;
+    
+
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
-.modal-conteiner p{
-    margin: 0px;
-    margin-top: 10px;
-}
-
-#btnChoseFileUploadPhoto{
-    width: 100%;
-    height: 50px;
-
-    margin-top: 5px;
-    background-color: black;
-    color: white;
-    font: bold 18px arial;
-    cursor: pointer;
-
-}
-
-#btnChoseFileUploadPhoto:hover{
-    background-color: white;
-    color: black;
-    cursor: pointer;
-
-}
 
 
 .modal-conteiner .modal-input{
     margin-top: 10px;
     display: flex;
-    width: 100%;
+
+    width: 90%;
     height: 30px;
-    background: rgba(0, 0, 0, 0.1);
+    background:#e7e7e7;
     border-radius: 2px;
-    padding: 3px;
-    border: none;
+    padding: 0px 1vw;
+
+    border: 1px solid #bdbdbd;
+    outline: none;
+}
+
+.modal-conteiner select{
+    width: 95%;
+    height: 30px;
+
+    padding-left: 8px;
+
+    background-color: #e7e7e7;
+    border-radius: 3px;
+    border: 1px solid #bdbdbd;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+    cursor: pointer;
+}
+
+#datapicker{
+    height: 30px;
+    width: 130px;
+    padding-left: 8px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.modal-conteiner input{
+    width: 91%;
+    height: 22px;
+
+    padding-left: 8px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
     outline: none;
 }
 
@@ -493,32 +613,14 @@ a{
     outline: none;
 }
 
-.modal-conteiner-center{
-    display: flex; /* Указываем, что контейнер должен использовать flexbox */
-    justify-content: center; /* Устанавливаем выравнивание по горизонтали - по центру */
-    align-items: center
-}
-
-.modal-conteiner .btnConfirm, .btn-openDialog{
-    width: 100%;
-    height: 50px;
-
-    margin-top: 30px;
-
-    background-color: black;
-    color: white;
-    font: bold 18px arial;
-    cursor: pointer;
+.text-header2{
+    font-weight: 500;
+    color: #333;
 }
 
 
-.modal-conteiner .btnConfirm:hover{
-    background-color: white;
-    color: black;
-}
 
-
-.modal.open, .modal-uploadPhoto.open, .modal-alert.open{
+.modal.open, .modal-uploadPhoto.open, .modal-alert.open, .modal-newClass.open{
     visibility: visible;
     opacity: 1;
 }
@@ -526,7 +628,7 @@ a{
 #map{
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid black;
+    border: 1px solid #bdbdbd;
 }
 
 #combobox{
@@ -544,16 +646,89 @@ a{
 }
 
 textarea{
-    width: 100%;
+    width: 95% ;
     resize: none;
-    font-weight: bold;
-    outline: none;
+    font-size: 14px;
+    background-color: #e7e7e7;
+    border-radius: 4px;
+    border: #b6b6b6 1px solid;
 }
 
+
+.text{
+    font-weight: 500;
+    color: #333;
+}
+
+.btn_open_file{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: .3vw 0px;
+    padding: 5px 10px;
+    gap: 5px;
+    
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: #333;
+    background-color: transparent;
+
+    border-radius: 3px;
+    border: #b6b6b6 1px solid;
+
+    cursor: pointer;
+}
+
+.modal-conteiner-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 20px;
+    padding: 10px 10px;
+    gap: 10px;
+
+    border: solid 1px #b6b6b6;
+    border-radius: 3px;
+
+
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+
+    cursor: pointer;
+}
+
+.modal-conteiner-center:hover{
+    border: solid 1px #919191;
+}
+
+.modal-conteiner-center svg{
+    width: 24px;
+    height: 24px;
+}
+
+.btn_open_file:hover{
+    background-color: #f0f0f0;
+}
+
+.btn_open_file svg{
+    width: 24px;
+    height: 24px;
+}
 
 .hide{
     display: none;
 }
+
+
+
+
+
+
 
 
 
@@ -616,9 +791,7 @@ textarea{
 
 /* Модальное окно "Редактировать" */
 .modalEdite{
-    width: 500px;
-    height: 500px;
-    padding: 30px;
+
 }
 
 .editeConteiner{
@@ -662,7 +835,7 @@ textarea{
 }
 
 #btnEditeOpenFile{
-    width: 170px;
+    font-size: 16px;
 }
 
 #viewBox{
@@ -673,25 +846,28 @@ textarea{
 
     font: bold 18px arial;
     padding-left: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
-    margin-right: 400px;
 }
 
 #AddViewToFam{
-    width: 170px;
+  font-size: 16px;
 }
 #btnEdite{
-    margin-top: 10px;
-    width: 170px;
+    font-size: 16px;
 }
-/* Модальное окно "Новый отряд" */
 
+
+
+
+
+
+
+
+/* Модальное окно "Редактировать Классификатор" */
 .modalNewClass{
-    height: 300px;
-    width: 700px;
 
-    padding: 40px;
+
+
+
 }
 
 .squad-contiener{
@@ -754,263 +930,6 @@ textarea{
 
 
 
-
-
-@media(max-width: 1366px){
-
-    html{
-        height: auto;
-    }
-
-    /* Шапка */
-    .header{
-
-        display: flex;
-        align-items: center;
-
-    }
-
-    .logo{
-        width: 100px;
-        height: 100px;
-    }
-
-    .header .btn_conteiner{
-        height: 40px;
-        width: auto;
-
-        gap: 5px;
-        padding-left: 10px;
-        padding-right: 10px;
-        border-radius: 7px;
-
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-
-        cursor: pointer;
-    }
-
-    .btn_conteiner .btn_name{
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-weight: 600;
-        color: #333;
-    }
-
-    .header .btn_conteiner:hover{
-        background-color: #f0f0f0;
-    }
-
-    .conteiner-search{
-        height: 40px;
-        margin-left: 20px;
-        gap: 5px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-    }
-
-    /* .search{
-        height: 24px;
-        width: 300px;
-        outline: 0px;
-        border: 1px #555 solid;
-        border-radius: 3px;
-
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-        font-size: 16px;
-    } */
-
-    .conteiner-search .btnClear:hover{
-        cursor: pointer;
-        background-color: #e0e0e0;
-        border-radius: 10px;
-    }
-
-    /* Картинки */
-    .vid{
-        width: 130px;
-    }
-
-    .vid img{
-        width: 100px;
-        height: 100px;
-    }
-
-    .vid-name{
-        font-size: 16px;
-        color: #333;
-    }
-
-
-
-
-    /* Модальные окна */
-        /* Контейнеры */
-    .modal-box{
-        position: fixed;
-    
-        width: 550px;
-
-        height: 550px;
-        left: 50%;
-        top: 50%;
-    
-        z-index: 1;
-        background: rgb(255, 255, 255);
-    
-        transform: translate(-50%, -50%);
-        border-radius: 6px;
-
-        overflow-y: auto;
-    }
-
-    .modalUploadPhoto{
-        width: 400px;
-    }
-
-    .modal-conteiner{
-        padding: 10px;
-    }
-
-  
-
-        /* Элементы */
-
-    .modal-conteiner .modal-input{
-        margin-top: 10px;
-        display: flex;
-        width: 100%;
-        height: 20px;
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        border: 1px solid rgba(255,255,255,.1);
-        font-weight: bold;
-    }
-
-    .text-header2{
-        margin: 8px 0px 8px;
-    }
-
-    textarea{
-        width: 100%;
-        font-size: 13px;
-        height: 80px;
-
-        font-weight: bold;
-        resize: none;
-
-        outline: none;
-    }
-
-    #btnChoseFileUploadPhoto{
-        width: 50%;
-        height: 30px;
-        font: bold 12px arial;
-    }
-
-    #combobox, #datapicker, #place, #camera{
-        width: 200px;
-    }
-
-    .modal-conteiner .btnConfirm{
-        height: 40px;
-        font: bold 16px arial;
-    }
-
-    /* Сustom Alert */
-    .modal-alert{
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        left: 0;
-        top: 0;
-        background-color: rgba(15, 15, 15, 0.521);
-        visibility: hidden;
-        opacity: 0;
-        z-index: 2;
-    }
-
-    .modal-alert-box{
-        position: relative;
-        width: 400px;
-        background-color: azure;
-
-        border-radius: 10px;
-
-        top: 40%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    .modal-alert-conteiner{
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-    }
-    .alert-text{
-        word-wrap: break-word;
-    }
-
-    .btn-ok{
-        margin-top: 8px;
-        align-self: flex-end;
-        background-color: transparent;
-        font: bold 18px arial;
-
-        border: 0px;
-    }
-
-    .btn-ok:hover{
-        cursor: pointer;
-    }
-
-    .alert-input{
-        width: 90%;
-        height: 20px;
-
-        border: 1px solid rgba(195, 206, 211, 0.733);
-        outline: transparent;
-    }
-
-
-
-
-
-
-    /* Модальное окно "Новый отряд" */
-    .modalNewClass{
-        height: 350px;
-        width: 900px;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px;
-    }
-
-    .sqaud-layout, .family-layuot, .view-layout{
-        margin: 0px 8px 0px;
-    }
-
-    .classifire{
-        font-size: 24px;
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-weight: 600;
-
-        border-bottom: 2px solid #AAAAAA;
-    }
-
-    .squad-text, .family-text, .view-text{
-        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        font-weight: 600;
-        font-size: 22px;
-    }
-
-    #addSquad, #AddFamily, #AddView{
-        margin-top: auto;
-    }
-}
 
 
 .open{

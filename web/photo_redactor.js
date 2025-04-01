@@ -49,42 +49,42 @@ document.getElementById('crop-btn').addEventListener("click", function(){
 
 
 function CropImage() {
-    // Создаем временный canvas с оригинальным изображением (без фильтров)
-    const originalCanvas = document.createElement('canvas');
-    const originalCtx = originalCanvas.getContext('2d');
+    // Создаем временный canvas для учета поворота
+    const tempCanvas = document.createElement('canvas');
+    const tempCtx = tempCanvas.getContext('2d');
     
     // Устанавливаем размеры с учетом поворота
     if (rotation % 180 === 90) {
-        originalCanvas.width = canvas.height;
-        originalCanvas.height = canvas.width;
+        tempCanvas.width = canvas.height;
+        tempCanvas.height = canvas.width;
     } else {
-        originalCanvas.width = canvas.width;
-        originalCanvas.height = canvas.height;
+        tempCanvas.width = canvas.width;
+        tempCanvas.height = canvas.height;
     }
     
-    // Рисуем оригинальное изображение без фильтров
-    originalCtx.save();
-    originalCtx.translate(originalCanvas.width / 2, originalCanvas.height / 2);
-    originalCtx.rotate((rotation * Math.PI) / 180);
-    originalCtx.drawImage(
+    // Применяем текущий поворот к временному canvas
+    tempCtx.save();
+    tempCtx.translate(tempCanvas.width / 2, tempCanvas.height / 2);
+    tempCtx.rotate((rotation * Math.PI) / 180);
+    tempCtx.drawImage(
         img,
         -img.width / 2,
         -img.height / 2,
         img.width,
         img.height
     );
-    originalCtx.restore();
+    tempCtx.restore();
     
-    // Применяем обрезку к оригинальному изображению
-    const croppedImage = cropper.getCroppedCanvas({
-        imageSmoothingEnabled: false
-    }).toDataURL("image/png");
+    // Получаем обрезанное изображение с учетом поворота
+    var croppedImage = cropper.getCroppedCanvas().toDataURL("image/png");
     
-    // Создаем новое изображение из обрезанного canvas
     img = new Image();
     img.src = croppedImage;
     img.onload = function() {
-        // Обновляем размеры (без сброса параметров)
+        // Сбрасываем поворот после обрезки
+        rotation = 0;
+        
+        // Обновляем размеры
         originalWidth = img.width;
         originalHeight = img.height;
         
@@ -104,10 +104,30 @@ function CropImage() {
         const canvas_container = document.getElementById('canvas_container');
         canvas_container.style.width = displayWidth + 'px';
         canvas_container.style.height = displayHeight + 'px';
-        
-        // Рисуем с текущими параметрами фильтров (они не сбрасываются)
-        DrawImage();
-        
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.save();
+    
+        // Рассчитываем соотношение для масштабирования
+        const scaleX = displayWidth / originalWidth;
+        const scaleY = displayHeight / originalHeight;
+        const scale = Math.min(scaleX, scaleY);
+    
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate((rotation * Math.PI) / 180);
+        // ctx.filter = `grayscale(${gray}%) hue-rotate(${hue}deg) brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%)`;
+    
+        // Рисуем с учетом масштаба
+        ctx.drawImage(
+            img, 
+            -originalWidth * scale / 2, 
+            -originalHeight * scale / 2, 
+            originalWidth * scale, 
+            originalHeight * scale
+        );
+    
+        ctx.restore();
+
         cropper.destroy();
         HideCropBtns();
     };

@@ -1,3 +1,24 @@
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
+
+
+
+// const video = document.getElementById('myVideo');
+// video.addEventListener('play', function() {
+//     this.classList.add('playing');
+//     this.parentElement.classList.add('playing')
+// });
+
+// video.addEventListener('pause', function() {
+//     this.classList.remove('playing');
+//     this.parentElement.classList.remove('playing')
+// });
+
+
+
+
+
 eel.get_video_by_view()(function(data){
     console.log(data)
 
@@ -54,8 +75,6 @@ function Delete(id){
 function ShowInFolder(path_video){
     eel.open_folder(path_video)
 }
-
-
 
 async function AddVideo(){
     var videoPath = await eel.OpenFileDialogVideo()()

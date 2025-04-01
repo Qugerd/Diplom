@@ -623,7 +623,7 @@ async function CreateClassTable(){
 
                 let vidTitle = document.createElement('div')
                 vidTitle.classList.add("vid-title")
-                vidTitle.style.fontSize = "16px"
+                // vidTitle.style.fontSize = "16px"
                 vidTitle.innerHTML = views[k][0]
                 vidTitle.onclick = function (){
                     OpenPageAbout(name)

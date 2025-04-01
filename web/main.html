@@ -6,7 +6,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Все виды</title>
 	<link rel="stylesheet" href="main.css">
-	<link rel="stylesheet" href="text_style.css">
     <link rel="icon" type="image/png" href="assets/icons/folder-icon.png">
 	<script src="eel.js"></script>
 </head>
@@ -17,10 +16,10 @@
         <img class="logo" src="assets/logo.png" alt="">
 		<!-- <div class="allViews" onclick="GoHome()"></div> -->
     
-        <div class="btn_conteiner addbutton" id="addClass" >
+        <!-- <div class="btn_conteiner addbutton" id="addClass" >
 			<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5H5.5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V11"/><path d="M17.5 3.467a1.462 1.462 0 0 1-.017 2.05L10.5 12.5l-3 1l1-3l6.987-7.046a1.409 1.409 0 0 1 1.885-.104zm-2 2.033l.953 1"/></g></svg>
             <div class="btn_name">Классификатор</div>
-		</div>
+		</div> -->
 
 
 		<div class="btn_conteiner addbutton" id="addCategory" >
@@ -48,13 +47,12 @@
 
 	<div class="main-conteiner">
         <div class="conteiner-class">
-            <div class="classifire">
-                Классификация
+            <div class="classifire" id="addClass">
+                <div class="btn_name">Классификатор</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 16 16"><g fill="currentColor" fill-rule="evenodd"><path d="m15.682 2.91l-1.535-1.514c-.41-.408-1.218-.577-1.607-.189L6.485 7.234s-1.321 3.913-1.446 4.242c-.099.262.231.59.46.475c.374-.186 4.105-1.631 4.105-1.631l6.071-6.057c.39-.388.418-.946.007-1.353zM9.021 9.854l-2.567.974l-.461-.425l1.225-2.965l.741.546h1.058l.004 1.87z"/><path d="M12.042 10.345v3.697H.958V3l8.183-.083l.812-.859H0V15h13l-.057-5.422l-.901.767z"/></g></svg>
             </div>
 
             <div class="squad text" id="squadConteiner" style="font-size: 24px;">
-                <!-- <div class="squad-title">Гусеобразные</div><div class="squad-family"><div class="family-title"> Тетеревиные</div><div class="family-title"> Утиные</div></div><div class="squad-title">Курообразные</div><div class="squad-family"><div class="family-title">Тетеревиные</div><div class="family-title">Фазановые</div></div><div class="squad-title">Соколообразные</div><div class="squad-family"><div class="family-title"> Ястребиные</div><div class="squad-family-vid"><div class="vid-title" style="font-size: 16px;">Тонкоклювый буревестник</div></div><div class="family-title">Скопиные</div><div class="family-title">Соколиные</div></div> -->
-                
             </div>
 
 
@@ -83,8 +81,11 @@
 	<div class="modal" id="modal">
 		<div class="modal-box">
 			<div class="modal-conteiner">
-				<p class="text-header">Новый вида</p>
-				<button id="btnCloseModal">x</button>
+                <div class="container_top_model">
+                    <div class="text-header">Новый вид</div>
+                    <svg id="btnCloseModal" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
 
 				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
 
@@ -101,61 +102,100 @@
                 <div class="text-header2">Биология:</div>
                 <textarea name="" id="ta-bio" rows="6"></textarea>
 
-				<p class="text-header2">Выбор изображения:</p>
-				<button class="btnChooseFile" onclick="OpenFileDialog()">Выбрать файл</button><br>
+
+
+				<div class="text-header2">Выбор изображения:</div>
+                <div class="btn_open_file"  onclick="OpenFileDialog()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11.59l4.29-4.3l2.5 2.5l5-5L20 16V6a2 2 0 0 0-2-2H5m4.79 13.21l-2.5-2.5L3 19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-1.59l-5.21-5.2l-5 5M7.5 6A2.5 2.5 0 0 1 10 8.5A2.5 2.5 0 0 1 7.5 11A2.5 2.5 0 0 1 5 8.5A2.5 2.5 0 0 1 7.5 6m0 1A1.5 1.5 0 0 0 6 8.5A1.5 1.5 0 0 0 7.5 10A1.5 1.5 0 0 0 9 8.5A1.5 1.5 0 0 0 7.5 7Z"/></svg>
+                    <div class="btn_name">Выбрать файл</div>
+                </div>
+
                 <div class="text" id="fileValue">Файл выбран: пусто</div>
 
-				<div class="modal-conteiner-center"><button class="btnConfirm" id="Confirm" onclick="Confirm()">Подтвердить</button></div>
+
+
+				<div class="modal-conteiner-center" id="Confirm" onclick="Confirm()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="24" stroke-dashoffset="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11L11 17L21 7"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path></svg>
+                    <div class="btnConfirm">Подтвердить</div>
+                </div>
 			
 			</div>
 		</div>
 	</div>
 
 
+
+
+
+
+
+
+
+
+
 	<!-- Модальное окно "Загрузить фото" -->
 	<div class="modal-uploadPhoto" id="modal-uploadPhoto">
 		<div class="modal-box modalUploadPhoto">
 			<div class="modal-conteiner">
-				<p class="text-header">Загрузить фото</p>
-				<button id="btnCloseModal-Upload">x</button>
-				<p class="text-header2">Выбор изображения:</p>
-				<button class="btnChooseFile" id="btnChoseFileUploadPhoto" onclick="OpenFilesDialog()">Выбрать файл</button><br>
+                
+                <div class="container_top_model" id="btnCloseModal-Upload">
+                    <div class="text-header">Загрузить фото</div>
+                    <svg id="btnCloseModal" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
+
+
+				<div class="text-header2">Выбор изображения:</div>
+                <div class="btn_open_file" id="btnChoseFileUploadPhoto" onclick="OpenFilesDialog()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11.59l4.29-4.3l2.5 2.5l5-5L20 16V6a2 2 0 0 0-2-2H5m4.79 13.21l-2.5-2.5L3 19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-1.59l-5.21-5.2l-5 5M7.5 6A2.5 2.5 0 0 1 10 8.5A2.5 2.5 0 0 1 7.5 11A2.5 2.5 0 0 1 5 8.5A2.5 2.5 0 0 1 7.5 6m0 1A1.5 1.5 0 0 0 6 8.5A1.5 1.5 0 0 0 7.5 10A1.5 1.5 0 0 0 9 8.5A1.5 1.5 0 0 0 7.5 7Z"/></svg>
+                    <div class="btn_name">Выбрать файл</div>
+                </div>
                 <div class="text" id="files-value">Файлы: пусто</div>
 
-				<p class="text-header2">Указание вида:</p>
-				<select id="combobox" class="text">
-				</select><br>
 
-				<p class="text-header2">Дата съемки:</p>
+
+				<div class="text-header2">Указание вида:</div>
+				<select id="combobox" class="text">
+				</select>
+
+				<div class="text-header2">Дата съемки:</div>
 				<input type="date" id="datapicker">
 
-				<p class="text-header2">Место съемки:</p>
+				<div class="text-header2">Место съемки:</div>
 				<input type="text" id="place"
 				class="text">
 
-				<p class="text-header2">Координаты:</p>
-				<div id="map" style="width: 250px; height: 250px"></div>
+				<div class="text-header2">Координаты:</div>
+				<div id="map" style="width: 350px; height: 250px"></div>
 
 				<span class="text">Широта: </span><input class="text" type="number" id="shirota" onchange="editInput()">
-                <br>
+
 				<span class="text">Долгота: </span><input class="text" type="number" id="dolgota" onchange="editInput()">
-				<p class="text-header2">Камера:</p>
+				<div class="text-header2">Камера:</div>
 				<input class="text" type="text" id="camera">
-				
-				<div class="modal-conteiner-center">
-					<button class="btnConfirm" id="Confirm" onclick="ConfirmUploadPhoto()">Подтвердить</button>
-				</div>
-			</div>
-		</div>
-	</div>
 
 
 
-    <!-- Модальное окно "Новый отряд" -->
+                <div class="modal-conteiner-center" id="Confirm" onclick="ConfirmUploadPhoto()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="24" stroke-dashoffset="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11L11 17L21 7"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path></svg>
+                    <div class="btnConfirm">Подтвердить</div>
+                </div>
+		    </div>
+	    </div>
+    </div>
+
+
+    
+    <!-- Модальное окно "Настроить классификатор" -->
     <div class="modal-newClass" id="modal-newClass">
         <div class="modal-box modalNewClass">
             <div class="modal-conteiner">
-                <button id="btnCloseModal-Class">x</button>
+
+                <div class="container_top_model" id="btnCloseModal-Upload">
+                    <div class="text-header">Настроить классфикатор</div>
+                    <svg id="btnCloseModal-Class" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
                 <div class="squad-contiener">
                     <div class="sqaud-layout">
                         <div class="squad-text">
@@ -186,30 +226,36 @@
 
 
 
+
 <!-- Модальное окно "Редактировать вид" -->
 <div class="modal-edite" id="modal-edite">
     <div class="modal-box modalEdite">
         <div class="modal-conteiner">
-            <button id="btnCloseModal-Edite">x</button>
 
-            <div class="text-header">
-                Редактировать
+            <div class="container_top_model" id="btnCloseModal-Edite"">
+                <div class="text-header">Настроить вид</div>
+                <svg id="btnCloseModal-Class" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
             </div>
-
-
 
            <div class="editeConteiner">
                 <div class="title text-header2">
                     Изменить название:
                 </div>
                 <input id="inputEditeTitle" type="text" placeholder="Название">
-                <button class="btn" id="btnEdite" onclick="RenameTitle()">Переименовать</button>
+                <div class="btn_open_file" id="btnEdite" onclick="RenameTitle()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
+                    <div class="btn_name">переименовать</div>
+                </div>
 
 
                 <div class="title text-header2">
                     Изменить изображение:
                 </div>
-                <button class="btn" id="btnEditeOpenFile" onclick="ChangePreview()">Выбрать файл</button>
+                <div class="btn_open_file" id="btnEditeOpenFile" onclick="ChangePreview()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="-2 -4 24 24"><path fill="currentColor" d="M17 4H9.415l-.471-1.334A1.001 1.001 0 0 0 8 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-6.17-2H17a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h5c1.306 0 2.417.835 2.83 2z"/></svg>
+                    <div class="btn_name">выбрать файл</div>
+                </div>
+
 
 
                 <div class="title text-header2">
@@ -217,10 +263,11 @@
                 </div>
                 <select name="" id="viewBox">
                 </select>
-                <button class="btn" id="AddViewToFam" onclick="AddViewToFamily()">Добавить</button>
-
-
-                
+                <div class="btn_open_file" id="AddViewToFam" onclick="AddViewToFamily()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12Zm10-8a8 8 0 1 0 0 16a8 8 0 0 0 0-16Z"/><path d="M13 7a1 1 0 1 0-2 0v4H7a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2h-4V7Z"/></g></svg>
+                    <div class="btn_name">добавить</div>
+                </div>
+               
            </div>
         </div>
     </div>
