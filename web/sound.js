@@ -20,9 +20,20 @@ function CreateTableRow(id, path_sound, date, country, place, type, duration_, a
     tr.appendChild(tdAudio)
 
     let tdDuration = document.createElement("td")
-    tdDuration.innerHTML = duration_
     tr.appendChild(tdDuration)
 
+    audio.addEventListener('loadedmetadata', function() {
+        // Получаем длительность в секундах
+        const duration = audio.duration;
+        
+        // Форматируем в минуты:секунды
+        const minutes = Math.floor(duration / 60);
+        const seconds = Math.floor(duration % 60);
+        const formattedDuration = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        
+        // Устанавливаем отформатированное значение
+        tdDuration.innerHTML = formattedDuration;
+    });
 
     let tdDate = document.createElement("td")
     tdDate.innerHTML = date
@@ -45,19 +56,20 @@ function CreateTableRow(id, path_sound, date, country, place, type, duration_, a
 
 
     let tdButtons = document.createElement("td")
-    let btnEdit = document.createElement("button")
+    tdButtons.classList.add('kek2')
+    let btnEdit = document.createElement("div")
     btnEdit.classList.add("edit")
     btnEdit.addEventListener("click", function(){
         EditeSound(id, date, country, place, type)
     })
 
-    let btnFolder = document.createElement("button")
+    let btnFolder = document.createElement("div")
     btnFolder.classList.add("sif")
     btnFolder.addEventListener("click", function(){
         ShowSound(absolute_path)
     })
 
-    let btnDelete = document.createElement("button")
+    let btnDelete = document.createElement("div")
     btnDelete.classList.add("del")
     btnDelete.addEventListener("click", function(){
         DeleteSound(id)

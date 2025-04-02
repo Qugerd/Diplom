@@ -270,6 +270,8 @@ hr{
     margin-left: 20px;
     resize: none;
     min-height: 200px;
+
+    background-color: #e7e7e7;
 }
 
 .conteiner-information-group textarea:focus{
@@ -283,6 +285,25 @@ hr{
     text-indent: 40px;
 }
 
+.conteiner-information-group button{
+    background-color: transparent;
+    height: 30px;
+    margin-left: 20px;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 16px;
+    color: #333;
+
+    cursor: pointer;
+
+    border: 1px solid #333;
+    border-radius: 3px;
+}
+
+.conteiner-information-group button:hover{
+    border: 1px solid black;
+    color: black;
+}
 
 
 
@@ -290,88 +311,128 @@ hr{
 /* Модальные окна */
 .modal{
     position: fixed;
-    opacity: 0;
-    visibility: hidden; 
     left: 0;
     top: 0;
     height: 100%;
     width: 100%;
     z-index: 1;
     background-color: rgba(0, 0, 0, 0.5);
-    display: grid;
     align-items: center;
     justify-content: center;
+    opacity: 0;
+    visibility: hidden; 
 }
 
 .modal-box{
     position: fixed;
+
+    width: 30vw;
+    max-height: clamp(600px, 88vh, 1200px);
     left: 50%;
     top: 50%;
 
     z-index: 1;
-    background: rgb(255, 255, 255);
-    width: 500px;
+    background: #ececec;
+
     transform: translate(-50%, -50%);
     border-radius: 6px;
+
+    overflow-y: auto;
 }
 
-.modal-box #btnCloseModal{
-    position: fixed;
-    top: -5px;
-    right: 0px;
-    border: none;
-    background-color: white;
-    font-size: 35px;
-    margin: 5px;
-    padding: 5px;
-    height: 30px;
-    width: 30px;
-}
-
-#btnCloseModal:hover{
-    cursor: pointer;
-    color: rgb(109, 11, 11);
-}
 
 .modal-conteiner{
-    margin-left: 40px;
-    margin-right: 40px;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    padding: 2.5vw 2.5vw;
 
     display: flex;
     flex-direction: column;
+    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.container_top_model{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
 
-.modal-conteiner .btnConfirm{
-    width: 100%;
-    height: 50px;
-
-    margin-top: 30px;
-
-    background-color: black;
-    color: white;
-    font: bold 18px arial;
-    cursor: pointer;
+    margin-bottom: 20px;
 }
 
-
-.modal-conteiner .btnConfirm:hover{
-    background-color: white;
+.container_top_model svg:hover{
     color: black;
 }
 
-.input{
-    margin-top: 8px;
-    margin-bottom: 15px;
-
-    background: rgba(0, 0, 0, 0.07);
-    border-radius: 2px;
-
-    border: 0.1px solid rgba(10, 10, 10, 0.116);
-    outline: 0px;
+.container_top_model svg{
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    color: #333;
+    cursor: pointer;
 }
+
+.text-header{
+    font-size: clamp(23px, 1.8vw, 28px);
+    color: #333;
+}
+
+.text-header2{
+    margin-top: 5px;
+
+    font-weight: 500;
+    color: #333;
+
+    padding-left: 1vw;
+}
+
+.modal-conteiner input{
+    width: 91%;
+    height: 22px;
+
+    margin-left: 1vw;
+    padding-left: 8px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+}
+
+.modal-conteiner-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 40px;
+    padding: 10px 10px;
+    gap: 10px;
+
+    border: solid 1px #b6b6b6;
+    border-radius: 3px;
+
+
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+
+    cursor: pointer;
+}
+
+.modal-conteiner-center:hover{
+    border: solid 1px #727272;
+    color: black;
+}
+
+.modal-conteiner-center svg{
+    width: 24px;
+    height: 24px;
+}
+
 
 .open{
     visibility: visible;

@@ -47,7 +47,7 @@ function Edit(elementId){
     let btnConfirm = document.createElement('button')
     let btnConfirmId = 'btnConfirm-' + elementId
     btnConfirm.setAttribute('id', btnConfirmId)
-    btnConfirm.textContent = "Confirm"
+    btnConfirm.textContent = "Изменить"
     btnConfirm.onclick = function(){
         Confirm(elementId, textareaId, btnConfirmId)
     }

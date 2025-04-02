@@ -502,8 +502,6 @@ a{
     overflow-y: auto;
 }
 
-
-
 .container_top_model{
     display: flex;
     flex-direction: row;
@@ -538,8 +536,6 @@ a{
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
-
-
 
 .modal-conteiner .modal-input{
     margin-top: 10px;
