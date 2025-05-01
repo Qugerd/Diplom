@@ -1,4 +1,9 @@
-ymaps.ready(init);
+try{
+    ymaps.ready(init);
+}
+catch(error){
+    console.log(error)
+}
 
 let ID; 
 let absolute_path;
@@ -39,6 +44,9 @@ eel.get_photo()(async function(data){
     document.getElementById("name_eng").innerHTML = name_eng
     document.getElementById("name_lat").innerHTML = name_lat
 
+    if (photo_path == ""){
+        document.getElementById('empty_container').classList.add('open')
+    }
 
     const image = document.getElementById("image")
     image.setAttribute('src', photo_path)
@@ -61,6 +69,15 @@ eel.get_photo()(async function(data){
         svgPath.setAttribute('fill', '#ffd000')
     }
 })
+
+
+
+async function ChangePhotoPath(){
+    let new_path = await eel.OpenFileDialog()()
+
+    eel.edit_photo_path(ID, new_path)
+    GoPhotoPage()
+}
 
 
 function EditNotes(){

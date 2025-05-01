@@ -3,6 +3,12 @@ const PLACEHOLD_PATH = "http://placehold.it/150x150"
 let fileDialogValue = PLACEHOLD_PATH
 let Title;
 
+// try{
+//     ymaps.ready(init);
+// }
+// catch(error){
+//     console.log(error)
+// }
 
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
@@ -371,14 +377,15 @@ async function ConfirmUploadPhoto(){
             console.log(list)
            Alert(await eel.put_data_to_db(list)())
         }
-        dolgota.innerHTML = ""
-        shirota.innerHTML = ""
-        place.innerHTML = ""
-        datapicker.innerHTML = ""
-        camera.innerHTML = ""
-        dolgota.innerHTML = ""
-        shirota.innerHTML = ""
+        dolgota.value = ""
+        shirota.value = ""
+        place.value = ""
+        datapicker.value = ""
+        camera.value = ""
+        dolgota.value = ""
+        shirota.value = ""
         fileDialogValue = ""
+        document.getElementById("fileValue").innerHTML = "Файлы: пусто"
     }
 }
 

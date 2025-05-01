@@ -24,7 +24,6 @@ body.loaded {
 .header{
     display: flex;
     align-items: center;
-
 }
 
 .logo{
@@ -365,7 +364,6 @@ body.loaded {
 .family-title:hover{
     cursor: pointer;
     text-decoration: underline;
-    text-decoration: ;
 }
 
 .vid-title{

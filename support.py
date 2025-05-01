@@ -65,6 +65,10 @@ def change_date_formate(date_str):
 
 
 def absolute_path_to_relative_path(file_url):
+
+    if not os.path.exists(file_url):
+        return ""
+
     # Определяем путь к временной директории от корня проекта
     web_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web')
     temp_dir_path = os.path.join(web_dir, 'temp')
@@ -96,14 +100,16 @@ def delete_temp_dir():
     web_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web')
     temp_dir_path = os.path.join(web_dir, 'temp')
     
-    # # Удаляем все файлы из временной директории
-    for file_name in os.listdir(temp_dir_path):
-        file_path = os.path.join(temp_dir_path, file_name)
-        try:
-            if os.path.isfile(file_path):
-                os.remove(file_path)
-        except Exception as e:
-            print(e)
+    # Проверяем, существует ли временная директория
+    if os.path.exists(temp_dir_path):
+        # Удаляем все файлы из временной директории
+        for file_name in os.listdir(temp_dir_path):
+            file_path = os.path.join(temp_dir_path, file_name)
+            try:
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            except Exception as e:
+                print(e)
 
 
 def get_location(lat, lon):
@@ -126,6 +132,10 @@ def get_photo_exif(photo_path):
     with open(photo_path, 'rb') as file:
         tags = exifread.process_file(file)
 
+        data = ""
+        model = ""
+        result = ["", ""]
+
         if 'EXIF DateTimeOriginal' and "Image Make" in tags:
             data_and_time = tags['EXIF DateTimeOriginal'].values
             data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
@@ -133,7 +143,7 @@ def get_photo_exif(photo_path):
             make = tags["Image Make"].values
             model = tags["Image Model"].values
 
-            return [data, model]
+            result = [data, model]
 
 
         if 'GPS GPSLatitude' in tags:
@@ -156,9 +166,9 @@ def get_photo_exif(photo_path):
 
             city = get_location(lat_decimal, lon_decimal)
 
-            return [data, lat_decimal, lon_decimal, city, model]
+            result = [data, lat_decimal, lon_decimal, city, model]
 
-        return ["", ""]
+        return result
 
 
 # print(get_photo_exif(r'web\assets\geo.jpg'))

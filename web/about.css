@@ -225,6 +225,8 @@ hr{
     text-align: center;
     justify-content: center;
 
+    width: 100%;
+
     margin-bottom: 1rem;
 
     font-size: 1.5em;
@@ -232,6 +234,9 @@ hr{
 }
 
 .conteiner-information-group{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     padding: 2em;
     min-width: 800px;
     max-width: 800px;
@@ -266,12 +271,15 @@ hr{
 }
 
 .conteiner-information-group textarea{
-    width: 97.5%;
+    width:93%;
     margin-left: 20px;
+    margin-right: 20px;
     resize: none;
     min-height: 200px;
 
     background-color: #e7e7e7;
+    border: solid 1px rgb(199, 199, 199);
+    padding: 10px;
 }
 
 .conteiner-information-group textarea:focus{
@@ -296,7 +304,7 @@ hr{
 
     cursor: pointer;
 
-    border: 1px solid #333;
+    border: 1px solid rgb(199, 199, 199);
     border-radius: 3px;
 }
 

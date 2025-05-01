@@ -230,6 +230,20 @@ body.loaded {
 
 
 
+.empty_container{
+    font-size: 18px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    color: #880e0e;
+
+    display: none;
+
+    cursor: pointer;
+}
+
+.empty_container:hover{
+    text-decoration: underline;
+}
+
 
 
 
@@ -327,5 +341,8 @@ body.loaded {
     font-size: 1.3rem;
 }
 
+.open{
+    display: block;
+}
 
 

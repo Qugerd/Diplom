@@ -7,18 +7,73 @@ from support import *
 
 
 
+import sqlite3
+
+import sqlite3
 
 def CreateDataBase():
     conn = sqlite3.connect('database.db')
+    
+    # Создание таблицы views
     conn.execute('''CREATE TABLE IF NOT EXISTS views
                 (id INTEGER PRIMARY KEY,
-                name TEXT NOT NULL,
-                img BLOB,
-                name_lat TEXT,
-                name_eng TEXT,
-                description TEXT,
-                spreading TEXT,
-                biology TEXT);''')
+                 name TEXT NOT NULL UNIQUE,
+                 img BLOB,
+                 name_lat TEXT,
+                 name_eng TEXT,
+                 description TEXT,
+                 spreading TEXT,
+                 biology TEXT,
+                 family_id INTEGER,
+                 FOREIGN KEY (family_id) REFERENCES family (id) ON DELETE CASCADE);''')
+    
+    # Создание таблицы gallery
+    conn.execute('''CREATE TABLE IF NOT EXISTS gallery
+                (id INTEGER PRIMARY KEY,
+                 photo_path TEXT,
+                 kind TEXT,
+                 data TEXT,
+                 place TEXT,
+                 latitude TEXT,
+                 longitude TEXT,
+                 camera TEXT,
+                 group_id TEXT NOT NULL,
+                 notes TEXT,
+                 like INTEGER,
+                 FOREIGN KEY (kind) REFERENCES views (name) ON DELETE CASCADE);''')
+    
+    # Создание таблицы sounds
+    conn.execute('''CREATE TABLE IF NOT EXISTS sounds
+                (id INTEGER PRIMARY KEY,
+                 path_video TEXT,
+                 view TEXT,
+                 date TEXT,
+                 country TEXT,
+                 place TEXT,
+                 type TEXT,
+                 duration TEXT,
+                 FOREIGN KEY (view) REFERENCES views (name) ON DELETE CASCADE);''')
+    
+    # Создание таблицы video
+    conn.execute('''CREATE TABLE IF NOT EXISTS video
+                (id INTEGER PRIMARY KEY,
+                 path_video TEXT,
+                 view TEXT,
+                 date TEXT,
+                 FOREIGN KEY (view) REFERENCES views (name) ON DELETE CASCADE);''')
+    
+    # Создание таблицы squad
+    conn.execute('''CREATE TABLE IF NOT EXISTS squad
+                (id INTEGER PRIMARY KEY,
+                 squad_name TEXT);''')
+    
+    # Создание таблицы family
+    conn.execute('''CREATE TABLE IF NOT EXISTS family
+                (id INTEGER PRIMARY KEY,
+                 family_name TEXT,
+                 squad_id INTEGER,
+                 FOREIGN KEY (squad_id) REFERENCES squad (id) ON DELETE CASCADE);''')
+    
     conn.commit()
     conn.close()
 
@@ -130,6 +185,11 @@ def GetPhoto(id):
     data = list(cursor.fetchone())
     return data
 
+def EditPhotoPath(id, new_path):
+    conn = sqlite3.connect('database.db')
+    conn.execute("UPDATE gallery SET photo_path = ? WHERE id = ?", (new_path, id))
+    conn.commit()
+    conn.close()
 
 def EditNotes(id, text):
     conn = sqlite3.connect('database.db')
@@ -145,17 +205,28 @@ def EditInformation(id, col_name, text):
     conn.close()
 
 
-def GetCoordsAllPhotos(kind):
+# def GetCoordsAllPhotos(kind):
+#     conn = sqlite3.connect('database.db')
+#     cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE kind=?', (kind,))
+#     data = []
+#     for row in cursor:
+#         lat, log = convert_str_to_numeric(list(row))
+#         data.append([lat, log])
+#     conn.commit()
+#     conn.close()
+#     return dat
+# 
+
+
+def GetGalleryAllInfo(kind):
     conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT latitude, longitude FROM gallery WHERE kind=?', (kind,))
-    data = []
-    for row in cursor:
-        lat, log = convert_str_to_numeric(list(row))
-        data.append([lat, log])
+    cursor = conn.execute('SELECT * FROM gallery WHERE kind=?', (kind,))
+    data = list(cursor.fetchall())
     conn.commit()
     conn.close()
     return data
 
+# print(GetCoordsAllPhotos("Тонкоклювый буревестник"))
 
 def GetCoordsPhoto(id):
     conn = sqlite3.connect('database.db')

@@ -130,7 +130,7 @@ def get_gallery_photos():
 def generate_group_id():
     return str(uuid.uuid4())
 
-
+# FIXME: обработать то что у файла может измениться путь
 @eel.expose
 def get_photo():
     data = GetPhoto(ID)
@@ -140,6 +140,10 @@ def get_photo():
     # print('get photo', data[1])
     return data
 
+
+@eel.expose
+def edit_photo_path(id, new_path):
+    EditPhotoPath(id, new_path)
 
 @eel.expose
 def edit_notes(id, text):
@@ -152,8 +156,8 @@ def edit_information(id, col_name, text):
 
 
 @eel.expose
-def get_coords_all_photos():
-    return GetCoordsAllPhotos(TITLE)
+def get_gallery_all_info():
+    return GetGalleryAllInfo(TITLE)
 
 
 @eel.expose
@@ -282,7 +286,7 @@ def change_preview(id, img):
 
 
 
-
+CreateDataBase()
 
 delete_temp_dir()
 
@@ -292,4 +296,4 @@ delete_temp_dir()
 
 eel.init("web")
 
-eel.start("main.html", size=(1366, 780), position=(200,200), shutdown_delay=10.0, mode='chrome', host="localhost", port="8000")
+eel.start("main.html", shutdown_delay=10.0, mode='chrome', host="localhost", port="8000", cmdline_args=['--start-maximized'])

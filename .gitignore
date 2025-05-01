@@ -9,3 +9,7 @@ __pycache__
 .gitignore
 .gitattributes
 temp
+Birds_test
+last_model.pth
+best_model.pth
+logfile.txt

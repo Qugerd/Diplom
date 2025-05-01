@@ -60,15 +60,29 @@ eel.get_gallery_photos()(function(data){
             titleDataLocation = document.createElement("div")
             imgConteiner = document.createElement("div")
 
+            if (data[i][1] == ""){
+                empty_div = document.createElement("div")
+                empty_div.classList.add("empty_img")
+                empty_div.innerHTML = "путь изображения изменен"
+                empty_div.onclick = function(){
+                    eel.save_id(data[i][0])
+                    GoPhotoPage()
+                }
 
-            let img = document.createElement("img")
-            img.setAttribute('src', data[i][1])
-            img.onclick = function(){
-                eel.save_id(data[i][0])
-                GoPhotoPage()
-                
+                imgConteiner.appendChild(empty_div)
             }
-            imgConteiner.appendChild(img)
+            else{
+                let img = document.createElement("img")
+                img.setAttribute('src', data[i][1])
+                img.setAttribute('alt', 'Путь до файла изменён')
+                img.onclick = function(){
+                    eel.save_id(data[i][0])
+                    GoPhotoPage()
+                }
+                imgConteiner.appendChild(img)
+            }
+
+
     
             let location = data[i][2]
             let dataTime = data[i][3]
@@ -120,17 +134,28 @@ async function init(){
 
     var myGeoObjects = [];
 
-    var coords = await eel.get_coords_all_photos()()
+    var data = await eel.get_gallery_photos()()
 
-    console.log(coords)
+    console.log(data)
 
-    for (var i = 0; i < coords.length; i++) {
-        myGeoObjects[i] = new ymaps.GeoObject({
-            geometry: {
-                type: "Point",
-                coordinates: coords[i]
-                }
-            });
+    for (var i = 0; i < data.length; i++) {
+        myGeoObjects[i] = new ymaps.Placemark(
+            [data[i][5], data[i][6]],
+            {
+                balloonContent:
+                `
+                <div class="kek" onclick="
+                    eel.save_id(${data[i][0]});
+                    GoPhotoPage();
+                    " style="cursor: pointer;">
+                                    ${data[i][2]} <br>
+                                    ${data[i][3]}<br>
+                                    <img src="${data[i][1]}" style="width: 150px;">
+                                </div>
+                `,
+                clusterCaption: `${i}-я фотография`
+            }
+        )
     }
 
     var myClusterer = new ymaps.Clusterer();

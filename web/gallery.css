@@ -273,10 +273,30 @@ img:hover{
     border: 0.5px solid rgb(129, 129, 129);
 }
 
+.empty_img{
+    width: 130px;
+    height: 13vh;
+
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    border-radius: 3px;
+
+    padding: 0px 20px;
+    font-size: 20px;
+    color: #8a1111;
+    word-wrap: break-word;
+
+    cursor: pointer;
+}
+
 .hide{
     display: none;
 }
 
+.kek:hover{
+    font-weight: 700;
+}
 
 
 
