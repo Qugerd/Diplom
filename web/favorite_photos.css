@@ -84,8 +84,7 @@ body.loaded {
 }
 
 .conteiner-image img{
-    width: 240px;
-    height: 180px;
+    height: 20vh;
 
     margin-top: 20px;
 
@@ -103,37 +102,22 @@ body.loaded {
     cursor: pointer;
 }
 
+.conteiner-title{
+    position: relative;
+    margin: 0 140px;
+    margin-top: 20px;
+}
 
+#name_ru{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 2em;
+    font-weight: 500;
+    color: #303030;
+}
 
-@media(max-width: 1366px){
-    /* Контейнер навигации */
-    .container{
-        min-width: 1200px;
-    }
-
-    .container-header button{
-        width: 150px;
-        height: 40px;
-        margin: 0 35px;
-
-        font: bold 13px arial;
-    }
-
-
-
-
-    /* Основной контейнер */
-    .conteiner-image{
-        margin: 20px 80px 40px;
-    
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
-    }
-
-    .conteiner-image img{
-        width: 180px;
-        height: 120px;
-    
-        margin-top: 20px;
-    }
+#name_lat, #name_eng{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.5em;
+    color: #333;
+    font-weight: 400;
 }

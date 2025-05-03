@@ -20,3 +20,12 @@ eel.get_all_favorite_photos()(function(photos){
     }
 })
 
+eel.set_value()(function(response){
+    let name_ru = response[1]
+    let name_eng = response[3]
+    let name_lat = response[4]
+
+    document.getElementById("name_ru").innerHTML = name_ru
+    document.getElementById("name_lat").innerHTML = name_eng
+    document.getElementById("name_eng").innerHTML = name_lat
+})

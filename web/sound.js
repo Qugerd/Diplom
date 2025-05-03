@@ -5,6 +5,16 @@ window.addEventListener('load', function() {
     document.body.classList.add('loaded');
 });
 
+eel.set_value()(function(response){
+    let name_ru = response[1]
+    let name_eng = response[3]
+    let name_lat = response[4]
+
+    document.getElementById("name_ru").innerHTML = name_ru
+    document.getElementById("name_lat").innerHTML = name_eng
+    document.getElementById("name_eng").innerHTML = name_lat
+})
+
 function CreateTableRow(id, path_sound, date, country, place, type, duration_, absolute_path){
 
     //Создание новых строк в таблице

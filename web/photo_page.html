@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <title>Фотография</title>
-    <script src="eel.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?apikey=48636471-5ca7-4614-a8dd-ec96ec0ff4cc&lang=ru_RU" type="text/javascript"></script>
     <script src="navigation.js"></script>
     <link rel="stylesheet" href="photo_page.css">
@@ -102,9 +101,16 @@
             выберите расположение файла, <br>
             чтобы указать новый путь.
         </div>
-        <img id="image" src="temp\3448f54472d6bf338f692d827bc81b16.jpg">
+        <img id="image" src="assets/duc.jpg">
     </div>
 
+
+    <div id="container_image_version" class="container_image_version">
+        <div class="btn_add_image_version" onclick="AddPhotoVertion()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="130" height="130" viewBox="0 0 24 24"><path fill="#000000" d="M18 20H4V6h9V4H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9h-2zm-7.79-3.17l-1.96-2.36L5.5 18h11l-3.54-4.71zM20 4V1h-2v3h-3c.01.01 0 2 0 2h3v2.99c.01.01 2 0 2 0V6h3V4z"/></svg>
+            <div>Добавить вариацию изображения</div>
+        </div>
+    </div>
 
 
 
@@ -123,6 +129,11 @@
 
 
 
+    <div class="notes_title">Фотографии этой серии</div>
+    <div class="container_series" id="container_series_photos">
+    </div>
+
+
 
 
     <div class="conteiner-information">
@@ -136,6 +147,37 @@
         </div>
     </div>
 
+
+
+	<div class="modal" id="modal">
+		<div class="modal-box">
+			<div class="modal-conteiner">
+                <div class="container_top_model">
+                    <div class="container_btn" id="btn_open_in_folder">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 32 32"><path fill="currentColor" d="M4.08 5A3.08 3.08 0 0 0 1 8.08v17.935c0 .755.17 1.576.504 2.28a1 1 0 0 0 .073.176a4.783 4.783 0 0 0 4.498 2.531h17.927a3.033 3.033 0 0 0 2.887-2.15l3.957-11.82l.005-.016A3.085 3.085 0 0 0 28 13v-1c0-1.701-1.299-3-3-3h-8.167a1.09 1.09 0 0 1-.759-.318L13.626 6.19l-.008-.009A4.06 4.06 0 0 0 10.755 5H4.08ZM26 13H10.886a4.679 4.679 0 0 0-4.404 3.102l-.003.008C4.62 21.439 3.583 24.273 3 25.768V8.08C3 7.484 3.484 7 4.08 7h6.675a2.06 2.06 0 0 1 1.449.596l2.448 2.492l.009.009a3.09 3.09 0 0 0 2.172.903H25c.596 0 1 .404 1 1v1ZM4.445 28.657a2.779 2.779 0 0 1-.425-.292l.042-.061c.047-.073.091-.152.132-.23c.082-.16.182-.38.31-.684c.507-1.21 1.569-4.043 3.862-10.618A2.68 2.68 0 0 1 10.886 15h17.025a1.087 1.087 0 0 1 1.036 1.406l-3.96 11.826a.493.493 0 0 0-.005.017l-.004.015a1.034 1.034 0 0 1-.984.738H6.045c-.021 0-.043 0-.065.002a2.783 2.783 0 0 1-1.535-.347Z"/></svg>
+                        <div class="btn_show_in_folder">Открыть в папке</div>
+                    </div>
+                    
+
+                    <div id="delete_photo" class="container_btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 20 20"><path fill="currentColor" d="m9.129 0l1.974.005c.778.094 1.46.46 2.022 1.078c.459.504.7 1.09.714 1.728h5.475a.69.69 0 0 1 .686.693a.689.689 0 0 1-.686.692l-1.836-.001v11.627c0 2.543-.949 4.178-3.041 4.178H5.419c-2.092 0-3.026-1.626-3.026-4.178V4.195H.686A.689.689 0 0 1 0 3.505c0-.383.307-.692.686-.692h5.47c.014-.514.205-1.035.554-1.55C7.23.495 8.042.074 9.129 0Zm6.977 4.195H3.764v11.627c0 1.888.52 2.794 1.655 2.794h9.018c1.139 0 1.67-.914 1.67-2.794l-.001-11.627ZM6.716 6.34c.378 0 .685.31.685.692v8.05a.689.689 0 0 1-.686.692a.689.689 0 0 1-.685-.692v-8.05c0-.382.307-.692.685-.692Zm2.726 0c.38 0 .686.31.686.692v8.05a.689.689 0 0 1-.686.692a.689.689 0 0 1-.685-.692v-8.05c0-.382.307-.692.685-.692Zm2.728 0c.378 0 .685.31.685.692v8.05a.689.689 0 0 1-.685.692a.689.689 0 0 1-.686-.692v-8.05a.69.69 0 0 1 .686-.692ZM9.176 1.382c-.642.045-1.065.264-1.334.662c-.198.291-.297.543-.313.768l4.938-.001c-.014-.291-.129-.547-.352-.792c-.346-.38-.73-.586-1.093-.635l-1.846-.002Z"/></svg>
+                        <div class="btn_delete">Удалить</div>
+                    </div>
+                    
+
+                    <svg onclick="CloseModalPhoto()" id="btnCloseModal" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
+                <img id="img_version" src="" alt="">
+				
+			
+			</div>
+		</div>
+	</div>
+
+
+
+    <script src="eel.js"></script>
     <script src="photo_page.js"></script>
 </body>
 </html>

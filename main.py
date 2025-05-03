@@ -140,6 +140,30 @@ def get_photo():
     # print('get photo', data[1])
     return data
 
+@eel.expose
+def get_group_photos(id, group_id):
+    data = GetGroupPhotos(id, group_id)
+    for i in range(len(data)):
+        data[i] = list(data[i])
+        data[i][1] = absolute_path_to_relative_path(data[i][1])
+    return data
+
+@eel.expose
+def add_photo_version(id, photo_path):
+    AddPhotoVersion(id, photo_path)
+
+@eel.expose
+def get_photos_version(id):
+    data = GetPhotosVersion(id)
+    for i in range(len(data)):
+        data[i] = list(data[i])
+        data[i].append(data[i][2])
+        data[i][2] = absolute_path_to_relative_path(data[i][2])
+    return data
+
+@eel.expose
+def delete_photo_version(id):
+    DeletePhotoVersion(id)
 
 @eel.expose
 def edit_photo_path(id, new_path):

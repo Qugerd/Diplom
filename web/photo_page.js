@@ -54,6 +54,11 @@ eel.get_photo()(async function(data){
     // image.setAttribute('height', '705')
 
 
+
+    LoadPhotoVersion()
+    GetPhotosSeries(group_id)
+
+
     document.getElementById('notes_text').innerHTML = note
 
 
@@ -69,6 +74,75 @@ eel.get_photo()(async function(data){
         svgPath.setAttribute('fill', '#ffd000')
     }
 })
+
+
+
+// Загрузка версий главной фотогрофии
+async function LoadPhotoVersion(){
+    data_photo = await eel.get_photos_version(ID)()
+
+    const container_image_version = document.getElementById('container_image_version')
+    let currentPhotoPath;
+    let id_photo;
+
+    console.log(data_photo)
+    for (let i = 0; i < data_photo.length; i++){
+        const img = document.createElement('img')
+        img.setAttribute('src', data_photo[i][2])
+        img.onclick = function(){
+            document.getElementById('modal').classList.add('open_modal')
+            document.getElementById('img_version').setAttribute('src', data_photo[i][2])
+            currentPhotoPath = data_photo[i][3]
+            id_photo = data_photo[i][1]
+            // TODO: доделать обработку если путь фото изменен
+        }
+
+
+        document.getElementById('delete_photo').onclick = function(){
+            eel.delete_photo_version(id_photo)
+            location.reload()
+        }
+
+
+        document.getElementById('btn_open_in_folder').onclick = function(){
+            eel.open_folder(currentPhotoPath)
+        }
+        container_image_version.prepend(img)
+    }
+}
+
+
+
+// Загрузка фотографий тойже серии
+async function GetPhotosSeries(group_id){
+    const container_series_photos = document.getElementById('container_series_photos')
+
+    let photos = await eel.get_group_photos(ID, group_id)()
+    console.log(photos)
+
+    for (let i = 0; i < photos.length; i++){
+        const image = document.createElement('img')
+
+        if (photos[i][1] == ""){
+            const empty_div = document.createElement('div')
+            empty_div.innerHTML = "Путь изображения изменён"
+            empty_div.classList.add("empty_div")
+            empty_div.onclick = function(){
+                eel.save_id(photos[i][0])
+                GoPhotoPage()
+            }
+            container_series_photos.appendChild(empty_div)
+        }
+        else{
+            image.setAttribute('src', photos[i][1])
+            image.onclick = function(){
+                eel.save_id(photos[i][0])
+                GoPhotoPage()
+            }
+            container_series_photos.appendChild(image)
+        }
+    }
+}
 
 
 
@@ -169,4 +243,15 @@ function DeletePhoto(){
 
 function Redact(){
     GoPhotoRedactorPage()
+}
+
+async function AddPhotoVertion(){
+    const photo_path = await eel.OpenFileDialog()()
+    eel.add_photo_version(ID, photo_path)
+    location.reload()
+}
+
+
+function CloseModalPhoto(){
+    document.getElementById('modal').classList.remove('open_modal')
 }

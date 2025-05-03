@@ -97,7 +97,6 @@ body.loaded {
 }
 
 .add-video:hover{
-    background-color: ;
     color: black;
     border: 1px solid #888888;
 }
@@ -178,4 +177,25 @@ body.loaded {
 
 .video-card button:hover{
     cursor: pointer;
+}
+
+
+.conteiner-title{
+    position: relative;
+    margin: 0 140px;
+    margin-top: 20px;
+}
+
+#name_ru{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 2em;
+    font-weight: 500;
+    color: #303030;
+}
+
+#name_lat, #name_eng{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 1.5em;
+    color: #333;
+    font-weight: 400;
 }

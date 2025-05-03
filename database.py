@@ -74,9 +74,41 @@ def CreateDataBase():
                  squad_id INTEGER,
                  FOREIGN KEY (squad_id) REFERENCES squad (id) ON DELETE CASCADE);''')
     
+    conn.execute('''CREATE TABLE IF NOT EXISTS photo_variations
+                (id INTEGER PRIMARY KEY,
+                 original_id INTEGER NOT NULL,
+                photo_path TEXT NOT NULL,
+                FOREIGN KEY (original_id) REFERENCES gallery (id) ON DELETE CASCADE)''')
+
     conn.commit()
     conn.close()
 
+
+def AddPhotoVersion(original_id, photo_path):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO photo_variations (original_id, photo_path) VALUES (?, ?)",
+                 (original_id, photo_path))
+    conn.commit()
+    conn.close()
+
+def GetPhotosVersion(original_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute('''SELECT * FROM photo_variations WHERE original_id = ? 
+                 ''', 
+                 (original_id,))
+
+    data = cursor.fetchall()
+    return data
+
+# print(GetPhotosVersion(1))
+# path = "C:/Users/asus/Downloads/птицы/Мандаринка/b02fcbf9349b3cca44a029b856040a6e.jpg"
+# AddPhotoVersion(1, path)
+
+def DeletePhotoVersion(id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("DELETE FROM photo_variations WHERE id=?", (id, ))
+    conn.commit()
+    conn.close()
 
 def AddInDB(name, img, name_lat, name_eng, description, spreading, biology):
     conn = sqlite3.connect('database.db')
@@ -179,11 +211,19 @@ def GetGalleryPhotos(kind):
     return data
 
 
+def GetGroupPhotos(id, group_id):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute("SELECT * FROM gallery WHERE id != ? AND group_id = ?", (id, group_id))
+    data = list(cursor.fetchall())
+    return data
+
+
 def GetPhoto(id):
     conn = sqlite3.connect('database.db')
     cursor = conn.execute('SELECT * FROM gallery WHERE id=?', (id,))
     data = list(cursor.fetchone())
     return data
+
 
 def EditPhotoPath(id, new_path):
     conn = sqlite3.connect('database.db')
