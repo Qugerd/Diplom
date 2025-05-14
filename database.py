@@ -60,6 +60,7 @@ def CreateDataBase():
                  path_video TEXT,
                  view TEXT,
                  date TEXT,
+                 place TEXT,
                  FOREIGN KEY (view) REFERENCES views (name) ON DELETE CASCADE);''')
     
     # Создание таблицы squad
@@ -106,14 +107,15 @@ def GetPhotosVersion(original_id):
 
 def DeletePhotoVersion(id):
     conn = sqlite3.connect('database.db')
-    conn.execute("DELETE FROM photo_variations WHERE id=?", (id, ))
+    conn.execute("DELETE FROM photo_variations WHERE id = ?", (id, ))
     conn.commit()
     conn.close()
 
-def AddInDB(name, img, name_lat, name_eng, description, spreading, biology):
+
+def AddInDB(name, img, name_lat, name_eng, description, spreading, biology, family_id):
     conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO views (name, img, name_lat, name_eng, description, spreading, biology) VALUES (?, ?, ?, ?, ?, ?, ?)",
-             (name, Image_to_Bytes(img), name_lat, name_eng, description, spreading, biology))
+    conn.execute("INSERT INTO views (name, img, name_lat, name_eng, description, spreading, biology, family_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+             (name, Image_to_Bytes(img), name_lat, name_eng, description, spreading, biology, family_id))
     conn.commit()
     conn.close()
 
@@ -211,6 +213,15 @@ def GetGalleryPhotos(kind):
     return data
 
 
+def AddPhotoGalleryCollection(photo_path, kind, data, place, latitude, longitude, group_id):
+    conn = sqlite3.connect('database.db')
+    conn.execute("INSERT INTO gallery (photo_path, kind, data, place, latitude, longitude, group_id) VALUES (?, ?, ?, ?, ?, ?, ?)",
+            (photo_path, kind, data, place, latitude, longitude, group_id))
+    conn.commit()
+    conn.close()
+
+
+
 def GetGroupPhotos(id, group_id):
     conn = sqlite3.connect('database.db')
     cursor = conn.execute("SELECT * FROM gallery WHERE id != ? AND group_id = ?", (id, group_id))
@@ -295,10 +306,10 @@ def UpdateLikePhoto(like_value, id):
     conn.close()
 
 
-def AddVideo(path_video, date, view):
+def AddVideo(path_video, date, view, place):
     conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO video (path_video, date, view) VALUES (?, ?, ?)",
-            (path_video, date, view))
+    conn.execute("INSERT INTO video (path_video, date, view, place) VALUES (?, ?, ?, ?)",
+            (path_video, date, view, place))
     conn.commit()
     conn.close()
 

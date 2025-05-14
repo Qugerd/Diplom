@@ -3,12 +3,6 @@ const PLACEHOLD_PATH = "http://placehold.it/150x150"
 let fileDialogValue = PLACEHOLD_PATH
 let Title;
 
-// try{
-//     ymaps.ready(init);
-// }
-// catch(error){
-//     console.log(error)
-// }
 
 window.addEventListener('load', function() {
     document.body.classList.add('loaded');
@@ -26,8 +20,10 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
     // Создание кнопок: удалить, изменить
     let btnFunctionDelete = document.createElement("button");
     btnFunctionDelete.classList.add('btn-function-delete')
-    btnFunctionDelete.onclick = function(){
-        Delete(id, title)
+    btnFunctionDelete.onclick = async function(){
+        await Delete(id, title)
+        ClearClassTable()
+        await CreateClassTable()
     }
 
 
@@ -81,6 +77,7 @@ function OpenModal(){
 
 document.getElementById("addCategory").addEventListener("click", function(){
     document.getElementById("modal").classList.add("open")
+    CreateViewBox()
 })
 
 
@@ -103,25 +100,23 @@ document.getElementById("btnCloseModal-Edite").addEventListener("click", functio
 
 document.getElementById("addClass").addEventListener("click", async function(){
     document.getElementById("modal-newClass").classList.add("open")
-    // CreateViewBox()
     CreateFamilyBox()
     let squads = await eel.get_all_squad()()
     CreateSquadBox(squads)
 })
 
 async function CreateViewBox(){
-    let viewBox = document.getElementById("viewBox")
+    let viewBox = document.getElementById("viewBox2")
     $(viewBox).empty();
-    let views = await eel.get_all_view()()
+    let views = await eel.get_all_family()()
 
 
     for(let i = 0; i < views.length; i++){
         let option = document.createElement("option")
-        option.text = views[i]
+        option.text = views[i][1]
+        option.value = views[i][0]
         viewBox.appendChild(option)
     }
-
-
 }
 
 
@@ -148,6 +143,8 @@ async function Confirm(){
     let spreading = document.getElementById("ta-place").value
     let biology = document.getElementById("ta-bio").value
 
+    let family_id = document.getElementById('viewBox2').value
+
 
 
     if(name == ''){
@@ -158,7 +155,7 @@ async function Confirm(){
         // Созадние карточки
         
         // Очищение занчениеи fileDialogValue
-        eel.add_to_db(name, fileDialogValue, name_lat, name_eng, description, spreading, biology)
+        eel.add_to_db(name, fileDialogValue, name_lat, name_eng, description, spreading, biology, family_id)
       
         // CreateCardVid(name, await eel.get_last_image()())
         
@@ -322,7 +319,7 @@ async function Delete(id, title){
                 option[i].remove();
             }
         }
-    }   
+    }  
 }
 
 

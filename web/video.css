@@ -78,7 +78,7 @@ body.loaded {
 
 /* Кнопка добавит видео */
 .conteiner-btn{
-    margin: 40px 60px;
+    margin: 40px 140px;
 }
 
 .add-video{
@@ -148,8 +148,24 @@ body.loaded {
     opacity: 1;
 }
 
+
+.divVideoInfo{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 14px;
+    font-weight: 500;
+    color: #303030;
+} 
+
+.divVideoInfo span{
+    font-weight: 700;
+    color:#292929
+}
+
 .button-conteiner{
     display: flex;
+    flex-direction: column;
+    align-items: center;
+
     z-index: 2;
     margin-bottom: 3px;
 
@@ -198,4 +214,213 @@ body.loaded {
     font-size: 1.5em;
     color: #333;
     font-weight: 400;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal, .modalEdite{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden; 
+}
+
+.modal.open, .modalEdite.open{
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-box{
+    position: fixed;
+
+    width: 30vw;
+    max-height: clamp(600px, 88vh, 1200px);
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: #ececec;
+
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+
+    overflow-y: auto;
+}
+
+.container_top_model{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+
+    margin-bottom: 20px;
+}
+
+.container_top_model svg{
+    width: 40px;
+    height: 40px;
+    margin-left: auto;
+    color: #333;
+    cursor: pointer;
+}
+
+.container_top_model svg:hover{
+    color: black;
+}
+
+.modal-conteiner{
+    padding: 2.5vw 2.5vw;
+
+    display: flex;
+    flex-direction: column;
+    
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.text-header{
+    font-size: 28px;
+    color: #333;
+}
+
+.text-header2{
+    margin-top: 5px;
+
+    font-weight: 500;
+    color: #333;
+
+    padding-left: 1vw;
+}
+
+.th2{
+    margin-top: 20px;
+}
+
+.text{
+    font-weight: 500;
+    padding-left: 1vw;
+    color: #333;
+    max-width: 91%;
+    word-wrap: break-word;
+}
+
+.btn_open_file{
+    width: fit-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: .3vw 1vw;
+    padding: 5px 10px;
+    gap: 5px;
+    
+    font-weight: 600;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: #333;
+    background-color: transparent;
+
+    border-radius: 3px;
+    border: #b6b6b6 1px solid;
+
+    cursor: pointer;
+}
+
+.btn_open_file:hover{
+    border: #727272 1px solid;
+}
+
+.btn_open_file svg{
+    height: 25px;
+    width: 25px;
+}
+
+#input-date{
+    height: 30px;
+    width: 130px;
+    padding-left: 8px;
+    margin-left: 1vw;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.modal-conteiner input{
+    width: 91%;
+    height: 22px;
+
+    margin-left: 1vw;
+    padding-left: 8px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+}
+
+.modal-conteiner-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 40px;
+    padding: 10px 10px;
+    gap: 10px;
+
+    border: solid 1px #b6b6b6;
+    border-radius: 3px;
+
+
+    font-size: 18px;
+    font-weight: 500;
+    color: #333;
+
+    cursor: pointer;
+}
+
+.modal-conteiner-center:hover{
+    border: solid 1px #727272;
+    color: black;
+}
+
+.modal-conteiner-center svg{
+    width: 24px;
+    height: 24px;
+}
+
+
+
+.open{
+    opacity: 1;
+    visibility: visible;
 }

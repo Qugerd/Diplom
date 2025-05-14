@@ -68,8 +68,8 @@ def parse():
 
 
 @eel.expose
-def add_to_db(name, img, name_lat, name_eng, description, spreading, biology):
-    AddInDB(name, img, name_lat, name_eng, description, spreading, biology)
+def add_to_db(name, img, name_lat, name_eng, description, spreading, biology, family_id):
+    AddInDB(name, img, name_lat, name_eng, description, spreading, biology, family_id)
 
 
 @eel.expose
@@ -185,6 +185,12 @@ def get_gallery_all_info():
 
 
 @eel.expose
+def add_photo_gallery_collection(photo_path, data, place, latitude, longitude, group_id):
+    kind = TITLE
+    print(photo_path, kind, data, place, latitude, longitude, group_id)
+    AddPhotoGalleryCollection(photo_path, kind, data, place, latitude, longitude, group_id)
+
+@eel.expose
 def get_coords_photo():
     return GetCoordsPhoto(ID)
 
@@ -200,8 +206,8 @@ def get_all_favorite_photos():
 
 
 @eel.expose
-def add_video(path_video, date):
-    AddVideo(path_video, date, TITLE)
+def add_video(path_video, date, place):
+    AddVideo(path_video, date, TITLE, place)
 
 
 @eel.expose

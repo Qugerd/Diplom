@@ -42,14 +42,35 @@ eel.get_gallery_photos()(function(data){
             let dataTime = data[i][3]
 
 
+            const container_btn_add_photo_to_collection = document.createElement('div')
+            const icon_btn_add_photo_to_collection = document.createElement('div')
+            const btn_add_photo_to_collection = document.createElement('div')
+            btn_add_photo_to_collection.innerHTML = "Добавить фотографию к коллекции"
+            btn_add_photo_to_collection.classList.add("btn_add_photo_to_collection")
+            btn_add_photo_to_collection.onclick = async function(){
+                var photo_path = await eel.OpenFileDialog()()
+                if (photo_path){
+                    eel.add_photo_gallery_collection(photo_path, data[i][3], data[i][2], data[i][5], data[i][6], group_id_current)
+                    window.location.reload()
+                }
+            }
+
+            container_btn_add_photo_to_collection.classList.add("container_btn_add_photo_to_collection")
+            icon_btn_add_photo_to_collection.classList.add("icon_btn_add_photo_to_collection")
+            container_btn_add_photo_to_collection.appendChild(icon_btn_add_photo_to_collection)
+            container_btn_add_photo_to_collection.appendChild(btn_add_photo_to_collection)
+
+
             titleDataLocation.innerText = dataTime + ' | ' + location
             titleDataLocation.classList.add('label-container')
+            titleDataLocation.appendChild(container_btn_add_photo_to_collection)
             imgConteiner.classList.add('img-container')
-
+            
 
             conteinerCollection.classList.add("conteiner-collection")
             conteinerCollection.appendChild(titleDataLocation)
             conteinerCollection.appendChild(imgConteiner)
+            
 
             // Добавление в главный контейнер 
             categoryConteiner.appendChild(conteinerCollection)
@@ -87,11 +108,31 @@ eel.get_gallery_photos()(function(data){
             let location = data[i][2]
             let dataTime = data[i][3]
 
+
+            const container_btn_add_photo_to_collection = document.createElement('div')
+            const icon_btn_add_photo_to_collection = document.createElement('div')
+            const btn_add_photo_to_collection = document.createElement('div')
+            btn_add_photo_to_collection.innerHTML = "Добавить фотографию к коллекции"
+            btn_add_photo_to_collection.classList.add("btn_add_photo_to_collection")
+            btn_add_photo_to_collection.onclick = async function(){
+                var photo_path = await eel.OpenFileDialog()()
+                if (photo_path){
+                    eel.add_photo_gallery_collection(photo_path, data[i][3], data[i][2], data[i][5], data[i][6], group_id_current)
+                    window.location.reload()
+                }
+            }
+
+            container_btn_add_photo_to_collection.classList.add("container_btn_add_photo_to_collection")
+            icon_btn_add_photo_to_collection.classList.add("icon_btn_add_photo_to_collection")
+            container_btn_add_photo_to_collection.appendChild(icon_btn_add_photo_to_collection)
+            container_btn_add_photo_to_collection.appendChild(btn_add_photo_to_collection)
+
  
             titleDataLocation.innerText = dataTime + ' | ' + location
-
             titleDataLocation.classList.add('label-container')
             titleDataLocation.classList.add('text-header2')
+            titleDataLocation.appendChild(container_btn_add_photo_to_collection)
+
             imgConteiner.classList.add('img-container')
 
             conteinerCollection = document.createElement("div")

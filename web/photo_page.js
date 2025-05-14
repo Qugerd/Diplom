@@ -93,7 +93,7 @@ async function LoadPhotoVersion(){
             document.getElementById('modal').classList.add('open_modal')
             document.getElementById('img_version').setAttribute('src', data_photo[i][2])
             currentPhotoPath = data_photo[i][3]
-            id_photo = data_photo[i][1]
+            id_photo = data_photo[i][0]
             // TODO: доделать обработку если путь фото изменен
         }
 
