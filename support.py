@@ -7,7 +7,13 @@ import shutil
 import exifread
 from geopy.geocoders import Nominatim
 from datetime import datetime
-
+from hachoir.parser import createParser
+from hachoir.metadata import extractMetadata
+from mutagen.mp3 import MP3
+from mutagen.easyid3 import EasyID3
+from mutagen.mp4 import MP4
+import os
+from datetime import datetime
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
@@ -46,15 +52,7 @@ def open_folder(path):
     os.system('explorer /select,"'+path+'"')
 
 
-def get_duration(path_file):
-    # y, sr = librosa.load(path_file)
-    # duration = librosa.get_duration(y=y, sr=sr)
-    # minutes = int(duration / 60)
-    # seconds = int(duration % 60)
-    # duration_formatted = "{:d}:{:02d}".format(minutes, seconds)
 
-    # print("Длительность файла составляет: {}".format(duration_formatted))
-    return "none"
 
 def change_date_formate(date_str):
     # преобразовываем строку с датой в объект datetime
@@ -65,6 +63,9 @@ def change_date_formate(date_str):
 
 
 def absolute_path_to_relative_path(file_url):
+
+    if isinstance(file_url, str) and (file_url.startswith('http://') or file_url.startswith('https://')):
+        return file_url
 
     if not os.path.exists(file_url):
         return ""
@@ -88,9 +89,9 @@ def absolute_path_to_relative_path(file_url):
     rel_path = os.path.relpath(dest_path, web_dir)
 
     # Выводим информацию о временной директории и скопированном файле
-    print("Временная директория: ", temp_dir_path)
-    print("Скопированный файл: ", dest_path)
-    print("Относительный путь до файла: ", rel_path)
+    # print("Временная директория: ", temp_dir_path)
+    # print("Скопированный файл: ", dest_path)
+    # print("Относительный путь до файла: ", rel_path)
 
 
     return rel_path
@@ -136,7 +137,7 @@ def get_photo_exif(photo_path):
         model = ""
         result = ["", ""]
 
-        if 'EXIF DateTimeOriginal' and "Image Make" in tags:
+        if 'EXIF DateTimeOriginal' in tags and "Image Make" in tags:
             data_and_time = tags['EXIF DateTimeOriginal'].values
             data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
 
@@ -154,15 +155,12 @@ def get_photo_exif(photo_path):
             lon_decimal = float(lon[0]) + float(lon[1])/60 + float(lon[2])/3600
 
 
-
-
             # Учитываем направление (N/S, E/W)
             if tags['GPS GPSLatitudeRef'].values != 'N':
                 lat_decimal = -lat_decimal
             if tags['GPS GPSLongitudeRef'].values != 'E':
                 lon_decimal = -lon_decimal
 
-                
 
             city = get_location(lat_decimal, lon_decimal)
 
@@ -171,7 +169,94 @@ def get_photo_exif(photo_path):
         return result
 
 
-# print(get_photo_exif(r'web\assets\geo.jpg'))
+@eel.expose
+def get_video_date(file_path):
+    parser = createParser(file_path)
+    if not parser:
+        print("Не удалось создать парсер")
+        return
+
+    with parser:
+        metadata = extractMetadata(parser)
+        if metadata:
+            for item in metadata.exportPlaintext():
+                if "Creation date" in item or "Creation time" in item or "Date" in item:
+                    # Пример: 'Creation date: 2023-05-27 15:30:45'
+                    # Отделяем после двоеточия и берем только дату
+                    date_time_str = item.split(":", 1)[1].strip()
+                    date_only = date_time_str.split(" ")[0]
+                    return date_only
+
+
+
+
+@eel.expose
+def get_audio_creation_date(file_path):
+    """
+    Попытка извлечения даты из аудиофайла (.mp3 или .m4a)
+    
+    1. Сначала ищет в тегах аудиофайла.
+    2. Если не найдено — можно использовать дату создания файла в ОС.
+    3. Возвращает строку с датой или None.
+    4. use_filesystem_date — флаг, включает использование даты файла в ОС как fallback.
+    """
+
+    use_filesystem_date = True
+    _, ext = os.path.splitext(file_path.lower())
+
+    try:
+        date_from_tags = None
+        if ext == ".mp3":
+            audio = EasyID3(file_path)
+            date = audio.get("date", audio.get("year"))
+            date_from_tags = date[0] if date else ""
+
+        elif ext == ".m4a":
+            audio = MP4(file_path)
+            date = audio.get("\xa9day")  # \xa9day — стандартный ключ для даты в M4A
+            date_from_tags = date[0] if date else ""
+
+        else:
+            print(f"Неподдерживаемый формат: {ext}")
+            return ""
+
+        # 1–3. Проверяем, нашли ли дату в тегах
+        if date_from_tags:
+            return date_from_tags
+
+        # 4. Если дата не найдена в тегах, используем дату создания файла
+        if use_filesystem_date:
+            creation_time = os.path.getctime(file_path)
+            creation_date = datetime.fromtimestamp(creation_time).strftime('%Y-%m-%d')
+            return creation_date
+
+    except Exception as e:
+        print(f"Ошибка при чтении файла {file_path}: {e}")
+        return ""
+
+    return ""
+# date_mp3 = get_audio_creation_date(r"C:\Users\asus\Downloads\Recording_1.m4a")
+# date_m4a = get_audio_creation_date(r"C:\Users\asus\Downloads\брэт.mp3")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# print(get_video_metadata(r'C:\Users\asus\Downloads\1.mp4'))
+# print(get_photo_exif(r'C:\Users\asus\Downloads\2.mp4'))
 # print(get_photo_exif(r'web\assets\no_geo.jpg'))
 
 

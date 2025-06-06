@@ -29,13 +29,28 @@ eel.get_gallery_photos()(function(data){
 
         if(group_id_current == group_id_prev){
 
-            let img = document.createElement("img")
-            img.setAttribute('src', data[i][1])
-            img.onclick = function(){
-                eel.save_id(data[i][0])
-                GoPhotoPage()
+
+            if (data[i][1] == ""){
+                let empty_div = document.createElement("div")
+                empty_div.classList.add("empty_img")
+                empty_div.innerHTML = "Путь изображения изменен"
+                empty_div.onclick = function(){
+                    eel.save_id(data[i][0])
+                    GoPhotoPage()
+                }
+
+                imgConteiner.appendChild(empty_div)
             }
-            imgConteiner.appendChild(img)
+            else{
+                let img = document.createElement("img")
+                img.setAttribute('src', data[i][1])
+                img.setAttribute('alt', 'Путь до файла изменён')
+                img.onclick = function(){
+                    eel.save_id(data[i][0])
+                    GoPhotoPage()
+                }
+                imgConteiner.appendChild(img)
+            }
 
 
             let location = data[i][2]
@@ -191,7 +206,7 @@ async function init(){
                     " style="cursor: pointer;">
                                     ${data[i][2]} <br>
                                     ${data[i][3]}<br>
-                                    <img src="${data[i][1]}" style="width: 150px;">
+                                    <img src="${data[i][1]}" style="hieght: 150px;">
                                 </div>
                 `,
                 clusterCaption: `${i}-я фотография`
@@ -199,7 +214,10 @@ async function init(){
         )
     }
 
-    var myClusterer = new ymaps.Clusterer();
+    var myClusterer = new ymaps.Clusterer({
+        clusterDisableClickZoom: true,
+        clusterOpenBalloonOnClick: true
+    });
     myClusterer.add(myGeoObjects);
     myMap.geoObjects.add(myClusterer);
 }

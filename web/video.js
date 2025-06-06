@@ -81,7 +81,7 @@ function Delete(id){
     location.reload()
 }
 
-function ShowInFolder(path_video){
+async function ShowInFolder(path_video){
     eel.open_folder(path_video)
 }
 
@@ -92,6 +92,8 @@ async function ChooseVideoFile(){
     }
     else{
         document.getElementById('file_video').innerHTML = videoPath
+        let date = await eel.get_video_date(videoPath)()
+        document.getElementById('input_date').value = date
     }
 
 }

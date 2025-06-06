@@ -79,7 +79,7 @@ eel.get_photo()(async function(data){
 
 // Загрузка версий главной фотогрофии
 async function LoadPhotoVersion(){
-    data_photo = await eel.get_photos_version(ID)()
+    let data_photo = await eel.get_photos_version(ID)()
 
     const container_image_version = document.getElementById('container_image_version')
     let currentPhotoPath;
@@ -87,15 +87,32 @@ async function LoadPhotoVersion(){
 
     console.log(data_photo)
     for (let i = 0; i < data_photo.length; i++){
-        const img = document.createElement('img')
-        img.setAttribute('src', data_photo[i][2])
-        img.onclick = function(){
-            document.getElementById('modal').classList.add('open_modal')
-            document.getElementById('img_version').setAttribute('src', data_photo[i][2])
-            currentPhotoPath = data_photo[i][3]
-            id_photo = data_photo[i][0]
-            // TODO: доделать обработку если путь фото изменен
+
+        if (data_photo[i][2] == ""){
+            let empty_div = document.createElement("div")
+            empty_div.classList.add("empty_div")
+            empty_div.innerHTML = "Путь изображения изменен"
+            empty_div.onclick = function(){
+                document.getElementById('modal').classList.add('open_modal')
+                document.getElementById('img_version').setAttribute('src', data_photo[i][2])
+                currentPhotoPath = data_photo[i][3]
+                id_photo = data_photo[i][0]
+            }
+            container_image_version.prepend(empty_div)
         }
+        else{
+            const img = document.createElement('img')
+            img.setAttribute('src', data_photo[i][2])
+            img.onclick = function(){
+                document.getElementById('modal').classList.add('open_modal')
+                document.getElementById('img_version').setAttribute('src', data_photo[i][2])
+                currentPhotoPath = data_photo[i][3]
+                id_photo = data_photo[i][0]
+            }
+            container_image_version.prepend(img)
+        }
+
+
 
 
         document.getElementById('delete_photo').onclick = function(){
@@ -107,7 +124,6 @@ async function LoadPhotoVersion(){
         document.getElementById('btn_open_in_folder').onclick = function(){
             eel.open_folder(currentPhotoPath)
         }
-        container_image_version.prepend(img)
     }
 }
 

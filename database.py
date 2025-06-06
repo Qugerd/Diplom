@@ -66,18 +66,19 @@ def CreateDataBase():
     # Создание таблицы squad
     conn.execute('''CREATE TABLE IF NOT EXISTS squad
                 (id INTEGER PRIMARY KEY,
-                 squad_name TEXT);''')
+                 squad_name TEXT UNIQUE NOT NULL);''')
     
     # Создание таблицы family
     conn.execute('''CREATE TABLE IF NOT EXISTS family
                 (id INTEGER PRIMARY KEY,
-                 family_name TEXT,
+                 family_name UNIQUE NOT NULL,
                  squad_id INTEGER,
-                 FOREIGN KEY (squad_id) REFERENCES squad (id) ON DELETE CASCADE);''')
+                 FOREIGN KEY (squad_id) REFERENCES squad (id) ON DELETE SET NULL);''')
     
+    # Создание таблицы photo_variations
     conn.execute('''CREATE TABLE IF NOT EXISTS photo_variations
                 (id INTEGER PRIMARY KEY,
-                 original_id INTEGER NOT NULL,
+                original_id INTEGER NOT NULL,
                 photo_path TEXT NOT NULL,
                 FOREIGN KEY (original_id) REFERENCES gallery (id) ON DELETE CASCADE)''')
 
@@ -113,11 +114,17 @@ def DeletePhotoVersion(id):
 
 
 def AddInDB(name, img, name_lat, name_eng, description, spreading, biology, family_id):
-    conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO views (name, img, name_lat, name_eng, description, spreading, biology, family_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-             (name, Image_to_Bytes(img), name_lat, name_eng, description, spreading, biology, family_id))
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect('database.db') as conn:
+            conn.execute("""
+                INSERT INTO views 
+                (name, img, name_lat, name_eng, description, spreading, biology, family_id) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (name, Image_to_Bytes(img), name_lat, name_eng, description, spreading, biology, family_id))
+            return True
+    except sqlite3.IntegrityError:
+        return "Вид с таким названием уже существует"
 
 
 def ParseDB():
@@ -182,10 +189,8 @@ def InsertMetaDate(data: list):
 
 def DeleteView(id, title):
     conn = sqlite3.connect('database.db')
+    conn.execute("PRAGMA foreign_keys = ON")
     conn.execute("DELETE FROM views WHERE id=?", (id, ))
-    conn.execute("DELETE FROM gallery WHERE kind=?", (title,))
-    conn.execute("DELETE FROM video WHERE view=?", (title,))
-    conn.execute("DELETE FROM sounds WHERE view=?", (title,))
     conn.commit()
     conn.close()
 
@@ -388,6 +393,7 @@ def EditeSound(id, date, country, place, type):
 def DeletePhoto(id):
     try:
         conn = sqlite3.connect('database.db')
+        conn.execute("PRAGMA foreign_keys = ON")
         conn.execute("DELETE FROM gallery WHERE id=?", (id, ))
         conn.commit()
         conn.close()
@@ -397,11 +403,13 @@ def DeletePhoto(id):
 
 
 def AddSquad(squad_name):
-    conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO squad (squad_name) VALUES (?)",
-            (squad_name,))
-    conn.commit()
-    conn.close()
+    try:
+        with sqlite3.connect('database.db') as conn:
+            conn.execute("INSERT INTO squad (squad_name) VALUES (?)",
+                         (squad_name,))
+            return True
+    except sqlite3.IntegrityError:
+        return "Такое название уже существует"
 
 
 def GetAllSquad():
@@ -416,13 +424,19 @@ def GetAllSquad():
     return data
 
 
+def AddFamily(family_name):
+    try:
+        with sqlite3.connect('database.db') as conn:
+            conn.execute("INSERT INTO family (family_name) VALUES (?)",
+                         (family_name,))
+            return True
+    except sqlite3.IntegrityError:
+        return "Такое название уже существует"
 
-def AddFamily(family_name, squad_id):
-    conn = sqlite3.connect('database.db')
-    conn.execute("INSERT INTO family (family_name, squad_id) VALUES (?, ?)",
-            (family_name, squad_id))
-    conn.commit()
-    conn.close()
+
+def AddFamilyToSquad(squad_id, family_id):
+    with sqlite3.connect('database.db') as conn:
+        conn.execute("UPDATE family SET squad_id=? WHERE id=?", (squad_id, family_id))
 
 
 def GetAllFamilyById(squad_id):
@@ -449,16 +463,11 @@ def GetAllView():
 
 
 def GetAllFamily():
-    conn = sqlite3.connect('database.db')
-    cursor = conn.execute('SELECT id, family_name FROM family ORDER BY family_name ASC')
-    data = []
-    for row in cursor:
-        id, family_name = row
-        data.append([id, family_name])
-    conn.commit()
-    conn.close()
-    print(data)
-    return data
+    with sqlite3.connect('database.db') as conn:
+        cursor = conn.execute('SELECT id, family_name FROM family ORDER BY family_name ASC')
+        data = [[row[0], row[1]] for row in cursor.fetchall()]
+        # print(data)
+        return data
 
 
 def GetViewInFamily(family_id):
@@ -487,14 +496,45 @@ def ChangePreview(id, img):
     conn.commit()
     conn.close()
 
+def GetPhotoKindByDate(start_date, end_date):
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute("SELECT DISTINCT(kind) FROM gallery " \
+                          "WHERE data BETWEEN ? AND ? " \
+                          "ORDER BY kind ASC", (start_date, end_date))
+    data = []
+    for row in cursor:
+        data.append(row[0])
+    return data
 
+def GetKindsByKindsAndDate(kinds, start_date, end_date):
+    placeholders = ','.join(['?'] * len(kinds))
+    conn = sqlite3.connect('database.db')
+    cursor = conn.execute("SELECT * " \
+                          "FROM gallery " \
+                          f"WHERE data BETWEEN ? AND ? AND kind IN ({placeholders})", ([start_date, end_date] + kinds))
+    return cursor.fetchall()
 
+def DeleteSquadById(squad_id):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("DELETE FROM squad WHERE id=?", (squad_id, ))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+            # print("Ошибка:", e.args[0])
+            pass
 
-
-
-
-
-
+def DeleteFamilyById(family_id):
+    try:
+        conn = sqlite3.connect('database.db')
+        conn.execute("PRAGMA foreign_keys = ON")
+        conn.execute("DELETE FROM family WHERE id=?", (family_id, ))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+            # print("Ошибка:", e.args[0])
+            pass
 
 
 

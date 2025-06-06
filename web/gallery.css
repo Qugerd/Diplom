@@ -253,6 +253,11 @@ body.loaded {
     cursor: pointer;
 }
 
+.container_btn_add_photo_to_collection:hover{
+    border: 1px solid #000000;
+    color: #000000;
+}
+
 
 .icon_btn_add_photo_to_collection{
     width: 20px;
@@ -294,7 +299,7 @@ img{
     cursor: pointer;
     border-radius: 5px;
     box-shadow: 0 0 50px rgba(172, 171, 171, 0.5);
-    border: 0.5px solid rgb(59, 58, 58);
+    border: 0.5px solid rgb(150, 150, 150);
 }
 
 img:hover{
@@ -308,7 +313,7 @@ img:hover{
 
     display: flex;
     align-items: center;
-    border: 1px solid black;
+    border: 1px solid rgb(150, 150, 150);
     border-radius: 3px;
 
     padding: 0px 20px;

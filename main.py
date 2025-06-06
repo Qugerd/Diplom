@@ -41,7 +41,7 @@ def OpenFileDialogSound():
     root.lift()
     root.attributes("-topmost", True)
 
-    filetypes = (("MP3 files", "*.mp3"), ("All files", "*.*"))
+    filetypes = (("Audio files", "*.mp3 *.m4a"), ("All files", "*.*"))
     file_path = filedialog.askopenfilename(filetypes=filetypes)
     # print(file_path)
     return file_path
@@ -57,7 +57,7 @@ def OpenFilesDialog():
     file_path = filedialog.askopenfilenames(title='Выберите файлы')
     print(file_path)
 
-    exif = get_photo_exif(file_path[0])
+    exif = get_photo_exif(file_path[0]) if file_path else ["", ""]
 
     return file_path, exif
 
@@ -69,7 +69,7 @@ def parse():
 
 @eel.expose
 def add_to_db(name, img, name_lat, name_eng, description, spreading, biology, family_id):
-    AddInDB(name, img, name_lat, name_eng, description, spreading, biology, family_id)
+    return AddInDB(name, img, name_lat, name_eng, description, spreading, biology, family_id)
 
 
 @eel.expose
@@ -130,7 +130,7 @@ def get_gallery_photos():
 def generate_group_id():
     return str(uuid.uuid4())
 
-# FIXME: обработать то что у файла может измениться путь
+
 @eel.expose
 def get_photo():
     data = GetPhoto(ID)
@@ -223,7 +223,7 @@ def get_video_by_view():
 
 @eel.expose
 def add_sound(path_sound, date, country, place, type_):
-    duration = get_duration(path_sound)
+    duration = ""
     return AddSound(path_sound, TITLE, date, country, place, type_, duration)
 
 
@@ -270,7 +270,7 @@ def delete_photo(id):
 
 @eel.expose
 def add_squad(text):
-    AddSquad(text)
+    return AddSquad(text)
 
 
 @eel.expose
@@ -279,8 +279,8 @@ def get_all_squad():
 
 
 @eel.expose
-def add_family(text, squad_id):
-    AddFamily(text, squad_id)
+def add_family(family_name):
+    return AddFamily(family_name)
 
 
 @eel.expose
@@ -312,6 +312,41 @@ def add_view_to_family(vidName, familyId):
 def change_preview(id, img):
     print(img)
     ChangePreview(id, img)
+
+@eel.expose
+def get_photo_kind_by_date(start_date, end_date):
+    # print(GetPhotoKindByDate(start_date, end_date))
+    return GetPhotoKindByDate(start_date, end_date)
+
+
+@eel.expose
+def get_kinds_by_kinds_and_date(kinds, start_date, end_date):
+    data = GetKindsByKindsAndDate(kinds, start_date, end_date)
+    for i in range(len(data)):
+        data[i] = list(data[i])
+        data[i][1] = absolute_path_to_relative_path(data[i][1])
+    return data
+
+
+@eel.expose
+def delete_squad_by_id(squad_id):
+    DeleteSquadById(squad_id)
+
+
+@eel.expose
+def delete_family_by_id(family_id):
+    DeleteFamilyById(family_id)
+
+
+
+@eel.expose
+def add_family_to_squad(squad_id, family_id):
+    AddFamilyToSquad(squad_id, family_id)
+
+
+
+
+
 
 
 

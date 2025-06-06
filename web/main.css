@@ -139,6 +139,7 @@ body.loaded {
     text-align: center;
     margin-bottom: 10px;
     margin-top: 8px;
+    color: #333;
 }
 
 
@@ -216,6 +217,10 @@ body.loaded {
     color: #333;
     background: linear-gradient(90deg, #dedede,#e0e0e0,#ececec, transparent);
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
     padding-left: 5px;
     padding-right: 20px;
 
@@ -227,6 +232,15 @@ body.loaded {
     word-wrap: break-word;
 
     margin-top: .8vw;
+}
+
+.squad-title svg{
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+.squad-title:hover svg{
+    opacity: 1;
 }
 
 .squad-family{
@@ -247,8 +261,21 @@ body.loaded {
     cursor: pointer;
     text-decoration: none !important;
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    
     padding: .1vw 1vw;
     border-radius: 3px;
+}
+
+.family-title svg{
+    opacity: 0;
+}
+
+.family-title:hover svg{
+    opacity: 1;
 }
 
 .family-title:hover{
@@ -535,6 +562,81 @@ a{
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
+.uploaded-image{
+    height: 200px;
+    max-width: 400px;
+}
+
+.container_label_path{
+    display: flex;
+    flex-direction: row;
+
+    align-items: center;
+}
+
+.label_path{
+    font-size: 16px;
+    font-weight: 500;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    color: #333;
+
+    
+    margin-bottom: 2px;
+}
+
+.container_label_path svg{
+    color: rgb(134, 134, 134);
+    margin-right: 5px;
+}
+
+.container_label_path svg:hover{
+    color: black;
+    cursor: pointer;
+}
+
+
+.container_link{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.btn_add_link svg{
+    margin-top: 3px;
+    margin-left: 7px;
+
+    color: #555;
+
+    cursor: pointer;
+}
+
+.btn_add_link svg:hover{
+    color: black;
+}
+
+.container_label_link{
+    display: flex;
+    flex-direction: row;
+}
+
+.container_label_link svg{
+    color: #555;
+    cursor: pointer;
+}
+
+.container_label_link svg:hover{
+    color: #000000;
+}
+
+.label_link{
+    display: inline-block; /* или block */
+    max-width: 300px; /* или любая нужная вам ширина */
+    white-space: nowrap; /* запрещаем перенос строк */
+    overflow: hidden; /* скрываем выходящий за границы текст */
+    text-overflow: ellipsis;
+}
+
 .modal-conteiner .modal-input{
     margin-top: 10px;
     display: flex;
@@ -743,7 +845,7 @@ textarea{
 .modal-alert-box{
     position: relative;
     width: 600px;
-    background-color: azure;
+    background-color: #ececec;
 
     border-radius: 10px;
 
@@ -757,28 +859,40 @@ textarea{
     display: flex;
     flex-direction: column;
 }
+
 .alert-text{
     word-wrap: break-word;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .btn-ok{
     margin-top: 8px;
     align-self: flex-end;
     background-color: transparent;
-    font: bold 18px arial;
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
 
     border: 0px;
 }
 
 .btn-ok:hover{
+    color: #252525;
     cursor: pointer;
 }
 
 .alert-input{
     width: 90%;
-    font: bold 18px arial;
+    height: 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #f0f0f0;
+    font-weight: 500px;
+    font-size: 16px;
 
     border: 1px solid rgba(195, 206, 211, 0.733);
+    border-radius: 3px;
     outline: transparent;
 }
 
@@ -856,19 +970,148 @@ textarea{
 
 
 
+
+
+
+
+
+
+/* Модальное окно поиск по карте */
+
+.modal-box_search_map{
+    position: fixed;
+
+    width: 90vw;
+    height: 90%;
+    max-height: clamp(600px, 88vh, 1200px);
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: #ececec;
+
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+
+    overflow-y: hidden;
+}
+
+.modal-conteiner_search_map{
+    box-sizing: border-box;
+    padding: 2.5vw 2.5vw;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+}
+
+.container_date{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    align-items: center;
+}
+
+.container_date div{
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+}
+
+.container_grid_label{
+    height: 30%;
+    /* background-color: #9b9b9b; */
+
+    padding: 10px;
+
+    display: grid;
+    justify-items: center;
+    align-content: space-evenly;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 20px;
+    overflow-y: auto;
+
+    border: 1px solid #bdbdbd;
+    border-radius: 5px;
+}
+
+#start_date, #end_date{
+    height: 30px;
+    width: 130px;
+    padding-left: 8px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
+    cursor: pointer;
+}
+
+.kek{
+    display: flex;
+    flex-direction: column;
+
+    width: fit-content;
+    padding: 7px;
+    
+
+    font-size: 16px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    border-radius: 5px;
+    border: 1px solid transparent;
+}
+.kek img{
+    width: 120px;
+}
+.kek:hover{
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+
+
+
+
+
+
+
+
 /* Модальное окно "Редактировать Классификатор" */
 .modalNewClass{
-
-
-
+    width: auto;
 
 }
 
 .squad-contiener{
+    margin-top: 10px;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+
+    gap: 20px;
+    
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
 }
 
+.squad-contiener select{
+    width: auto;
+    height: 24px;
+}
 
 .sqaud-layout, .family-layuot, .view-layout{
     display: flex;
@@ -886,34 +1129,64 @@ textarea{
 }
 
 #inputSquad, #inputFamily{
-    height: 20px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    border-radius: 5px;
-
-    outline: 0px;
-    background-color: rgba(129, 123, 123, 0.1);
-    border: 0.1px solid #d6d6d6;
-}
-
-#addSquad, #AddFamily, #AddView{
     height: 24px;
-    background-color: black;
-    color: white;
-    font: bold 16px arial;
-    cursor: pointer;
+    width: auto;
+    padding-left: 8px;
 
-    border-radius: 5px;
-    border: 0px;
+    margin-bottom: 5px;
+
+    border: 1px solid #bdbdbd;
+    background-color: #e7e7e7;
+    border-radius: 3px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+
+    outline: none;
 }
 
-#addSquad:hover, #AddFamily:hover, #AddView:hover{
-    cursor: pointer;
+.btn_create, .btn_add{
+    height: 26px;
 
-    background-color: white;
-    color: black;
-    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    margin: .3vw 0px;
+    padding: 1px 5px;
+    gap: 5px;
+    
+    font-weight: 500;
+    font-size: clamp(14px, 1.2vw, 18px);
+    color: #555;
+    background-color: transparent;
+
+    border-radius: 3px;
+    border: #b6b6b6 1px solid;
+
+    cursor: pointer;
 }
+
+.btn_create:hover, .btn_add:hover{
+    border: rgb(75, 75, 75) 1px solid;
+    color: rgb(51, 51, 51);
+}
+
+.btn_create:hover svg path, .btn_add:hover svg path{
+    fill: rgb(75, 75, 75);
+}
+
+
+
+.family-text{
+    margin-top: 10px;
+}
+
+#btn_add_family_to_squad{
+    margin-top: auto;
+}
+
 
 #squadBox, #familyBox{
     outline: 0px;

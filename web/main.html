@@ -32,6 +32,11 @@
             <div class="btn_name">Загрузить фото</div>
 		</div>
 
+            <div class=" btn_conteiner open_map" id="btn_open_map" onclick="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 32 32"><path fill="#4d4d4d" d="m16 24l-6.09-8.6A8.14 8.14 0 0 1 16 2a8.08 8.08 0 0 1 8 8.13a8.2 8.2 0 0 1-1.8 5.13Zm0-20a6.07 6.07 0 0 0-6 6.13a6.19 6.19 0 0 0 1.49 4L16 20.52L20.63 14A6.24 6.24 0 0 0 22 10.13A6.07 6.07 0 0 0 16 4"/><circle cx="16" cy="9" r="2" fill="#4d4d4d"/><path fill="#4d4d4d" d="M28 12h-2v2h2v14H4V14h2v-2H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h24a2 2 0 0 0 2-2V14a2 2 0 0 0-2-2"/></svg>
+            <div class="btn_name">Поиск по карте</div>
+		</div>
+
 
 
 		<div class="conteiner-search">
@@ -147,19 +152,34 @@
 		<div class="modal-box modalUploadPhoto">
 			<div class="modal-conteiner">
                 
-                <div class="container_top_model" id="btnCloseModal-Upload">
+                <div class="container_top_model" >
                     <div class="text-header">Загрузить фото</div>
-                    <svg id="btnCloseModal" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                    <svg id="btnCloseModal-Upload" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
                 </div>
 
 
 
 				<div class="text-header2">Выбор изображения:</div>
-                <div class="btn_open_file" id="btnChoseFileUploadPhoto" onclick="OpenFilesDialog()">
+                <div class="btn_open_file" id="btnChoseFileUploadPhoto" onclick="AutoCompleteInfo()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11.59l4.29-4.3l2.5 2.5l5-5L20 16V6a2 2 0 0 0-2-2H5m4.79 13.21l-2.5-2.5L3 19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-1.59l-5.21-5.2l-5 5M7.5 6A2.5 2.5 0 0 1 10 8.5A2.5 2.5 0 0 1 7.5 11A2.5 2.5 0 0 1 5 8.5A2.5 2.5 0 0 1 7.5 6m0 1A1.5 1.5 0 0 0 6 8.5A1.5 1.5 0 0 0 7.5 10A1.5 1.5 0 0 0 9 8.5A1.5 1.5 0 0 0 7.5 7Z"/></svg>
                     <div class="btn_name">Выбрать файл</div>
                 </div>
-                <div class="text" id="files-value">Файлы: пусто</div>
+                <div class="text" id="files-value">Файлы:</div>
+                <!-- <div class="container_label_path">
+                    <div class="label_path">2312321.jpg</div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div> -->
+
+
+
+                <div class="text" id="files-value">Добавить по ссылке:</div>
+                <div class="container_link" id="container_link">
+                    <input type="text" id="inputLink" oninput="CreateImg()">
+                    <div class="btn_add_link" onclick="AddLink()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M9.25 5a.75.75 0 0 1 .11 1.492l-.11.008H7a3.5 3.5 0 0 0-.206 6.994L7 13.5h2.25a.75.75 0 0 1 .11 1.492L9.25 15H7a5 5 0 0 1-.25-9.994L7 5zM17 5a5 5 0 0 1 4.43 7.322a6.5 6.5 0 0 0-1.294-.765a3.5 3.5 0 0 0-2.93-5.05L17 6.499h-2.25a.75.75 0 0 1-.11-1.492L14.75 5zM7 9.25h10a.75.75 0 0 1 .102 1.493L17 10.75H7a.75.75 0 0 1-.102-1.493zm16 8.25a5.5 5.5 0 1 0-11 0a5.5 5.5 0 0 0 11 0m-5 .5l.001 2.503a.5.5 0 1 1-1 0V18h-2.505a.5.5 0 0 1 0-1H17v-2.5a.5.5 0 1 1 1 0V17h2.497a.5.5 0 0 1 0 1z"/></svg>
+                    </div>
+                </div>
+                
 
 
 
@@ -194,6 +214,67 @@
     </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+    <div class="modal" id="modal_search_map">
+		<div class="modal-box_search_map">
+			<div class="modal-conteiner_search_map">
+                <div class="container_top_model">
+                    <div class="text-header">Поиск по карте</div>
+                    <svg id="btn_close_search_map" xmlns="http://www.w3.org/2000/svg" width="90%" height="90%" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
+                <div class="container_date">
+                    <div>Введите даты поиска: от</div>
+                    <input type="date" id="start_date"  onchange="SelectDate()">
+                    <div>до</div>
+                    <input type="date" id="end_date" onchange="SelectDate()">
+                </div>
+
+                <div class="container_grid_label" id="container_grid_label">
+                </div>
+
+                <div id="map_search" style="width: auto; height: 100%"></div>
+
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     <!-- Модальное окно "Настроить классификатор" -->
     <div class="modal-newClass" id="modal-newClass">
@@ -208,25 +289,44 @@
                 <div class="squad-contiener">
                     <div class="sqaud-layout">
                         <div class="squad-text">
-                            Добавить отряд:
+                            Создать отряд:
                         </div>
                         <input type="text" placeholder="Название отряда" id="inputSquad">
-                        <button id="addSquad" onclick="AddSquad()">Добавить</button>
-                    </div>
-    
-                    <div class="family-layuot">
-                        <div class="family-text">
-                            Добавить семейство:
+                        <div class="btn_create" id="addSquad" onclick="AddSquad()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><defs><path id="carbonNewTab0" fill="#555" d="M26 26H6V6h10V4H6a2.002 2.002 0 0 0-2 2v20a2.002 2.002 0 0 0 2 2h20a2.002 2.002 0 0 0 2-2V16h-2Z"/></defs><use href="#carbonNewTab0"/><use href="#carbonNewTab0"/><path fill="#555" d="M26 6V2h-2v4h-4v2h4v4h2V8h4V6z"/></svg>
+                            <div class="btn_name">Создать</div>
                         </div>
-                        <input type="text" placeholder="Название семейства" id="inputFamily">
+
 
                         <div class="family-text">
-                            Семейство добавить к отряду:
+                            Создать семейство:
+                        </div>
+                        <input type="text" placeholder="Название семейства" id="inputFamily">
+                        <div class="btn_create" id="btnCreateFamily" onclick="CreateFamily()">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><defs><path id="carbonNewTab0" fill="#555" d="M26 26H6V6h10V4H6a2.002 2.002 0 0 0-2 2v20a2.002 2.002 0 0 0 2 2h20a2.002 2.002 0 0 0 2-2V16h-2Z"/></defs><use href="#carbonNewTab0"/><use href="#carbonNewTab0"/><path fill="#555" d="M26 6V2h-2v4h-4v2h4v4h2V8h4V6z"/></svg>
+                            <div class="btn_name">Создать</div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="family-layuot">
+                        <div class="squad-text">
+                            Выбрать отряд:
                         </div>
                         <select id="squadBox">
                         </select>
 
-                        <button id="AddFamily" onclick="AddFamily()">Добавить</button>
+
+                        <div class="family-text">
+                            Выбрать семейство:
+                        </div>
+                        <select id="family_box"></select>
+
+                        <div class="btn_add" id="btn_add_family_to_squad" onclick="AddFamilyToSquad()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12Zm10-8a8 8 0 1 0 0 16a8 8 0 0 0 0-16Z"/><path d="M13 7a1 1 0 1 0-2 0v4H7a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2h-4V7Z"/></g></svg>
+                            <div class="btn_name">Добавить</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -306,6 +406,7 @@
 		<div class="modal-alert-box ">
 			<div class="modal-alert-conteiner">
                 <div class="alert-text text-header" id="msg">
+                        ужтьдтйаьудвцьабдц
                 </div>
                 <button class="btn-ok" id="btn-ok">Закрыть</button>
 			</div>

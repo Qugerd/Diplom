@@ -160,6 +160,8 @@ async function OpenFileDialog(){
     if (fileDialogValue != ""){
         document.getElementById("file-song").innerHTML = fileDialogValue
         document.getElementById("file-song").style.color = "black"
+        let date = await eel.get_audio_creation_date(fileDialogValue)()
+        document.getElementById('input-date').value = date
     }
     else{
         document.getElementById("file-song").innerHTML = "Файл не выран"

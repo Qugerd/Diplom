@@ -1,4 +1,4 @@
-const PLACEHOLD_PATH = "http://placehold.it/150x150"
+const PLACEHOLD_PATH = ""
 
 let fileDialogValue = PLACEHOLD_PATH
 let Title;
@@ -77,7 +77,7 @@ function OpenModal(){
 
 document.getElementById("addCategory").addEventListener("click", function(){
     document.getElementById("modal").classList.add("open")
-    CreateViewBox()
+    CreateViewBox2()
 })
 
 
@@ -100,12 +100,19 @@ document.getElementById("btnCloseModal-Edite").addEventListener("click", functio
 
 document.getElementById("addClass").addEventListener("click", async function(){
     document.getElementById("modal-newClass").classList.add("open")
+    CreateSquadBox()
     CreateFamilyBox()
-    let squads = await eel.get_all_squad()()
-    CreateSquadBox(squads)
 })
 
-async function CreateViewBox(){
+document.getElementById('btn_open_map').addEventListener('click', function(){
+    document.getElementById('modal_search_map').classList.add('open')
+})
+
+document.getElementById('btn_close_search_map').addEventListener('click', function(){
+    document.getElementById('modal_search_map').classList.remove('open')
+})
+
+async function CreateViewBox2(){
     let viewBox = document.getElementById("viewBox2")
     $(viewBox).empty();
     let views = await eel.get_all_family()()
@@ -116,20 +123,6 @@ async function CreateViewBox(){
         option.text = views[i][1]
         option.value = views[i][0]
         viewBox.appendChild(option)
-    }
-}
-
-
-async function CreateFamilyBox(){
-    let familyBox = document.getElementById("viewBox")
-    $(familyBox).empty();
-
-    let familys =  await eel.get_all_family()()
-    for(let i = 0; i < familys.length; i++){
-        let option = document.createElement("option")
-        option.text = familys[i][1]
-        option.value = familys[i][0]
-        familyBox.appendChild(option)
     }
 }
 
@@ -150,22 +143,26 @@ async function Confirm(){
     if(name == ''){
         Alert('Поле "Название вида" пустое')
     }
+    else if(fileDialogValue == ""){
+        Alert('Выберите изображение !')
+    }
     else{
         // Добавление в базу данных 
         // Созадние карточки
         
         // Очищение занчениеи fileDialogValue
-        eel.add_to_db(name, fileDialogValue, name_lat, name_eng, description, spreading, biology, family_id)
-      
-        // CreateCardVid(name, await eel.get_last_image()())
+        let response = await eel.add_to_db(name, fileDialogValue, name_lat, name_eng, description, spreading, biology, family_id)()
         
-        fileDialogValue = PLACEHOLD_PATH
+        if (response == true){
+            document.getElementById("modal").classList.remove("open")
+            document.getElementById("inputName").value = ''
+            fileDialogValue = ""
 
-        document.getElementById("modal").classList.remove("open")
-        document.getElementById("inputName").value = ''
-
-
-        location.reload()
+            location.reload()
+        }
+        else{
+            Alert(response)
+        }
     }
 
 }
@@ -184,7 +181,36 @@ async function OpenFileDialog(){
 }
 
 
-async function OpenFilesDialog(){
+function CreateLabelsPath(paths){
+    const filesValue = document.getElementById("files-value");
+    console.log(paths)
+    paths.forEach(path => {
+        const container = document.createElement("div");
+        container.dataset.path = path;
+        container.classList.add("container_label_path");
+
+        let label = document.createElement("div");
+        label.classList.add("label_path");
+        label.innerHTML = path.split(/[\\/]/).pop();
+
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.setAttribute("width", "16");
+        svg.setAttribute("height", "16");
+        svg.setAttribute("viewBox", "0 0 24 24");
+        svg.innerHTML = '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/>';
+        svg.onclick = function() {
+            container.remove();
+        };
+
+        container.appendChild(svg);
+        container.appendChild(label);
+        filesValue.insertAdjacentElement("afterend", container);
+    });
+}
+
+
+
+async function AutoCompleteInfo(){
     let exif = "empty"
     let data = ""
     let lat = ""
@@ -193,7 +219,14 @@ async function OpenFilesDialog(){
     let camera = ""
 
     file_list =  await eel.OpenFilesDialog()()
+    console.log(file_list)
     fileDialogValue = file_list[0]
+
+    if (fileDialogValue) {
+        CreateLabelsPath(fileDialogValue)
+    }
+
+
     exif = file_list[1]
 
     if(exif.length > 2){
@@ -228,19 +261,19 @@ async function OpenFilesDialog(){
 
 
 
-    if(fileDialogValue.length == 1){
-        document.getElementById("files-value").innerHTML = "Файл выбран: " + fileDialogValue
-        document.getElementById("files-value").style.color = "black"
-    }
-    else if(fileDialogValue.length == 0){
-        document.getElementById("files-value").innerHTML = "Файл не выбран !"
-        document.getElementById("files-value").style.color = "red"
-    }
-    else{
-        let size = fileDialogValue.length
-        document.getElementById("files-value").innerHTML = "Файлов выбрано: " + size
-        document.getElementById("files-value").style.color = "black"
-    }
+    // if(fileDialogValue.length == 1){
+    //     document.getElementById("files-value").innerHTML = "Файл выбран: " + fileDialogValue
+    //     document.getElementById("files-value").style.color = "black"
+    // }
+    // else if(fileDialogValue.length == 0){
+    //     document.getElementById("files-value").innerHTML = "Файл не выбран !"
+    //     document.getElementById("files-value").style.color = "red"
+    // }
+    // else{
+    //     let size = fileDialogValue.length
+    //     document.getElementById("files-value").innerHTML = "Файлов выбрано: " + size
+    //     document.getElementById("files-value").style.color = "black"
+    // }
 }
 
 
@@ -264,7 +297,7 @@ async function OpenModalEdite(id, title){
     ID = id
     Title = title
 
-    CreateFamilyBox()
+    CreateViewBox()
 }
 
 
@@ -341,25 +374,33 @@ async function ConfirmUploadPhoto(){
     let shirota = document.getElementById("shirota")
     let dolgota = document.getElementById("dolgota")
     let camera = document.getElementById("camera")
-    console.log(fileDialogValue)
-    // Валидация 
-    if(fileDialogValue == PLACEHOLD_PATH || fileDialogValue == ""){
-        Alert("Выберите фотографию")
-    }
 
+
+
+    const container_label_path = document.querySelectorAll(".container_label_path")
+    const paths = Array.from(container_label_path).map(container => container.dataset.path);
+    // console.log(paths)
+    const containerLabelLink = document.querySelectorAll(".container_label_link")
+    const links = Array.from(containerLabelLink).map(container => container.dataset.path);
+
+    if (paths.length === 0 && links.length === 0) {
+        Alert("Выберите фотографию на устройстве или вставте ссылку на изображение")
+    }
     else if(datapicker.value == ''){
         Alert("Выберите дату")
     }
-
     else if(place.value == ''){
-        Alert("Выберите место съемки")
+        Alert("Укажите место съемки")
     }
     else{
+        let paths_and_links = [...paths, ...links];
+        console.log(paths_and_links)
         let group_id = await eel.generate_group_id()();
-        for (let i = 0; i < fileDialogValue.length; i++){
+
+        for (let i = 0; i < paths_and_links.length; i++){
 
             let list = []
-            list.push(fileDialogValue[i])
+            list.push(paths_and_links[i])
             list.push(combobox.value)
             list.push(datapicker.value)
             list.push(place.value)
@@ -372,25 +413,80 @@ async function ConfirmUploadPhoto(){
             document.getElementById("fileValue").innerHTML = "Файл выбран: пусто"
 
             console.log(list)
-           Alert(await eel.put_data_to_db(list)())
+            Alert(await eel.put_data_to_db(list)())
         }
         dolgota.value = ""
         shirota.value = ""
         place.value = ""
         datapicker.value = ""
         camera.value = ""
-        dolgota.value = ""
-        shirota.value = ""
         fileDialogValue = ""
         document.getElementById("fileValue").innerHTML = "Файлы: пусто"
     }
 }
+
+function CreateImg(){
+    let linkInput = document.getElementById("inputLink")
+    const container_link = document.getElementById("container_link")
+    let existingImg = container_link.nextElementSibling
+
+    if(existingImg && existingImg.tagName === "IMG"){
+        existingImg.remove()
+    }
+
+    if(linkInput.value){
+        let img = document.createElement("img")
+        img.src = linkInput.value
+        img.alt = "Изображение не найдено"
+        img.id = "linkImg"
+        img.classList.add("uploaded-image")
+        container_link.insertAdjacentElement("afterend", img)
+    }
+}
+
+function AddLink(){
+    let linkInput = document.getElementById("inputLink")
+
+    let containerLabelLink = document.createElement("div")
+    containerLabelLink.classList.add("container_label_link")
+
+
+    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    svg.setAttribute("width", "24");
+    svg.setAttribute("height", "24");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.innerHTML = '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/>';
+    svg.onclick = function() {
+        containerLabelLink.remove();
+    };
+
+
+    if (linkInput.value){
+        let labelLink = document.createElement("div")
+        labelLink.innerHTML = linkInput.value
+        labelLink.classList.add("label_link")
+
+        let linkImg = document.getElementById('linkImg')
+        linkImg.insertAdjacentElement("afterend", labelLink)
+
+        containerLabelLink.dataset.path = linkInput.value
+        containerLabelLink.appendChild(svg)
+        containerLabelLink.appendChild(labelLink)
+
+        linkImg.insertAdjacentElement("afterend", containerLabelLink)
+
+        linkInput.value = ""
+        CreateImg()
+    }
+}
+
 
 
 // Перемещение маркера карты при
 // измении поля ввода координат
 var placeMark
 var myMap
+var mapSearch
 
 function editInput(){
     var shirotaValue = document.getElementById('shirota').value
@@ -408,6 +504,13 @@ function init(){
         controls: ['zoomControl'],
         suppressMapOpenBlock: true,
         zoom: 8
+    });
+
+    mapSearch = new ymaps.Map("map_search", {
+        center: [57., 80.90],
+        controls: ['zoomControl'],
+        suppressMapOpenBlock: true,
+        zoom: 3
     });
 
 
@@ -477,23 +580,20 @@ function Alert(text){
 }
 
 
-
-
 function AlertConfirm(text) {
     return new Promise(function(resolve, reject) {
-      document.getElementById('conf-msg').innerHTML = text;
-      document.getElementById('modal-alert-confirm').classList.add('open');
+        document.getElementById('conf-msg').innerHTML = text;
+        document.getElementById('modal-alert-confirm').classList.add('open');
   
-      document.getElementById('conf-ok').addEventListener('click', function(){
-        document.getElementById('modal-alert-confirm').classList.remove('open');
-        resolve(true);
-      });
+        document.getElementById('conf-ok').addEventListener('click', function(){
+            document.getElementById('modal-alert-confirm').classList.remove('open');
+            resolve(true);
+        });
 
-
-      document.getElementById('conf-canсel').addEventListener('click', function(){
-        document.getElementById('modal-alert-confirm').classList.remove('open');
-        resolve(false);
-      });
+        document.getElementById('conf-canсel').addEventListener('click', function(){
+            document.getElementById('modal-alert-confirm').classList.remove('open');
+            resolve(false);
+        });
     });
 }
 
@@ -518,19 +618,20 @@ function AlertPromt(title){
 
 
 async function AddSquad(){
-    let value = document.getElementById("inputSquad").value
+    let squad_value = document.getElementById("inputSquad").value
 
-    if (value){
-        eel.add_squad(value)
-        document.getElementById("inputSquad").value = ""
-
-
-        let squads = await eel.get_all_squad()()
-
-        CreateSquadBox(squads)
-        ClearClassTable()
-        CreateClassTable()
-        // CreateConteiner2()
+    if (squad_value){
+        let response  = await eel.add_squad(squad_value)()
+        console.log(response)
+        if (response == true){
+            document.getElementById("inputSquad").value = ""
+            ClearClassTable()
+            CreateClassTable()
+            CreateSquadBox()
+        }
+        else{
+            Alert(response)
+        }
     }
     else{
         Alert("Введите название отряда")
@@ -538,17 +639,19 @@ async function AddSquad(){
 }
 
 
-function AddFamily(){
-    let valueInput = document.getElementById("inputFamily").value
-    let valueId = document.getElementById("squadBox").value
+async function CreateFamily(){
+    let family_value = document.getElementById("inputFamily").value
 
-    if (valueInput){
-        eel.add_family(valueInput, valueId)
-        document.getElementById("inputFamily").value = ''
-        CreateFamilyBox()
-        ClearClassTable()
-        CreateClassTable()
-        // CreateConteiner2()
+    if (family_value){
+        let response = await eel.add_family(family_value)()
+
+        if (response == true){
+            document.getElementById("inputFamily").value = ''
+            CreateFamilyBox()
+        }
+        else{
+            Alert(response)
+        }
     }
     else{
         Alert("Введите название семейства")
@@ -556,10 +659,10 @@ function AddFamily(){
 }
 
 
-function CreateSquadBox(squads){
+async function CreateSquadBox(){
     let box = document.getElementById("squadBox")
     $(box).empty();
-
+    let squads = await eel.get_all_squad()()
 
     for(let i = 0; i < squads.length; i++){
         let option = document.createElement("option")
@@ -569,6 +672,34 @@ function CreateSquadBox(squads){
 
         box.appendChild(option)
     }
+}
+
+
+async function CreateViewBox(){
+    let box = document.getElementById("viewBox")
+    $(box).empty();
+    let families = await eel.get_all_family()()
+
+    families.forEach(([id, name]) => {
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = name;
+        box.appendChild(option);
+    });
+}
+
+
+async function CreateFamilyBox(){
+    let box = document.getElementById("family_box")
+    $(box).empty();
+    let families = await eel.get_all_family()()
+
+    families.forEach(([id, name]) => {
+        const option = document.createElement("option");
+        option.value = id;
+        option.textContent = name;
+        box.appendChild(option);
+    });
 }
 
 
@@ -587,7 +718,35 @@ async function CreateClassTable(){
         squadTitle.classList.add("squad-title")
         squadTitle.innerHTML = squads[i][1]
 
+        let svgIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svgIcon.setAttribute("width", "24");
+        svgIcon.setAttribute("height", "24");
+        svgIcon.setAttribute("viewBox", "0 0 24 24");
+        svgIcon.classList.add("squad-icon");
+
+
         let squad_id = squads[i][0]
+        // Создаем path для SVG
+        let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+        path.setAttribute("fill", "none");
+        path.setAttribute("stroke", "currentColor");
+        path.setAttribute("stroke-linecap", "round");
+        path.setAttribute("stroke-linejoin", "round");
+        path.setAttribute("stroke-width", "2");
+        path.setAttribute("d", "M18 6L6 18M6 6l12 12");
+        svgIcon.onclick = async function(){
+            if (await AlertConfirm("Вы хотите удалить ?")){
+                eel.delete_squad_by_id(squad_id)
+                ClearClassTable()
+                CreateClassTable()
+            }
+        }
+
+        // Добавляем path в SVG
+        svgIcon.appendChild(path);
+        squadTitle.appendChild(svgIcon);
+
+
 
         let familys = await eel.get_all_family_by_id(squad_id)()
         // console.log(familys)
@@ -601,6 +760,40 @@ async function CreateClassTable(){
             // let a = document.createElement("a")
             // a.href = `#f${familys[j][0]}`
             // a.innerHTML = familys[j][1]
+            let familys_id = familys[j][0]
+
+            let svgIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svgIcon.setAttribute("width", "24");
+            svgIcon.setAttribute("height", "24");
+            svgIcon.setAttribute("viewBox", "0 0 24 24");
+            svgIcon.classList.add("squad-icon");
+
+
+            // let squad_id = squads[i][0]
+            // Создаем path для SVG
+            let path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("fill", "none");
+            path.setAttribute("stroke", "currentColor");
+            path.setAttribute("stroke-linecap", "round");
+            path.setAttribute("stroke-linejoin", "round");
+            path.setAttribute("stroke-width", "2");
+            path.setAttribute("d", "M18 6L6 18M6 6l12 12");
+            svgIcon.onclick = async function(e){
+                e.stopPropagation()
+
+                if (await AlertConfirm("Вы хотите удалить ?")){
+                    eel.delete_family_by_id(familys_id)
+                    ClearClassTable()
+                    CreateClassTable()
+                }
+            }
+
+            // Добавляем path в SVG
+            svgIcon.appendChild(path);
+
+
+
+
             let familyTitle = document.createElement("div")
             familyTitle.classList.add("family-title")
             // familyTitle.appendChild(a)
@@ -609,7 +802,7 @@ async function CreateClassTable(){
             }
             familyTitle.innerHTML = familys[j][1]
 
-
+            familyTitle.appendChild(svgIcon);
 
             squadFamily.appendChild(familyTitle)
             squadConteiner.appendChild(squadFamily)
@@ -713,5 +906,103 @@ function AddViewToFamily(){
     CreateClassTable()
     // CreateConteiner2()
 }
+
+
+async function SelectDate(){
+    let start_date = document.getElementById('start_date').value
+    let end_date = document.getElementById('end_date').value
+
+    if (end_date){
+        kinds = await eel.get_photo_kind_by_date(start_date, end_date)()
+        console.log(kinds)
+        CreateGridKind(kinds)
+    }
+}
+
+async function CreateGridKind(kinds){
+    let container_grid_label = document.getElementById('container_grid_label')
+    $(container_grid_label).empty()
+
+    for (let i = 0; i < kinds.length; i++){
+        const check_label = document.createElement('div')
+        check_label.className = "check_label"
+
+        const check_kind = document.createElement('input')
+        check_kind.type = 'checkbox'
+        check_kind.value = kinds[i]
+        check_kind.checked = true
+
+        check_label.appendChild(check_kind)
+        check_label.appendChild(document.createTextNode(kinds[i]))
+        container_grid_label.appendChild(check_label)
+    }
+
+    
+        const startDate = document.getElementById('start_date').value;
+        const endDate = document.getElementById('end_date').value;
+
+        let photos = await eel.get_kinds_by_kinds_and_date(kinds, startDate, endDate)()
+        console.log(photos)
+        AddMarkersToMapSearch(photos)
+}
+
+document.getElementById('container_grid_label').addEventListener('change', async function(e) {
+    const checkedValues = Array.from(
+        this.querySelectorAll('input[type="checkbox"]:checked')
+    ).map(cb => cb.value);
+
+        const startDate = document.getElementById('start_date').value;
+        const endDate = document.getElementById('end_date').value;
+
+        let photos  = await eel.get_kinds_by_kinds_and_date(checkedValues, startDate, endDate)()
+        console.log(photos)
+        AddMarkersToMapSearch(photos)
+});
+
+
+function AddMarkersToMapSearch(photos){
+    mapSearch.geoObjects.removeAll();
+
+    const myGeoObjects = []
+    photos.forEach(item => {
+        const [id, imagePath, kind, date, city, lat, lon, camera, group_id, note, favorite] = item
+
+        const coords = [parseFloat(lat), parseFloat(lon)]
+
+        const placemark = new ymaps.Placemark(coords, {
+            balloonContent: `
+            <div class="kek" onclick="
+                eel.save_value('${kind}');
+                eel.save_id('${id}');
+                GoPhotoPage();
+                "style="cursor: pointer;">
+            ${kind} <br>
+            ${city}, ${date}
+            <img src="${imagePath}"">
+            </div>
+            `,
+            clusterCaption: `${kind}`
+        })
+
+        myGeoObjects.push(placemark);
+    })
+
+    const myClusterer = new ymaps.Clusterer({
+        clusterDisableClickZoom: true,
+        clusterOpenBalloonOnClick: true
+    });
+
+    myClusterer.add(myGeoObjects);
+    mapSearch.geoObjects.add(myClusterer);
+}
+
+function AddFamilyToSquad(){
+    let squad_id = document.getElementById('squadBox').value
+    let family_id = document.getElementById('family_box').value
+    eel.add_family_to_squad(squad_id, family_id)
+    ClearClassTable()
+    CreateClassTable()
+}
+
 
 CreateClassTable()
