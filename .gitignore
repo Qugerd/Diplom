@@ -10,6 +10,7 @@ __pycache__
 .gitattributes
 temp
 Birds_test
+Birds_test_200
 last_model.pth
 best_model.pth
 logfile.txt
