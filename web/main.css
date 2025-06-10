@@ -564,7 +564,7 @@ a{
 
 
 /* Модальные окна */
-.modal, .modal-uploadPhoto, .modal-newClass, .modal-edite, .modal_settings{
+.modal, .modal-uploadPhoto, .modal-newClass, .modal-edite, .modal_settings, .modal_predction_views{
     position: fixed;
     left: 0;
     top: 0;
@@ -1433,6 +1433,87 @@ textarea{
     flex-direction: row;
     gap: 10px;
 }
+
+
+
+
+
+
+
+
+
+
+/* Модальное окно предсказания вида */
+.modal_box_predction_views{
+    position: fixed;
+    height: 90vh;
+    width: 90vw;
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: #ececec;
+
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+
+    box-sizing: border-box;
+}
+
+.modal_box_predction_views .modal-conteiner{
+    height: 100%;
+
+    box-sizing: border-box;
+}
+
+.container_grid_prediction {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    display: grid;
+    gap: 10px; /* Уменьшил отступ между элементами для компактности */
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Адаптивные колонки */
+    justify-content: center;
+    align-items: start; /* Выравнивание по верху */
+    justify-items: center;
+
+    overflow-y: auto;
+}
+
+.grid_item {
+  width: 100%; /* Занимает всю ширину колонки */
+  max-width: 350px; /* Максимальная ширина элемента */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Отступ между названием и фото */
+  background: rgb(255, 254, 254);
+  border-radius: 10px;
+  padding: 20px;
+
+
+}
+
+.grid_item .text{
+  margin: 0;
+  text-align: center;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.grid_item img {
+  width: 100%; /* Ширина по родителю */
+  height: 300px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+
+
+
+
+
+
 
 
 

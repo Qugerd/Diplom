@@ -410,7 +410,21 @@ def create_new_database():
         return "Ошибка: не удалось создать базу данных"
 
 
+@eel.expose
+def view_prediction(path):
+    MODEL_PATH = 'best_model.pth'
+    TEST_IMAGE = path
+    with open("class_name.txt", "r", encoding="utf-8") as f:
+        CLASS_NAMES = f.read().splitlines()
+    NUM_CLASSES = len(CLASS_NAMES)
 
+    model = load_model(MODEL_PATH, NUM_CLASSES, device)
+    predict_transform = create_predict_transform()
+    prediction = predict_image(model, TEST_IMAGE, predict_transform, CLASS_NAMES, device)
+
+
+    temp_path = absolute_path_to_relative_path(path)
+    return [temp_path, prediction]
 
 
 

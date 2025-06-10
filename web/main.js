@@ -1104,12 +1104,41 @@ async function SelectDatabase(){
 }
 
 
-function RecognizeViewFromPhoto(){
+function ClosePredictionViews(){
+    document.getElementById('modal_prediction_views').classList.remove('open');
+}
+
+
+async function RecognizeViewFromPhoto(){
+
+    document.getElementById('modal_prediction_views').classList.add('open')
+
     const container_label_path = document.querySelectorAll(".container_label_path")
     const paths = Array.from(container_label_path).map(container => container.dataset.path);
 
     if (paths.length > 0) {
-        
+        const container_grid_prediction = document.getElementById('container_grid_prediction')
+        container_grid_prediction.innerHTML = ""
+        for (const path of paths) {
+            [path_temp, prediction] = await eel.view_prediction(path)()
+
+            const grid_item = document.createElement('div')
+            grid_item.className = "grid_item"
+
+
+            const img = document.createElement('img')
+            img.src = path_temp
+            img.alt = "Изображение"
+
+
+            const text = document.createElement('div')
+            text.className = "text"
+            text.innerText = prediction
+
+            grid_item.appendChild(img)
+            grid_item.appendChild(text)
+            container_grid_prediction.appendChild(grid_item)
+        }
     }
     else{
         Alert("Выберите изображения файл")
