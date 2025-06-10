@@ -28,7 +28,9 @@ eel.get_photo()(async function(data){
     const group_id = data[8]
     const note = data[9]
     likeValue = data[10]
-    absolute_path = data[11]
+    const lens = data[11]
+    absolute_path = data[12]
+
 
 
     let data_view = await eel.set_value()()
@@ -65,6 +67,7 @@ eel.get_photo()(async function(data){
     document.getElementById('place').innerHTML = "Местоположение: " + place
     document.getElementById('date').innerHTML = "Дата: " + date
     document.getElementById('camera').innerHTML = "Камера: " + camera
+    document.getElementById('lens').innerHTML = "Объектив: " + lens
 
 
     const btnLike = document.getElementById("like")

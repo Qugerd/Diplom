@@ -69,6 +69,7 @@ body.loaded {
 .conteiner-search{
     height: 40px;
     margin-left: 100px;
+    margin-right: auto;
     gap: 5px;
     display: flex;
     flex-direction: row;
@@ -92,10 +93,30 @@ body.loaded {
 
 }
 
-.btnClear:hover{
+.btn_settings, .btn_question{
+    color: #505050;
     cursor: pointer;
-    background-color: #e2e2e2;
-    border-radius: 15px;
+    margin-right: 10px;
+        transition: .2s ease-in-out;
+}
+
+.btn_settings:hover, .btn_question:hover{
+    color: #333;
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
+
+}
+
+.btnClear{
+    color: #505050;
+
+    cursor: pointer;
+}
+
+.btnClear:hover{
+    color: #333;
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
 }
 
 
@@ -119,7 +140,7 @@ body.loaded {
     transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 .vid:hover{
-    transform:  translate(0%, -10%);;
+    transform: scale(1.1);
     box-shadow: 0 0 50px rgba(172, 171, 171, 0.5);
 }
 
@@ -133,12 +154,16 @@ body.loaded {
 .vid-name{
     width: auto;
     word-wrap: break-word;
+
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-size: 24px;
     font-weight: bold;
     text-align: center;
+
     margin-bottom: 10px;
     margin-top: 8px;
+    padding: 0px 15px;
+
     color: #333;
 }
 
@@ -166,7 +191,9 @@ body.loaded {
 
 /* КЛАССИФИКАТОР */
 .conteiner-class{
-    /* min-height: 850px; */
+    box-sizing: border-box;
+
+    width: fit-content;
     /* width: 300px; */
     /* background-color: rgba(0, 0, 0, 0.027); */
     display: flex;
@@ -203,9 +230,15 @@ body.loaded {
     border-bottom: 2px solid #744e4e38;
 }
 
+.classifire svg{
+    color: #505050;
+}
+
 .classifire svg:hover{
     color: black;
     cursor: pointer;
+    transform: scale(1.2);
+    transition: 0.15s ease-in-out;
 }
 
 .squad{
@@ -213,6 +246,8 @@ body.loaded {
 }
 
 .squad-title{
+    width: auto;
+
     font-size: clamp(16px, 1.3vw, 24px);
     color: #333;
     background: linear-gradient(90deg, #dedede,#e0e0e0,#ececec, transparent);
@@ -224,23 +259,40 @@ body.loaded {
     padding-left: 5px;
     padding-right: 20px;
 
-    width: clamp(200px, 12vw, 350px);
     border-radius: 2px;
 
     font-weight: 500;
     text-transform: uppercase;
-    word-wrap: break-word;
+    text-overflow: ellipsis;
+
 
     margin-top: .8vw;
+}
+
+#squadConteiner{
+    height: 82vh; 
+
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+
+    overflow-y: auto;
 }
 
 .squad-title svg{
     opacity: 0;
     transition: opacity 0.2s ease;
+    flex-shrink: 0;
     cursor: pointer;
 }
 .squad-title:hover svg{
     opacity: 1;
+    transition:  0.3s ease-in-out;
+}
+
+.squad-title:hover svg:hover{
+    color: #000000;
+    transform: scale(1.2);
 }
 
 .squad-family{
@@ -272,14 +324,22 @@ body.loaded {
 
 .family-title svg{
     opacity: 0;
+    color: #505050;
 }
 
 .family-title:hover svg{
     opacity: 1;
 }
 
+.family-title:hover svg:hover{
+    transform: scale(1.2);
+    transition: .3s ease-in-out;
+    color: #000000;
+}
+
 .family-title:hover{
     background-color: #f0f0f0;
+    transition: .3s ease-in-out;
 }
 
 .vid-title{
@@ -394,7 +454,7 @@ body.loaded {
 }
 
 .vid-title{
-    color: rgba(43, 78, 29, 0.788);
+    color: rgb(50, 112, 20)
 }
 
 .vid-title:hover{
@@ -402,6 +462,13 @@ body.loaded {
     text-decoration: underline;
 }
 
+.vid-title.disabled-view {
+    color: #505050; /* Серый цвет текста */
+    cursor: not-allowed; /* Курсор "недоступно" */
+    user-select: none; /* Запрет выделения текста */
+    text-decoration: none;
+    cursor: default;
+}
 
 
 
@@ -486,6 +553,7 @@ a{
     visibility: hidden;
 }
 
+
 .vid:hover .btn-function-delete, .vid:hover .btn-function-edit{
     opacity: 1;
     visibility: visible;
@@ -496,7 +564,7 @@ a{
 
 
 /* Модальные окна */
-.modal, .modal-uploadPhoto, .modal-newClass, .modal-edite{
+.modal, .modal-uploadPhoto, .modal-newClass, .modal-edite, .modal_settings{
     position: fixed;
     left: 0;
     top: 0;
@@ -508,6 +576,8 @@ a{
     justify-content: center;
     opacity: 0;
     visibility: hidden; 
+
+    transition: all .25s ease-in-out;
 }
 
 .modal-box{
@@ -537,12 +607,15 @@ a{
     width: 40px;
     height: 40px;
     margin-left: auto;
-    color: #333;
+    color: #505050;
     cursor: pointer;
+    transition: .2s ease-in-out;
 }
 
 .container_top_model svg:hover{
     color: black;
+    transform: scale(1.2);
+    transition: all 0.4s ease;
 }
 
 .text-header{
@@ -556,15 +629,17 @@ a{
 
     display: flex;
     flex-direction: column;
-    
+    color: #333;
 
-
+    font-weight: 500;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .uploaded-image{
-    height: 200px;
-    max-width: 400px;
+    height: 13vh;
+    width: auto;
+    /* object-fit: contain; */
+    align-self: self-start;
 }
 
 .container_label_path{
@@ -593,6 +668,8 @@ a{
 .container_label_path svg:hover{
     color: black;
     cursor: pointer;
+    transition: 0.2s ease-in-out;
+    transform: scale(1.1);
 }
 
 
@@ -607,12 +684,15 @@ a{
     margin-left: 7px;
 
     color: #555;
+    transition: .2s ease-in-out;
 
     cursor: pointer;
 }
 
 .btn_add_link svg:hover{
     color: black;
+    transition: .2s ease-in-out;
+    transform: scale(1.1);
 }
 
 .container_label_link{
@@ -621,12 +701,15 @@ a{
 }
 
 .container_label_link svg{
-    color: #555;
+    margin-right: 5px;
+    color: rgb(134, 134, 134);
     cursor: pointer;
 }
 
 .container_label_link svg:hover{
     color: #000000;
+    transform: scale(1.1);
+    transition: .2s ease-in-out;
 }
 
 .label_link{
@@ -649,6 +732,34 @@ a{
 
     border: 1px solid #bdbdbd;
     outline: none;
+}
+
+.modal-conteiner .modal-input:focus{
+    border: 1px solid #bdbdbd;
+}
+
+
+.container_view{
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 10px;
+
+}
+
+#inputName{
+    width: calc(55% - 10px);
+    margin-right: 10px;
+    margin-top: 0px;
+}
+
+
+
+#list_views{
+    width: 35%;
+    height: 32px;
+
+    color: #505050;
 }
 
 .modal-conteiner select{
@@ -704,11 +815,6 @@ a{
 }
 
 
-.modal-conteiner .modal-input:focus{
-    border: 1px solid rgba(0, 0, 0, 0.8);
-    outline: none;
-}
-
 .text-header2{
     font-weight: 500;
     color: #333;
@@ -744,11 +850,18 @@ a{
 textarea{
     width: 95% ;
     resize: none;
+    padding: 10px;
+
     font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
     background-color: #e7e7e7;
     border-radius: 4px;
     border: #b6b6b6 1px solid;
+
+    outline: none;
 }
+
 
 
 .text{
@@ -775,6 +888,7 @@ textarea{
     border: #b6b6b6 1px solid;
 
     cursor: pointer;
+    transition: .2s ease-in-out;
 }
 
 .modal-conteiner-center{
@@ -796,10 +910,14 @@ textarea{
     color: #333;
 
     cursor: pointer;
+    transition: .2s ease-in-out;
 }
 
 .modal-conteiner-center:hover{
-    border: solid 1px #919191;
+    border: solid 1px #333;
+    color: #333;
+    transition: .2s ease-in-out;
+    transform: scale(1.05);
 }
 
 .modal-conteiner-center svg{
@@ -808,7 +926,10 @@ textarea{
 }
 
 .btn_open_file:hover{
-    background-color: #f0f0f0;
+    color: #333;
+    border-color: #333;
+    transition: .2s ease-in-out;
+    transform: scale(1.05);
 }
 
 .btn_open_file svg{
@@ -840,6 +961,9 @@ textarea{
     visibility: hidden;
     opacity: 0;
     z-index: 2;
+
+    
+    transition: all .25s ease-in-out;
 }
 
 .modal-alert-box{
@@ -1073,7 +1197,9 @@ textarea{
     border: 1px solid transparent;
 }
 .kek img{
-    width: 120px;
+    height: 8vh;
+    width: auto;
+    align-self: self-start;
 }
 .kek:hover{
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -1165,12 +1291,18 @@ textarea{
     border-radius: 3px;
     border: #b6b6b6 1px solid;
 
+
     cursor: pointer;
+    transition: .2s ease-in-out;
 }
 
 .btn_create:hover, .btn_add:hover{
     border: rgb(75, 75, 75) 1px solid;
     color: rgb(51, 51, 51);
+
+    
+    transform: scale(1.03);
+    transition: .2s ease-in-out;
 }
 
 .btn_create:hover svg path, .btn_add:hover svg path{
@@ -1203,3 +1335,142 @@ textarea{
     visibility: visible;
     opacity: 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Модальное окно настройки */
+.modal_box_settings{
+    position: fixed;
+    height: 80vh;
+    width: 35vw;
+    max-height: clamp(600px, 88vh, 1200px);
+    left: 50%;
+    top: 50%;
+
+    z-index: 1;
+    background: #ececec;
+
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+
+    overflow-y: auto;
+}
+
+.setting-item{
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.settings-content .text{
+    font-size: 20px;
+}
+
+.settings-content .btn_container{
+    width: fit-content;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    gap: 7px;
+    padding: 5px 10px;
+
+    border: 1px solid #b6b6b6;
+    border-radius: 3px;
+
+
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 600;
+    font-size: 1vw;
+    color: #505050;
+
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.settings-content .btn_container:hover{
+    border-color: #333;
+    color: #333;
+    transition: all 0.2s ease-in-out;
+    transform: scale(1.05);
+}
+
+.div-raw{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.header .btn_conteiner:hover{
+    background-color: #f0f0f0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

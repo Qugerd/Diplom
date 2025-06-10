@@ -41,10 +41,18 @@
 
 		<div class="conteiner-search">
 			<input type="text" class="search" id="search" placeholder="Поиск" oninput="Search()">
-            <svg class="btnClear" onclick="ClearCearch()" xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 21 21"><g fill="none" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3.578 6.487A8 8 0 1 1 2.5 10.5"/><path d="M7.5 6.5h-4v-4"/></g></svg>
+            <svg class="btnClear" onclick="ClearCearch()" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 2048 2048"><path fill="currentColor" d="M1024 0q141 0 272 36t245 103t207 160t160 208t103 245t37 272q0 141-36 272t-103 245t-160 207t-208 160t-245 103t-272 37q-172 0-330-55t-289-154t-226-238t-141-304l123-34q40 145 123 265t198 208t253 135t289 49q123 0 237-32t214-90t182-141t140-181t91-214t32-238q0-123-32-237t-90-214t-141-182t-181-140t-214-91t-238-32q-129 0-251 36T546 267T355 428T215 640h297v128H0V256h128v274q67-123 163-221t212-166T752 37t272-37"/></svg>
 		</div>
 
 
+        <div class="btn_settings" onclick="OpenSettings()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 1024 1024"><path fill="currentColor" d="m924.8 625.7l-65.5-56c3.1-19 4.7-38.4 4.7-57.8s-1.6-38.8-4.7-57.8l65.5-56a32.03 32.03 0 0 0 9.3-35.2l-.9-2.6a443.74 443.74 0 0 0-79.7-137.9l-1.8-2.1a32.12 32.12 0 0 0-35.1-9.5l-81.3 28.9c-30-24.6-63.5-44-99.7-57.6l-15.7-85a32.05 32.05 0 0 0-25.8-25.7l-2.7-.5c-52.1-9.4-106.9-9.4-159 0l-2.7.5a32.05 32.05 0 0 0-25.8 25.7l-15.8 85.4a351.86 351.86 0 0 0-99 57.4l-81.9-29.1a32 32 0 0 0-35.1 9.5l-1.8 2.1a446.02 446.02 0 0 0-79.7 137.9l-.9 2.6c-4.5 12.5-.8 26.5 9.3 35.2l66.3 56.6c-3.1 18.8-4.6 38-4.6 57.1c0 19.2 1.5 38.4 4.6 57.1L99 625.5a32.03 32.03 0 0 0-9.3 35.2l.9 2.6c18.1 50.4 44.9 96.9 79.7 137.9l1.8 2.1a32.12 32.12 0 0 0 35.1 9.5l81.9-29.1c29.8 24.5 63.1 43.9 99 57.4l15.8 85.4a32.05 32.05 0 0 0 25.8 25.7l2.7.5a449.4 449.4 0 0 0 159 0l2.7-.5a32.05 32.05 0 0 0 25.8-25.7l15.7-85a350 350 0 0 0 99.7-57.6l81.3 28.9a32 32 0 0 0 35.1-9.5l1.8-2.1c34.8-41.1 61.6-87.5 79.7-137.9l.9-2.6c4.5-12.3.8-26.3-9.3-35M788.3 465.9c2.5 15.1 3.8 30.6 3.8 46.1s-1.3 31-3.8 46.1l-6.6 40.1l74.7 63.9a370.03 370.03 0 0 1-42.6 73.6L721 702.8l-31.4 25.8c-23.9 19.6-50.5 35-79.3 45.8l-38.1 14.3l-17.9 97a377.5 377.5 0 0 1-85 0l-17.9-97.2l-37.8-14.5c-28.5-10.8-55-26.2-78.7-45.7l-31.4-25.9l-93.4 33.2c-17-22.9-31.2-47.6-42.6-73.6l75.5-64.5l-6.5-40c-2.4-14.9-3.7-30.3-3.7-45.5c0-15.3 1.2-30.6 3.7-45.5l6.5-40l-75.5-64.5c11.3-26.1 25.6-50.7 42.6-73.6l93.4 33.2l31.4-25.9c23.7-19.5 50.2-34.9 78.7-45.7l37.9-14.3l17.9-97.2c28.1-3.2 56.8-3.2 85 0l17.9 97l38.1 14.3c28.7 10.8 55.4 26.2 79.3 45.8l31.4 25.8l92.8-32.9c17 22.9 31.2 47.6 42.6 73.6L781.8 426zM512 326c-97.2 0-176 78.8-176 176s78.8 176 176 176s176-78.8 176-176s-78.8-176-176-176m79.2 255.2A111.6 111.6 0 0 1 512 614c-29.9 0-58-11.7-79.2-32.8A111.6 111.6 0 0 1 400 502c0-29.9 11.7-58 32.8-79.2C454 401.6 482.1 390 512 390c29.9 0 58 11.6 79.2 32.8A111.6 111.6 0 0 1 624 502c0 29.9-11.7 58-32.8 79.2"/></svg>
+        </div>
+
+
+        <div class="btn_question">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 1024 1024"><path fill="currentColor" d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448s448-200.6 448-448S759.4 64 512 64m0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372s372 166.6 372 372s-166.6 372-372 372"/><path fill="currentColor" d="M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7c-21.2 8.1-39.2 22.3-52.1 40.9c-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0 1 30.9-44.8c59-22.7 97.1-74.7 97.1-132.5c.1-39.3-17.1-76-48.3-103.3M472 732a40 40 0 1 0 80 0a40 40 0 1 0-80 0"/></svg>
+        </div>
 	</div>
 
 
@@ -92,7 +100,10 @@
                 </div>
 
 
-				<input class="modal-input" id="inputName"type="text" placeholder="Название вида">
+				<div class="container_view">
+                    <input class="modal-input" id="inputName" type="text" placeholder="Название вида">
+                    <select id="list_views" onchange="SelectView()"></select>
+                </div>
 
 				<input class="modal-input" id="inputLat"type="text" placeholder="Название на латинском">
 
@@ -148,7 +159,7 @@
 
 
 	<!-- Модальное окно "Загрузить фото" -->
-	<div class="modal-uploadPhoto" id="modal-uploadPhoto">
+	<div class="modal-uploadPhoto open" id="modal-uploadPhoto">
 		<div class="modal-box modalUploadPhoto">
 			<div class="modal-conteiner">
                 
@@ -160,21 +171,23 @@
 
 
 				<div class="text-header2">Выбор изображения:</div>
-                <div class="btn_open_file" id="btnChoseFileUploadPhoto" onclick="AutoCompleteInfo()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11.59l4.29-4.3l2.5 2.5l5-5L20 16V6a2 2 0 0 0-2-2H5m4.79 13.21l-2.5-2.5L3 19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-1.59l-5.21-5.2l-5 5M7.5 6A2.5 2.5 0 0 1 10 8.5A2.5 2.5 0 0 1 7.5 11A2.5 2.5 0 0 1 5 8.5A2.5 2.5 0 0 1 7.5 6m0 1A1.5 1.5 0 0 0 6 8.5A1.5 1.5 0 0 0 7.5 10A1.5 1.5 0 0 0 9 8.5A1.5 1.5 0 0 0 7.5 7Z"/></svg>
-                    <div class="btn_name">Выбрать файл</div>
+                <div class="div-raw">
+                    <div class="btn_open_file" id="btnChoseFileUploadPhoto" onclick="AutoCompleteInfo()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M5 3h13a3 3 0 0 1 3 3v13a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3m0 1a2 2 0 0 0-2 2v11.59l4.29-4.3l2.5 2.5l5-5L20 16V6a2 2 0 0 0-2-2H5m4.79 13.21l-2.5-2.5L3 19a2 2 0 0 0 2 2h13a2 2 0 0 0 2-2v-1.59l-5.21-5.2l-5 5M7.5 6A2.5 2.5 0 0 1 10 8.5A2.5 2.5 0 0 1 7.5 11A2.5 2.5 0 0 1 5 8.5A2.5 2.5 0 0 1 7.5 6m0 1A1.5 1.5 0 0 0 6 8.5A1.5 1.5 0 0 0 7.5 10A1.5 1.5 0 0 0 9 8.5A1.5 1.5 0 0 0 7.5 7Z"/></svg>
+                        <div class="btn_name">Выбрать файлы</div>
+                    </div>
+
+                    <div class="btn_open_file" id="btnRecognizeView" onclick="RecognizeViewFromPhoto()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><path fill="currentColor" d="M24 14a5.99 5.99 0 0 0-4.885 9.471L14 28.586L15.414 30l5.115-5.115A5.997 5.997 0 1 0 24 14m0 10a4 4 0 1 1 4-4a4.005 4.005 0 0 1-4 4m-7-12a3 3 0 1 0-3-3a3.003 3.003 0 0 0 3 3m0-4a1 1 0 1 1-1 1a1 1 0 0 1 1-1"/><path fill="currentColor" d="M12 24H4v-6.003L9 13l5.586 5.586L16 17.168l-5.586-5.585a2 2 0 0 0-2.828 0L4 15.168V4h20v6h2V4a2.002 2.002 0 0 0-2-2H4a2.002 2.002 0 0 0-2 2v20a2.002 2.002 0 0 0 2 2h8Z"/></svg>
+                        <div class="btn_name">Распознать вид</div>
+                    </div>
                 </div>
+
                 <div class="text" id="files-value">Файлы:</div>
-                <!-- <div class="container_label_path">
-                    <div class="label_path">2312321.jpg</div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
-                </div> -->
-
-
 
                 <div class="text" id="files-value">Добавить по ссылке:</div>
                 <div class="container_link" id="container_link">
-                    <input type="text" id="inputLink" oninput="CreateImg()">
+                    <input type="text" id="inputLink" placeholder="Вставьте адрес изображения" oninput="CreateImg()">
                     <div class="btn_add_link" onclick="AddLink()">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M9.25 5a.75.75 0 0 1 .11 1.492l-.11.008H7a3.5 3.5 0 0 0-.206 6.994L7 13.5h2.25a.75.75 0 0 1 .11 1.492L9.25 15H7a5 5 0 0 1-.25-9.994L7 5zM17 5a5 5 0 0 1 4.43 7.322a6.5 6.5 0 0 0-1.294-.765a3.5 3.5 0 0 0-2.93-5.05L17 6.499h-2.25a.75.75 0 0 1-.11-1.492L14.75 5zM7 9.25h10a.75.75 0 0 1 .102 1.493L17 10.75H7a.75.75 0 0 1-.102-1.493zm16 8.25a5.5 5.5 0 1 0-11 0a5.5 5.5 0 0 0 11 0m-5 .5l.001 2.503a.5.5 0 1 1-1 0V18h-2.505a.5.5 0 0 1 0-1H17v-2.5a.5.5 0 1 1 1 0V17h2.497a.5.5 0 0 1 0 1z"/></svg>
                     </div>
@@ -200,10 +213,12 @@
 				<span class="text">Широта: </span><input class="text" type="number" id="shirota" onchange="editInput()">
 
 				<span class="text">Долгота: </span><input class="text" type="number" id="dolgota" onchange="editInput()">
-				<div class="text-header2">Камера:</div>
+				
+                <div class="text-header2">Камера:</div>
 				<input class="text" type="text" id="camera">
 
-
+                <div class="text">Объектив:</div>
+                <input class="text" type="text" id="lens">
 
                 <div class="modal-conteiner-center" id="Confirm" onclick="ConfirmUploadPhoto()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-dasharray="24" stroke-dashoffset="24" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 11L11 17L21 7"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.4s" values="24;0"/></path></svg>
@@ -253,13 +268,43 @@
 
 
 
+    <div class="modal_settings" id="modal_settings">
+        <div class="modal_box_settings">
+            <div class="modal-conteiner">
+                <div class="container_top_model">
+                    <div class="text-header">Настройки</div>
+                    <svg onclick="CloseSettings()" id="btnCloseModal_settings" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
 
 
+                <div class="settings-content">
+                    <div class="setting-item">
+                        <div class="text">Предзагрузить классификатор из таблицы:</div>
+                        <div class="btn_container">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><g fill="currentColor"><path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1zM5 9.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5"/><path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5zm0 1v2A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1z"/></g></svg>
+                            <div class="btn_read_exel" onclick="LoadExcelData()">Выбрать файл</div>
+                        </div>
+                    </div>
 
 
+                    <div class="setting-item">
+                        <div class="text">Выбрать базу данных:</div>
+                        <div class="div-raw">
+                            <div class="btn_container" onclick="CreateNewDatabase()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313M13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A5 5 0 0 0 13 5.698M14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A5 5 0 0 0 13 8.698m0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525"/></svg>
+                                <div class="btn_new_database">Создать базу данных</div>
+                            </div>
+                            <div class="btn_container" onclick="SelectDatabase()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16"><path fill="currentColor" d="M4.318 2.687C5.234 2.271 6.536 2 8 2s2.766.27 3.682.687C12.644 3.125 13 3.627 13 4c0 .374-.356.875-1.318 1.313C10.766 5.729 9.464 6 8 6s-2.766-.27-3.682-.687C3.356 4.875 3 4.373 3 4c0-.374.356-.875 1.318-1.313M13 5.698V7c0 .374-.356.875-1.318 1.313C10.766 8.729 9.464 9 8 9s-2.766-.27-3.682-.687C3.356 7.875 3 7.373 3 7V5.698c.271.202.58.378.904.525C4.978 6.711 6.427 7 8 7s3.022-.289 4.096-.777A5 5 0 0 0 13 5.698M14 4c0-1.007-.875-1.755-1.904-2.223C11.022 1.289 9.573 1 8 1s-3.022.289-4.096.777C2.875 2.245 2 2.993 2 4v9c0 1.007.875 1.755 1.904 2.223C4.978 15.71 6.427 16 8 16s3.022-.289 4.096-.777C13.125 14.755 14 14.007 14 13zm-1 4.698V10c0 .374-.356.875-1.318 1.313C10.766 11.729 9.464 12 8 12s-2.766-.27-3.682-.687C3.356 10.875 3 10.373 3 10V8.698c.271.202.58.378.904.525C4.978 9.71 6.427 10 8 10s3.022-.289 4.096-.777A5 5 0 0 0 13 8.698m0 3V13c0 .374-.356.875-1.318 1.313C10.766 14.729 9.464 15 8 15s-2.766-.27-3.682-.687C3.356 13.875 3 13.373 3 13v-1.302c.271.202.58.378.904.525C4.978 12.71 6.427 13 8 13s3.022-.289 4.096-.777c.324-.147.633-.323.904-.525"/></svg>
+                                <div class="btn_choose_database">Выбрать базу данных</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-
-
+            </div>
+        </div>
+    </div>
 
 
 
@@ -336,51 +381,51 @@
 
 
 
-<!-- Модальное окно "Редактировать вид" -->
-<div class="modal-edite" id="modal-edite">
-    <div class="modal-box modalEdite">
-        <div class="modal-conteiner">
+    <!-- Модальное окно "Редактировать вид" -->
+    <div class="modal-edite" id="modal-edite">
+        <div class="modal-box modalEdite">
+            <div class="modal-conteiner">
 
-            <div class="container_top_model" id="btnCloseModal-Edite"">
-                <div class="text-header">Настроить вид</div>
-                <svg id="btnCloseModal-Class" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                <div class="container_top_model" id="btnCloseModal-Edite"">
+                    <div class="text-header">Настроить вид</div>
+                    <svg id="btnCloseModal-Class" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>
+                </div>
+
+            <div class="editeConteiner">
+                    <div class="title text-header2">
+                        Изменить название:
+                    </div>
+                    <input id="inputEditeTitle" type="text" placeholder="Название">
+                    <div class="btn_open_file" id="btnEdite" onclick="RenameTitle()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
+                        <div class="btn_name">переименовать</div>
+                    </div>
+
+
+                    <div class="title text-header2">
+                        Изменить изображение:
+                    </div>
+                    <div class="btn_open_file" id="btnEditeOpenFile" onclick="ChangePreview()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="-2 -4 24 24"><path fill="currentColor" d="M17 4H9.415l-.471-1.334A1.001 1.001 0 0 0 8 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-6.17-2H17a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h5c1.306 0 2.417.835 2.83 2z"/></svg>
+                        <div class="btn_name">выбрать файл</div>
+                    </div>
+
+
+
+                    <div class="title text-header2">
+                        Добавить вид к семейству:
+                    </div>
+                    <select name="" id="viewBox">
+                    </select>
+                    <div class="btn_open_file" id="AddViewToFam" onclick="AddViewToFamily()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12Zm10-8a8 8 0 1 0 0 16a8 8 0 0 0 0-16Z"/><path d="M13 7a1 1 0 1 0-2 0v4H7a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2h-4V7Z"/></g></svg>
+                        <div class="btn_name">добавить</div>
+                    </div>
+                
             </div>
-
-           <div class="editeConteiner">
-                <div class="title text-header2">
-                    Изменить название:
-                </div>
-                <input id="inputEditeTitle" type="text" placeholder="Название">
-                <div class="btn_open_file" id="btnEdite" onclick="RenameTitle()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M15.748 2.947a2 2 0 0 1 2.828 0l2.475 2.475a2 2 0 0 1 0 2.829L9.158 20.144l-6.38 1.076l1.077-6.38L15.748 2.947Zm-.229 3.057l2.475 2.475l1.643-1.643l-2.475-2.474l-1.643 1.642Zm1.06 3.89l-2.474-2.475l-8.384 8.384l-.503 2.977l2.977-.502l8.385-8.385Z"/></svg>
-                    <div class="btn_name">переименовать</div>
-                </div>
-
-
-                <div class="title text-header2">
-                    Изменить изображение:
-                </div>
-                <div class="btn_open_file" id="btnEditeOpenFile" onclick="ChangePreview()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="-2 -4 24 24"><path fill="currentColor" d="M17 4H9.415l-.471-1.334A1.001 1.001 0 0 0 8 2H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1zm-6.17-2H17a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H3a3 3 0 0 1-3-3V3a3 3 0 0 1 3-3h5c1.306 0 2.417.835 2.83 2z"/></svg>
-                    <div class="btn_name">выбрать файл</div>
-                </div>
-
-
-
-                <div class="title text-header2">
-                    Добавить вид к семейству:
-                </div>
-                <select name="" id="viewBox">
-                </select>
-                <div class="btn_open_file" id="AddViewToFam" onclick="AddViewToFamily()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"><path d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12Zm10-8a8 8 0 1 0 0 16a8 8 0 0 0 0-16Z"/><path d="M13 7a1 1 0 1 0-2 0v4H7a1 1 0 1 0 0 2h4v4a1 1 0 1 0 2 0v-4h4a1 1 0 1 0 0-2h-4V7Z"/></g></svg>
-                    <div class="btn_name">добавить</div>
-                </div>
-               
-           </div>
+            </div>
         </div>
     </div>
-</div>
 
 
 

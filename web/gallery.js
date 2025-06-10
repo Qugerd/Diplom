@@ -10,158 +10,129 @@ window.addEventListener('load', function() {
     document.body.classList.add('loaded');
 });
 
-eel.get_gallery_photos()(function(data){
-    // Контейнер для серии фото с датой и локацией
-    const categoryConteiner = document.querySelector('.category-conteiner')
 
-    let conteinerCollection = document.createElement("div")
+// Функция для показа/скрытия индикатора загрузки
+function showLoadingIndicator(total) {
+    const loadingIndicator = document.createElement('div');
+    loadingIndicator.id = 'loading-indicator';
+    loadingIndicator.innerHTML = `
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <div class="loading-text">Загрузка фотографий...</div>
+        </div>
+    `;
+    document.body.appendChild(loadingIndicator);
+    return loadingIndicator;
+}
 
-    // Создание элементов 
-    let titleDataLocation = document.createElement("div")
-    let imgConteiner = document.createElement("div")
-
-
-    // Присвоение знаечний 
-    let group_id_prev = null
-    for(let i = 0; i < data.length; i++){
-
-        let group_id_current = data[i][4]
-
-        if(group_id_current == group_id_prev){
-
-
-            if (data[i][1] == ""){
-                let empty_div = document.createElement("div")
-                empty_div.classList.add("empty_img")
-                empty_div.innerHTML = "Путь изображения изменен"
-                empty_div.onclick = function(){
-                    eel.save_id(data[i][0])
-                    GoPhotoPage()
-                }
-
-                imgConteiner.appendChild(empty_div)
-            }
-            else{
-                let img = document.createElement("img")
-                img.setAttribute('src', data[i][1])
-                img.setAttribute('alt', 'Путь до файла изменён')
-                img.onclick = function(){
-                    eel.save_id(data[i][0])
-                    GoPhotoPage()
-                }
-                imgConteiner.appendChild(img)
-            }
-
-
-            let location = data[i][2]
-            let dataTime = data[i][3]
-
-
-            const container_btn_add_photo_to_collection = document.createElement('div')
-            const icon_btn_add_photo_to_collection = document.createElement('div')
-            const btn_add_photo_to_collection = document.createElement('div')
-            btn_add_photo_to_collection.innerHTML = "Добавить фотографию к коллекции"
-            btn_add_photo_to_collection.classList.add("btn_add_photo_to_collection")
-            btn_add_photo_to_collection.onclick = async function(){
-                var photo_path = await eel.OpenFileDialog()()
-                if (photo_path){
-                    eel.add_photo_gallery_collection(photo_path, data[i][3], data[i][2], data[i][5], data[i][6], group_id_current)
-                    window.location.reload()
-                }
-            }
-
-            container_btn_add_photo_to_collection.classList.add("container_btn_add_photo_to_collection")
-            icon_btn_add_photo_to_collection.classList.add("icon_btn_add_photo_to_collection")
-            container_btn_add_photo_to_collection.appendChild(icon_btn_add_photo_to_collection)
-            container_btn_add_photo_to_collection.appendChild(btn_add_photo_to_collection)
-
-
-            titleDataLocation.innerText = dataTime + ' | ' + location
-            titleDataLocation.classList.add('label-container')
-            titleDataLocation.appendChild(container_btn_add_photo_to_collection)
-            imgConteiner.classList.add('img-container')
-            
-
-            conteinerCollection.classList.add("conteiner-collection")
-            conteinerCollection.appendChild(titleDataLocation)
-            conteinerCollection.appendChild(imgConteiner)
-            
-
-            // Добавление в главный контейнер 
-            categoryConteiner.appendChild(conteinerCollection)
-        }
-        else{
-
-            // Создание элементов 
-            titleDataLocation = document.createElement("div")
-            imgConteiner = document.createElement("div")
-
-            if (data[i][1] == ""){
-                empty_div = document.createElement("div")
-                empty_div.classList.add("empty_img")
-                empty_div.innerHTML = "путь изображения изменен"
-                empty_div.onclick = function(){
-                    eel.save_id(data[i][0])
-                    GoPhotoPage()
-                }
-
-                imgConteiner.appendChild(empty_div)
-            }
-            else{
-                let img = document.createElement("img")
-                img.setAttribute('src', data[i][1])
-                img.setAttribute('alt', 'Путь до файла изменён')
-                img.onclick = function(){
-                    eel.save_id(data[i][0])
-                    GoPhotoPage()
-                }
-                imgConteiner.appendChild(img)
-            }
-
-
-    
-            let location = data[i][2]
-            let dataTime = data[i][3]
-
-
-            const container_btn_add_photo_to_collection = document.createElement('div')
-            const icon_btn_add_photo_to_collection = document.createElement('div')
-            const btn_add_photo_to_collection = document.createElement('div')
-            btn_add_photo_to_collection.innerHTML = "Добавить фотографию к коллекции"
-            btn_add_photo_to_collection.classList.add("btn_add_photo_to_collection")
-            btn_add_photo_to_collection.onclick = async function(){
-                var photo_path = await eel.OpenFileDialog()()
-                if (photo_path){
-                    eel.add_photo_gallery_collection(photo_path, data[i][3], data[i][2], data[i][5], data[i][6], group_id_current)
-                    window.location.reload()
-                }
-            }
-
-            container_btn_add_photo_to_collection.classList.add("container_btn_add_photo_to_collection")
-            icon_btn_add_photo_to_collection.classList.add("icon_btn_add_photo_to_collection")
-            container_btn_add_photo_to_collection.appendChild(icon_btn_add_photo_to_collection)
-            container_btn_add_photo_to_collection.appendChild(btn_add_photo_to_collection)
-
- 
-            titleDataLocation.innerText = dataTime + ' | ' + location
-            titleDataLocation.classList.add('label-container')
-            titleDataLocation.classList.add('text-header2')
-            titleDataLocation.appendChild(container_btn_add_photo_to_collection)
-
-            imgConteiner.classList.add('img-container')
-
-            conteinerCollection = document.createElement("div")
-            conteinerCollection.classList.add("conteiner-collection")
-            conteinerCollection.appendChild(titleDataLocation)
-            conteinerCollection.appendChild(imgConteiner)
-
-            // Добавление в главный контейнер 
-            categoryConteiner.appendChild(conteinerCollection)
-        }
-        group_id_prev = group_id_current
+function hideLoadingIndicator(loadingIndicator) {
+    if (loadingIndicator) {
+        loadingIndicator.classList.add('fade-out');
+        setTimeout(() => loadingIndicator.remove(), 300);
     }
+}
 
-})
+// Показываем индикатор загрузки ДО вызова API
+const loadingIndicator = showLoadingIndicator();
+
+// Получаем данные
+eel.get_gallery_photos()(function(data) {
+    // Скрываем индикатор когда данные получены
+    hideLoadingIndicator(loadingIndicator);
+
+    // Основной контейнер
+    const categoryConteiner = document.querySelector('.category-conteiner');
+    categoryConteiner.innerHTML = ''; // Очищаем перед загрузкой новых данных
+
+    // Переменные для группировки
+    let currentGroupId = null;
+    let currentConteinerCollection = null;
+    let currentImgConteiner = null;
+
+    for (let i = 0; i < data.length; i++) {
+        const item = data[i];
+        const group_id_current = item[4];
+
+        // Логика группировки
+        if (group_id_current !== currentGroupId) {
+            // Создание новой группы
+            currentConteinerCollection = document.createElement("div");
+            currentConteinerCollection.classList.add("conteiner-collection");
+            
+            const titleDataLocation = document.createElement("div");
+            currentImgConteiner = document.createElement("div");
+            
+            titleDataLocation.innerText = item[3] + ' | ' + item[2];
+            titleDataLocation.classList.add('label-container', 'text-header2');
+            
+            // Кнопка добавления
+            const container_btn_add_photo_to_collection = document.createElement('div');
+            const icon_btn_add_photo_to_collection = document.createElement('div');
+            const btn_add_photo_to_collection = document.createElement('div');
+            
+            btn_add_photo_to_collection.innerHTML = "Добавить фотографию к коллекции";
+            btn_add_photo_to_collection.classList.add("btn_add_photo_to_collection");
+            btn_add_photo_to_collection.onclick = async function() {
+                var photo_path = await eel.OpenFileDialog()();
+                if (photo_path) {
+                    eel.add_photo_gallery_collection(photo_path, item[3], item[2], item[5], item[6], group_id_current);
+                    window.location.reload();
+                }
+            };
+
+            container_btn_add_photo_to_collection.classList.add("container_btn_add_photo_to_collection");
+            icon_btn_add_photo_to_collection.classList.add("icon_btn_add_photo_to_collection");
+            container_btn_add_photo_to_collection.appendChild(icon_btn_add_photo_to_collection);
+            container_btn_add_photo_to_collection.appendChild(btn_add_photo_to_collection);
+            
+            titleDataLocation.appendChild(container_btn_add_photo_to_collection);
+            currentImgConteiner.classList.add('img-container');
+            
+            currentConteinerCollection.appendChild(titleDataLocation);
+            currentConteinerCollection.appendChild(currentImgConteiner);
+            categoryConteiner.appendChild(currentConteinerCollection);
+            
+            currentGroupId = group_id_current;
+        }
+
+        // Добавление изображения
+        if (item[1] === "") {
+            let empty_div = document.createElement("div");
+            empty_div.classList.add("empty_img");
+            empty_div.innerHTML = "Путь изображения изменен";
+            empty_div.onclick = function() {
+                eel.save_id(item[0]);
+                GoPhotoPage();
+            };
+            currentImgConteiner.appendChild(empty_div);
+        } else {
+            let img = document.createElement("img");
+            img.src = item[1];
+            img.alt = 'Путь до файла изменён';
+            img.onclick = function() {
+                eel.save_id(item[0]);
+                GoPhotoPage();
+            };
+            currentImgConteiner.appendChild(img);
+        }
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 eel.set_value()(function(response){

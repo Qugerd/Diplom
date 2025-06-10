@@ -73,11 +73,30 @@ async function CreateCardVid(id, title, img_path = PLACEHOLD_PATH){
 
 function OpenModal(){
     document.getElementById("modal-uploadPhoto").classList.add("open")
+    
+    eel.fill_combobox_values()(function(list){
+        let combobox = document.getElementById('combobox')
+        combobox.innerHTML = ""
+
+        const option = document.createElement("option")
+        option.text = "Выбрать вид"
+        option.value = ""
+        option.selected = true
+        option.hidden = true
+        combobox.appendChild(option)
+
+        for(let i = 0; i < list.length; i++){
+            let option = document.createElement("option")
+            option.text = list[i]
+            combobox.appendChild(option)
+        }
+    })
 }
 
 document.getElementById("addCategory").addEventListener("click", function(){
     document.getElementById("modal").classList.add("open")
     CreateViewBox2()
+    CreateListViews()
 })
 
 
@@ -112,10 +131,45 @@ document.getElementById('btn_close_search_map').addEventListener('click', functi
     document.getElementById('modal_search_map').classList.remove('open')
 })
 
+async function CreateListViews(){
+    const list_views_container = document.getElementById('list_views')
+    list_views_container.innerHTML = '';
+
+    let list_views = await eel.get_views_list()()
+    // Создание первого элемента "Выбрать из списка"
+    let option = document.createElement('option')
+    option.text = "Выбрать из списка"
+    option.value = ""
+    option.selected = true
+    option.hidden = true
+    list_views_container.appendChild(option)
+
+
+    list_views.forEach(view => {
+        let option = document.createElement("option")
+        option.text = view[1]
+        option.value = view[0]
+        list_views_container.appendChild(option)
+    })
+}
+
+function SelectView(){
+    let inputName = document.getElementById('inputName')
+    inputName.value = document.getElementById('list_views').options[document.getElementById('list_views').selectedIndex].text
+}
+
+
 async function CreateViewBox2(){
     let viewBox = document.getElementById("viewBox2")
     $(viewBox).empty();
     let views = await eel.get_all_family()()
+
+    let option = document.createElement('option')
+    option.text = "Выбрать семейство"
+    option.value = ""
+    option.selected = true
+    option.hidden = true
+    viewBox.appendChild(option)
 
 
     for(let i = 0; i < views.length; i++){
@@ -183,6 +237,11 @@ async function OpenFileDialog(){
 
 function CreateLabelsPath(paths){
     const filesValue = document.getElementById("files-value");
+
+    const container_labels_path = document.createElement("div");
+    container_labels_path.classList.add("container_labels_path");
+    container_labels_path.id = "container_labels_path";
+
     console.log(paths)
     paths.forEach(path => {
         const container = document.createElement("div");
@@ -194,8 +253,8 @@ function CreateLabelsPath(paths){
         label.innerHTML = path.split(/[\\/]/).pop();
 
         const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        svg.setAttribute("width", "16");
-        svg.setAttribute("height", "16");
+        svg.setAttribute("width", "24");
+        svg.setAttribute("height", "24");
         svg.setAttribute("viewBox", "0 0 24 24");
         svg.innerHTML = '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/>';
         svg.onclick = function() {
@@ -204,20 +263,15 @@ function CreateLabelsPath(paths){
 
         container.appendChild(svg);
         container.appendChild(label);
-        filesValue.insertAdjacentElement("afterend", container);
+        container_labels_path.appendChild(container);
     });
+
+    filesValue.insertAdjacentElement("afterend", container_labels_path)
 }
 
 
 
 async function AutoCompleteInfo(){
-    let exif = "empty"
-    let data = ""
-    let lat = ""
-    let lon = ""
-    let city = ""
-    let camera = ""
-
     file_list =  await eel.OpenFilesDialog()()
     console.log(file_list)
     fileDialogValue = file_list[0]
@@ -229,51 +283,26 @@ async function AutoCompleteInfo(){
 
     exif = file_list[1]
 
-    if(exif.length > 2){
-        data = exif[0]
-        lat = exif[1]
-        lon = exif[2]
-        city = exif[3]
-        camera = exif[4]
+    if(exif){
+        let data = exif[0]
+        let lat = exif[1]
+        let lon = exif[2]
+        let city = exif[3]
+        let camera = exif[4]
+        let lens = exif[5]
 
         document.getElementById('datapicker').value = data
         document.getElementById('place').value = city
         document.getElementById('shirota').value = lat
         document.getElementById('dolgota').value = lon
         document.getElementById('camera').value = camera
-    
-        placeMark.geometry.setCoordinates([lat, lon]);
-        myMap.setCenter([lat, lon])
+        document.getElementById('lens').value = lens
+
+        if (lat && lon) {
+            placeMark.geometry.setCoordinates([lat, lon]);
+            myMap.setCenter([lat, lon])
+        }
     }
-    else if(exif.length <= 2){
-        data = exif[0]
-        camera = exif[1]
-
-        document.getElementById('datapicker').value = data
-        document.getElementById('camera').value = camera
-
-        console.log(data)
-        console.log(camera)
-    }
-
-
-
-
-
-
-    // if(fileDialogValue.length == 1){
-    //     document.getElementById("files-value").innerHTML = "Файл выбран: " + fileDialogValue
-    //     document.getElementById("files-value").style.color = "black"
-    // }
-    // else if(fileDialogValue.length == 0){
-    //     document.getElementById("files-value").innerHTML = "Файл не выбран !"
-    //     document.getElementById("files-value").style.color = "red"
-    // }
-    // else{
-    //     let size = fileDialogValue.length
-    //     document.getElementById("files-value").innerHTML = "Файлов выбрано: " + size
-    //     document.getElementById("files-value").style.color = "black"
-    // }
 }
 
 
@@ -305,23 +334,20 @@ function RenameTitle(){
     let newName = document.getElementById("inputEditeTitle").value
     let id = ID
     let title = Title
-    eel.edit_title(id, newName, title)
 
-    // меняю название на карточке вида
-    const divVid = document.getElementById(`${id}`)
-    divVid.children[1].innerHTML = newName
+    if (newName) {
+        eel.edit_title(id, newName, title)
 
-
-    // меняю название в комбобоксе
-    let option = document.querySelectorAll("option")
-    for(let i = 0; i < combobox.length; i++){
-        if (option[i].innerText.trim() === title) {
-            option[i].innerText = newName;
-        }
+        // меняю название на карточке вида
+        const divVid = document.getElementById(`${id}`)
+        divVid.children[1].innerHTML = newName
+        
+        ClearClassTable()
+        CreateClassTable()
     }
-
-    ClearClassTable()
-    CreateClassTable()
+    else{
+        Alert("Название не может быть пустым")
+    }
 }
 
 
@@ -356,17 +382,6 @@ async function Delete(id, title){
 }
 
 
-eel.fill_combobox_values()(function(list){
-    let combobox = document.getElementById('combobox')
-
-    for(let i = 0; i < list.length; i++){
-        let option = document.createElement("option")
-        option.text = list[i]
-        combobox.appendChild(option)
-    }
-})
-
-
 async function ConfirmUploadPhoto(){
     let combobox = document.getElementById("combobox")
     let datapicker = document.getElementById("datapicker")
@@ -374,17 +389,24 @@ async function ConfirmUploadPhoto(){
     let shirota = document.getElementById("shirota")
     let dolgota = document.getElementById("dolgota")
     let camera = document.getElementById("camera")
+    let lens = document.getElementById('lens')
 
 
 
     const container_label_path = document.querySelectorAll(".container_label_path")
     const paths = Array.from(container_label_path).map(container => container.dataset.path);
     // console.log(paths)
+    
     const containerLabelLink = document.querySelectorAll(".container_label_link")
     const links = Array.from(containerLabelLink).map(container => container.dataset.path);
+    console.log(links)
+
 
     if (paths.length === 0 && links.length === 0) {
         Alert("Выберите фотографию на устройстве или вставте ссылку на изображение")
+    }
+    else if(combobox.value == ""){
+        Alert("Выберите вид")
     }
     else if(datapicker.value == ''){
         Alert("Выберите дату")
@@ -408,6 +430,8 @@ async function ConfirmUploadPhoto(){
             list.push(dolgota.value)
             list.push(camera.value)
             list.push(group_id)
+            list.push(lens.value)
+
 
             document.getElementById("modal-uploadPhoto").classList.remove("open")
             document.getElementById("fileValue").innerHTML = "Файл выбран: пусто"
@@ -420,7 +444,11 @@ async function ConfirmUploadPhoto(){
         place.value = ""
         datapicker.value = ""
         camera.value = ""
+        lens.value = ""
         fileDialogValue = ""
+        combobox.selectedIndex = 0;
+        document.getElementById("container_labels_path").remove()
+        document.getElementById("container_labels_link").remove()
         document.getElementById("fileValue").innerHTML = "Файлы: пусто"
     }
 }
@@ -444,13 +472,32 @@ function CreateImg(){
     }
 }
 
-function AddLink(){
-    let linkInput = document.getElementById("inputLink")
-
-    let containerLabelLink = document.createElement("div")
-    containerLabelLink.classList.add("container_label_link")
 
 
+function AddLink() {
+    let linkInput = document.getElementById("inputLink");
+    
+    // Проверяем, есть ли введенное значение
+    if (!linkInput.value.trim()) {
+        return; // Если поле пустое, выходим из функции
+    }
+
+    // Получаем или создаем контейнер для ссылок
+    let container_labels_link = document.getElementById("container_labels_link");
+    if (!container_labels_link) {
+        container_labels_link = document.createElement("div");
+        container_labels_link.id = "container_labels_link";
+        container_labels_link.classList.add("container_labels_link");
+        // Добавляем контейнер в DOM после linkImg
+        document.getElementById('linkImg').insertAdjacentElement("afterend", container_labels_link);
+    }
+
+    // Создаем элемент для новой ссылки
+    let containerLabelLink = document.createElement("div");
+    containerLabelLink.classList.add("container_label_link");
+    containerLabelLink.dataset.path = linkInput.value;
+
+    // Создаем SVG для удаления
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttribute("width", "24");
     svg.setAttribute("height", "24");
@@ -458,28 +505,30 @@ function AddLink(){
     svg.innerHTML = '<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/>';
     svg.onclick = function() {
         containerLabelLink.remove();
+        // Если это последняя ссылка, удаляем и контейнер
+        if (container_labels_link.children.length === 0) {
+            container_labels_link.remove();
+        }
     };
 
+    // Создаем текст ссылки
+    let labelLink = document.createElement("div");
+    labelLink.textContent = linkInput.value; // Используем textContent вместо innerHTML для безопасности
+    labelLink.classList.add("label_link");
 
-    if (linkInput.value){
-        let labelLink = document.createElement("div")
-        labelLink.innerHTML = linkInput.value
-        labelLink.classList.add("label_link")
+    // Добавляем элементы в DOM
+    containerLabelLink.appendChild(svg);
+    containerLabelLink.appendChild(labelLink);
+    container_labels_link.appendChild(containerLabelLink);
 
-        let linkImg = document.getElementById('linkImg')
-        linkImg.insertAdjacentElement("afterend", labelLink)
+    // Очищаем поле ввода
+    linkInput.value = "";
 
-        containerLabelLink.dataset.path = linkInput.value
-        containerLabelLink.appendChild(svg)
-        containerLabelLink.appendChild(labelLink)
-
-        linkImg.insertAdjacentElement("afterend", containerLabelLink)
-
-        linkInput.value = ""
-        CreateImg()
+    // Вызываем функцию создания изображения (если она у вас есть)
+    if (typeof CreateImg === 'function') {
+        CreateImg();
     }
 }
-
 
 
 // Перемещение маркера карты при
@@ -678,6 +727,14 @@ async function CreateSquadBox(){
 async function CreateViewBox(){
     let box = document.getElementById("viewBox")
     $(box).empty();
+
+    const option = document.createElement("option");
+    option.value = ""
+    option.selected = true
+    option.hidden = true
+    option.text = "Выберите вид"
+    box.appendChild(option);
+
     let families = await eel.get_all_family()()
 
     families.forEach(([id, name]) => {
@@ -707,6 +764,7 @@ function ClearClassTable(){
     let squadConteiner = document.getElementById("squadConteiner")
     $(squadConteiner).empty();
 }
+
 
 async function CreateClassTable(){
     let squads = await eel.get_all_squad()()
@@ -810,24 +868,29 @@ async function CreateClassTable(){
 
             let familyId = familys[j][0]
 
-            let views = await eel.get_view_in_family(familyId)()
-            for (let k = 0; k < views.length; k++){
-                let name = views[k][0]
+            let views = await eel.get_view_in_family(familyId)();
+            console.log(views);
+            for (let k = 0; k < views.length; k++) {
+                let name = views[k][0];
+                let is_active = views[k][2];  // 1 если вид активен (добавлен пользователем), 0 если только в справочнике
+                
+                let familyVid = document.createElement("div");
+                familyVid.classList.add("squad-family-vid");
 
+                let vidTitle = document.createElement('div');
+                vidTitle.classList.add("vid-title");
+                vidTitle.innerHTML = name;
 
-                let familyVid = document.createElement("div")
-                familyVid.classList.add("squad-family-vid")
-
-                let vidTitle = document.createElement('div')
-                vidTitle.classList.add("vid-title")
-                // vidTitle.style.fontSize = "16px"
-                vidTitle.innerHTML = views[k][0]
-                vidTitle.onclick = function (){
-                    OpenPageAbout(name)
+                if (is_active) {
+                    // Если вид активен (добавлен пользователем) - делаем кликабельным
+                    vidTitle.onclick = () => OpenPageAbout(name);
+                } else {
+                    // Если вид только в справочнике - неактивный
+                    vidTitle.classList.add("disabled-view");
                 }
 
-                familyVid.appendChild(vidTitle)
-                squadFamily.appendChild(familyVid)
+                familyVid.appendChild(vidTitle);
+                squadFamily.appendChild(familyVid);
             }
         }
     }
@@ -901,9 +964,14 @@ async function CreateConteiner2(){
 function AddViewToFamily(){
     let title = Title
     let viewName = document.getElementById('viewBox').value
-    eel.add_view_to_family(title, viewName)
-    ClearClassTable()
-    CreateClassTable()
+    if (viewName) {
+        eel.add_view_to_family(title, viewName)
+        ClearClassTable()
+        CreateClassTable()
+    }
+    else{
+        Alert("Выберите вид")
+    }
     // CreateConteiner2()
 }
 
@@ -1002,6 +1070,62 @@ function AddFamilyToSquad(){
     eel.add_family_to_squad(squad_id, family_id)
     ClearClassTable()
     CreateClassTable()
+}
+
+
+
+
+async function LoadExcelData(){
+    // TODO: проверку на пустоты и неверные эксельки
+    let filePath = await eel.open_file_dialog_excel()()
+    eel.add_excel_data_to_db(filePath)
+
+    ClearClassTable()
+    CreateClassTable()
+}
+
+
+
+async function CreateNewDatabase(){
+    let response = await eel.create_new_database()()
+    if (response){
+        Alert(response)
+    }
+}
+
+
+async function SelectDatabase(){
+    let database_path = await eel.select_database()()
+    console.log(database_path)
+    if (database_path) {
+        eel.change_database_path(database_path)
+        window.location.reload()
+    }
+}
+
+
+function RecognizeViewFromPhoto(){
+    const container_label_path = document.querySelectorAll(".container_label_path")
+    const paths = Array.from(container_label_path).map(container => container.dataset.path);
+
+    if (paths.length > 0) {
+        
+    }
+    else{
+        Alert("Выберите изображения файл")
+    }
+}
+
+
+
+
+
+function OpenSettings(){
+    document.getElementById('modal_settings').classList.add('open');
+}
+
+function CloseSettings(){
+    document.getElementById('modal_settings').classList.remove('open');
 }
 
 

@@ -6,7 +6,6 @@ import sys
 import io
 
 
-
 # outfile = open("logfile.txt", "wt")
 # sys.stderr = outfile
 # sys.stdout = outfile
@@ -54,12 +53,19 @@ def OpenFilesDialog():
     root.lift()
     root.attributes("-topmost", True)
 
-    file_path = filedialog.askopenfilenames(title='Выберите файлы')
-    print(file_path)
+    files_paths = filedialog.askopenfilenames(title='Выберите файлы')
+    print(files_paths)
 
-    exif = get_photo_exif(file_path[0]) if file_path else ["", ""]
+    exif = False
 
-    return file_path, exif
+    if files_paths:
+        for file_path in files_paths:
+            current_exif = get_exif_data(file_path)
+            if current_exif and current_exif != ['', '', '', '', '', '']:
+                exif = current_exif
+                break
+
+    return files_paths, exif
 
 
 @eel.expose
@@ -338,10 +344,71 @@ def delete_family_by_id(family_id):
     DeleteFamilyById(family_id)
 
 
-
 @eel.expose
 def add_family_to_squad(squad_id, family_id):
     AddFamilyToSquad(squad_id, family_id)
+
+
+@eel.expose
+def add_excel_data_to_db(path):
+    squads, families, views = parse_exif_data(path)
+    
+    for squad in squads:
+        AddSquad(squad)
+
+    for family, squad in families:
+        AddFamilyAndSquad(family, squad)
+
+    for view in views:
+        AddViewsList(view['name'], view['family'])
+
+
+@eel.expose
+def open_file_dialog_excel():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+
+    filetypes = (("Excel files", "*.xlsx"), ("All files", "*.*"))
+    file_path = filedialog.askopenfilename(filetypes=filetypes)
+    return file_path
+
+
+@eel.expose
+def get_views_list():
+    return GetViewsList()
+
+
+@eel.expose
+def select_database():
+    root = tk.Tk()
+    root.withdraw()
+    root.lift()
+    root.attributes("-topmost", True)
+
+    filetypes = (("SQLite", "*.db"), ("All files", "*.*"))
+    file_path = filedialog.askopenfilename(filetypes=filetypes)
+    return file_path
+
+
+
+
+
+@eel.expose
+def create_new_database():
+    db_path = "database.db"
+    index = 1
+    while os.path.exists(db_path):
+        db_path = f"database_{index}.db"
+        index += 1
+    CreateDataBase(db_path)
+
+    if os.path.exists(db_path):
+        return f"База данных успешно создана: {db_path}"
+    else:
+        return "Ошибка: не удалось создать базу данных"
+
 
 
 
@@ -358,7 +425,11 @@ delete_temp_dir()
 
 
 
+try:
+    eel.init("web")
 
-eel.init("web")
-
-eel.start("main.html", shutdown_delay=10.0, mode='chrome', host="localhost", port="8000", cmdline_args=['--start-maximized'])
+    eel.start("main.html", shutdown_delay=10.0, mode='chrome', host="localhost", port="8000", cmdline_args=['--start-maximized'])
+except (KeyboardInterrupt, SystemExit):
+    print("Закрыто пользователем")
+except Exception as e:
+    print(f"Ошибка WebSocket: {e}")

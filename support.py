@@ -14,6 +14,17 @@ from mutagen.easyid3 import EasyID3
 from mutagen.mp4 import MP4
 import os
 from datetime import datetime
+import pandas as pd
+import re
+import exiftool
+import rawpy
+from PIL import Image
+from concurrent.futures import ThreadPoolExecutor
+import hashlib
+import time
+
+
+
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
@@ -62,39 +73,89 @@ def change_date_formate(date_str):
     return new_date_str
 
 
-def absolute_path_to_relative_path(file_url):
+import os
+import shutil
+import hashlib
+import time
+import rawpy
+from PIL import Image
+from concurrent.futures import ThreadPoolExecutor
 
+
+# Кэш
+_CONVERSION_CACHE = {}
+
+# Поддерживаемые браузером форматы
+BROWSER_SUPPORTED_FORMATS = {'.jpg', '.jpeg', '.png', '.webp', '.gif', '.svg', '.avif'}
+
+def _get_file_hash(file_path, chunk_size=1024 * 1024):
+    hasher = hashlib.md5()
+    with open(file_path, 'rb') as f:
+        chunk = f.read(chunk_size)
+        hasher.update(chunk)
+    return hasher.hexdigest()
+
+def _convert_to_jpg(input_path, output_path):
+    try:
+        start_time = time.time()
+        ext = os.path.splitext(input_path)[1].lower()
+
+        if ext == '.cr3':
+            with rawpy.imread(input_path) as raw:
+                rgb = raw.postprocess(
+                    use_camera_wb=True,
+                    half_size=True,
+                    no_auto_bright=False,
+                    output_bps=8
+                )
+            img = Image.fromarray(rgb)
+        else:
+            img = Image.open(input_path).convert("RGB")
+
+        img.save(output_path, format='JPEG', quality=50)
+        print(f"Конвертация {os.path.basename(input_path)} завершена за {time.time() - start_time:.2f} сек")
+        return True
+    except (rawpy.LibRawError, Exception) as e:
+        print(f"Ошибка при конвертации {input_path}: {str(e)}")
+        return False
+
+def absolute_path_to_relative_path(file_url):
     if isinstance(file_url, str) and (file_url.startswith('http://') or file_url.startswith('https://')):
         return file_url
 
     if not os.path.exists(file_url):
         return ""
 
-    # Определяем путь к временной директории от корня проекта
     web_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'web')
     temp_dir_path = os.path.join(web_dir, 'temp')
+    os.makedirs(temp_dir_path, exist_ok=True)
 
-    # Если директория для временных файлов не существует, создаем ее
-    if not os.path.exists(temp_dir_path):
-        os.makedirs(temp_dir_path)
+    ext = os.path.splitext(file_url)[1].lower()
 
-    # Определяем путь для копии файла
-    file_name = os.path.basename(file_url)
-    dest_path = os.path.join(temp_dir_path, file_name)
+    # Браузер поддерживает? Просто копируем.
+    if ext in BROWSER_SUPPORTED_FORMATS:
+        file_name = os.path.basename(file_url)
+        dest_path = os.path.join(temp_dir_path, file_name)
+        if not os.path.exists(dest_path) or os.path.getmtime(file_url) > os.path.getmtime(dest_path):
+            shutil.copy2(file_url, dest_path)
+        return os.path.relpath(dest_path, web_dir)
 
-    # Копируем файл
-    shutil.copy(file_url, dest_path)
+    # Конвертация
+    file_hash = _get_file_hash(file_url)
+    base_name = os.path.splitext(os.path.basename(file_url))[0]
+    jpg_name = f"{base_name}.jpg"
+    jpg_temp_path = os.path.join(temp_dir_path, jpg_name)
 
-    # Получаем относительный путь до скопированного файла
-    rel_path = os.path.relpath(dest_path, web_dir)
+    if file_hash in _CONVERSION_CACHE and os.path.exists(jpg_temp_path):
+        return os.path.relpath(jpg_temp_path, web_dir)
 
-    # Выводим информацию о временной директории и скопированном файле
-    # print("Временная директория: ", temp_dir_path)
-    # print("Скопированный файл: ", dest_path)
-    # print("Относительный путь до файла: ", rel_path)
+    if _convert_to_jpg(file_url, jpg_temp_path):
+        _CONVERSION_CACHE[file_hash] = True
+        return os.path.relpath(jpg_temp_path, web_dir)
+
+    return ""
 
 
-    return rel_path
 
 @eel.expose
 def delete_temp_dir():
@@ -129,44 +190,66 @@ def get_location(lat, lon):
     return city
 
 
-def get_photo_exif(photo_path):
-    with open(photo_path, 'rb') as file:
-        tags = exifread.process_file(file)
+import subprocess
+import json
 
-        data = ""
-        model = ""
-        result = ["", ""]
+import subprocess
 
-        if 'EXIF DateTimeOriginal' in tags and "Image Make" in tags:
-            data_and_time = tags['EXIF DateTimeOriginal'].values
-            data = datetime.strptime(data_and_time, "%Y:%m:%d %H:%M:%S").strftime("%Y-%m-%d")
+import subprocess
+from datetime import datetime
 
-            make = tags["Image Make"].values
-            model = tags["Image Model"].values
+import exiftool
 
-            result = [data, model]
+def get_exif_data(file_path):
+    tags = ["EXIF:CreateDate",
+            "EXIF:GPSLatitude", 
+            "EXIF:GPSLongitude", 
+            "EXIF:Model",
+            "EXIF:LensModel"]
+    
+    info = []
+    with exiftool.ExifToolHelper() as et:
+        metadata = et.get_metadata(file_path)[0]
+
+        if tags[0] in metadata:
+            datetime_obj = datetime.strptime(metadata[tags[0]], "%Y:%m:%d %H:%M:%S")
+            date_YYYY_MM_DD = datetime_obj.strftime("%Y-%m-%d")
+            info.append(date_YYYY_MM_DD)
+        else:
+            info.append("")
+
+        if tags[1] in metadata and tags[2] in metadata:
+            lat = metadata[tags[1]]
+            lon = metadata[tags[2]]
+            place = get_location(lat, lon)
+            info.extend([lat, lon, place])
+        else:
+            info.extend(["", "", ""])
+
+        if tags[3] in metadata:
+            info.append(metadata[tags[3]])
+        else:
+            info.append("")
+
+        if tags[4] in metadata:
+            info.append(metadata[tags[4]])
+        else:
+            info.append("")
+
+    print(info)
+    return info
 
 
-        if 'GPS GPSLatitude' in tags:
-            lat = tags['GPS GPSLatitude'].values
-            lon = tags['GPS GPSLongitude'].values
-
-            lat_decimal = float(lat[0]) + float(lat[1])/60 + float(lat[2])/3600
-            lon_decimal = float(lon[0]) + float(lon[1])/60 + float(lon[2])/3600
 
 
-            # Учитываем направление (N/S, E/W)
-            if tags['GPS GPSLatitudeRef'].values != 'N':
-                lat_decimal = -lat_decimal
-            if tags['GPS GPSLongitudeRef'].values != 'E':
-                lon_decimal = -lon_decimal
+
+# Пример использования
+# file = "D:\\Projects\\Diplom\\web\\assets\\no_geo.jpg"
+# file = "D:\\Projects\\Diplom\\web\\assets\\IMG20250607201542.jpg"
+# file = "D:\\Projects\\Diplom\\web\\assets\\6be364941202dc4d71ea1acb6a117aa3.jpg"
 
 
-            city = get_location(lat_decimal, lon_decimal)
 
-            result = [data, lat_decimal, lon_decimal, city, model]
-
-        return result
 
 
 @eel.expose
@@ -240,6 +323,79 @@ def get_audio_creation_date(file_path):
 
 
 
+def capitalize_first_letter(word):
+    return word[0].upper() + word[1:].lower() if word else word
+
+
+
+
+
+
+def parse_exif_data(file_path):
+    # file_path = "C:\\Users\\asus\\Desktop\\список видов рус_лат.xlsx"
+    xls = pd.ExcelFile(file_path)
+
+    df = xls.parse('Лист1')
+
+    # Исходные данные
+    data = df[1]  # колонка, содержащая отряды, семейства и виды
+    name_rus = df[10]
+    name_lat = df[11]
+
+    # Контейнеры
+    squads = []
+    families = []
+    views = []
+
+    # Текущие значения
+    current_squad = None
+    current_family = None
+
+    # Функция для проверки: строка с видом — начинается с цифры и содержит латинское название в скобках
+    def is_view(row_text):
+        return isinstance(row_text, str) and bool(re.match(r'^\d+.*\([A-Za-z ]+\)', row_text))
+
+    # Основной парсинг
+    for idx, value in data.items():
+        if pd.isna(value):
+            continue
+
+        text = str(value).strip()
+
+        if not is_view(text):
+            # Это либо отряд, либо семейство
+            if text.endswith("образные"):
+                current_squad = text
+                if current_squad not in squads:
+                    squads.append(current_squad)
+            else:
+                current_family = text
+                if current_family not in families:
+                    families.append((current_family, current_squad))
+        else:
+            # Это вид
+            views.append({
+                "name": name_rus.get(idx, "").strip(),
+                "name_lat": name_lat.get(idx, "").strip(),
+                "squad": current_squad,
+                "family": current_family
+            })
+
+
+    return squads, families, views
+
+
+# for view in views:
+#     name, family = view["name"], view["family"]
+#     AddViewsList(name, family)
+
+
+def get_confing_database_path():
+    with open("web/config.json", "r") as config_file:
+        config = json.load(config_file)
+
+    db_path = config["database"]["path"]
+    return db_path
 
 
 
@@ -255,7 +411,14 @@ def get_audio_creation_date(file_path):
 
 
 
-# print(get_video_metadata(r'C:\Users\asus\Downloads\1.mp4'))
+
+
+
+
+
+
+
+# print(get_video_Dmetadata(r'C:\Users\asus\Downloads\1.mp4'))
 # print(get_photo_exif(r'C:\Users\asus\Downloads\2.mp4'))
 # print(get_photo_exif(r'web\assets\no_geo.jpg'))
 
