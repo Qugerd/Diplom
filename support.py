@@ -5,9 +5,8 @@ import pandas as pd
 import re
 import exiftool
 import rawpy
-import tempfile
+import json
 import shutil
-import exifread
 import hashlib
 import time
 import torch
@@ -22,7 +21,6 @@ from mutagen.mp3 import MP3
 from mutagen.easyid3 import EasyID3
 from mutagen.mp4 import MP4
 from PIL import Image
-from concurrent.futures import ThreadPoolExecutor
 from torchvision import models, transforms
 
 
@@ -72,16 +70,6 @@ def change_date_formate(date_str):
     # преобразовываем объект datetime обратно в строку в нужном формате
     new_date_str = date_obj.strftime("%d-%m-%Y")
     return new_date_str
-
-
-import os
-import shutil
-import hashlib
-import time
-import rawpy
-from PIL import Image
-from concurrent.futures import ThreadPoolExecutor
-
 
 # Кэш
 _CONVERSION_CACHE = {}
@@ -191,15 +179,6 @@ def get_location(lat, lon):
     return city
 
 
-import subprocess
-import json
-
-import subprocess
-
-import subprocess
-from datetime import datetime
-
-import exiftool
 
 def get_exif_data(file_path):
     tags = ["EXIF:CreateDate",
@@ -502,7 +481,8 @@ def predict_image(model, image_path, transform, class_names, device=device):
 
 
 
-
+print(torch.__version__)
+print(device)
 
 
 

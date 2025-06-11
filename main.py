@@ -1,11 +1,10 @@
 import eel
 import tkinter as tk
+import uuid
 from tkinter import filedialog
 
 from support import *
 from database import *
-
-
 
 
 @eel.expose
