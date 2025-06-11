@@ -1076,12 +1076,13 @@ function AddFamilyToSquad(){
 
 
 async function LoadExcelData(){
-    // TODO: проверку на пустоты и неверные эксельки
     let filePath = await eel.open_file_dialog_excel()()
-    eel.add_excel_data_to_db(filePath)
+    if (filePath){
+        eel.add_excel_data_to_db(filePath)
 
-    ClearClassTable()
-    CreateClassTable()
+        ClearClassTable()
+        CreateClassTable()
+    }
 }
 
 

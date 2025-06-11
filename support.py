@@ -1,40 +1,36 @@
 import base64
 import os
 import eel
-from datetime import datetime
-import tempfile
-import shutil
-import exifread
-from geopy.geocoders import Nominatim
-from datetime import datetime
-from hachoir.parser import createParser
-from hachoir.metadata import extractMetadata
-from mutagen.mp3 import MP3
-from mutagen.easyid3 import EasyID3
-from mutagen.mp4 import MP4
-import os
-from datetime import datetime
 import pandas as pd
 import re
 import exiftool
 import rawpy
-from PIL import Image
-from concurrent.futures import ThreadPoolExecutor
+import tempfile
+import shutil
+import exifread
 import hashlib
 import time
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torchvision import models, transforms
+
+from datetime import datetime
+from geopy.geocoders import Nominatim
+from hachoir.parser import createParser
+from hachoir.metadata import extractMetadata
+from mutagen.mp3 import MP3
+from mutagen.easyid3 import EasyID3
+from mutagen.mp4 import MP4
 from PIL import Image
-import os
+from concurrent.futures import ThreadPoolExecutor
+from torchvision import models, transforms
+
 
 
 
 PLACEHOLD_PATH = "http://placehold.it/150x150"
 TITLE = ''
 ID = ''
-
 
 def Image_to_Bytes(image_path):
     print(image_path)
@@ -395,8 +391,62 @@ def parse_exif_data(file_path):
 #     AddViewsList(name, family)
 
 
+
+
+
+
+
+# DEFAULT_CONFIG = {
+#     "database": {
+#         "path": "database.db"
+#     }
+# }
+
+# def validate_config(config):
+#     return isinstance(config, dict) and "database" in config and isinstance(config["database"], dict)
+
+# def create_or_repair_config():
+#     config_path = "config.json"
+    
+#     # Если файла нет - создаем новый
+#     if not os.path.exists(config_path):
+#         with open(config_path, "w") as f:
+#             json.dump(DEFAULT_CONFIG, f, indent=4)
+#         return DEFAULT_CONFIG
+    
+#     # Если файл есть - проверяем его
+#     with open(config_path, "r") as f:
+#         config = json.load(f)
+            
+#         # Если структура правильная - возвращаем как есть
+#         if validate_config(config):
+#             return config
+                
+#         # Если структура неправильная - исправляем
+#         print("Обнаружен некорректный конфиг, восстанавливаю...")
+#         repaired_config = DEFAULT_CONFIG | config  # Объединяем с дефолтными значениями
+#         with open(config_path, "w") as f:
+#             json.dump(repaired_config, f, indent=4)
+#         return repaired_config
+
+
+
+def create_config():
+    config_path = "config.json"
+
+    if not os.path.exists(config_path):
+        with open(config_path, "w") as config_file:
+            config = {
+                "database": {
+                    "path": "database.db"
+                }
+            }
+            json.dump(config, config_file, indent=4)
+
+
+
 def get_confing_database_path():
-    with open("web/config.json", "r") as config_file:
+    with open("config.json", "r") as config_file:
         config = json.load(config_file)
 
     db_path = config["database"]["path"]

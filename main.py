@@ -1,14 +1,12 @@
 import eel
 import tkinter as tk
 from tkinter import filedialog
+
+from support import *
 from database import *
-import sys
-import io
 
 
-# outfile = open("logfile.txt", "wt")
-# sys.stderr = outfile
-# sys.stdout = outfile
+
 
 @eel.expose
 def OpenFileDialog():
@@ -431,9 +429,7 @@ def view_prediction(path):
 
 
 
-
 CreateDataBase()
-
 delete_temp_dir()
 
 

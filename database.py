@@ -1,24 +1,24 @@
 import sqlite3
 import uuid
+import json
 from PIL import Image
 from io import BytesIO
+
 from support import *
-import json
 
-
-
+create_config()
 DATABASE = get_confing_database_path()
 
 
 @eel.expose
 def change_database_path(new_path):
-    with open("web\\config.json", "r") as config_file:
+    with open("config.json", "r") as config_file:
         config = json.load(config_file)
 
     config["database"]["path"] = new_path
 
-    with open("web\\config.json", "w") as config_file:
-        json.dump(config, config_file, indent=4)\
+    with open("config.json", "w") as config_file:
+        json.dump(config, config_file, indent=4)
         
     global DATABASE
     DATABASE = get_confing_database_path()
