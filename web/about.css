@@ -289,7 +289,7 @@ hr{
     margin: 0 20px;
     margin-bottom: 20px;
 
-    text-indent: 40px;
+    white-space: pre-wrap;
 }
 
 .conteiner-information-group button{
