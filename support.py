@@ -121,15 +121,24 @@ def absolute_path_to_relative_path(file_url):
 
     ext = os.path.splitext(file_url)[1].lower()
 
-    # Браузер поддерживает? Просто копируем.
-    if ext in BROWSER_SUPPORTED_FORMATS:
+    # Supported formats - add video and audio extensions
+    SUPPORTED_MEDIA_FORMATS = {
+        # Image formats
+        '.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp',
+        # Video formats
+        '.mp4', '.webm', '.ogg', '.mov', '.avi',
+        # Audio formats
+        '.mp3', '.wav', '.ogg', '.m4a', '.flac'
+    }
+
+    if ext in SUPPORTED_MEDIA_FORMATS:
         file_name = os.path.basename(file_url)
         dest_path = os.path.join(temp_dir_path, file_name)
         if not os.path.exists(dest_path) or os.path.getmtime(file_url) > os.path.getmtime(dest_path):
             shutil.copy2(file_url, dest_path)
         return os.path.relpath(dest_path, web_dir)
 
-    # Конвертация
+    # For unsupported formats, try to convert to jpg (only for images)
     file_hash = _get_file_hash(file_url)
     base_name = os.path.splitext(os.path.basename(file_url))[0]
     jpg_name = f"{base_name}.jpg"
@@ -311,8 +320,8 @@ def capitalize_first_letter(word):
 
 
 
-def parse_exif_data(file_path):
-    # file_path = "C:\\Users\\asus\\Desktop\\список видов рус_лат.xlsx"
+def parse_excel_data(file_path):
+
     xls = pd.ExcelFile(file_path)
 
     df = xls.parse('Лист1')
