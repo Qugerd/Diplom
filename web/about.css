@@ -288,6 +288,7 @@ hr{
 .text-information{
     margin: 0 20px;
     margin-bottom: 20px;
+
     white-space: pre-wrap;
 }
 
