@@ -1,11 +1,10 @@
 import eel
 import tkinter as tk
+import uuid
 from tkinter import filedialog
 
 from support import *
 from database import *
-
-
 
 
 @eel.expose
@@ -349,7 +348,7 @@ def add_family_to_squad(squad_id, family_id):
 
 @eel.expose
 def add_excel_data_to_db(path):
-    squads, families, views = parse_exif_data(path)
+    squads, families, views = parse_excel_data(path)
     
     for squad in squads:
         AddSquad(squad)
